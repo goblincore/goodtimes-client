@@ -15,7 +15,7 @@ export const fetchProtectedDataError = error => ({
 
 export const fetchProtectedData = () => dispatch => {
     const authToken = localStorage.getItem('authToken');
-    return fetch(`${API_BASE_URL}/users`, {
+    return fetch(`${API_BASE_URL}/api/users`, {
         method: 'GET',
         headers: {
             // Provide our auth token as credentials
@@ -24,7 +24,7 @@ export const fetchProtectedData = () => dispatch => {
     })
         .then(res => normalizeResponseErrors(res))
         .then(res => res.json())
-        .then(({userData}) => dispatch(changeCurrentUser(userData)))
+        .then((userData) => dispatch(changeCurrentUser(userData)))
         .catch(err => {
             dispatch(fetchProtectedDataError(err));
         });

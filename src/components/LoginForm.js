@@ -6,6 +6,8 @@ import {login} from '../actions/Auth';
 import {required, nonEmpty} from '../Validators';
 
 export class LoginForm extends React.Component {
+
+    
     onSubmit(values) {
         return this.props.dispatch(login(values.username, values.password));
     }
@@ -49,6 +51,8 @@ export class LoginForm extends React.Component {
         );
     }
 }
+
+
 
 export default reduxForm({
     form: 'login',

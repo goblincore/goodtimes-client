@@ -22,7 +22,7 @@ export const authError = errorMessage => ({
 export const login = (username, password) => dispatch => {
     dispatch(authRequest());
     return (
-        fetch(`${API_BASE_URL}/login`, {
+        fetch(`${API_BASE_URL}/api/login`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

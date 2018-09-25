@@ -7,7 +7,8 @@ import Dashboard from './components/Dashboard';
 
 
 import RegistrationForm  from './components/RegistrationForm';
-import LoginForm  from './components/LoginForm';
+//import LoginForm  from './components/LoginForm';
+import LoginPage  from './components/LoginPage';
 import {Route, withRouter} from 'react-router-dom';
 
 class App extends Component {
@@ -21,7 +22,7 @@ class App extends Component {
         <div className="app" lang="en">
                 <Route exact path="/" component={LandingPage} />
                 <Route exact path="/register" component={RegistrationForm} />
-                <Route exact path="/login" component={LoginForm} /> 
+                <Route exact path="/login" component={LoginPage} /> 
                 <Route exact path="/dashboard" component={Dashboard} />
           
             </div>
