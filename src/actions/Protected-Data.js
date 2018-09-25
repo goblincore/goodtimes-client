@@ -1,9 +1,9 @@
 import {API_BASE_URL} from '../config';
 import {normalizeResponseErrors} from './Utils';
 
-export const FETCH_PROTECTED_DATA_SUCCESS = 'FETCH_PROTECTED_DATA_SUCCESS';
-export const fetchProtectedDataSuccess = data => ({
-    type: FETCH_PROTECTED_DATA_SUCCESS,
+export const CHANGE_CURRENT_USER = 'CHANGE_CURRENT_USER';
+export const changeCurrentUser = data => ({
+    type: CHANGE_CURRENT_USER,
     data
 });
 
@@ -24,7 +24,7 @@ export const fetchProtectedData = () => dispatch => {
     })
         .then(res => normalizeResponseErrors(res))
         .then(res => res.json())
-        .then(({userData}) => dispatch(fetchProtectedDataSuccess(userData)))
+        .then(({userData}) => dispatch(changeCurrentUser(userData)))
         .catch(err => {
             dispatch(fetchProtectedDataError(err));
         });
