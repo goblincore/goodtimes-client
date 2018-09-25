@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import LoginForm from './components/LoginForm';
+
+import RegistrationForm  from './components/RegistrationForm';
 
 class App extends Component {
   render() {
@@ -13,6 +16,8 @@ class App extends Component {
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
+        <LoginForm />
+        <RegistrationForm />
       </div>
     );
   }
