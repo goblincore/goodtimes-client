@@ -2,7 +2,7 @@ import {
     AUTH_REQUEST,
     AUTH_ERROR
 } from '../actions/Auth';
-import { FETCH_PROTECTED_DATA_ERROR, FETCH_PROTECTED_DATA_SUCCESS } from '../actions/Protected-Data';
+import { FETCH_PROTECTED_DATA_ERROR, CHANGE_CURRENT_USER } from '../actions/Protected-Data';
 
 const initialState = {
     currentUser: null,
@@ -23,11 +23,11 @@ export default function reducer(state = initialState, action) {
             error: action.error
         });
 
-    } else if (action.type === FETCH_PROTECTED_DATA_SUCCESS) {
+    } else if (action.type === CHANGE_CURRENT_USER) {
         return Object.assign({}, state, {
             loading: false,
             error: null,
-            currentUser: action.currentUser
+            currentUser: action.data
         })
 
     } else if (action.type === FETCH_PROTECTED_DATA_ERROR) {

@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
 
 //import { connect } from 'react-redux';
-import { clearAuth } from '../actions/Auth';
-import { clearAuthToken } from '../Local-Storage';
-
+// import { clearAuth } from '../actions/Auth';
+// import { clearAuthToken } from '../Local-Storage';
+import {changeCurrentUser} from '../actions/Protected-Data';
 import './styles/HeaderBar.css';
 
 
 
 export default class HeaderBar extends Component {
     logOut() {
-        this.props.dispatch(clearAuth());
-        clearAuthToken();
+        localStorage.removeItem('authToken');
+        this.props.dispatch(changeCurrentUser(null));
     }
 
     showAboutInfo() {

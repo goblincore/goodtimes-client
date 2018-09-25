@@ -1,4 +1,5 @@
 import React from 'react';
+import {connect} from 'react-redux';
 
 export function EventList(props) {
   
@@ -12,4 +13,8 @@ export function EventList(props) {
   )
 }
 
+const mapStateToProps= state => ({
+  event: state.auth.currentUser
+})
 
+export default connect(mapStateToProps)(EventList);

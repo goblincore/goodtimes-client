@@ -9,19 +9,18 @@ import { CreateEvent } from './components/CreateEvent';
 
 
 import {BrowserRouter as Router} from 'react-router-dom';
+import Dashboard from './components/Dashboard';
 
 
 ReactDOM.render(
 
     <Provider store={store}>
-
-             <CreateEvent />
-
             <Router>
                     <App />
-             </Router>
+            </Router>
 
     </Provider>, 
 
-document.getElementById('root'));
+    document.getElementById('root')
+);
 registerServiceWorker();
