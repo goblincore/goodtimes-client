@@ -2,7 +2,7 @@ import {SubmissionError} from 'redux-form';
 
 import {API_BASE_URL} from '../config';
 import {normalizeResponseErrors} from './Utils';
-import { authRequest } from './Auth';
+import { authRequest, login } from './Auth';
 
 export const registerUser = user => dispatch => {
     dispatch(authRequest());  //set loading to true while waiting
@@ -15,6 +15,7 @@ export const registerUser = user => dispatch => {
     })
         .then(res => normalizeResponseErrors(res))
         .then(res => res.json())
+        .then(() => dispatch(login(user.username, user.password)))
         .catch(err => {
             const {reason, message, location} = err;
             if (reason === 'ValidationError') {
