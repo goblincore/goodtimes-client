@@ -1,0 +1,25 @@
+
+/* elements */
+ul {
+    list-style-type: none;
+    margin: 0;
+  padding: 0;
+  text-align: center;
+  width: 100%;
+  }
+  
+ 
+  button{
+    border: 1px solid black;
+  
+  }
+  
+  /* Classes */
+  
+  .header-bar {
+    display: flex;
+  }
+
+  .about-and-logout {
+      float: right;
+  }
