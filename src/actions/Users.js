@@ -6,7 +6,7 @@ import { authRequest, login } from './Auth';
 
 export const registerUser = user => dispatch => {
     dispatch(authRequest());  //set loading to true while waiting
-    return fetch(`${API_BASE_URL}/users`, {
+    return fetch(`${API_BASE_URL}/api/users`, {
         method: 'POST',
         headers: {
             'content-type': 'application/json'
