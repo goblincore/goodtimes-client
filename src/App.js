@@ -3,6 +3,8 @@ import logo from './logo.svg';
 import './App.css';
 import LoginForm from './components/LoginForm';
 
+import RegistrationForm  from './components/RegistrationForm';
+
 class App extends Component {
   render() {
     return (
@@ -15,6 +17,7 @@ class App extends Component {
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
         <LoginForm />
+        <RegistrationForm />
       </div>
     );
   }
