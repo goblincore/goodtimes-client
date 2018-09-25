@@ -2,8 +2,10 @@ import {SubmissionError} from 'redux-form';
 
 import {API_BASE_URL} from '../config';
 import {normalizeResponseErrors} from './Utils';
+import { authRequest } from './Auth';
 
 export const registerUser = user => dispatch => {
+    dispatch(authRequest());  //set loading to true while waiting
     return fetch(`${API_BASE_URL}/users`, {
         method: 'POST',
         headers: {
