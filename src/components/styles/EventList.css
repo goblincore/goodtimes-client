@@ -1,0 +1,5 @@
+.user-event{
+  display: inline-block;
+  border: solid black 1px;
+  padding: 10px;
+}

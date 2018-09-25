@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import HeaderBar from './HeaderBar';
-import { EventList } from './EventList';
+import EventList from './EventList';
 //import { connect } from 'react-redux';
 //import {Link} from 'react-router-dom';
 
