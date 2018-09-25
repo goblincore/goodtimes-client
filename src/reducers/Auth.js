@@ -4,7 +4,6 @@ import {
 } from '../actions/Auth';
 import { FETCH_PROTECTED_DATA_ERROR, FETCH_PROTECTED_DATA_SUCCESS } from '../actions/Protected-Data';
 
-// authToken !== null does not mean it has been validated
 const initialState = {
     currentUser: null,
     loading: false,
@@ -37,6 +36,6 @@ export default function reducer(state = initialState, action) {
             error: action.error
         })
     } 
-    
+
     return state;
 }
