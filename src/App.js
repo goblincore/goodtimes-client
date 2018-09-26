@@ -12,26 +12,22 @@ import  {fetchProtectedData} from './actions/Protected-Data';
 import RegistrationPage from './components/RegistrationPage';
 //import LoginForm  from './components/LoginForm';
 import LoginPage  from './components/LoginPage';
-import {Route, withRouter} from 'react-router-dom';
+import {Route, withRouter, Redirect} from 'react-router-dom';
 
 class App extends Component {
 
 
-  componentDidMount(){
+  componentWillMount(){
     if(localStorage.getItem('authToken')){
        this.props.dispatch(fetchProtectedData());
+    } else {
+      return;
     }
-  
   }
 
   render() {
     return (
       <div className="App">
- 
-        {/* <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">It's a Date</h1>
-        </header> */}
         <div className="app" lang="en">
                <HeaderBar/>
                 <Route exact path="/" component={LandingPage} />

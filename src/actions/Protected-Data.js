@@ -24,7 +24,10 @@ export const fetchProtectedData = () => dispatch => {  //getting user data
     })
         .then(res => normalizeResponseErrors(res))
         .then(res => res.json())
-        .then((userData) => dispatch(changeCurrentUser(userData)))
+        .then((userData) => {
+          console.log('IN ACTION',userData);
+          dispatch(changeCurrentUser(userData))
+        })
         .catch(err => {
             dispatch(fetchProtectedDataError(err));
         });

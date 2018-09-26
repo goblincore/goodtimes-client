@@ -3,8 +3,10 @@ import HeaderBar from './HeaderBar';
 
 import { EventList } from './EventList';
 import { connect } from 'react-redux';
-import {Link, Redirect} from 'react-router-dom';
+
 import SuccessfullyCreatedEvent from './Events/SuccessfullyCreatedEvent';
+import {Link, Redirect, withRouter} from 'react-router-dom';
+
 
 export class Dashboard extends Component {
 
@@ -19,7 +21,7 @@ export class Dashboard extends Component {
             return (
                 <div className="dashboard-wrapper">
                 
-                    <EventList />
+                    <EventList currentUser={this.props.currentUser}/>
                     <button id="create-event">Create Event</button>
                     <br/>
                     <SuccessfullyCreatedEvent />
@@ -34,7 +36,8 @@ export class Dashboard extends Component {
 }
 
 const mapStateToProps = state => ({
-    loggedIn: state.auth.currentUser !== null
+    loggedIn: state.auth.currentUser !== null,
+    currentUser: state.auth.currentUser
   });
 
-export default connect(mapStateToProps)(Dashboard);
+export default withRouter(connect(mapStateToProps)(Dashboard));

@@ -60,23 +60,23 @@ export const login = (username, password) => dispatch => {
 
 
 
-export const refreshAuthToken = () => (dispatch, getState) => {
-    const oldToken = localStorage.getItem('authToken');
-    return fetch(`${API_BASE_URL}/auth/refresh`, {
-        method: 'POST',
-        headers: {
-            // Provide our existing token as credentials to get a new one
-            Authorization: `Bearer ${oldToken}`
-        }
-    })
-        .then(res => normalizeResponseErrors(res))
-        .then(res => res.json())
-        .then(({authToken}) => localStorage.setItem('authToken', authToken))
-        .catch(err => {
-            // We couldn't get a refresh token because our current credentials
-            // are invalid or expired, or something else went wrong, so clear
-            // them and sign us out
-            localStorage.removeItem('authToken');
-            dispatch(authError(err));
-        });
-};
+// export const refreshAuthToken = () => (dispatch, getState) => {
+//     const oldToken = localStorage.getItem('authToken');
+//     return fetch(`${API_BASE_URL}/auth/refresh`, {
+//         method: 'POST',
+//         headers: {
+//             // Provide our existing token as credentials to get a new one
+//             Authorization: `Bearer ${oldToken}`
+//         }
+//     })
+//         .then(res => normalizeResponseErrors(res))
+//         .then(res => res.json())
+//         .then(({authToken}) => localStorage.setItem('authToken', authToken))
+//         .catch(err => {
+//             // We couldn't get a refresh token because our current credentials
+//             // are invalid or expired, or something else went wrong, so clear
+//             // them and sign us out
+//             localStorage.removeItem('authToken');
+//             dispatch(authError(err));
+//         });
+// };
