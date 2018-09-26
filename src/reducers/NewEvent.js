@@ -21,7 +21,7 @@ export default newEventReducer = (state=initialState, action) => {
     })
 
   } else if (action.type === UPDATE_NEW_EVENT_STATE) {
-    return Object.assign({}, state, action.updateObject);
+    return Object.assign({}, state, action.updateObject); //example:  {restaurantOptions: [{zomatoId: '123'}]}
 
   } else if (action.type === CHANGE_ERROR_MESSAGE) {
     return Object.assign({}, state, {

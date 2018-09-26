@@ -1,6 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
+import { CreateEvent } from './CreateEvent';
+
 export class NewEventMain extends React.Component {
   constructor(props){
     super(props);
@@ -23,7 +25,7 @@ export class NewEventMain extends React.Component {
     switch (this.state.pageCount) {
       case 1:
         //title, location, description
-        component = <Component1 nextPage={this.nextPage} dispatch={this.props.dispatch} eventState={this.props.newEvent}/>;
+        component = <CreateEvent nextPage={this.nextPage} dispatch={this.props.dispatch} eventState={this.props.newEvent}/>;
         break;
       case 2:
         //date/time options
@@ -46,7 +48,6 @@ export class NewEventMain extends React.Component {
     return (
       <div class='new-event-form'>
         {component}
-        <p>{this.props.errorMessage}</p>
       </div>
     )
   }
