@@ -13,6 +13,7 @@ import RegistrationPage from './components/RegistrationPage';
 //import LoginForm  from './components/LoginForm';
 import LoginPage  from './components/LoginPage';
 import {Route, withRouter, Redirect} from 'react-router-dom';
+import { CreateEvent } from './components/newEvent/CreateEvent';
 
 class App extends Component {
 
@@ -35,6 +36,7 @@ class App extends Component {
                 <Route exact path="/register" component={RegistrationPage} />
                 <Route exact path="/login" component={LoginPage} /> 
                 <Route exact path="/dashboard" component={Dashboard} />
+                <Route exact path="/create-event" component={CreateEvent} />
           
             </div>
       </div>

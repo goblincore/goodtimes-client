@@ -45,7 +45,7 @@ return (
             <button className="logout" onClick={() => this.logOut()}>Log out</button>
             <div className="login-and-about"> 
             <Link to="/register">{signUpButton}</Link>
-             <Link to="/login">{logInButton}</Link>
+            <Link to="/login">{logInButton}</Link>
     </div>
         </div>
      
