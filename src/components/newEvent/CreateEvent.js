@@ -28,7 +28,7 @@ export function CreateEvent(props) {
 
             <label>
                 Enter a short description for your event:
-                <textarea />
+                <textarea rows="4" cols="50"/>
             </label>
             <button>
                 Next Page

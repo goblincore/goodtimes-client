@@ -6,7 +6,7 @@
 
 }
 
-.textarea{
-  width:350px;
+textarea{
+  max-width:350px;
   height: 100px;
 }
