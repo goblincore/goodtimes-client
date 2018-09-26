@@ -15,7 +15,7 @@ export default function PreviewEvent(props){
     console.log('NEW EVENT DETAILS:',newEvent)
     return props.dispatch(postNewEvent(newEvent))
       .then(() => props.nextPage())
-      .catch(err => console.log('ERROR HANDLING HERE'));
+      .catch(err => console.log('ERROR HANDLING HERE dispatch(changeErrorMessaeg(err.message))'));
   }
 
   return (

@@ -40,5 +40,5 @@ export const postNewEvent = eventData => dispatch => {
     console.log(res);
     return Promise.resolve();
   })
-  .catch(err => dispatch(changeErrorMessage(err.message)) )
+  .catch(err => Promise.reject(err) )
 }
