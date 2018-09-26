@@ -11,6 +11,12 @@ import RegistrationForm  from './RegistrationForm';
 
 export class LandingPage extends Component {
 
+
+  componentDidMount(){
+    console.log('this.props.loggedIn',this.props.loggedIn);
+  }
+  
+
 render(){ 
   if(this.props.loading){
     return <h1>loading...</h1>
