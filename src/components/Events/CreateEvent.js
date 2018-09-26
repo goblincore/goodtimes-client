@@ -2,12 +2,20 @@
 import React from 'react';
 // import {Field, reduxForm, focus} from 'redux-form';
 import '../styles/CreateEvent.css'
+import { updateNewEventState } from '../../actions/New-Event';
 export function CreateEvent(props) {
     return (
         <form
             className="event-form"
             onSubmit={e=>{
                 e.preventDefault();
+                const title = e.target.eventName.value.trim();
+                const state = e.target.stateLocation.value;
+                const city = e.target.cityLocation.value.trim();
+                const description = e.target.eventDescription.value;
+                console.log(title, state, city, description);
+                props.dispatch(updateNewEventState({title, location:{city, state}, description}));
+                props.nextPage();
             }
         }>
             <label htmlFor="eventName">Event Name</label>
@@ -19,8 +27,8 @@ export function CreateEvent(props) {
                 
             />
             <label htmlFor='stateLocation'>Location</label>
-            <select name="state" id="state">
-                <option value="" selected="selected">Select a State</option>
+            <select name="stateLocation" id="stateLocation" defaultValue="Select a State">
+                {/* <option value="" selected="selected">Select a State</option> */}
                 <option value="AL">Alabama</option>
                 <option value="AK">Alaska</option>
                 <option value="AZ">Arizona</option>
@@ -82,9 +90,9 @@ export function CreateEvent(props) {
                 placeholder="Please enter a City"
             />
 
-            <label>
+            <label htmlFor="eventDescription">
                 Enter a short description for your event:
-                <textarea rows="4" cols="50"/>
+                <textarea rows="4" cols="50" name="eventDescription"/>
             </label>
             <button>
                 Next Page
