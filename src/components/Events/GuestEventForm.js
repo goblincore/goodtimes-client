@@ -1,22 +1,37 @@
 import React, { Component } from 'react';
 import {API_BASE_URL} from '../../config';
-import {normalizeResponseErrors} from './Utils';
+import {normalizeResponseErrors} from '../../actions/Utils';
 
 
  export default class GuestEventForm extends Component {
-     constructor(){
-         super();
+     constructor(props){
+         super(props);
+         this.state = {
+             guestEvent: {}
+         }
      }
+ 
+
 componentDidMount(){
-    fetch(`${API_BASE_URL}/api/events/:evendId`, {
-        method: 'GET'
+    const { eventId }= this.props.match.params
+    //console.log(eventId, 'HERES THE EVENT ID');
+   
+
+
+    fetch(`${API_BASE_URL}/api/guestevents/${eventId}`, {
+        method: 'GET',
         })
-        .then(res => normalizeResponseErrors(res))
-        .then(res => res.json(guestEvent => this.setState({showEvent: guestEvent})))
-        .catch(err => {
-            console.error(err);
+        .then(res => {
+            if (!res.ok) {
+                throw new Error(res.statusText);
+            }
+            return res.json()
+        }).then(data => {
+            //console.log(data);
+            this.setState({guestEvent: data});
         })
-}
+        console.log(this.state.guestEvent);
+    }
 
     backToDashboard(){
         //dispatch action to change state of showNewEvent from true to false
@@ -25,22 +40,29 @@ componentDidMount(){
     
 render(){
 
-
-
+if(this.state.guestEvent === {}){
+    return (
+        <p>Loading...</p>
+    )
+} else { 
+const {title, description} = this.state.guestEvent;
     return (
         <div className="guest-event-form-wrapper">
 
-        <h1>Event: ${this.props.currentEvent.title}</h1>
-        <div className="event-link-to-share">
-            <h3>Share this link with your friends:</h3>
-            <p id="event-link">http://weekends.herokuapp.com/events/12321</p>
-   
+        <h1>Event:{title}</h1>
+            <br/>
+        <h3>{description}</h3>
+        <div className="event-form-options">
+
+        
+        </div>
 
                 
             <button id="back-to-dashboard" >Back to Dashboard</button>
         </div>
-        </div>
+        
     )
+}
 }
  }
 
@@ -49,3 +71,18 @@ render(){
 //   });
   
 //   export default connect(mapStateToProps)(LandingPage);
+
+// .then(res => { 
+//     console.log('Heres the RES', res);
+//     normalizeResponseErrors(res);
+// })
+
+// .then(res => {
+//     console.log(res);
+//     //console.log('here')
+//     res.json(data => this.setState({guestEvent: data}));
+// }) 
+// .catch(err => {
+//     console.error(err);
+// })
+// }
