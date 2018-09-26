@@ -63,6 +63,7 @@ export class DateSelectPage extends React.Component {
      
 
       render(){
+        console.log('EVENT=',this.props.event);
         let {inputMoment, bigInputMoment, datePickerMoment, datePickerRangeStartMoment, datePickerRangeEndMoment, timePickerMoment, showSeconds, locale, size} = this.state;
         let wrapperClass = 'wrapper ' + size;
         return (
@@ -115,7 +116,9 @@ export class DateSelectPage extends React.Component {
                     Add this date
                 </button>
                 
-                <button onClick={this.updateRedux}>
+                <button onClick={()=>{
+                  this.updateRedux;
+                  this.props.nextPage()}}>
                     Next Page
                 </button>
                 </div>
@@ -130,7 +133,8 @@ export class DateSelectPage extends React.Component {
 const mapStateToProps = state => {
   // const {currentUser} = state.auth;
   return {
-      times: state.newEvent.scheduleOptions 
+      times: state.newEvent.scheduleOptions,
+      event: state.newEvent 
   };
 };
 

@@ -13,21 +13,28 @@ const initialState = {
   scheduleOptions: [],
   restaurantOptions: [],
   id: null
-}
+};
 
 export default function newEventReducer (state=initialState, action) {
   if (action.type === SHOW_NEW_EVENT_STATE) {
     return Object.assign({}, state, {
       showNewEvent: action.bool
-    })
+    });
 
   } else if (action.type === UPDATE_NEW_EVENT_STATE) {
-    return Object.assign({}, state, action.updateObject); //example:  {restaurantOptions: [{zomatoId: '123'}]}
+    console.log('update action=',action);
+    return Object.assign({}, state, {
+      title: action.updateObject.title,
+      location: action.updateObject.location,
+      description: action.updateObject.description,
+      scheduleOptions: action.updateObject.scheduleOptions,
+      restaurantOptions: action.updateObject.restaurantOptions
+    }); //example:  {restaurantOptions: [{zomatoId: '123'}]}
 
   } else if (action.type === CHANGE_ERROR_MESSAGE) {
     return Object.assign({}, state, {
       errorMessage: action.message
-    })
+    });
   } else {
     return state;
   }

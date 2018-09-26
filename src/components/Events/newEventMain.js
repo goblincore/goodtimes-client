@@ -4,6 +4,7 @@ import { CreateEvent } from './CreateEvent';
 import DateSelectPage from './DateSelectPage';
 import {Redirect,withRouter} from 'react-router-dom';
 import PreviewEvent from './PreviewEvent';
+import RestaurantSelect from './RestaurantSelect';
 
 export class NewEventMain extends React.Component {
   constructor(props){
@@ -40,10 +41,10 @@ export class NewEventMain extends React.Component {
           //date/time options
           component = <DateSelectPage nextPage={this.nextPage} dispatch={this.props.dispatch} prevPage={this.prevPage} eventState={this.props.newEvent}/>;
           break;
-        // case 3:
-        //   //food options
-        //   component = <Component3 nextPage={this.nextPage} dispatch={this.props.dispatch} prevPage={this.prevPage} eventState={this.props.newEvent}/>;
-        //   break;
+        case 3:
+          //food options
+          component = <RestaurantSelect nextPage={this.nextPage} dispatch={this.props.dispatch} prevPage={this.prevPage} eventState={this.props.newEvent}/>;
+          break;
         case 4:
           //preview, confirm page
           component = <PreviewEvent 
