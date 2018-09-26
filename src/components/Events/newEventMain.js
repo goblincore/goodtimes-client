@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-
 import { CreateEvent } from './CreateEvent';
 
 export class NewEventMain extends React.Component {
@@ -11,6 +10,8 @@ export class NewEventMain extends React.Component {
       pageCount: 1
     }
   }
+
+  
 
   nextPage = () => {
     this.setState({pageCount: this.state.pageCount + 1})
