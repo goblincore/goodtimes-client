@@ -10,49 +10,60 @@ import './styles/HeaderBar.css';
 
 
 export class HeaderBar extends Component {
+
+   
+
     logOut() {
         localStorage.removeItem('authToken');
         this.props.dispatch(changeCurrentUser(null));
     }
 
 
-
-    // logOut() {
-    //     this.props.dispatch(clearAuth());
-    //     clearAuthToken();
-    // }
-
-
-    render(){   
+    render(){
+           
         let signUpButton, logInButton;
-        signUpButton =(
-            <button className="signup">Sign Up</button>
+             signUpButton =(
+                <button className="signup">Sign Up</button>
             );
             logInButton =(
                 <button className="login">Log In</button>
+            );
+
+            if(this.props.loggedIn){
+                return(
+                    <section className="header-bar">
+                    <div className="header-logo">
+                        <h3> Goodtime</h3>
+                    </div>
+    
+                        <div className="header-nav">    
+                            <button className="logout" onClick={() => this.logOut()}>Log out</button>
+                        </div>
+                    
+                
+                   </section>
+
+                )
+            } else {
+
+                return (
+                    <section className="header-bar">
+                    <div className="header-logo">
+                        <h3> Goodtime</h3>
+                    </div>
+
+                        <div className="header-nav">
+                    
+                            
+                            
+                            <Link to="/register">{signUpButton}</Link>
+                            <Link to="/login">{logInButton}</Link>
+                       </div>
+               
+                </section>
                 );
-  
-
-
-return (
-    <section className="header-bar">
-    <div className="header-logo">
-          <h3> Goodtime</h3>
-    </div>
-
-        <div className="header-nav">
-        
-            <button className="logout" onClick={() => this.logOut()}>Log out</button>
-            <div className="login-and-about"> 
-            <Link to="/register">{signUpButton}</Link>
-            <Link to="/login">{logInButton}</Link>
-    </div>
-        </div>
-     
-  
-</section>
-);
-}
+         }
+     }
 }
 //let logOutButton,  aboutToggle;
 const mapStateToProps = state => ({
