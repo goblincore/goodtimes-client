@@ -15,15 +15,15 @@ export class HeaderBar extends Component {
         this.props.dispatch(changeCurrentUser(null));
     }
 
-    showAboutInfo() {
-
-    }
-
-    
 
 
-    render(){ 
-        
+    // logOut() {
+    //     this.props.dispatch(clearAuth());
+    //     clearAuthToken();
+    // }
+
+
+    render(){   
         let signUpButton, logInButton;
         signUpButton =(
             <button className="signup">Sign Up</button>

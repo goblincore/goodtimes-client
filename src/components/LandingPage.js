@@ -17,6 +17,7 @@ return (
     <div className="container">
    
        <div className="hero"><h1>Event Planning Made Easy </h1></div>
+      
     </div>
 )
 }
