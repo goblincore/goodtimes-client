@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { CreateEvent } from './CreateEvent';
 import DateSelectPage from './DateSelectPage';
 import {Redirect,withRouter} from 'react-router-dom';
+import PreviewEvent from './PreviewEvent';
 
 export class NewEventMain extends React.Component {
   constructor(props){
@@ -44,10 +45,10 @@ export class NewEventMain extends React.Component {
         //   //food options
         //   component = <Component3 nextPage={this.nextPage} dispatch={this.props.dispatch} prevPage={this.prevPage} eventState={this.props.newEvent}/>;
         //   break;
-        // case 4:
-        //   //summary, confirm page
-        //   component = <Component4 nextPage={this.nextPage} dispatch={this.props.dispatch} prevPage={this.prevPage} eventState={this.props.newEvent}/>;
-        //   break;
+        case 4:
+          //preview, confirm page
+          component = <PreviewEvent nextPage={this.nextPage} dispatch={this.props.dispatch} prevPage={this.prevPage} eventState={this.props.newEvent}/>;
+          break;
         // case 5:
         //   //successful submition page
         //   component = <Component5 dispatch={this.props.dispatch} eventState={this.props.newEvent}/>;
