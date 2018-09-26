@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-//import { connect } from 'react-redux';
+import { connect } from 'react-redux';
 // import { clearAuth } from '../actions/Auth';
 // import { clearAuthToken } from '../Local-Storage';
 import {Link} from 'react-router-dom';
@@ -9,7 +9,7 @@ import './styles/HeaderBar.css';
 
 
 
-export default class HeaderBar extends Component {
+export class HeaderBar extends Component {
     logOut() {
         localStorage.removeItem('authToken');
         this.props.dispatch(changeCurrentUser(null));
@@ -55,11 +55,12 @@ return (
 }
 }
 //let logOutButton,  aboutToggle;
-// const mapStateToProps = state => ({
-//     loggedIn: state.auth.currentUser !== null
-// });
+const mapStateToProps = state => ({
+    loggedIn: state.auth.currentUser !== null
+});
 
-//export default connect(mapStateToProps)(HeaderBar);
+
+export default connect(mapStateToProps)(HeaderBar);
 
 // logOutButton = (
 //     <button className="logout" onClick={() => this.logOut()}>Log out</button>

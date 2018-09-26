@@ -1,34 +1,4 @@
-.DateInput_input__focused {
-    outline: 0;
-    background: #fff;
-    border: 0;
-    border-top: 0;
-    border-right: 0;
-    border-bottom: 0px !important;
-    border-left: 0;
-}
 
-
-.DateInput_input__focused {
-    /* outline: 0; */
-    /* background: #fff; */
-    /* border: 0; */
-    /* border-top: 0; */
-    /* border-right: 0; */
-    /* border-bottom: 2px solid #008489; */
-    /* border-left: 0; */
-}
-
-
-.DateInput_input {
-
-    width:100%;
-    padding:10px !important;
-    margin:10 0px;
-    border-radius:6px;
-    border:1px solid #ccc;
-    font-size:16px; 
-}
 
 .rc-time-picker-panel * {
     -webkit-box-sizing: border-box;
