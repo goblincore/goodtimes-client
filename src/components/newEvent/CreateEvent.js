@@ -1,7 +1,7 @@
 
 import React from 'react';
 // import {Field, reduxForm, focus} from 'redux-form';
-
+import '../styles/CreateEvent.css'
 export function CreateEvent(props) {
     return (
         <form
