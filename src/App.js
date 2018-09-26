@@ -13,7 +13,7 @@ import RegistrationPage from './components/RegistrationPage';
 //import LoginForm  from './components/LoginForm';
 import LoginPage  from './components/LoginPage';
 import {Route, withRouter, Redirect} from 'react-router-dom';
-import { NewEventMain} from './components/Events/newEventMain';
+import NewEventMain from './components/Events/newEventMain';
 
 class App extends Component {
 
