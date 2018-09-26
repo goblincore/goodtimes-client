@@ -1,3 +1,29 @@
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
+
+input{
+  width:100%;
+  padding:10px;
+  margin:10 0px;
+  border-radius:6px;
+  border:1px solid #666666;
+  font-size:16px;
+  
+  }
+
+
+  .container{
+    text-align:center;
+    line-height:180%;
+  }
+  
+  input:-webkit-autofill {
+      -webkit-box-shadow: 0 0 0px 1000px white inset;
+  }
+
+
 .App {
   text-align: center;
 }
