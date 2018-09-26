@@ -16,10 +16,10 @@ const store = createStore(
 );
 
 // Hydrate the authToken from localStorage if it exist
-const authToken = localStorage.getItem('authToken');
-if (authToken) {
-    store.dispatch(refreshAuthToken());
-}
+// const authToken = localStorage.getItem('authToken');
+// if (authToken) {
+//     store.dispatch(refreshAuthToken());
+// }
 
 export default store;
 
