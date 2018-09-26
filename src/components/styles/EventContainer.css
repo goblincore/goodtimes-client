@@ -1,0 +1,6 @@
+.rc-time-picker-panel * {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    overflow: hidden;
+    
+}
