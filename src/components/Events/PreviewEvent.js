@@ -12,7 +12,6 @@ export default function PreviewEvent(props){
       scheduleOptions: props.eventState.scheduleOptions,
       restaurantOptions: props.eventState.restaurantOptions
     }
-    console.log('NEW EVENT DETAILS:',newEvent)
     return props.dispatch(postNewEvent(newEvent))
       .then(() => props.nextPage())
       .catch(err => console.log('ERROR HANDLING HERE dispatch(changeErrorMessaeg(err.message))'));
