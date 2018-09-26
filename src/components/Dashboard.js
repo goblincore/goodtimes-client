@@ -20,7 +20,8 @@ export class Dashboard extends Component {
                 <div className="dashboard-wrapper">
                 
                     <EventList currentUser={this.props.currentUser}/>
-                    <button id="create-event">Create Event</button>
+                    <Link to="/create-event">Create Event</Link>
+                    {/* <button id="create-event">Create Event</button> */}
                 </div>
             )
         }
