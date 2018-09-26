@@ -15,6 +15,7 @@ export function CreateEvent(props) {
                 const description = e.target.eventDescription.value;
                 console.log(title, state, city, description);
                 props.dispatch(updateNewEventState({title, location:{city, state}, description}));
+                props.nextPage();
             }
         }>
             <label htmlFor="eventName">Event Name</label>
