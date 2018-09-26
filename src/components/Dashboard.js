@@ -4,7 +4,7 @@ import HeaderBar from './HeaderBar';
 import { EventList } from './EventList';
 import { connect } from 'react-redux';
 import {Link, Redirect} from 'react-router-dom';
-
+import SuccessfullyCreatedEvent from './Events/SuccessfullyCreatedEvent';
 
 export class Dashboard extends Component {
 
@@ -21,6 +21,8 @@ export class Dashboard extends Component {
                 
                     <EventList />
                     <button id="create-event">Create Event</button>
+                    <br/>
+                    <SuccessfullyCreatedEvent />
                 </div>
             )
         }
