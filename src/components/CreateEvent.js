@@ -19,17 +19,11 @@ export function CreateEvent(props) {
                 
             />
             <label htmlFor="location">Location</label>
-            <select>
-                <option value="">--Please choose an option--</option>
-            </select>
-            //////Figure out the location/////
-            <label htmlFor="location">Location</label>
             <input
                 type="Location"
                 id="Location"
                 name="Location"
-                placeholder="Select Option"
-                onChange={e=> props.onChange(e.target.value)}
+                placeholder="Please enter a location"
             />
 
             <label>
