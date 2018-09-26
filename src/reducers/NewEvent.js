@@ -14,7 +14,7 @@ const initialState = {
   restaurantOptions: []
 }
 
-export default newEventReducer = (state=initialState, action) => {
+export default function newEventReducer (state=initialState, action) {
   if (action.type === SHOW_NEW_EVENT_STATE) {
     return Object.assign({}, state, {
       showNewEvent: action.bool

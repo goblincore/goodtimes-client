@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import './styles/EventList.css'
 
 export function EventList(props) {
-  console.log(props.events);
+  console.log('PROPS',props);
   const event = props.events.map((event, i)=>{
     console.log(event);
     return(
@@ -21,7 +21,7 @@ export function EventList(props) {
   )
 }
 
-const mapStateToProps= state => ({
+const mapStateToProps = state => ({
   events: state.auth.currentUser.eventList
 })
 
