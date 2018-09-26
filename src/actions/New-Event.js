@@ -36,8 +36,9 @@ export const postNewEvent = eventData => dispatch => {
     body: JSON.stringify(eventData)
   })
   .then(res => normalizeResponseErrors(res))
+  .then(res => res.json())
   .then(res => {
-    console.log(res);
+    dispatch(updateNewEventState({id: res.id}));
     return Promise.resolve();
   })
   .catch(err => Promise.reject(err) )
