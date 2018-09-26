@@ -10,28 +10,50 @@ export class NewEventMain extends React.Component {
     }
   }
 
-  changePageCount = pageNumber => {
-    this.setState({pageCount: pageNumber});
+  nextPage = () => {
+    this.setState({pageCount: this.state.pageCount + 1})
+  }
+
+  prevPage = () => {
+    this.setState({pageCount: this.state.pageCount - 1})
   }
 
   render(){
+    let component;
     switch (this.state.pageCount) {
       case 1:
-        return <Component1 changePageCount={this.changePageCount}/>; //title, location, description
+        //title, location, description
+        component = <Component1 nextPage={this.nextPage} dispatch={this.props.dispatch} eventState={this.props.newEvent}/>;
+        break;
       case 2:
-        return <Component2 changePageCount={this.changePageCount}/>; //date and times
+        //date/time options
+        component = <Component2 nextPage={this.nextPage} dispatch={this.props.dispatch} prevPage={this.prevPage} eventState={this.props.newEvent}/>;
+        break;
       case 3:
-        return <Component3 changePageCount={this.changePageCount}/>; //food options
+        //food options
+        component = <Component3 nextPage={this.nextPage} dispatch={this.props.dispatch} prevPage={this.prevPage} eventState={this.props.newEvent}/>;
+        break;
       case 4:
-        return <Component4 changePageCount={this.changePageCount}/>; //preview of the event
+        //summary, confirm page
+        component = <Component4 nextPage={this.nextPage} dispatch={this.props.dispatch} prevPage={this.prevPage} eventState={this.props.newEvent}/>;
+        break;
       case 5:
-        return <Component5 changePageCount={this.changePageCount}/>; //successful
+        //successful submition page
+        component = <Component5 dispatch={this.props.dispatch} eventState={this.props.newEvent}/>;
+        break;
     }
+
+    return (
+      <div class='new-event-form'>
+        {component}
+        <p>{this.props.errorMessage}</p>
+      </div>
+    )
   }
 }
 
 const mapStateToProps = state => ({
-  eventDetails: state.newEvent
+  newEvent: state.newEvent
 });
 
 export default connect(mapStateToProps)(NewEventMain)
