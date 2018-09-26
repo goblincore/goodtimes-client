@@ -58,7 +58,7 @@ export class DateSelectPage extends React.Component {
 
 
         updateRedux=()=>{
-          this.props.dispatch(updateNewEventState({scheduledOptions: [...this.state.savedDate]}))
+          this.props.dispatch(updateNewEventState({scheduleOptions: [...this.state.savedDate]}))
         }
      
 
@@ -130,7 +130,7 @@ export class DateSelectPage extends React.Component {
 const mapStateToProps = state => {
   // const {currentUser} = state.auth;
   return {
-      times: state.newEvent.scheduledOptions 
+      times: state.newEvent.scheduleOptions 
   };
 };
 
