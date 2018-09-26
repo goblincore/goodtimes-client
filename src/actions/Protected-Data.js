@@ -13,7 +13,7 @@ export const fetchProtectedDataError = error => ({
     error
 });
 
-export const fetchProtectedData = () => dispatch => {
+export const fetchProtectedData = () => dispatch => {  //getting user data
     const authToken = localStorage.getItem('authToken');
     return fetch(`${API_BASE_URL}/api/users`, {
         method: 'GET',
