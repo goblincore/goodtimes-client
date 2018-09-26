@@ -19,7 +19,7 @@ export class Dashboard extends Component {
             return (
                 <div className="dashboard-wrapper">
                 
-                    {/* <EventList /> */}
+                    <EventList currentUser={this.props.currentUser}/>
                     <button id="create-event">Create Event</button>
                 </div>
             )
@@ -32,7 +32,8 @@ export class Dashboard extends Component {
 }
 
 const mapStateToProps = state => ({
-    loggedIn: state.auth.currentUser !== null
+    loggedIn: state.auth.currentUser !== null,
+    currentUser: state.auth.currentUser
   });
 
 export default withRouter(connect(mapStateToProps)(Dashboard));
