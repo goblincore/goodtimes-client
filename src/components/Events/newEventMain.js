@@ -47,7 +47,13 @@ export class NewEventMain extends React.Component {
         //   break;
         case 4:
           //preview, confirm page
-          component = <PreviewEvent nextPage={this.nextPage} dispatch={this.props.dispatch} prevPage={this.prevPage} eventState={this.props.newEvent}/>;
+          component = <PreviewEvent 
+            nextPage={this.nextPage} 
+            dispatch={this.props.dispatch} 
+            prevPage={this.prevPage} 
+            eventState={this.props.newEvent}
+            userId={this.props.currentUser.id}
+            />;
           break;
         // case 5:
         //   //successful submition page
@@ -72,8 +78,8 @@ export class NewEventMain extends React.Component {
 
 const mapStateToProps = state => ({
   newEvent: state.newEvent,
-  loggedIn: state.auth.currentUser !== null
-
+  loggedIn: state.auth.currentUser !== null,
+  currentUser: state.auth.currentUser
 });
 
 export default withRouter(connect(mapStateToProps)(NewEventMain));

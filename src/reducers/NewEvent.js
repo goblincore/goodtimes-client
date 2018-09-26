@@ -10,7 +10,7 @@ const initialState = {
   title: '',
   location: '', //  <-- maybe switch this to {lat: ..., long: ...} ??
   description: '',
-  scheduledOptions: [],
+  scheduleOptions: [],
   restaurantOptions: []
 }
 
