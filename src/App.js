@@ -5,7 +5,7 @@ import './App.css';
 //import LoginForm from './components/LoginForm';
 import LandingPage from './components/LandingPage';
 import Dashboard from './components/Dashboard';
-import EventContainer from './components/Events/EventContainer.js'
+import NewEventMain from './components/Events/newEventMain'
 import HeaderBar from './components/HeaderBar.js';
 import  {fetchProtectedData} from './actions/Protected-Data';
 
@@ -13,7 +13,7 @@ import RegistrationPage from './components/RegistrationPage';
 //import LoginForm  from './components/LoginForm';
 import LoginPage  from './components/LoginPage';
 import {Route, withRouter, Redirect} from 'react-router-dom';
-import NewEventMain from './components/Events/newEventMain';
+import SuccessfullyCreatedEvent from './components/Events/SuccessfullyCreatedEvent';
 
 class App extends Component {
 
@@ -35,7 +35,7 @@ class App extends Component {
         <div className="app" lang="en">
                <HeaderBar/>
                 <Route exact path="/" component={LandingPage} />
-                <Route exact path="/dateform" component={EventContainer} />
+                <Route exact path="/successpage" component={SuccessfullyCreatedEvent} />
                 <Route exact path="/register" component={RegistrationPage} />
                 <Route exact path="/login" component={LoginPage} /> 
                 <Route exact path="/dashboard" component={Dashboard} />
