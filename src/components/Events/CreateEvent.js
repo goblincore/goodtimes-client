@@ -1,34 +1,53 @@
 
 import React from 'react';
-// import {Field, reduxForm, focus} from 'redux-form';
 import '../styles/CreateEvent.css'
-import { updateNewEventState } from '../../actions/New-Event';
+import { updateNewEventState, newEventErrorMessage } from '../../actions/New-Event';
+
 export function CreateEvent(props) {
+
+    function handleSubmit(e){
+      e.preventDefault();
+      const title = e.target.eventName.value.trim();
+      const state = e.target.stateLocation.value;
+      const city = e.target.cityLocation.value.trim();
+      const description = e.target.eventDescription.value;
+
+      //Validate the required fields
+      const requiredInfo = [title, state, city];
+      let requiredFields = ['title', 'state', 'city'];
+      for(let i = 0; i < requiredFields.length; i++){
+        if (!requiredInfo[i]) {
+          return props.dispatch(newEventErrorMessage(`Must include ${requiredFields[i]} for your new event.`));
+        }
+      }
+
+      props.dispatch(updateNewEventState({title, location:{city, state}, description}))
+      props.nextPage();
+    }
+
+    let errorMessage;
+    if (props.eventState.errorMessage){
+      errorMessage = <p className='error-message'>{props.eventState.errorMessage}</p>
+    }
+
     return (
         <form
             className="event-form"
-            onSubmit={e=>{
-                e.preventDefault();
-                const title = e.target.eventName.value.trim();
-                const state = e.target.stateLocation.value;
-                const city = e.target.cityLocation.value.trim();
-                const description = e.target.eventDescription.value;
-                console.log(title, state, city, description);
-                props.dispatch(updateNewEventState({title, location:{city, state}, description}));
-                props.nextPage();
-            }
-        }>
+            onSubmit={e=>handleSubmit(e)}
+        >
+            {errorMessage}
+
             <label htmlFor="eventName">Event Name</label>
             <input
-                type="eventName"
+                type="text"
                 id="eventName"
                 name="eventName"
                 placeholder="Get together"
-                
+                onChange={() => props.dispatch(newEventErrorMessage(null))}
             />
             <label htmlFor='stateLocation'>Location</label>
             <select name="stateLocation" id="stateLocation" defaultValue="Select a State">
-                {/* <option value="" selected="selected">Select a State</option> */}
+
                 <option value="AL">Alabama</option>
                 <option value="AK">Alaska</option>
                 <option value="AZ">Arizona</option>
@@ -84,17 +103,18 @@ export function CreateEvent(props) {
 
             <label htmlFor="cityLocation">City</label>
             <input
-                type="cityLocation"
+                type="text"
                 id="cityLocation"
                 name="cityLocation"
                 placeholder="Please enter a City"
+                onChange={() => props.dispatch(newEventErrorMessage(null))}
             />
 
             <label htmlFor="eventDescription">
                 Enter a short description for your event:
                 <textarea rows="4" cols="50" name="eventDescription"/>
             </label>
-            <button>
+            <button type='submit'>
                 Next Page
             </button>
         </form>
