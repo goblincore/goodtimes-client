@@ -3,13 +3,15 @@ import {reducer as formReducer} from 'redux-form';
 import thunk from 'redux-thunk';
 import authReducer from './reducers/Auth';
 import newEventReducer from './reducers/NewEvent';
+import restaurantReducer from './reducers/RestaurantSelect';
 import { refreshAuthToken } from './actions/Auth';
 
 const store = createStore(
     combineReducers({
         form: formReducer,
         auth: authReducer,
-        newEvent: newEventReducer
+        newEvent: newEventReducer,
+        restaurants: restaurantReducer
     }),
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
     applyMiddleware(thunk)

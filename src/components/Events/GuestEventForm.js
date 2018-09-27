@@ -38,9 +38,6 @@ submitVotes(event){
     const dateId = document.querySelector('input[name="time-option"]:checked').value
    let selectionObject = {dateSelection: dateId};
 
-   console.log('EventID', eventId);
-   console.log('GuestEvent', this.state.guestEvent);
-    console.log(selectionObject);
     this.props.dispatch(updateEventVotes(selectionObject, eventId));
 }
   
@@ -54,13 +51,8 @@ if(this.state.guestEvent === null){
 } else { 
     let timesDisplay;
     const eventId = this.state.guestEvent.id
-    console.log('EventID', eventId);
-    console.log('GuestEvent', this.state.guestEvent);
+   
 const {title, description, scheduleOptions } = this.state.guestEvent;
-
-//  scheduleOptions.map(option => { 
-//    return console.log(option)});
-
 
         timesDisplay = scheduleOptions.map(option => { 
             return (

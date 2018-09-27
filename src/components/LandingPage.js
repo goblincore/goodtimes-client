@@ -17,20 +17,20 @@ export class LandingPage extends Component {
   }
   
 
-render(){ 
-  if(this.props.loading){
-    return <h1>loading...</h1>
-  }
-  if (this.props.loggedIn) {
+  render(){ 
+    if(this.props.loading){
+      return <h1>loading...</h1>;
+    }
+    if (this.props.loggedIn) {
       return <Redirect to="/dashboard" />;
-  }
-  return (
+    }
+    return (
       <div className="container">
     
         <div className="hero"><h1>Event Planning Made Easy </h1></div>
         
       </div>
-  )
+    );
   }
 }
 
