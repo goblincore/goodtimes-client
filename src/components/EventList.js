@@ -3,14 +3,14 @@ import {connect} from 'react-redux';
 import './styles/EventList.css';
 
 export function EventList(props) {
-  console.log('PROPS',props);
+  console.log('eventlist props',props);
 
   if(props.userEvents !== null ){
     const event = props.userEvents.map((event, i)=>{
       console.log(event);
       return(
-        <div key={i} className='user-event'>
-          <p>{event.title}</p>
+        <li key={i} className='user-event'>
+          <h2>{event.title}</h2>
           <p>{event.description}</p>
           {
             event.scheduleOptions.map(date =>{
@@ -24,7 +24,7 @@ export function EventList(props) {
               
             })
           }
-        </div>
+        </li>
       );
     });
 

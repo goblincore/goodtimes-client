@@ -9,7 +9,7 @@
     "moment": "^2.22.2",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
-    "react-icons": "^2.2.0",
+    "react-icons": "^2.2.7",
     "react-input-slider": "^4.0.1",
     "react-md": "^1.7.1",
     "react-redux": "^5.0.7",
