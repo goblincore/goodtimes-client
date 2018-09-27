@@ -1,0 +1,30 @@
+#dashboard_main{
+    width:400px;
+    display:inline-block;
+    float:left;
+    text-align:left;
+  
+
+}
+
+#dashboard_main p{
+ 
+    line-height:180%;
+}
+
+.block-li li{
+    display:block;
+}
+
+#dashboard_eventlist{
+    width:500px;
+    display:inline-block;
+    float:left;
+ 
+
+}
+
+.dashboard-wrapper{
+    max-width:910px;
+    margin:auto;
+}
