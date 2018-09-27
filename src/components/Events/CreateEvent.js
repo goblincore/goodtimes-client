@@ -3,8 +3,10 @@ import React from 'react';
 // import {Field, reduxForm, focus} from 'redux-form';
 import '../styles/CreateEvent.css'
 import { updateNewEventState } from '../../actions/New-Event';
+
+
 export function CreateEvent(props) {
-    return (
+    return (    
         <form
             className="event-form"
             onSubmit={e=>{
@@ -98,5 +100,6 @@ export function CreateEvent(props) {
                 Next Page
             </button>
         </form>
+       
     );
 }

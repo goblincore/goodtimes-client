@@ -1,16 +1,21 @@
 import React, { Component } from 'react';
 import {API_BASE_URL} from '../../config';
+import { updateEventVotes } from '../../actions/Update-Event-Votes';
+//import { updateEventVotes } from '../../actions/Update-Event-Votes';
 
  export default class GuestEventForm extends Component {
      constructor(props){
          super(props);
          this.state = {
-             guestEvent: null
+             guestEvent: null,
+             errorMessage: null
          }
+         this.submitVotes = this.submitVotes.bind(this);
      }
+
 componentDidMount(){
+    //GET EVENT DATA
     const { eventId }= this.props.match.params
-    //console.log(eventId, 'HERES THE EVENT ID');
 
     fetch(`${API_BASE_URL}/api/guestevents/${eventId}`, {
         method: 'GET',
@@ -21,16 +26,18 @@ componentDidMount(){
             }
             return res.json()
         }).then(data => {
-            //console.log(data);
+
             this.setState({guestEvent: data});
         })
-       // console.log(this.state.guestEvent);
     }
-
-    backToDashboard(){
-        //dispatch action to change state of showNewEvent from true to false
-      
-    }
+submitVotes(event){
+    event.preventDefault();
+    const eventId = this.state.guestEvent._id
+    const dateId = document.querySelector('input[name="time-option"]:checked').value
+    //console.log(selection);
+//this.props.dispatch(updateEventVotes(eventId, dateId));
+}
+  
     
 render(){
 
@@ -42,19 +49,15 @@ if(this.state.guestEvent === null){
     let timesDisplay;
 
 const {title, description, scheduleOptions } = this.state.guestEvent;
-const { date } = scheduleOptions[0].option;
-const times = scheduleOptions[0].option.times;
 
-//pull times from objects and load them into an array
-let timesArray = [];
- times.map((item) => {
-    timesArray.push(item.time);
-});
-//map over array to create radio buttons
-        timesDisplay = timesArray.map(time => { 
+//  scheduleOptions.map(option => { 
+//    return console.log(option)});
+
+
+        timesDisplay = scheduleOptions.map(option => { 
             return (
                 <label><input type="radio" 
-                    name="time-option" value={time} /> {time} </label> )});
+                    name="time-option" value={option.id} /> {option.date} </label> )});
 
     return (
         <div className="guest-event-form-wrapper">
@@ -63,11 +66,14 @@ let timesArray = [];
             
                 <h1>Event:{title}</h1><br/>
                     <h3>{description}</h3>
-                <div className="event-form-options">
-                    <h3>{date}</h3>
+                <form className="event-form-options" onSubmit={this.submitVotes}>
+                    
                         {timesDisplay}
-                </div>     
-            <button id="back-to-dashboard" >Back to Dashboard</button>
+                        
+                        <button type="submit" id="submit-votes">
+                                Submit</button>
+                </form>     
+            
         </div>
         
         )

@@ -1,4 +1,4 @@
-import _InputMoment from './InputMoment';
+import _InputMoment from './inputmoment';
 import _BigInputMoment from './BigInputMoment';
 import _DatePicker from './date/DatePicker';
 import _DatePickerRange from './date/DatePickerRange';
