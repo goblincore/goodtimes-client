@@ -1,6 +1,6 @@
 import React from 'react';
 import { postNewEvent } from '../../actions/New-Event';
-//import GuestForm Component Here
+import GuestForm from '../Events/GuestEventForm';
 
 export default function PreviewEvent(props){
   function onSubmit() {
@@ -11,7 +11,7 @@ export default function PreviewEvent(props){
       location: props.eventState.location,  //zomato location ID
       scheduleOptions: props.eventState.scheduleOptions,
       restaurantOptions: props.eventState.restaurantOptions
-    }
+    };
     return props.dispatch(postNewEvent(newEvent))
       .then(() => props.nextPage())
       .catch(err => console.log('ERROR HANDLING HERE dispatch(changeErrorMessaeg(err.message))'));
@@ -27,8 +27,26 @@ export default function PreviewEvent(props){
         <h1>Preview Event Form</h1>
       </div>
 
-      <p>GuestForm component goes here</p>
-      {/* <GuestForm currentForm={props.eventState}/> */}
+      
+      <div className="guest-event-form-wrapper">
+        <h3>You're invited to:</h3>
+        <h1>Title</h1><br/>
+        <h3>Vote to decide on a time and place.</h3>
+            
+        <h3>Description</h3>
+        <form className="event-form-options">
+          <div className="time-options"> 
+            <h4>Choose a Time:</h4>
+              Time
+          </div>
+          <div className="restaurant-options"> 
+            <h4>Choose a Place:</h4>
+              Restaurants
+          </div>
+          <br/>
+          <br/>
+        </form>     
+      </div>
 
       <div>
         <button type='button'>Save as Draft</button>
