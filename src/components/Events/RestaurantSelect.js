@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 
 import { fetchCuisines, fetchRestaurants, fetchZomatoLocation } from '../../actions/RestaurantSelect';
 import { updateNewEventState } from '../../actions/New-Event';
-
+import '../styles/RestaurantSelect.css';
 export class RestaurantSelect extends React.Component {
 
   constructor(props){
@@ -67,22 +67,31 @@ export class RestaurantSelect extends React.Component {
     } 
     
     return(
-      <div>
-        <form>
-          <label>Select Cuisine</label>
-          <select onChange={e => this.getCuisines(e)}>
-            {cuisineOptions}
-          </select>
-        </form>
-        {restaurantChoices}
-        <ul>Restaurant Choices{selectedRestaurantsDisplay}</ul>
-        <button onClick={()=>this.props.dispatch(updateNewEventState({restaurantOptions:[...this.state.selectedRestaurants]}))}>Add Restaurant(s)</button>
+      <div className="container">
+        <div id="select-cuisine">
+          <form id="select-cuisine-form">
+            <label>Select Cuisine</label>
+            <select onChange={e => this.getCuisines(e)}>
+              {cuisineOptions}
+            </select>
+          </form>
+         
+       
+         
+         
+          <ul>Restaurant Choices{selectedRestaurantsDisplay}</ul>
+          <button onClick={()=>this.props.dispatch(updateNewEventState({restaurantOptions:[...this.state.selectedRestaurants]}))}>Add Restaurant(s)</button>
 
-        <button type='button' onClick={() => this.props.prevPage()}>
-                {'<-'} Back
-        </button>
+          <button type='button' onClick={() => this.props.prevPage()}>
+                  {'<-'} Back
+          </button>
 
-        <button onClick={()=>this.props.nextPage()}>Next Page</button>
+          <button onClick={()=>this.props.nextPage()}>Next Page</button>
+        </div>
+
+          <div id="restaurant-list">
+          {restaurantChoices}
+          </div>
       </div>
     );
   }
