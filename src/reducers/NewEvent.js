@@ -1,7 +1,7 @@
 import { 
   SHOW_NEW_EVENT_STATE, 
   UPDATE_NEW_EVENT_STATE,
-  CHANGE_ERROR_MESSAGE 
+  NEW_EVENT_ERROR_MESSAGE 
 } from '../actions/New-Event';
 
 const initialState = {
@@ -24,7 +24,7 @@ export default function newEventReducer (state=initialState, action) {
   } else if (action.type === UPDATE_NEW_EVENT_STATE) {
     return Object.assign({}, state, action.updateObject); //example:  {restaurantOptions: [{zomatoId: '123'}]}
 
-  } else if (action.type === CHANGE_ERROR_MESSAGE) {
+  } else if (action.type === NEW_EVENT_ERROR_MESSAGE) {
     return Object.assign({}, state, {
       errorMessage: action.message
     })
