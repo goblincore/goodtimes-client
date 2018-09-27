@@ -77,6 +77,11 @@ export class RestaurantSelect extends React.Component {
         {restaurantChoices}
         <ul>Restaurant Choices{selectedRestaurantsDisplay}</ul>
         <button onClick={()=>this.props.dispatch(updateNewEventState({restaurantOptions:[...this.state.selectedRestaurants]}))}>Add Restaurant(s)</button>
+
+        <button type='button' onClick={() => this.props.prevPage()}>
+                {'<-'} Back
+        </button>
+
         <button onClick={()=>this.props.nextPage()}>Next Page</button>
       </div>
     );

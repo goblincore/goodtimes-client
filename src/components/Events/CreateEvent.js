@@ -115,12 +115,16 @@ export function CreateEvent(props) {
       <label htmlFor="eventDescription">
                 Enter a short description for your event:
 
-        <textarea rows="4" cols="50" name="eventDescription"/>
-      </label>
-      <button type='submit'>
+
+                <textarea rows="4" cols="50" name="eventDescription"/>
+            </label>
+            <button type='button' onClick={() => props.prevPage()}>
+                {'<-'} Back
+              </button>
+            <button type='submit'>
 
                 Next Page
-      </button>
+             </button>
     </form>
   );
 }
