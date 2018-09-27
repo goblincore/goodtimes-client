@@ -10,8 +10,9 @@ const initialState = {
   title: '',
   location: '', //  <-- maybe switch this to {lat: ..., long: ...} ??
   description: '',
-  scheduledOptions: [],
-  restaurantOptions: []
+  scheduleOptions: [],
+  restaurantOptions: [],
+  id: null
 }
 
 export default function newEventReducer (state=initialState, action) {
