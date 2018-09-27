@@ -188,7 +188,7 @@
 }
 
 .im-time-picker .time-picker-wrapper .time {
-    width: 65px;
+    width: 175px;
     height: 65px;
     display: inline-block;
     font-size: 38px;
@@ -232,7 +232,7 @@
 }
 
 .im-time-slider .time {
-    width: 65px;
+    width: 185px;
     height: 65px;
     display: inline-block;
     font-size: 38px;

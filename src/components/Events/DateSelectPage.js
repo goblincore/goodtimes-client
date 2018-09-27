@@ -13,7 +13,7 @@ import {updateNewEventState} from '../../actions/New-Event';
  import './Calendar/less/calendar-time.css';
 // import 'react-datepicker/dist/react-datepicker.css';
  import '../styles/DateTime.css';
-import {InputMoment, BigInputMoment, DatePicker, TimePicker} from 'react-input-moment';
+import {InputMoment, BigInputMoment, DatePicker, TimePicker} from './Calendar';
 
 
 
@@ -67,7 +67,7 @@ export class DateSelectPage extends React.Component {
         let wrapperClass = 'wrapper ' + size;
         return (
         <div className="container">
-          <div classsName="form-container">
+          <div className="form-container">
             <form
                 className="date-form"
                 onSubmit={e=>{
@@ -91,7 +91,7 @@ export class DateSelectPage extends React.Component {
 
 
         <div className={wrapperClass}>
-          <BigInputMoment
+          <InputMoment
             moment={bigInputMoment}
             locale={locale}
             showSeconds={showSeconds}
