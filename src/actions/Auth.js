@@ -2,7 +2,7 @@ import {SubmissionError} from 'redux-form';
 
 import {API_BASE_URL} from '../config';
 import {normalizeResponseErrors} from './Utils';
-import { fetchProtectedData } from './Protected-Data';
+import { fetchProtectedData, fetchUserEvents } from './Protected-Data';
 
 
 export const AUTH_REQUEST = 'AUTH_REQUEST';
@@ -38,6 +38,7 @@ export const login = (username, password) => dispatch => {
             .then(res => res.json())
             .then(({authToken}) => {
               localStorage.setItem('authToken', authToken);
+            //   dispatch(fetchUserEvents());
               dispatch(fetchProtectedData());  // <-------- Logs in, gets auth token, then immediately fetches the user data
             })
             .catch(err => {

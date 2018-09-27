@@ -9,12 +9,12 @@ import {Link, Redirect, withRouter} from 'react-router-dom';
 export class Dashboard extends Component {
 
     render() {
-
+        console.log('userevents props',this.props.userEvents);
         if(this.props.loggedIn){
             return (
                 <div className="dashboard-wrapper">
                    
-                    <EventList currentUser={this.props.currentUser}/>
+                    <EventList userEvents={this.props.userEvents}/>
                     <Link to="/create-event">Create Event</Link>
                     {/* <button id="create-event">Create Event</button> */}
                 </div>
@@ -29,7 +29,8 @@ export class Dashboard extends Component {
 
 const mapStateToProps = state => ({
     loggedIn: state.auth.currentUser !== null,
-    currentUser: state.auth.currentUser
+    currentUser: state.auth.currentUser,
+    userEvents:state.auth.userEvents
   });
 
 export default withRouter(connect(mapStateToProps)(Dashboard));

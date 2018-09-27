@@ -1,91 +1,69 @@
 import cx from 'classnames';
-import moment from 'moment';
-import React, { Component } from 'react';
-import Calendar from './calendar';
-import Time from './time';
+import React from 'react';
+import DatePickerIcon from 'react-icons/lib/fa/calendar';
+import ClockIcon from 'react-icons/lib/fa/clock-o';
+import DatePicker from './date/DatePicker';
+import TimePicker from './time/TimePicker';
 
-export default class InputMoment extends Component {
-  static defaultProps = {
-    prevMonthIcon: 'ion-ios-arrow-left',
-    nextMonthIcon: 'ion-ios-arrow-right',
-    minStep: 1,
-    hourStep: 1
-  };
+export default class extends React.Component {
+  constructor(props) {
+    super(props);
 
-  state = {
-    tab: 0
-  };
-
-  handleClickTab = (e, tab) => {
-    e.preventDefault();
-    this.setState({ tab: tab });
-  };
-
-  handleSave = e => {
-    e.preventDefault();
-    if (this.props.onSave) this.props.onSave();
-  };
+    this.state = {
+      tab: 0
+    };
+  }
 
   render() {
-    const { tab } = this.state;
-    const {
-      moment: m,
-      className,
-      prevMonthIcon,
-      nextMonthIcon,
-      minStep,
-      hourStep,
-      onSave,
-      ...props
-    } = this.props;
-    const cls = cx('m-input-moment', className);
+    let tab = this.state.tab;
+    let mom = this.props.moment;
 
     return (
-      <div className={cls} {...props}>
+      <div className="im-input-moment">
         <div className="options">
-          <button
-            type="button"
-            className={cx('ion-calendar im-btn', { 'is-active': tab === 0 })}
-            onClick={e => this.handleClickTab(e, 0)}
-          >
-            Date
+          <button type="button" className={cx('im-btn', {'is-active': tab === 0})} onClick={this.handleClickTab.bind(this, 0)}>
+            <DatePickerIcon
+              style={{
+                fontSize: '18px',
+                marginRight: '5px',
+                verticalAlign: 'middle',
+              }}
+            />
+            <span style={{verticalAlign: 'middle'}}>Date</span>
           </button>
-          <button
-            type="button"
-            className={cx('ion-clock im-btn', { 'is-active': tab === 1 })}
-            onClick={e => this.handleClickTab(e, 1)}
-          >
-            Time
+          <button type="button" className={cx('im-btn', {'is-active': tab === 1})} onClick={this.handleClickTab.bind(this, 1)}>
+            <ClockIcon
+              style={{
+                fontSize: '18px',
+                marginRight: '5px',
+                verticalAlign: 'middle',
+              }}
+            />
+            <span style={{verticalAlign: 'middle'}}>Time</span>
           </button>
         </div>
 
-        <div className="tabs">
-          <Calendar
-            className={cx('tab', { 'is-active': tab === 0 })}
-            moment={m}
-            onChange={this.props.onChange}
-            prevMonthIcon={this.props.prevMonthIcon}
-            nextMonthIcon={this.props.nextMonthIcon}
-          />
-          <Time
-            className={cx('tab', { 'is-active': tab === 1 })}
-            moment={m}
-            minStep={this.props.minStep}
-            hourStep={this.props.hourStep}
+        <div className={cx('tab-component', {'is-active': tab === 0})}>
+          <DatePicker
+            moment={mom}
+            locale={this.props.locale}
             onChange={this.props.onChange}
           />
         </div>
-
-        {this.props.onSave ? (
-          <button
-            type="button"
-            className="im-btn btn-save ion-checkmark"
-            onClick={this.handleSave}
-          >
-            Save
-          </button>
-        ) : null}
+        <div className={cx('tab-component', {'is-active': tab === 1})}>
+          <TimePicker
+            moment={mom}
+           
+            locale={this.props.locale}
+            onChange={this.props.onChange}
+          />
+        </div>
       </div>
     );
+  }
+
+  handleClickTab(tab, e) {
+    e.preventDefault();
+    this.setState({tab});
   }
 }

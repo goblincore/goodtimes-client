@@ -18,7 +18,7 @@ export default class Datelist extends React.Component{
               
                 return (
                 <li className="date-list-item" key={index}  >
-                   {date}
+                   {date.date}
                    {/* {word.lapineWord} : {Math.floor(word.percentCorrect)} %  */}
                  
                 </li>
