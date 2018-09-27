@@ -32,9 +32,9 @@ export function EventList(props) {
       <div className='event-list'>
         {event}
       </div>
-    )
+    );
   } else {
-    return null
+    return null;
   }
 
 

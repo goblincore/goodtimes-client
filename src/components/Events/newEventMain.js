@@ -4,10 +4,12 @@ import { CreateEvent } from './CreateEvent';
 import DateSelectPage from './DateSelectPage';
 import {Redirect,withRouter} from 'react-router-dom';
 import PreviewEvent from './PreviewEvent';
+import { initialState } from '../../reducers/NewEvent';
 
 import RestaurantSelect from './RestaurantSelect';
 
 import SuccessfullyCreatedEvent from './SuccessfullyCreatedEvent';
+import { updateNewEventState } from '../../actions/New-Event';
 
 
 export class NewEventMain extends React.Component {
@@ -19,9 +21,9 @@ export class NewEventMain extends React.Component {
     }
   }
 
-
-  componentDidMount(){
-    console.log('this.props did mount',this.props);
+  //reset Redux state if page changes
+  componentWillUnmount(){
+    this.props.dispatch(updateNewEventState(initialState));
   }
   
 
