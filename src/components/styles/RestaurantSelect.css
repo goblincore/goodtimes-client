@@ -1,0 +1,21 @@
+#select-cuisine{
+    max-width:500px;
+    text-align:left;
+    float:left;
+}
+
+
+#restaurant-list{
+    text-align:left;
+    float:left;
+    margin-left:50px;
+}
+#restaurant-list input{
+    width:20px;
+    display:inline;
+}
+
+.new-event-form{
+    max-width:800px;
+    margin:auto;
+}
