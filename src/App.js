@@ -9,7 +9,10 @@ import  {fetchProtectedData} from './actions/Protected-Data';
 
 import RegistrationPage from './components/RegistrationPage';
 import LoginPage  from './components/LoginPage';
-import {Route, withRouter} from 'react-router-dom';
+
+import {Route, withRouter, Redirect} from 'react-router-dom';
+import SuccessfullyCreatedEvent from './components/Events/SuccessfullyCreatedEvent';
+import GuestEventForm from './components/Events/GuestEventForm';
 
 class App extends Component {
 
@@ -35,6 +38,7 @@ class App extends Component {
                 <Route exact path="/login" component={LoginPage} /> 
                 <Route exact path="/dashboard" component={Dashboard} />
                 <Route exact path="/create-event" component={NewEventMain} />
+                <Route exact path="/guestevents/:eventId" component={GuestEventForm} />
           
             </div>
       </div>
