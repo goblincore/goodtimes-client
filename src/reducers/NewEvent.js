@@ -4,7 +4,7 @@ import {
   NEW_EVENT_ERROR_MESSAGE 
 } from '../actions/New-Event';
 
-const initialState = {
+export const initialState = {
   showNewEvent: false,
   errorMessage: '',
   title: '',
@@ -14,6 +14,7 @@ const initialState = {
   restaurantOptions: [],
   id: null
 };
+
 
 export default function newEventReducer (state=initialState, action) {
   if (action.type === SHOW_NEW_EVENT_STATE) {
