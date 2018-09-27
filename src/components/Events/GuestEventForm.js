@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import {API_BASE_URL} from '../../config';
 import { updateEventVotes } from '../../actions/Update-Event-Votes';
 //import { updateEventVotes } from '../../actions/Update-Event-Votes';
+import { connect } from 'react-redux';
 
- export default class GuestEventForm extends Component {
+  class GuestEventForm extends Component {
      constructor(props){
          super(props);
          this.state = {
@@ -32,10 +33,15 @@ componentDidMount(){
     }
 submitVotes(event){
     event.preventDefault();
-    const eventId = this.state.guestEvent._id
+    const eventId = this.state.guestEvent.id
+ 
     const dateId = document.querySelector('input[name="time-option"]:checked').value
-    //console.log(selection);
-//this.props.dispatch(updateEventVotes(eventId, dateId));
+   let selectionObject = {dateSelection: dateId};
+
+   console.log('EventID', eventId);
+   console.log('GuestEvent', this.state.guestEvent);
+    console.log(selectionObject);
+    this.props.dispatch(updateEventVotes(selectionObject, eventId));
 }
   
     
@@ -47,7 +53,9 @@ if(this.state.guestEvent === null){
     )
 } else { 
     let timesDisplay;
-
+    const eventId = this.state.guestEvent.id
+    console.log('EventID', eventId);
+    console.log('GuestEvent', this.state.guestEvent);
 const {title, description, scheduleOptions } = this.state.guestEvent;
 
 //  scheduleOptions.map(option => { 
@@ -61,10 +69,11 @@ const {title, description, scheduleOptions } = this.state.guestEvent;
 
     return (
         <div className="guest-event-form-wrapper">
-            <h3>You're invited!</h3>
+            <h3>You're invited to:</h3>
+            <h1>{title}</h1><br/>
             <h3>Vote to decide on a time and place.</h3>
             
-                <h1>Event:{title}</h1><br/>
+           
                     <h3>{description}</h3>
                 <form className="event-form-options" onSubmit={this.submitVotes}>
                     
@@ -81,3 +90,4 @@ const {title, description, scheduleOptions } = this.state.guestEvent;
     }
  }
 
+export default connect()(GuestEventForm);
