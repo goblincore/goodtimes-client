@@ -1,5 +1,6 @@
 
 import React from 'react';
+
 import '../styles/CreateEvent.css'
 import { updateNewEventState, newEventErrorMessage } from '../../actions/New-Event';
 
@@ -110,13 +111,16 @@ export function CreateEvent(props) {
                 onChange={() => props.dispatch(newEventErrorMessage(null))}
             />
 
-            <label htmlFor="eventDescription">
+
+      <label htmlFor="eventDescription">
                 Enter a short description for your event:
+
                 <textarea rows="4" cols="50" name="eventDescription"/>
             </label>
             <button type='submit'>
+
                 Next Page
-            </button>
-        </form>
-    );
+      </button>
+    </form>
+  );
 }

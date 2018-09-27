@@ -1,9 +1,10 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import './styles/EventList.css'
+import './styles/EventList.css';
 
 export function EventList(props) {
   console.log('PROPS',props);
+
   if(props.userEvents !== null ){
     const event = props.userEvents.map((event, i)=>{
       console.log(event);
