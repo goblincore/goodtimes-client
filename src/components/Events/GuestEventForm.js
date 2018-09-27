@@ -33,12 +33,24 @@ componentDidMount(){
     }
 submitVotes(event){
     event.preventDefault();
-    const eventId = this.state.guestEvent.id
- 
-    const dateId = document.querySelector('input[name="time-option"]:checked').value
-   let selectionObject = {dateSelection: dateId};
 
-    this.props.dispatch(updateEventVotes(selectionObject, eventId));
+
+    //If restaurants or times section has not been filled out, return
+
+    if(!document.querySelector('input[name="restaurant-option"]:checked') ||
+    !document.querySelector('input[name="time-option"]:checked') ){
+        return;
+    }
+    const restaurantId = document.querySelector('input[name="restaurant-option"]:checked').value;
+    const dateId = document.querySelector('input[name="time-option"]:checked').value;
+    const eventId = this.state.guestEvent.id
+
+   let selectionObject = {
+       dateSelection: dateId,
+       restaurantSelection: restaurantId
+    };
+console.log('SELECTION OBJ', selectionObject);
+   this.props.dispatch(updateEventVotes(selectionObject, eventId));
 }
   
     
@@ -49,15 +61,20 @@ if(this.state.guestEvent === null){
         <p>Loading...</p>
     )
 } else { 
-    let timesDisplay;
-    const eventId = this.state.guestEvent.id
-   
-const {title, description, scheduleOptions } = this.state.guestEvent;
+    let timesDisplay, restaurantsDisplay;
 
-        timesDisplay = scheduleOptions.map(option => { 
+    const {title, description, scheduleOptions, restaurantOptions } = this.state.guestEvent;
+
+    timesDisplay = scheduleOptions.map(option => { 
             return (
                 <label><input type="radio" 
                     name="time-option" value={option.id} /> {option.date} </label> )});
+
+     restaurantsDisplay = restaurantOptions.map(option => { 
+            let link = <a href={option.website}>{option.name}</a>;
+                return (
+                         <label><input type="radio" name="restaurant-option" 
+                         value={option.zomatoId} /> {link} </label> )});        
 
     return (
         <div className="guest-event-form-wrapper">
@@ -65,16 +82,21 @@ const {title, description, scheduleOptions } = this.state.guestEvent;
             <h1>{title}</h1><br/>
             <h3>Vote to decide on a time and place.</h3>
             
-           
-                    <h3>{description}</h3>
-                <form className="event-form-options" onSubmit={this.submitVotes}>
-                    
-                        {timesDisplay}
-                        
-                        <button type="submit" id="submit-votes">
-                                Submit</button>
-                </form>     
-            
+                <h3>{description}</h3>
+                    <form className="event-form-options" onSubmit={this.submitVotes}>
+                         <div className="time-options"> 
+                             <h4>Choose a Time:</h4>
+                                 {timesDisplay}
+                                    </div>
+                        <div className="restaurant-options"> 
+                            <h4>Choose a Place:</h4>
+                                {restaurantsDisplay}
+                                    </div>
+                                        <br/>
+                                            <br/>
+                        <button  type="submit" id="submit-votes">
+                            Submit</button>
+                         </form>     
         </div>
         
         )
