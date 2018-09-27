@@ -14,8 +14,7 @@ export class RestaurantSelect extends React.Component {
     };
   }
   componentDidMount(){
-    this.props.dispatch(fetchZomatoLocation(this.props.city,this.props.state));//get city code
-    // .then(()=>this.props.dispatch(fetchCuisines(this.props.cityCode))); //list cuisines in that city
+    this.props.dispatch(fetchZomatoLocation(this.props.city,this.props.state));
   }
   getCuisines(e){
     const cuisineCode = e.target.value;
@@ -47,7 +46,7 @@ export class RestaurantSelect extends React.Component {
             <input 
               onChange={(e)=>{
                 if(e.target.checked===true){
-                  tempArray.push({id: e.target.id, website: e.target.value, name: e.target.name});
+                  tempArray.push({zomatoId: e.target.id, website: e.target.value, name: e.target.name});
                   this.setState({selectedRestaurants:tempArray});
                 }
                 else if(e.target.checked===false){
@@ -78,6 +77,11 @@ export class RestaurantSelect extends React.Component {
         {restaurantChoices}
         <ul>Restaurant Choices{selectedRestaurantsDisplay}</ul>
         <button onClick={()=>this.props.dispatch(updateNewEventState({restaurantOptions:[...this.state.selectedRestaurants]}))}>Add Restaurant(s)</button>
+
+        <button type='button' onClick={() => this.props.prevPage()}>
+                {'<-'} Back
+        </button>
+
         <button onClick={()=>this.props.nextPage()}>Next Page</button>
       </div>
     );
