@@ -117,7 +117,7 @@ export class DateSelectPage extends React.Component {
                 </button>
                 
                 <button onClick={()=>{
-                  this.updateRedux;
+                  this.updateRedux();
                   this.props.nextPage()}}>
                     Next Page
                 </button>

@@ -20,19 +20,18 @@ export const fetchZomatoLocationError = (error) => ({
 
 export const fetchZomatoLocation = (city, state) => (dispatch, getState) => {
   console.log('action dispatched');
-  const authToken = getState().auth.authToken;
   city = getState().newEvent.location.city;
   state = getState().newEvent.location.state;
   dispatch(fetchZomatoLocationRequest());
   return fetch(`${API_BASE_URL}/api/restaurants/${city}/${state}`, {
-    method: 'GET',
-    headers: {
-      Authorization: `Bearer ${authToken}`
-    }
+    method: 'GET'
   })
     .then(res => normalizeResponseErrors(res))
     .then(res => res.json())
-    .then(cityCode => dispatch(fetchZomatoLocationSuccess(cityCode)))
+    .then(cityCode => {
+      dispatch(fetchZomatoLocationSuccess(cityCode));
+      dispatch(fetchCuisines(cityCode.id));
+    })
     .catch(err => dispatch(fetchZomatoLocationError(err)));
 };
 
