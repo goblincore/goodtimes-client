@@ -23,13 +23,8 @@ export default function newEventReducer (state=initialState, action) {
 
   } else if (action.type === UPDATE_NEW_EVENT_STATE) {
     console.log('update action=',action);
-    return Object.assign({}, state, {
-      title: action.updateObject.title,
-      location: action.updateObject.location,
-      description: action.updateObject.description,
-      scheduleOptions: action.updateObject.scheduleOptions,
-      restaurantOptions: action.updateObject.restaurantOptions
-    }); //example:  {restaurantOptions: [{zomatoId: '123'}]}
+    return Object.assign({}, state, action.updateObject); //example:  {restaurantOptions: [{zomatoId: '123'}]}
+
 
   } else if (action.type === CHANGE_ERROR_MESSAGE) {
     return Object.assign({}, state, {

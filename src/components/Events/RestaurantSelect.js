@@ -22,9 +22,7 @@ export class RestaurantSelect extends React.Component {
     e.preventDefault();
     this.props.dispatch(fetchRestaurants(this.props.cityCode, cuisineCode));
   }
-  sendRestaurants(){
-    this.props.dispatch(updateNewEventState({restaurantOptions:[...this.state.selectedRestaurants]}));
-   }
+
   render(){
     let cuisineOptions;
     if(this.props.cityCode===null){
@@ -79,7 +77,8 @@ export class RestaurantSelect extends React.Component {
         </form>
         {restaurantChoices}
         <ul>Restaurant Choices{selectedRestaurantsDisplay}</ul>
-        <button onClick={this.sendRestaurants}>Add Restaurant(s)</button>
+        <button onClick={()=>this.props.dispatch(updateNewEventState({restaurantOptions:[...this.state.selectedRestaurants]}))}>Add Restaurant(s)</button>
+        <button onClick={()=>this.props.nextPage()}></button>
       </div>
     );
   }
