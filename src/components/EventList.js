@@ -20,21 +20,21 @@ export function EventList(props) {
                   <p>Date:{date.date}</p>
                   <p>Votes:{date.votes}</p>
                 </div>
-              )
+              );
               
             })
           }
         </div>
-      )
-    })
+      );
+    });
 
     return (
       <div className='event-list'>
         {event}
       </div>
-    )
+    );
   } else {
-    return null
+    return null;
   }
 
 
