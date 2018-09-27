@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 // import { clearAuthToken } from '../Local-Storage';
 import {Link} from 'react-router-dom';
 import {changeCurrentUser} from '../actions/Protected-Data';
+import {MdSentimentSatisfied} from 'react-icons/lib/md';
 import './styles/HeaderBar.css';
 
 
@@ -33,7 +34,7 @@ export class HeaderBar extends Component {
                 return(
                     <section className="header-bar">
                     <div className="header-logo">
-                        <h3> Goodtime</h3>
+                        <h3><MdSentimentSatisfied/> Goodtimes</h3>
                     </div>
     
                         <div className="header-nav">    

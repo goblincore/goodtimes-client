@@ -1,9 +1,15 @@
 .user-event{
   display: inline-block;
-  border: solid black 1px;
+  border: dotted grey 1px;
+  border-radius:6px;
   padding: 10px;
 }
 
 .date-vote{
-  border: solid black 1px;
+  border: dotted grey 1px;
+  padding-left:20px;
+}
+
+.event-list{
+  text-align:left;
 }
