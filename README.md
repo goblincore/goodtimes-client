@@ -20,7 +20,7 @@ Users click create event to start planning and are walked through a series of ev
 
 //screenshots of create event button and pages
 
-After selecting the options for the event, Goodtimes auto-generates a form the user can send to friends.
+After selecting the options for the event, Goodtimes auto-generates a form users can send to friends.
 
 //screenshot of form
 
@@ -28,7 +28,7 @@ After selecting the options for the event, Goodtimes auto-generates a form the u
 
 //screenshot of voting and the thanks page
 
-...and users can check the results of the votes on the dashboard.
+...and users can check the results of the votes on their dashboard.
 
 //screenshot of votes details on event
 
@@ -36,5 +36,6 @@ When everyone has voted, users can let their group know which options came out o
 
 ## Tech Stack:
 
-**FrontEnd:** {React, Redux, input-moment, (other things?)}
-**BackEnd:** {MongoDB, Mongoose, Node.js, JWT authentication, (others?)}
+**FrontEnd:** React, Redux, input-moment, (other things?)
+
+**BackEnd:** MongoDB, Mongoose, Node.js, JWT authentication, (others?)
