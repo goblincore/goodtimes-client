@@ -1,40 +1,52 @@
-import React, { Component } from 'react';
+import React from 'react';
+import {Link} from 'react-router-dom';
 
 
+export default class SuccessfullyCreatedEvent extends React.Component {
 
-
- export default class SuccessfullyCreatedEvent extends Component {
-
-
-backToDashboard(){
-    //dispatch action to change state of showNewEvent from true to false
-  
-}
-    copyLinkToClipBoard() {
-        //Still figuring out how to implement
-
-        //<button id="copy-link-to-share" >Copy Link</button>
+  constructor(props) {
+    super(props);
+    this.state={
+      value:'',
+      copied:false
     }
-
+  
+  }
+  
+  
+  handleCopy =()=>{
+    console.log("copy")
+    var inp =document.createElement('input');
+    document.body.appendChild(inp)
+    inp.value =document.querySelector("#event-link").textContent
+    inp.select();
+    document.execCommand('copy',false);
+    inp.remove();
+    this.setState({copied:true});
     
-render(){
+  }
 
+  
 
-
-    return (
+  render(){
+      return (
         <div className="event-successfully-created">
 
-        <h2>Nice! Your event has been created successfully.</h2>
-        <div className="event-link-to-share">
-            <h3>Share this link with your friends:</h3>
-            <p id="event-link">http://weekends.herokuapp.com/events/12321</p>
-   
+          <h2>Nice! Your event has been created successfully.</h2>
 
-                
-            <button id="back-to-dashboard" >Back to Dashboard</button>
-        </div>
+          <div className="event-link-to-share">
+              <h3>Share this link with your friends:</h3>
+              {/* {props.eventState.id} */}
+              <p id="event-link">http://goodtimes.herokuapp.com/events/123123example</p>
+
+              <button onClick={this.handleCopy}>Copy Link</button>  
+              {this.state.copied ? <span style={{color: 'red'}}><p>Copied</p></span> : null}
+               <p></p>
+              <Link to="/dashboard"> <button id="back-to-dashboard" >Back to Dashboard</button></Link>
+          </div>
+
         </div>
     )
+  } 
+ 
 }
- }
-

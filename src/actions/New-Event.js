@@ -17,9 +17,9 @@ export const updateNewEventState = updateObject => ({
 //Example input:  {restuarantOptions: [zomatoId: '123', votes: 0]}
 
 
-export const CHANGE_ERROR_MESSAGE = 'CHANGE_ERROR_MESSAGE';
-export const changeErrorMessage = message => ({
-  type: CHANGE_ERROR_MESSAGE,
+export const NEW_EVENT_ERROR_MESSAGE = 'NEW_EVENT_ERROR_MESSAGE';
+export const newEventErrorMessage = message => ({
+  type: NEW_EVENT_ERROR_MESSAGE,
   message
 })
 

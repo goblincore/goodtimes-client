@@ -2,3 +2,18 @@
     max-width:400px;
     margin:auto;
 }
+
+.width1100{
+    max-width:900px;
+    margin:auto;
+}
+
+.date_list li{
+    font-size:14px;
+    font-weight:bold;
+}
+
+.dateList{
+    text-align:left;
+    margin-top:20px;
+}
