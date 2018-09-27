@@ -53,7 +53,11 @@ export class DateSelectPage extends React.Component {
 
         handleSave = () => {
           let tempArr = this.state.savedDate;
-          tempArr.push(this.state.bigInputMoment.format('llll'));
+          let tempObj = { 
+            date: this.state.bigInputMoment.format('llll'),
+            votes:0
+          }
+          tempArr.push(tempObj);
           // this.props.dispatch(updateNewEventState({scheduledOptions: [...this.props.times, this.state.savedDate]}))
           this.setState({savedDate: tempArr});
           console.log('ADDED DATE', this.state.savedDate);
@@ -62,6 +66,7 @@ export class DateSelectPage extends React.Component {
 
 
         updateRedux=()=>{
+
           this.props.dispatch(updateNewEventState({scheduleOptions: [...this.state.savedDate]}))
         }
      
