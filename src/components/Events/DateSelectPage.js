@@ -128,12 +128,13 @@ export class DateSelectPage extends React.Component {
         
         </div>
 
-
+              <button type='button' onClick={() => this.props.prevPage()}>
+                {'<-'} Back
+              </button>
          
                 <button onClick={()=>{
                   this.updateRedux();
                   this.props.nextPage()}}>
-
                     Next Page
                 </button>
                

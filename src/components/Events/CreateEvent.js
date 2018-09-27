@@ -117,10 +117,12 @@ export function CreateEvent(props) {
 
                 <textarea rows="4" cols="50" name="eventDescription"/>
             </label>
+            <button type='button' onClick={() => props.prevPage()}>
+                {'<-'} Back
+              </button>
             <button type='submit'>
-
                 Next Page
-      </button>
+             </button>
     </form>
   );
 }

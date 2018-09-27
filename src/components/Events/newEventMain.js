@@ -37,9 +37,11 @@ export class NewEventMain extends React.Component {
     if(this.props.loggedIn){
       let component;
       switch (this.state.pageCount) {
+        case 0:
+          return <Redirect to='/dashboard' />;
         case 1:
           //title, location, description
-          component = <CreateEvent nextPage={this.nextPage} dispatch={this.props.dispatch} eventState={this.props.newEvent}/>;
+          component = <CreateEvent nextPage={this.nextPage} dispatch={this.props.dispatch} prevPage={this.prevPage} eventState={this.props.newEvent}/>;
           break;
         case 2:
           //date/time options
