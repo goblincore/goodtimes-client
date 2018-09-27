@@ -4,6 +4,7 @@ import { CreateEvent } from './CreateEvent';
 import DateSelectPage from './DateSelectPage';
 import {Redirect,withRouter} from 'react-router-dom';
 import PreviewEvent from './PreviewEvent';
+import SuccessfullyCreatedEvent from './SuccessfullyCreatedEvent';
 
 export class NewEventMain extends React.Component {
   constructor(props){
@@ -54,10 +55,16 @@ export class NewEventMain extends React.Component {
             userId={this.props.currentUser.id}
             />;
           break;
-        // case 5:
-        //   //successful submition page
-        //   component = <Component5 dispatch={this.props.dispatch} eventState={this.props.newEvent}/>;
-        //   break;
+        case 5:
+          //successful submition page
+          component = <SuccessfullyCreatedEvent 
+            dispatch={this.props.dispatch} 
+            eventState={this.props.newEvent}
+            nextPage={this.nextPage}
+            />;
+          break;
+        case 6:
+          return <Redirect to='/dashboard'/>
       }
 
       return (
