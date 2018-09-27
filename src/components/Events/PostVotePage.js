@@ -3,21 +3,31 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
 
-export function PostVote(props) {
+export class PostVote extends React.Component {
+  constructor(props){
+    super(props);
 
-  const redirectToMain = () => {
-    return <Redirect to="/" />;
-  };
+    this.state = {
+      redirect: false
+    };
+    setTimeout(()=>this.setState({redirect:true}), 5000);
+  }
 
-  setTimeout(redirectToMain(), 5000);
-        
-  return (    
-    <div className="container">
-      Thanks for your input!
-      Your event coordinator will be in touch with the final plan!
-    </div>
-                
-  );
+  
+
+  render(){
+    if(this.state.redirect){
+      return <Redirect to='/'/>;
+    }
+    return (    
+      <div className="container">
+          Thanks for your input!
+          Your event coordinator will be in touch with the final plan!
+      </div>
+                    
+    );
+  }     
+  
 }
 
 export default connect()(PostVote);
