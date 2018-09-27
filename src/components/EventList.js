@@ -11,6 +11,18 @@ export function EventList(props) {
         <div key={i} className='user-event'>
           <p>{event.title}</p>
           <p>{event.description}</p>
+          {
+            event.scheduleOptions.map(date =>{
+              console.log(date);
+              return(
+                <div className='date-vote'>
+                  <p>Date:{date.date}</p>
+                  <p>Votes:{date.votes}</p>
+                </div>
+              )
+              
+            })
+          }
         </div>
       )
     })
