@@ -35,10 +35,42 @@ export const fetchProtectedData = () => dispatch => {  //getting user data
         .then(res => normalizeResponseErrors(res))
         .then(res => res.json())
         .then((userData) => {
-          console.log('IN ACTION',userData);
+          console.log('Fetching user data',userData);
+          dispatch(fetchUserEvents());
           dispatch(changeCurrentUser(userData))
         })
         .catch(err => {
             dispatch(fetchProtectedDataError(err));
         });
+};
+
+
+
+export const FETCH_USEREVENTS_SUCCESS = 'FETCH_USEREVENTS_SUCCESS';
+export const fetchUserEventsSuccess = userEvents => ({
+    type: FETCH_USEREVENTS_SUCCESS,
+    userEvents
+});
+
+export const fetchUserEvents=()=>dispatch=>{
+
+    const authToken = localStorage.getItem('authToken');
+    dispatch(requestProtectedData(true));
+    return fetch(`${API_BASE_URL}/api/events`, {
+        method: 'GET',
+        headers: {
+            // Provide our auth token as credentials
+            Authorization: `Bearer ${authToken}`
+        }
+    })
+        .then(res => normalizeResponseErrors(res))
+        .then(res => res.json())
+        .then((userData) => {
+          console.log('Fetched user events',userData);
+          dispatch(fetchUserEventsSuccess(userData))
+        })
+        .catch(err => {
+            dispatch(fetchProtectedDataError(err));
+        });
+
 };

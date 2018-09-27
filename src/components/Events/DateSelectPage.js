@@ -5,15 +5,19 @@ import ReactDom from 'react-dom';
 import moment from 'moment';
 import DateList from './DateList';
 import {updateNewEventState} from '../../actions/New-Event';
-// import DatePicker from 'react-datepicker';
-// import InputMoment from './Calendar/inputmoment';
-// import './Calendar/less/input-moment.css';
-// import './Calendar/less/calendar.css';
-// import './Calendar/less/slider.css';
  import './Calendar/less/calendar-time.css';
 // import 'react-datepicker/dist/react-datepicker.css';
  import '../styles/DateTime.css';
 import {InputMoment, BigInputMoment, DatePicker, TimePicker} from './Calendar';
+import {
+  Box,
+  Flex,
+  Card,
+  Button,
+  Image,
+  Heading,
+  Text
+} from 'rebass'
 
 
 
@@ -64,61 +68,65 @@ export class DateSelectPage extends React.Component {
 
       render(){
         let {inputMoment, bigInputMoment, datePickerMoment, datePickerRangeStartMoment, datePickerRangeEndMoment, timePickerMoment, showSeconds, locale, size} = this.state;
-        let wrapperClass = 'wrapper ' + size;
         return (
         <div className="container">
-          <div className="form-container">
-            <form
-                className="date-form"
-                onSubmit={e=>{
-                    e.preventDefault();
-                }
-              }>
-                <label htmlFor="eventName">What day is your event?</label>
+           <div className="width1100">
+        <Flex flexWrap='wrap'>
+        <Card
+            fontSize={[2,3,4]}
+            fontWeight='bold'
+            border='1px dashed grey'
+            width={[ 1, 1, 1/2, 1/2]}
+            p={4}
+            my={5}
+            bg='#ffffff'
+            borderRadius={6}
+             >
+            
+            <Text textAlign='left' fontSize={[ 1, 1, 1 ]}>Select a date and time. You can add multiple dates and times!</Text>
+            
+            <input
+              className="output"
+              type="text"
+              value={bigInputMoment.format('llll')}
+              readOnly
+             />
+              <button onClick={this.handleSave}>
+                 Add this date
+               </button>
+              <div className="dateList">
+               <DateList dateList={this.state.savedDate}/>
+               </div>
+                  
+            </Card>
 
-                 <div className="input">
-            {/* <input type="text" value={this.state.m.format('llll')} readOnly /> */}
-          </div>
-               
-              
-             
-        <input
-          className="output"
-          type="text"
-          value={bigInputMoment.format('llll')}
-          readOnly
-        />
-
-
-        <div className={wrapperClass}>
-          <InputMoment
-            moment={bigInputMoment}
-            locale={locale}
-            showSeconds={showSeconds}
-            onChange={date => this.setState({bigInputMoment: date})}
-          />
+          
+          <Card
+            fontSize={4}
+            fontWeight='bold'
+            width={[ 1, 1, 1/2,1/2  ]}
+            p={5}
+            my={5}
+            bg='#ffffff'
+            borderRadius={6}
+            border='1px dashed grey'>
+                <InputMoment
+                  moment={bigInputMoment}
+                  locale={locale}
+                  showSeconds={showSeconds}
+                  onChange={date => this.setState({bigInputMoment: date})}
+                 />
+            </Card>
+            </Flex>
+  
+        
         </div>
 
-
-                <label htmlFor="location">Saved Dates</label>
-                {/* <select>
-                    <option value="">--Please choose an option--</option>
-                </select> */}
-                
-                <DateList dateList={this.state.savedDate}/>
-                   
-             
-            </form>
-
-             <div></div>
-                <button onClick={this.handleSave}>
-                    Add this date
-                </button>
-                
+         
                 <button onClick={this.updateRedux}>
                     Next Page
                 </button>
-                </div>
+               
         </div>
 
             
