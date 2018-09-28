@@ -33,8 +33,11 @@ export const postNewEventSuccess = message => ({
   type: POST_NEW_EVENT_SUCCESS,
   
 })
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> c28eab46f2e53124dd555ecabaa70159f6188042
 
 export const postNewEvent = eventData => dispatch => {
   dispatch(postNewEventRequest());
@@ -50,6 +53,7 @@ export const postNewEvent = eventData => dispatch => {
   .then(res => normalizeResponseErrors(res))
   .then(res => res.json())
   .then(res => {
+<<<<<<< HEAD
     dispatch(updateNewEventState({id: res.id}));
     
   })
@@ -57,5 +61,15 @@ export const postNewEvent = eventData => dispatch => {
   dispatch(postNewEventSuccess());
   return Promise.resolve();
 })
+=======
+   dispatch(updateNewEventState({id: res.id}));
+    
+  })
+  .then(() => {
+    dispatch(postNewEventSuccess());
+    return Promise.resolve();
+}
+)
+>>>>>>> c28eab46f2e53124dd555ecabaa70159f6188042
   .catch(err => Promise.reject(err) )
 }
