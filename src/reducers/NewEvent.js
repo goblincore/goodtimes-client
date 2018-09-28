@@ -1,7 +1,9 @@
 import { 
   SHOW_NEW_EVENT_STATE, 
   UPDATE_NEW_EVENT_STATE,
-  NEW_EVENT_ERROR_MESSAGE 
+  NEW_EVENT_ERROR_MESSAGE,
+  POST_NEW_EVENT_REQUEST,
+  POST_NEW_EVENT_SUCCESS 
 } from '../actions/New-Event';
 
 export const initialState = {
@@ -13,7 +15,8 @@ export const initialState = {
   description: '',
   scheduleOptions: [],
   restaurantOptions: [],
-  id: null
+  id: null,
+  loading: false
 };
 
 
@@ -23,10 +26,20 @@ export default function newEventReducer (state=initialState, action) {
       showNewEvent: action.bool
     });
 
+  } else if (action.type === POST_NEW_EVENT_REQUEST) {
+
+    return Object.assign({}, state, {
+      loading: true
+    });
   } else if (action.type === UPDATE_NEW_EVENT_STATE) {
     console.log('update action=',action);
     return Object.assign({}, state, action.updateObject); //example:  {restaurantOptions: [{zomatoId: '123'}]}
 
+  } else if (action.type === NEW_EVENT_ERROR_MESSAGE) {
+
+    return Object.assign({}, state, {
+      loading: false
+    });
   } else if (action.type === NEW_EVENT_ERROR_MESSAGE) {
 
     return Object.assign({}, state, {
