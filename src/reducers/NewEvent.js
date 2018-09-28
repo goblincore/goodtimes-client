@@ -9,6 +9,8 @@ export const initialState = {
   errorMessage: '',
   title: '',
   location: '', //  <-- maybe switch this to {lat: ..., long: ...} ??
+  zomatoLocation: '',
+  zomatoEntityId: '',
   description: '',
   scheduleOptions: [],
   restaurantOptions: [],
