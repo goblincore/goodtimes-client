@@ -58,7 +58,6 @@ export const fetchCuisines = (cityCode) => (dispatch) => {
   return fetch(`https://developers.zomato.com/api/v2.1/cuisines?city_id=${cityCode}`, {
     method: 'GET',
     headers: {
-      'User-Agent': 'Request-Promise',
       'Accept':'application/json',
       'user-key':'02fb4b75d2055eb17f988da8447de24a',
     },
@@ -91,7 +90,6 @@ export const fetchRestaurants = (cityCode, cuisine) => (dispatch) => {
   return fetch(`https://developers.zomato.com/api/v2.1/search?entity_id=${cityCode}&entity_type=city&cuisines=${cuisine}`, {
     method: 'GET',
     headers: {
-      'User-Agent': 'Request-Promise',
       'Accept':'application/json',
       'user-key':'02fb4b75d2055eb17f988da8447de24a',
     }, 
