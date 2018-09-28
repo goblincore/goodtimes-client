@@ -28,9 +28,9 @@ export class RestaurantSelect extends React.Component {
       cuisineOptions = <option>Loading cuisine options...</option>;
     }
     if(this.props.cityCode !== null){
-      cuisineOptions = this.props.cuisines.map(cuisine => {
+      cuisineOptions = this.props.cuisines.map( (cuisine,index) => {
         return (
-          <option value={cuisine.cuisine.cuisine_id} key={cuisine.cuisine.cuisine_id}>{cuisine.cuisine.cuisine_name}</option>
+          <option value={cuisine.cuisine.cuisine_id} key={index}>{cuisine.cuisine.cuisine_name}</option>
         );
       });
     }
@@ -40,7 +40,7 @@ export class RestaurantSelect extends React.Component {
       restaurantChoices = <div></div>;
     }
     else{
-      restaurantChoices = this.props.restaurants.map(restaurant => {
+      restaurantChoices = this.props.restaurants.map((restaurant,index) => {
         return (
           <div>
             <input 
@@ -54,8 +54,8 @@ export class RestaurantSelect extends React.Component {
                   this.setState({selectedRestaurants:tempArray});
                 }
               }}
-              key={restaurant.restaurant.id} id={restaurant.restaurant.id} name={restaurant.restaurant.name} value={restaurant.restaurant.url} type="checkbox"></input>
-            <a key={restaurant.restaurant.id+1} href={restaurant.restaurant.url} target="#">{restaurant.restaurant.name}</a>
+              key={index} id={restaurant.restaurant.id} name={restaurant.restaurant.name} value={restaurant.restaurant.url} type="checkbox"></input>
+            <a key={index} href={restaurant.restaurant.url} target="#">{restaurant.restaurant.name}</a>
           </div>
         );
       });
@@ -63,7 +63,7 @@ export class RestaurantSelect extends React.Component {
     let selectedRestaurantsDisplay;
     if(this.state.selectedRestaurants !== null || this.state.selectedRestaurants !== undefined){
       console.log(this.state.selectedRestaurants);  
-      selectedRestaurantsDisplay = this.state.selectedRestaurants.map(restaurant => <li key={restaurant.id+2}>{restaurant.name}</li>);
+      selectedRestaurantsDisplay = this.state.selectedRestaurants.map((restaurant,index) => <li key={index}>{restaurant.name}</li>);
     } 
     
     return(
