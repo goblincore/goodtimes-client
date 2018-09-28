@@ -3,28 +3,16 @@ import { postNewEvent } from '../../actions/New-Event';
 import { Redirect } from 'react-router-dom';
 import { connect  } from 'react-redux';
 
-<<<<<<< HEAD
 class PreviewEvent extends Component {
   constructor(props){
     super(props);
       }
 
-=======
-import { connect  } from 'react-redux';
-
- class PreviewEvent extends Component {
-constructor(props){
-  super(props);
-}
->>>>>>> c28eab46f2e53124dd555ecabaa70159f6188042
   onSubmit() {
     const newEvent = {
       userId: this.props.userId,
       title: this.props.eventState.title,
-<<<<<<< HEAD
       draft: false,
-=======
->>>>>>> c28eab46f2e53124dd555ecabaa70159f6188042
       description: this.props.eventState.description,
       location: this.props.eventState.location,  //zomato location ID
       scheduleOptions: this.props.eventState.scheduleOptions,
@@ -35,7 +23,6 @@ constructor(props){
       .catch(err => console.log('ERROR HANDLING HERE dispatch(changeErrorMessaeg(err.message))'));
   }
 
-<<<<<<< HEAD
  onDraft(){
     const newEvent = {
       userId: this.props.userId,
@@ -54,16 +41,12 @@ constructor(props){
 
 
   render(){
-=======
-  render(){ 
->>>>>>> c28eab46f2e53124dd555ecabaa70159f6188042
     let timesDisplay, restaurantsDisplay;
 
     timesDisplay = this.props.eventState.scheduleOptions.map((option, i) => { 
       return (
         <div key={i} className="option_container">
           <input 
-<<<<<<< HEAD
             type="radio" 
             name="time-option" 
             value={option.id} />
@@ -71,15 +54,6 @@ constructor(props){
           <label> {option.date} </label> 
         </div>
       );});
-=======
-          type="radio" 
-          name="time-option" 
-          value={option.id} />
-  
-          <label> {option.date} </label> 
-          </div>
-          );});
->>>>>>> c28eab46f2e53124dd555ecabaa70159f6188042
   
     restaurantsDisplay = this.props.eventState.restaurantOptions.map((option,i) => { 
       let link = <a href={option.website}>{option.name}</a>;
@@ -89,7 +63,6 @@ constructor(props){
             type="radio" 
             name="restaurant-option" 
             value={option.zomatoId} />
-<<<<<<< HEAD
           <label> {link} </label>
         </div> );}); 
 
@@ -98,18 +71,6 @@ constructor(props){
    } else { 
         return (
 
-=======
-            <label> {link} </label>
-          </div> );}); 
-  
- if(this.props.loading){
-  return (
-    <h1>Loading...</h1>
-   )
- } else { 
-
-  return (
->>>>>>> c28eab46f2e53124dd555ecabaa70159f6188042
     <div className='preview-event'>
       <div>
         {/* <input type='image'/> */}
@@ -141,30 +102,18 @@ constructor(props){
       </div>
 
       <div>
-<<<<<<< HEAD
         <button type='button' onClick={() => this.onDraft()}>Save as Draft</button>
-=======
-        <button type='button'>Save as Draft</button>
->>>>>>> c28eab46f2e53124dd555ecabaa70159f6188042
         <button type='button' onClick={() => this.onSubmit()}>Looks good!</button>
       </div>
     </div>
   );
 }
-<<<<<<< HEAD
 }
-=======
- }
->>>>>>> c28eab46f2e53124dd555ecabaa70159f6188042
 }
 const mapStateToProps = state => ({
   loading: state.newEvent.loading
  
 });
 export default connect(mapStateToProps)(PreviewEvent);
-<<<<<<< HEAD
-=======
-
->>>>>>> c28eab46f2e53124dd555ecabaa70159f6188042
 
 //PROPS: <PreviewEvent nextPage={this.nextPage} dispatch={this.props.dispatch} prevPage={this.prevPage} eventState={this.props.newEvent}/>;
