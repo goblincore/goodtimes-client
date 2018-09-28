@@ -1,8 +1,36 @@
 import React from 'react';
 import { postNewEvent } from '../../actions/New-Event';
-import GuestForm from '../Events/GuestEventForm';
+import { connect } from 'react-redux';
 
-export default function PreviewEvent(props){
+export function PreviewEvent(props){
+  
+  
+  let timesDisplay, restaurantsDisplay;
+
+  timesDisplay = props.times.map(option => { 
+    return (
+      <div className="option_container">
+        <input 
+        type="radio" 
+        name="time-option" 
+        value={option.id} />
+
+        <label> {option.date} </label> 
+        </div>
+        );});
+
+  restaurantsDisplay = props.restaurants.map(option => { 
+    let link = <a href={option.website}>{option.name}</a>;
+    return (
+      <div className="option_container">
+        <input 
+          type="radio" 
+          name="restaurant-option" 
+          value={option.zomatoId} />
+          <label> {link} </label>
+        </div> );}); 
+
+
   function onSubmit() {
     const newEvent = {
       userId: props.userId,
@@ -37,11 +65,11 @@ export default function PreviewEvent(props){
         <form className="event-form-options">
           <div className="time-options"> 
             <h4>Choose a Time:</h4>
-              Time
+              {timesDisplay}
           </div>
           <div className="restaurant-options"> 
             <h4>Choose a Place:</h4>
-              Restaurants
+             {restaurantsDisplay}
           </div>
           <br/>
           <br/>
@@ -56,5 +84,15 @@ export default function PreviewEvent(props){
   );
 }
 
+const mapStateToProps = state => {
 
+  return {
+      times: state.newEvent.scheduleOptions,
+      restaurants:state.newEvent.restaurantOptions
+      
+  };
+};
+
+
+export default connect(mapStateToProps)(PreviewEvent);
 //PROPS: <PreviewEvent nextPage={this.nextPage} dispatch={this.props.dispatch} prevPage={this.prevPage} eventState={this.props.newEvent}/>;
