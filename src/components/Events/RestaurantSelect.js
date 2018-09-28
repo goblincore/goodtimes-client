@@ -10,7 +10,7 @@ export class RestaurantSelect extends React.Component {
     super(props);
 
     this.state= {
-      selectedRestaurants:[]
+      selectedRestaurants:[...this.props.eventRestaurants]
     };
   }
   componentDidMount(){
@@ -29,6 +29,7 @@ export class RestaurantSelect extends React.Component {
 
   }
   render(){
+    console.log('selected restaurants pulling from redux = ',this.state.selectedRestaurants);
     let cuisineOptions;
     if(this.props.cityCode===null){
       cuisineOptions = <option>Loading cuisine options...</option>;
@@ -61,7 +62,10 @@ export class RestaurantSelect extends React.Component {
                 }
               }}
               key={index} id={restaurant.restaurant.id} name={restaurant.restaurant.name} value={restaurant.restaurant.url} type="checkbox"></input>
+            <img src={restaurant.restaurant.thumb==="" ? "https://www.redbytes.in/wp-content/uploads/2018/09/zomato-logo-AD6823E433-seeklogo.com_.png" : restaurant.restaurant.thumb} alt="Thumbnail"></img>
             <a key={index+1} href={restaurant.restaurant.url} target="#">{restaurant.restaurant.name}</a>
+            <p>{'$'.repeat(restaurant.restaurant.price_range)}</p>
+            <p>Rating: {restaurant.restaurant.user_rating.aggregate_rating}</p>
           </div>
         );
       });
@@ -107,6 +111,7 @@ const mapStateToProps = state => ({
   city: state.newEvent.location.city,
   state: state.newEvent.location.state,
   cuisines: state.restaurants.cuisines,
+  eventRestaurants: state.newEvent.restaurantOptions,
   restaurants: state.restaurants.restaurants,
   cityCode: state.restaurants.cityCode
 
