@@ -3,7 +3,8 @@
     bottom: 0px;
     max-width: 600px;
     z-index: 0;
-    left: 25%;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 
@@ -24,6 +25,7 @@
     font-size:60px;
     position:relative;
     z-index:1;
+    
 }
 
 
@@ -39,6 +41,7 @@
     .home-img{
         width:100%;
         left:0px;
+        transform:translateX(2%);
     }
 
 
