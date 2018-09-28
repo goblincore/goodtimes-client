@@ -3,9 +3,7 @@ import { EventList } from './EventList';
 import { connect } from 'react-redux';
 import {MdAddCircleOutline} from 'react-icons/lib/md';
 import './styles/Dashboard.css';
-
 import {Link, Redirect, withRouter} from 'react-router-dom';
-
 
 export class Dashboard extends Component {
 constructor(props){
@@ -26,25 +24,18 @@ displayDrafts(){
         if(this.props.userEvents !==null && this.props.userEvents.length >= 1){
 
             switch(this.state.display){
-                case true :
-                console.log('NOT DRAFT SWITCH');
+                //true = display active events, false = display drafts
+                case true:
                     eventsToDisplay = this.props.userEvents.filter(event => event.draft !==true );
                     break;
                 case false:
-                console.log('DRAFT SWITCH');
                     eventsToDisplay = this.props.userEvents.filter(event => event.draft === true);
             }
-            console.log('EVENTS TO DISPLAY', eventsToDisplay);
-            console.log("this.props.userEVENTS", this.props.userEvents);
         }
-       // console.log(this.props.userEvents);
-//  const activeEvents = this.props.userEvents.filter(event => event.draft !== true);
-//   console.log(activeEvents);
-//         console.log('userevents props',this.props.userEvents);
+      
         if(this.props.loggedIn){
             return (
                 <div className="dashboard-wrapper">
-                   
                    
                     <div id="dashboard_main">
                          <h2>Hey {this.props.currentUser.username}!</h2>
@@ -61,10 +52,9 @@ displayDrafts(){
                     </div>
                     <div id="dashboard_eventlist">
                      <ul className="block-li">
-                       
+                  
                      </ul>
                     </div>
-                    {/* <button id="create-event">Create Event</button> */}
                 </div>
             )
         }
@@ -73,7 +63,7 @@ displayDrafts(){
         }
 }
 }
-//  <EventList userEvents={eventsToDisplay}/>
+
 
 const mapStateToProps = state => ({
     loggedIn: state.auth.currentUser !== null,
