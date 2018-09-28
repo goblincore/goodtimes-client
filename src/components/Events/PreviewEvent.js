@@ -1,15 +1,15 @@
 import React from 'react';
 import { postNewEvent } from '../../actions/New-Event';
-import { connect } from 'react-redux';
 
-export function PreviewEvent(props){
+
+export default function PreviewEvent(props){
   
   
   let timesDisplay, restaurantsDisplay;
 
-  timesDisplay = props.times.map(option => { 
+  timesDisplay = props.eventState.scheduleOptions.map((option, i) => { 
     return (
-      <div className="option_container">
+      <div key={i} className="option_container">
         <input 
         type="radio" 
         name="time-option" 
@@ -19,10 +19,10 @@ export function PreviewEvent(props){
         </div>
         );});
 
-  restaurantsDisplay = props.restaurants.map(option => { 
+  restaurantsDisplay = props.eventState.restaurantOptions.map((option,i) => { 
     let link = <a href={option.website}>{option.name}</a>;
     return (
-      <div className="option_container">
+      <div key={i} className="option_container">
         <input 
           type="radio" 
           name="restaurant-option" 
@@ -84,15 +84,7 @@ export function PreviewEvent(props){
   );
 }
 
-const mapStateToProps = state => {
-
-  return {
-      times: state.newEvent.scheduleOptions,
-      restaurants:state.newEvent.restaurantOptions
-      
-  };
-};
 
 
-export default connect(mapStateToProps)(PreviewEvent);
+
 //PROPS: <PreviewEvent nextPage={this.nextPage} dispatch={this.props.dispatch} prevPage={this.prevPage} eventState={this.props.newEvent}/>;

@@ -42,7 +42,7 @@ export class RestaurantSelect extends React.Component {
     else{
       restaurantChoices = this.props.restaurants.map((restaurant,index) => {
         return (
-          <div>
+          <div key={index}>
             <input 
               onChange={(e)=>{
                 if(e.target.checked===true){
@@ -55,7 +55,7 @@ export class RestaurantSelect extends React.Component {
                 }
               }}
               key={index} id={restaurant.restaurant.id} name={restaurant.restaurant.name} value={restaurant.restaurant.url} type="checkbox"></input>
-            <a key={index} href={restaurant.restaurant.url} target="#">{restaurant.restaurant.name}</a>
+            <a key={index+1} href={restaurant.restaurant.url} target="#">{restaurant.restaurant.name}</a>
           </div>
         );
       });
