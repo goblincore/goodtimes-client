@@ -4,6 +4,7 @@ import { updateEventVotes } from '../../actions/Update-Event-Votes';
 //import { updateEventVotes } from '../../actions/Update-Event-Votes';
 import { connect } from 'react-redux';
 import PostVote from './PostVotePage';
+import '../styles/GuestEventForm.css';
 
 class GuestEventForm extends Component {
   constructor(props){
@@ -71,14 +72,26 @@ class GuestEventForm extends Component {
 
       timesDisplay = scheduleOptions.map(option => { 
         return (
-          <label><input type="radio" 
-            name="time-option" value={option.id} /> {option.date} </label> );});
+          <div className="option_container">
+            <input 
+            type="radio" 
+            name="time-option" 
+            value={option.id} />
+  
+            <label> {option.date} </label> 
+            </div>
+            );});
 
       restaurantsDisplay = restaurantOptions.map(option => { 
         let link = <a href={option.website}>{option.name}</a>;
         return (
-          <label><input type="radio" name="restaurant-option" 
-            value={option.zomatoId} /> {link} </label> );});        
+          <div className="option_container">
+            <input 
+              type="radio" 
+              name="restaurant-option" 
+              value={option.zomatoId} />
+              <label> {link} </label>
+            </div> );});        
 
       return (
         <div className="guest-event-form-wrapper">
@@ -89,11 +102,11 @@ class GuestEventForm extends Component {
           <h3>{description}</h3>
           <form className="event-form-options" onSubmit={this.submitVotes}>
             <div className="time-options"> 
-              <h4>Choose a Time:</h4>
+              <h4>A good time to meet would be...</h4>
               {timesDisplay}
             </div>
             <div className="restaurant-options"> 
-              <h4>Choose a Place:</h4>
+              <h4>Let's go eat at...</h4>
               {restaurantsDisplay}
             </div>
             <br/>
