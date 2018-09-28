@@ -18,7 +18,6 @@ export class NewEventMain extends React.Component {
 
     this.state = {
       pageCount: 1,
-      redirect: false,
     }
   }
 
@@ -37,7 +36,7 @@ export class NewEventMain extends React.Component {
   }
 
   goHome = () => {
-    this.setState({redirect: true})
+    this.setState({pageCount:0})
   }
   render(){
     if(this.state.redirect){
