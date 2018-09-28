@@ -3,29 +3,29 @@ import React from 'react';
 
 export default class Datelist extends React.Component{
 
-    render(){
+  render(){
 
-        if(!this.props  === undefined ){
-            return null   
-        }
+    if(!this.props  === undefined ){
+      return null;   
+    }
 
-        // console.log('STATS PROPS',this.props);
+    // console.log('STATS PROPS',this.props);
       
-        return (
-            <ul className="date_list" aria-live="polite">
-           {
-            this.props.dateList.map((date,index)=>{
+    return (
+      <ul className="date_list" aria-live="polite">
+        {
+          this.props.dateList.map((date,index)=>{
               
-                return (
-                <li className="date-list-item" key={index}  >
-                   {date.date}
-                   {/* {word.lapineWord} : {Math.floor(word.percentCorrect)} %  */}
+            return (
+              <li className="date-list-item" key={index}  >
+                {date.date}
+                {/* {word.lapineWord} : {Math.floor(word.percentCorrect)} %  */}
                  
-                </li>
-                )
-            })
-           } 
-           </ul>
+              </li>
+            );
+          })
+        } 
+      </ul>
     );
   } 
 }

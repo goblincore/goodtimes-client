@@ -134,8 +134,12 @@ export class CreateEvent extends React.Component {
       }
 
     return (
+      <div>
+      <h3>Let's get started!</h3>
+      <p>Create a title and select a location for your event. Don't forget to add a description!</p>
+
       <form
-        classTitle="event-form"
+        className="event-form"
         onSubmit={e => this.handleSubmit(e)}
       >
         {errorMessage}
@@ -230,6 +234,7 @@ export class CreateEvent extends React.Component {
           Next Page
         </button>
       </form>
-    );
+    </div>
+  );
   }
 }

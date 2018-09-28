@@ -10,7 +10,7 @@ export class RestaurantSelect extends React.Component {
     super(props);
 
     this.state= {
-      selectedRestaurants:[]
+      selectedRestaurants:[...this.props.eventRestaurants]
     };
   }
   componentDidMount(){
@@ -21,8 +21,15 @@ export class RestaurantSelect extends React.Component {
     e.preventDefault();
     this.props.dispatch(fetchRestaurants(this.props.cityCode, cuisineCode));
   }
+  
+  sendFoodOptions(e){
+    e.preventDefault();
+    this.props.dispatch(updateNewEventState({restaurantOptions:[...this.state.selectedRestaurants]}));
+    this.props.nextPage();
 
+  }
   render(){
+    console.log('selected restaurants pulling from redux = ',this.state.selectedRestaurants);
     let cuisineOptions;
     if(this.props.cityCode===null){
       cuisineOptions = <option>Loading cuisine options...</option>;
@@ -55,7 +62,10 @@ export class RestaurantSelect extends React.Component {
                 }
               }}
               key={index} id={restaurant.restaurant.id} name={restaurant.restaurant.name} value={restaurant.restaurant.url} type="checkbox"></input>
+            <img src={restaurant.restaurant.thumb==="" ? "https://www.redbytes.in/wp-content/uploads/2018/09/zomato-logo-AD6823E433-seeklogo.com_.png" : restaurant.restaurant.thumb} alt="Thumbnail"></img>
             <a key={index+1} href={restaurant.restaurant.url} target="#">{restaurant.restaurant.name}</a>
+            <p>{'$'.repeat(restaurant.restaurant.price_range)}</p>
+            <p>Rating: {restaurant.restaurant.user_rating.aggregate_rating}</p>
           </div>
         );
       });
@@ -68,6 +78,7 @@ export class RestaurantSelect extends React.Component {
     
     return(
       <div className="container">
+        <p>Change the cuisine to see a list of restaurant options. Check off restaurants to add them to your list of options. You can select multiple restaurants!</p>
         <div id="select-cuisine">
           <form id="select-cuisine-form">
             <label>Select Cuisine</label>
@@ -80,18 +91,17 @@ export class RestaurantSelect extends React.Component {
          
          
           <ul>Restaurant Choices{selectedRestaurantsDisplay}</ul>
-          <button onClick={()=>this.props.dispatch(updateNewEventState({restaurantOptions:[...this.state.selectedRestaurants]}))}>Add Restaurant(s)</button>
 
           <button type='button' onClick={() => this.props.prevPage()}>
-                  {'<-'} Back
+            {'<-'} Back
           </button>
 
-          <button onClick={()=>this.props.nextPage()}>Next Page</button>
+          <button onClick={(e)=>this.sendFoodOptions(e)}>Next Page</button>
         </div>
 
-          <div id="restaurant-list">
+        <div id="restaurant-list">
           {restaurantChoices}
-          </div>
+        </div>
       </div>
     );
   }
@@ -101,6 +111,7 @@ const mapStateToProps = state => ({
   city: state.newEvent.location.city,
   state: state.newEvent.location.state,
   cuisines: state.restaurants.cuisines,
+  eventRestaurants: state.newEvent.restaurantOptions,
   restaurants: state.restaurants.restaurants,
   cityCode: state.restaurants.cityCode
 

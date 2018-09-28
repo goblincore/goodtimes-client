@@ -17,7 +17,7 @@ export class NewEventMain extends React.Component {
     super(props);
 
     this.state = {
-      pageCount: 1
+      pageCount: 1,
     }
   }
 
@@ -39,7 +39,13 @@ export class NewEventMain extends React.Component {
     )  
   }
 
+  goHome = () => {
+    this.setState({pageCount:0})
+  }
   render(){
+    if(this.state.redirect){
+      return <Redirect to="/" />
+    }
     if(this.props.loggedIn){
       let component;
       switch (this.state.pageCount) {
@@ -65,7 +71,8 @@ export class NewEventMain extends React.Component {
         case 4:
           //preview, confirm page
           component = <PreviewEvent 
-            nextPage={this.nextPage} 
+            nextPage={this.nextPage}
+            goHome={this.goHome} 
             dispatch={this.props.dispatch} 
             prevPage={this.prevPage} 
             eventState={this.props.newEvent}
