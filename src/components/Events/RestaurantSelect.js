@@ -21,7 +21,13 @@ export class RestaurantSelect extends React.Component {
     e.preventDefault();
     this.props.dispatch(fetchRestaurants(this.props.cityCode, cuisineCode));
   }
+  
+  sendFoodOptions(e){
+    e.preventDefault();
+    this.props.dispatch(updateNewEventState({restaurantOptions:[...this.state.selectedRestaurants]}));
+    this.props.nextPage();
 
+  }
   render(){
     let cuisineOptions;
     if(this.props.cityCode===null){
@@ -68,6 +74,7 @@ export class RestaurantSelect extends React.Component {
     
     return(
       <div className="container">
+        <p>Change the cuisine to see a list of restaurant options. Check off restaurants to add them to your list of options. You can select multiple restaurants!</p>
         <div id="select-cuisine">
           <form id="select-cuisine-form">
             <label>Select Cuisine</label>
@@ -80,18 +87,17 @@ export class RestaurantSelect extends React.Component {
          
          
           <ul>Restaurant Choices{selectedRestaurantsDisplay}</ul>
-          <button onClick={()=>this.props.dispatch(updateNewEventState({restaurantOptions:[...this.state.selectedRestaurants]}))}>Add Restaurant(s)</button>
 
           <button type='button' onClick={() => this.props.prevPage()}>
-                  {'<-'} Back
+            {'<-'} Back
           </button>
 
-          <button onClick={()=>this.props.nextPage()}>Next Page</button>
+          <button onClick={(e)=>this.sendFoodOptions(e)}>Next Page</button>
         </div>
 
-          <div id="restaurant-list">
+        <div id="restaurant-list">
           {restaurantChoices}
-          </div>
+        </div>
       </div>
     );
   }
