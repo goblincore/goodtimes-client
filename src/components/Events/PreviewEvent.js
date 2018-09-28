@@ -57,7 +57,7 @@ export default function PreviewEvent(props){
       restaurantOptions: props.eventState.restaurantOptions
     };
     return props.dispatch(postNewEvent(newEvent))
-      .then(() => <Redirect to='/'/>)
+      .then(() => props.goHome())
       .catch(err => console.log('ERROR HANDLING HERE dispatch(changeErrorMessaeg(err.message))'));
   }
   return (
