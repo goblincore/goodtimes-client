@@ -100,6 +100,7 @@ export class CreateEvent extends React.Component {
     let requiredFields = ['title', 'state', 'city'];
     for(let i = 0; i < requiredFields.length; i++){
       if (!requiredInfo[i]) {
+        console.log('HANDLE SUBMIT');
         return this.props.dispatch(newEventErrorMessage(`Must include ${requiredFields[i]} for your new event.`));
       }
     }
@@ -114,7 +115,7 @@ export class CreateEvent extends React.Component {
     let errorMessage = null;
     let locationMessage = null;
     if (this.props.eventState.errorMessage){
-      errorMessage = <p classTitle='error-message'>{this.props.eventState.errorMessage}</p>;
+      errorMessage = <p className='error-message'>{this.props.eventState.errorMessage}</p>;
     }
 
     if ( this.state.locationFeedback === 'Checking city...' || 
