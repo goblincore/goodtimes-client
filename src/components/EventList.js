@@ -15,7 +15,7 @@ export function EventList(props) {
     });
   }else{
     return(
-      <span>Events NOT Found</span>
+      null
     )
   }
 }
