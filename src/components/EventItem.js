@@ -1,5 +1,4 @@
 import React from 'react';
-import { toggleEventDetails } from '../actions/Auth';
 
 export default class EventItem extends React.Component{
   constructor(props){
@@ -47,7 +46,6 @@ export default class EventItem extends React.Component{
                     <p>Votes: {food.votes}</p>
                   </div>
                 );
-                
               })
             }
           </div>
