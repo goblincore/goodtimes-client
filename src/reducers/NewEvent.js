@@ -9,9 +9,10 @@ import {
 export const initialState = {
   showNewEvent: false,
   errorMessage: '',
+
   title: '',
   draft: false,
-  location: '', //  <-- maybe switch this to {lat: ..., long: ...} ??
+  location: '',
   description: '',
   scheduleOptions: [],
   restaurantOptions: [],
@@ -33,17 +34,16 @@ export default function newEventReducer (state=initialState, action) {
     });
   } else if (action.type === UPDATE_NEW_EVENT_STATE) {
     console.log('update action=',action);
-    return Object.assign({}, state, action.updateObject); //example:  {restaurantOptions: [{zomatoId: '123'}]}
+    return Object.assign({}, state, action.updateObject); 
 
-  } else if (action.type === POST_NEW_EVENT_SUCCESS) {
-
+  }  else if (action.type === POST_NEW_EVENT_SUCCESS) {
     return Object.assign({}, state, {
       loading: false
     });
-  } else if (action.type === NEW_EVENT_ERROR_MESSAGE) {
-
+  }else if (action.type === NEW_EVENT_ERROR_MESSAGE) {
     return Object.assign({}, state, {
-      errorMessage: action.message
+      errorMessage: action.message,
+      loading: false
     });
   } else {
     return state;

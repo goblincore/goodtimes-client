@@ -17,13 +17,12 @@ export const fetchZomatoLocationError = (error) => ({
   type: FETCH_ZOMATO_LOCATION_ERROR,
   error
 });
-
-export const fetchZomatoLocation = (city, state) => (dispatch, getState) => {
+export const fetchZomatoLocation = (lat, lon) => (dispatch, getState) => {
   console.log('action dispatched');
-  city = getState().newEvent.location.city;
-  state = getState().newEvent.location.state;
+  lat = getState().newEvent.location.latitude;
+  lon = getState().newEvent.location.longitude;
   dispatch(fetchZomatoLocationRequest());
-  return fetch(`${API_BASE_URL}/api/restaurants/${city}/${state}`, {
+  return fetch(`${API_BASE_URL}/api/restaurants/${lat}/${lon}`, {
     method: 'GET'
   })
     .then(res => normalizeResponseErrors(res))
