@@ -35,7 +35,7 @@ export default function newEventReducer (state=initialState, action) {
     console.log('update action=',action);
     return Object.assign({}, state, action.updateObject); //example:  {restaurantOptions: [{zomatoId: '123'}]}
 
-  } else if (action.type === NEW_EVENT_ERROR_MESSAGE) {
+  } else if (action.type === POST_NEW_EVENT_SUCCESS) {
 
     return Object.assign({}, state, {
       loading: false

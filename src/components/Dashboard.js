@@ -8,9 +8,17 @@ import {Link, Redirect, withRouter} from 'react-router-dom';
 
 
 export class Dashboard extends Component {
-
+constructor(props){
+    super(props);
+    this.state = {
+        display: true
+    }
+}
     render() {
-        console.log('userevents props',this.props.userEvents);
+       // console.log(this.props.userEvents);
+//  const activeEvents = this.props.userEvents.filter(event => event.draft !== true);
+//   console.log(activeEvents);
+//         console.log('userevents props',this.props.userEvents);
         if(this.props.loggedIn){
             return (
                 <div className="dashboard-wrapper">
@@ -21,7 +29,8 @@ export class Dashboard extends Component {
                          <p>Welcome to your dashboard. Here you can create new events or manage
                              events that you've already created. Need Help? 
                          </p>
-                             
+                             <button id="display-drafts" >Drafts</button>
+                             <button id="display-active-events">Active Events</button>
                            <Link to="/create-event"><h3>Create New Event  <MdAddCircleOutline /></h3></Link>
                          <div id="event_boxes">
                          
