@@ -50,7 +50,7 @@ export class HeaderBar extends Component {
                 return (
                     <section className="header-bar">
                     <div className="header-logo">
-                        <h3> Goodtime</h3>
+                    <h3><MdSentimentSatisfied/> Goodtimes</h3>
                     </div>
 
                         <div className="header-nav">
