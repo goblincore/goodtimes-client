@@ -9,7 +9,7 @@ import { initialState } from '../../reducers/NewEvent';
 import RestaurantSelect from './RestaurantSelect';
 
 import SuccessfullyCreatedEvent from './SuccessfullyCreatedEvent';
-import { updateNewEventState } from '../../actions/New-Event';
+import { updateNewEventState, newEventErrorMessage } from '../../actions/New-Event';
 
 
 export class NewEventMain extends React.Component {
@@ -28,11 +28,15 @@ export class NewEventMain extends React.Component {
   
 
   nextPage = () => {
-    this.setState({pageCount: this.state.pageCount + 1})
+    this.setState({pageCount: this.state.pageCount + 1}, 
+      () => this.props.dispatch(newEventErrorMessage(null))
+    )
   }
 
   prevPage = () => {
-    this.setState({pageCount: this.state.pageCount - 1})
+    this.setState({pageCount: this.state.pageCount - 1}, 
+      () => this.props.dispatch(newEventErrorMessage(null))
+    )  
   }
 
   render(){
@@ -43,7 +47,12 @@ export class NewEventMain extends React.Component {
           return <Redirect to='/dashboard' />;
         case 1:
           //title, location, description
-          component = <CreateEvent nextPage={this.nextPage} dispatch={this.props.dispatch} prevPage={this.prevPage} eventState={this.props.newEvent}/>;
+          component = <CreateEvent 
+            nextPage={this.nextPage} 
+            dispatch={this.props.dispatch} 
+            prevPage={this.prevPage} 
+            eventState={this.props.newEvent}
+          />;
           break;
         case 2:
           //date/time options

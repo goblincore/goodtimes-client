@@ -5,27 +5,71 @@ import '../styles/CreateEvent.css';
 import { updateNewEventState, newEventErrorMessage } from '../../actions/New-Event';
 import { bingMapsKey } from '../../config';
 
-export function CreateEvent(props) {
+export class CreateEvent extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      locationOption: 0,
+      locationFeedback: ''
+    }
+  }
 
-  function validateCity(e){
-    e.preventDefault();
-    props.dispatch(newEventErrorMessage('Checking City...'));
-    const city = e.target.value;
+
+  validateCity = () => {
+    const city = document.getElementsByName('cityLocation')[0].value;
     const state = document.getElementsByName('stateLocation')[0].value;
-    props.dispatch(updateNewEventState({location: {city, state}}));
-    
-    return fetch(`https://developers.zomato.com/api/v2.1/locations?query=${city}%20${state}`, {
-      method: 'GET',
-      headers: {
-        'user-key': 'ed893dfd2c5516eaae9f86dad4f43bda'
-      }
-    })
+    //Error Handle
+    if (!city || !state) {
+      return this.setState({locationFeedback: 'Must provide a city and state'});
+    } else if (city.length < 3) {
+      return this.setState({locationFeedback: 'Must provide a longer city name.'});
+    }
+
+    this.setState({locationFeedback: 'Checking city...'});
+    //Get Latitude and Longitude
+    return fetch(`http://dev.virtualearth.net/REST/v1/Locations/US/${state}/${city}/addressLine?includeNeighborhood=0&include=0&key=${bingMapsKey}`)
       .then(res => res.json())
-      .then(locationData => {
-        const zomatoId = locationData.location_suggestions[0].entity_id;
-        const locationTitle = locationData.location_suggestions[0].title;
-        props.dispatch(newEventErrorMessage(null));
-        props.dispatch(updateNewEventState({zomatoLocation: locationTitle, zomatoEntityId: zomatoId}));
+      .then(bingMapsResult => {
+        const possibleResults = bingMapsResult.resourceSets[0].resources;
+        if (possibleResults.length === 1) {
+          let message = `Successfully found ${possibleResults[0].name}`;
+          if (!possibleResults[0].address.locality) {
+            message = `Must provide a valid city name.`
+          }
+          this.setState({
+            locationFeedback: message,
+            locationOption: 0
+          }, () => {
+            this.props.dispatch(updateNewEventState({
+              location: {
+                'latitude': possibleResults[0].point.coordinates[0], 
+                'longitude': possibleResults[0].point.coordinates[1]
+              }
+            }));
+          })
+
+        } else if (this.state.locationOption < possibleResults.length) {
+          let message = `You selected ${possibleResults[this.state.locationOption].name}`;
+          if (!possibleResults[this.state.locationOption].address.locality) {
+            message = `Must provide a valid city name.`
+          }
+          this.setState({locationFeedback: message}, () => {
+            this.props.dispatch(updateNewEventState({
+              location: {
+                'latitude': possibleResults[this.state.locationOption].point.coordinates[0],
+                'longitude': possibleResults[this.state.locationOption].point.coordinates[1]
+              }
+            }))
+          })
+        } else {
+          this.setState({
+            locationFeedback: 'No more options. Please try a different city.',
+            locationOption: 0
+          }, () => {
+            this.props.dispatch(updateNewEventState({location: ''}));
+          })
+        }
+        return;
       })
       .catch(err => console.log(err));
   }
@@ -33,38 +77,20 @@ export function CreateEvent(props) {
 
 
 
-  function handleIncorrectCity(){
-    const city = props.eventState.location.city;
-    const state = props.eventState.location.state;
-    //Get Latitude-Longitude instead
-    return fetch(`http://dev.virtualearth.net/REST/v1/Locations/US/${state}/${city}/addressLine?includeNeighborhood=0&include=0&key=${bingMapsKey}`)
-      .then(res => res.json())
-      .then(bingMapsResult => {
-        const name = bingMapsResult.resourceSets[0].resources[0].name;
-        const coordinates = bingMapsResult.resourceSets[0].resources[0].point.coordinates; //[lat, long]
-        return fetch(`https://developers.zomato.com/api/v2.1/geocode?lat=${coordinates[0]}&lon=${coordinates[1]}`, {
-          method: 'GET',
-          headers: {
-            'user-key': 'ed893dfd2c5516eaae9f86dad4f43bda'
-          }
-        });
-      })
-      .then(res => res.json())
-      .then(zomatoRes => {
-        const zomatoId = zomatoRes.location.entity_id;
-        const correctCity = zomatoRes.location.city_name;
-        props.dispatch(updateNewEventState({zomatoLocation: `${correctCity}, ${state}`}));
-      })
-      .catch(err => console.log('ERROR:',err))
+  handleIncorrectCity = () => {
+    this.setState({locationOption: this.state.locationOption + 1}, () => this.validateCity());
   }
 
 
 
-  function handleSubmit(e){
+  handleSubmit = (e) => {
     e.preventDefault();
-    if (props.eventState.errorMessage) return;
+    if (this.props.eventState.errorMessage) return;
+    if (this.state.locationFeedback.startsWith('No more options')) return;
+    if (this.state.locationFeedback.startsWith('Must provide')) return;
+    if (this.state.locationFeedback === 'Checking city...') return;
 
-    const title = e.target.eventName.value.trim();
+    const title = e.target.eventTitle.value.trim();
     const state = e.target.stateLocation.value;
     const city = e.target.cityLocation.value.trim();
     const description = e.target.eventDescription.value;
@@ -74,121 +100,136 @@ export function CreateEvent(props) {
     let requiredFields = ['title', 'state', 'city'];
     for(let i = 0; i < requiredFields.length; i++){
       if (!requiredInfo[i]) {
-        return props.dispatch(newEventErrorMessage(`Must include ${requiredFields[i]} for your new event.`));
+        return this.props.dispatch(newEventErrorMessage(`Must include ${requiredFields[i]} for your new event.`));
       }
     }
 
-    props.dispatch(updateNewEventState({title, location:{city, state}, description}));
-    props.nextPage();
+    this.props.dispatch(updateNewEventState({title, description}));
+    this.props.nextPage();
   }
 
 
   ////// RENDER BEGINS HERE ////////
-  let feedbackMessage;
-  if (props.eventState.errorMessage){
-    feedbackMessage = <p className='error-message'>{props.eventState.errorMessage}</p>;
-  } else if (props.eventState.zomatoLocation) {
-    feedbackMessage = (
-      <p>
-        Successfully found {props.eventState.zomatoLocation}
-        <button type='button' onClick={() => handleIncorrectCity()}>Incorrect?</button>
-      </p>
-    )
+  render(){
+    let errorMessage = null;
+    let locationMessage = null;
+    if (this.props.eventState.errorMessage){
+      errorMessage = <p classTitle='error-message'>{this.props.eventState.errorMessage}</p>;
+    }
+
+    if ( this.state.locationFeedback === 'Checking city...' || 
+        this.state.locationFeedback.startsWith('Successfully found') ||
+        this.state.locationFeedback.startsWith('No more options.') ||
+        this.state.locationFeedback.startsWith('Must provide') ||
+        !this.state.locationFeedback) {
+      locationMessage = <p>{this.state.locationFeedback}</p>
+    } else {
+        locationMessage = (
+          <p>
+            {this.state.locationFeedback}
+            <button type='button' onClick={() => this.setState({locationFeedback: ''})}>Yes</button>
+            <button type='button' onClick={() => this.handleIncorrectCity()}>No</button>
+          </p>
+        )
+      }
+
+    return (
+      <form
+        classTitle="event-form"
+        onSubmit={e => this.handleSubmit(e)}
+      >
+        {errorMessage}
+
+        <label htmlFor="eventTitle">Event Title</label>
+        <input
+          type="text"
+          id="eventTitle"
+          name="eventTitle"
+          placeholder="Get together"
+          onChange={() => this.props.dispatch(newEventErrorMessage(null))}
+        />
+        <label htmlFor='stateLocation'>Location</label>
+        <select name="stateLocation" id="stateLocation" defaultValue="Select a State" onChange={() => this.setState({locationOption: 0}, () => this.validateCity() )}>
+
+          <option value="AL">Alabama</option>
+          <option value="AK">Alaska</option>
+          <option value="AZ">Arizona</option>
+          <option value="AR">Arkansas</option>
+          <option value="CA">California</option>
+          <option value="CO">Colorado</option>
+          <option value="CT">Connecticut</option>
+          <option value="DE">Delaware</option>
+          <option value="DC">District Of Columbia</option>
+          <option value="FL">Florida</option>
+          <option value="GA">Georgia</option>
+          <option value="HI">Hawaii</option>
+          <option value="ID">Idaho</option>
+          <option value="IL">Illinois</option>
+          <option value="IN">Indiana</option>
+          <option value="IA">Iowa</option>
+          <option value="KS">Kansas</option>
+          <option value="KY">Kentucky</option>
+          <option value="LA">Louisiana</option>
+          <option value="ME">Maine</option>
+          <option value="MD">Maryland</option>
+          <option value="MA">Massachusetts</option>
+          <option value="MI">Michigan</option>
+          <option value="MN">Minnesota</option>
+          <option value="MS">Mississippi</option>
+          <option value="MO">Missouri</option>
+          <option value="MT">Montana</option>
+          <option value="NE">Nebraska</option>
+          <option value="NV">Nevada</option>
+          <option value="NH">New Hampshire</option>
+          <option value="NJ">New Jersey</option>
+          <option value="NM">New Mexico</option>
+          <option value="NY">New York</option>
+          <option value="NC">North Carolina</option>
+          <option value="ND">North Dakota</option>
+          <option value="OH">Ohio</option>
+          <option value="OK">Oklahoma</option>
+          <option value="OR">Oregon</option>
+          <option value="PA">Pennsylvania</option>
+          <option value="RI">Rhode Island</option>
+          <option value="SC">South Carolina</option>
+          <option value="SD">South Dakota</option>
+          <option value="TN">Tennessee</option>
+          <option value="TX">Texas</option>
+          <option value="UT">Utah</option>
+          <option value="VT">Vermont</option>
+          <option value="VA">Virginia</option>
+          <option value="WA">Washington</option>
+          <option value="WV">West Virginia</option>
+          <option value="WI">Wisconsin</option>
+          <option value="WY">Wyoming</option>
+        </select>
+
+        <label htmlFor="cityLocation">City</label>
+        <input
+          type="text"
+          id="cityLocation"
+          name="cityLocation"
+          placeholder="Please enter a City"
+          onChange={() => {
+            this.setState({locationOption: 0}, () => this.props.dispatch(newEventErrorMessage(null)));
+          }}
+          onBlur={() => this.validateCity()}
+        />
+
+        {locationMessage}
+
+        <label htmlFor="eventDescription">
+                  Enter a short description for your event:
+          <textarea rows="4" cols="50" name="eventDescription"/>
+        </label>
+              
+        <button type='button' onClick={() => this.props.prevPage()}>
+          {'<-'} Back
+        </button>
+        <button type='submit'>
+          Next Page
+        </button>
+      </form>
+    );
   }
-
-  return (
-    <form
-      className="event-form"
-      onSubmit={e=>handleSubmit(e)}
-    >
-      {feedbackMessage}
-
-      <label htmlFor="eventName">Event Name</label>
-      <input
-        type="text"
-        id="eventName"
-        name="eventName"
-        placeholder="Get together"
-        onChange={() => props.dispatch(newEventErrorMessage(null))}
-      />
-      <label htmlFor='stateLocation'>Location</label>
-      <select name="stateLocation" id="stateLocation" defaultValue="Select a State">
-
-        <option value="AL">Alabama</option>
-        <option value="AK">Alaska</option>
-        <option value="AZ">Arizona</option>
-        <option value="AR">Arkansas</option>
-        <option value="CA">California</option>
-        <option value="CO">Colorado</option>
-        <option value="CT">Connecticut</option>
-        <option value="DE">Delaware</option>
-        <option value="DC">District Of Columbia</option>
-        <option value="FL">Florida</option>
-        <option value="GA">Georgia</option>
-        <option value="HI">Hawaii</option>
-        <option value="ID">Idaho</option>
-        <option value="IL">Illinois</option>
-        <option value="IN">Indiana</option>
-        <option value="IA">Iowa</option>
-        <option value="KS">Kansas</option>
-        <option value="KY">Kentucky</option>
-        <option value="LA">Louisiana</option>
-        <option value="ME">Maine</option>
-        <option value="MD">Maryland</option>
-        <option value="MA">Massachusetts</option>
-        <option value="MI">Michigan</option>
-        <option value="MN">Minnesota</option>
-        <option value="MS">Mississippi</option>
-        <option value="MO">Missouri</option>
-        <option value="MT">Montana</option>
-        <option value="NE">Nebraska</option>
-        <option value="NV">Nevada</option>
-        <option value="NH">New Hampshire</option>
-        <option value="NJ">New Jersey</option>
-        <option value="NM">New Mexico</option>
-        <option value="NY">New York</option>
-        <option value="NC">North Carolina</option>
-        <option value="ND">North Dakota</option>
-        <option value="OH">Ohio</option>
-        <option value="OK">Oklahoma</option>
-        <option value="OR">Oregon</option>
-        <option value="PA">Pennsylvania</option>
-        <option value="RI">Rhode Island</option>
-        <option value="SC">South Carolina</option>
-        <option value="SD">South Dakota</option>
-        <option value="TN">Tennessee</option>
-        <option value="TX">Texas</option>
-        <option value="UT">Utah</option>
-        <option value="VT">Vermont</option>
-        <option value="VA">Virginia</option>
-        <option value="WA">Washington</option>
-        <option value="WV">West Virginia</option>
-        <option value="WI">Wisconsin</option>
-        <option value="WY">Wyoming</option>
-      </select>
-
-      <label htmlFor="cityLocation">City</label>
-      <input
-        type="text"
-        id="cityLocation"
-        name="cityLocation"
-        placeholder="Please enter a City"
-        onChange={() => props.dispatch(newEventErrorMessage(null))}
-        onBlur={(e) => validateCity(e)}
-      />
-
-
-      <label htmlFor="eventDescription">
-                Enter a short description for your event:
-        <textarea rows="4" cols="50" name="eventDescription"/>
-      </label>
-            
-      <button type='button' onClick={() => props.prevPage()}>
-        {'<-'} Back
-      </button>
-      <button type='submit'>
-        Next Page
-      </button>
-    </form>
-  );
 }

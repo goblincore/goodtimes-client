@@ -7,10 +7,8 @@ import {
 export const initialState = {
   showNewEvent: false,
   errorMessage: '',
-  title: '',
-  location: '', //  <-- maybe switch this to {lat: ..., long: ...} ??
-  zomatoLocation: '',
-  zomatoEntityId: '',
+  title: '', // {lat: Num, long: Num}
+  location: '',
   description: '',
   scheduleOptions: [],
   restaurantOptions: [],
