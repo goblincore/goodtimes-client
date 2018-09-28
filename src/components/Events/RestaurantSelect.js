@@ -10,7 +10,7 @@ export class RestaurantSelect extends React.Component {
     super(props);
 
     this.state= {
-      selectedRestaurants:[]
+      selectedRestaurants:[...this.props.eventRestaurants]
     };
   }
   componentDidMount(){
@@ -29,6 +29,7 @@ export class RestaurantSelect extends React.Component {
 
   }
   render(){
+    console.log('selected restaurants pulling from redux = ',this.state.selectedRestaurants);
     let cuisineOptions;
     if(this.props.cityCode===null){
       cuisineOptions = <option>Loading cuisine options...</option>;
@@ -110,6 +111,7 @@ const mapStateToProps = state => ({
   city: state.newEvent.location.city,
   state: state.newEvent.location.state,
   cuisines: state.restaurants.cuisines,
+  eventRestaurants: state.newEvent.restaurantOptions,
   restaurants: state.restaurants.restaurants,
   cityCode: state.restaurants.cityCode
 
