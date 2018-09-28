@@ -1,0 +1,22 @@
+.time-options, .restaurant-options{
+    max-width:300px;
+    text-align:left;
+}
+
+.option_container{
+    margin-top:20px;
+}
+
+.option_container input{
+  width:20px;
+
+}
+
+.option_container label, input{
+    display:inline;
+  }
+
+ .event-form-options{
+     max-width:400px;
+     margin:auto;
+ }
