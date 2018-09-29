@@ -12,7 +12,7 @@ export function LoginPage(props) {
         return <Redirect to="/dashboard" />;
     }
     return ( 
-        <Page>  
+        <Page background="#03a9f4">  
         <div className="container">
            <div className="form-container">
               <LoginForm />

@@ -3,7 +3,7 @@
     bottom: 0px;
     max-width: 600px;
     z-index: 0;
-    left: 50%;
+    left: 64%;
     transform: translateX(-50%);
 }
 
@@ -22,8 +22,11 @@
 
 .hero h1{
     margin-top:10% !important;
-    font-size:60px;
+    font-family:Graebenbach;
+    font-weight:400;
+    font-size:100px !important;
     position:relative;
+    line-height:130%;
     z-index:1;
     
 }
@@ -33,9 +36,9 @@
 
 
     .hero h1{
-        font-size:20px;
+        font-size:70px !important;
         text-align:left;
-        line-height:150%;
+        line-height:120%;
     }
 
     .home-img{
@@ -44,8 +47,13 @@
         transform:translateX(2%);
     }
 
-
-
+    .header-bar {
+        height: 50px;
+        padding: 20px 10px;
+        width: 100%;
+        position: fixed;
+        z-index: 1;
+    }
 
 
 }

@@ -25,10 +25,10 @@ export class LandingPage extends Component {
       return <Redirect to="/dashboard" />;
     }
     return (
-      <Page>
+      <Page background="#ffec44">
           <div className="container">
         
-            <div className="hero"><h1>Event Planning Made Easy </h1></div>
+            <div className="hero"><h1>Let the good times roll! </h1></div>
            <img className="home-img" src="../../assets/home.png"/>
           </div>
       </Page>

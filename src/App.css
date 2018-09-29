@@ -1,7 +1,32 @@
+
+@font-face {
+  font-family: 'Graebenbach';
+  src: url('/assets/fonts/Graebenbach-Medium.woff') format('woff'),
+       url('/assets/fonts/Graebenbach-Medium.eot') format('eot'),
+       url('/assets/fonts/Graebenbach-Medium.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+
+}
+
+
 *, *:before, *:after {
   box-sizing: border-box;
 }
 
+*, :after, :before {
+  -webkit-font-smoothing: inherit;
+  text-rendering: optimizeLegibility;
+  -webkit-font-feature-settings: "kern";
+  -moz-font-feature-settings: "kern";
+  -moz-font-feature-settings: "kern=1";
+  font-feature-settings: "kern" 1;
+  font-kerning: normal;
+}
+
+body{
+  font-family:'Akkurat Pro';
+}
 
 input{
   width:100%;
@@ -55,7 +80,21 @@ button{
   to { transform: rotate(360deg); }
 }
 
+.switch-wrapper {
+  position: relative;
+}
+ 
+.switch-wrapper > div {
+  position: absolute;
+}
 
+
+button{
+  background-color:transparent;
+  font-size:16px;
+  padding:6px;
+  margin:10px;
+}
 /* Page */
 
 .page {

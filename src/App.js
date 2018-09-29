@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import './App.css';
+import DashboardRoutes from './DashboardRoutes';
+import HomepageRoutes from './HomepageRoutes';
 import LandingPage from './components/LandingPage';
 import Dashboard from './components/Dashboard';
 import NewEventMain from './components/Events/newEventMain'
@@ -9,7 +11,9 @@ import  {fetchProtectedData} from './actions/Protected-Data';
 import Error404 from './components/Error404';
 import RegistrationPage from './components/RegistrationPage';
 import LoginPage  from './components/LoginPage';
-
+import Router from 'react-router-dom/BrowserRouter';
+import { spring,AnimatedRoute, AnimatedSwitch} from 'react-router-transition';
+import styled from 'styled-components';
 import {Route, withRouter, BrowserRouter, Switch, Redirect} from 'react-router-dom';
 import { 
   CSSTransition, 
@@ -24,6 +28,72 @@ import GuestEventForm from './components/Events/GuestEventForm';
 // If the user's browser doesn't support the HTML5 history API then we
 // will force full page refreshes on each page change.
 const supportsHistory = 'pushState' in window.history;
+const switchRule = styled.div`
+  position: relative;
+  & > div {
+    position: absolute;
+  }
+`;
+
+const routeRule = styled.div`
+  position: relative;
+  & > div {
+    position: absolute;
+    width: 100%;
+  }
+`;
+
+function glide(val) {
+  return spring(val, {
+    stiffness: 174,
+    damping: 24,
+  });
+}
+
+function slide(val) {
+  return spring(val, {
+    stiffness: 125,
+    damping: 16,
+  });
+}
+
+const topBarTransitions = {
+  atEnter: {
+    offset: -100,
+  },
+  atLeave: {
+    offset: slide(-150),
+  },
+  atActive: {
+    offset: slide(0),
+  },
+};
+
+const pageTransitions = {
+  atEnter: {
+    offset: 100,
+  },
+  atLeave: {
+    offset: glide(-100),
+  },
+  atActive: {
+    offset: glide(0),
+  },
+};
+
+const emptyTransitions = {
+  atEnter: {
+    
+  },
+  atLeave: {
+   
+  },
+  atActive: {
+   
+  },
+};
+
+
 
 class App extends Component {
 
@@ -43,42 +113,52 @@ class App extends Component {
     return (
       <BrowserRouter forceRefresh={!supportsHistory}>
        <div className="App">
-       <HeaderBar/>
+           <HeaderBar />
           <div className="app" lang="en">
-         
-          <Route
-          render={({ location }) => {
-            const { pathname } = location;
-            return (
-              <TransitionGroup>
-                <CSSTransition 
-                  key={pathname}
-                  classNames="page"
-                  timeout={{
-                    enter: 1000,
-                    exit: 1000,
-                  }}
-                > 
-                  <Route
-                    location={location}
-                    render={() => (
-                      <Switch>
+                          <Route render={({ location }) => (
+                      <div>
+                      
+                     
+                          <AnimatedSwitch
+                            css={switchRule}
+                            {...pageTransitions}
+                            // runOnMount={location.pathname === '/'}
+                            mapStyles={styles => ({
+                              transform: `translateX(${styles.offset}%)`,
+                            })}
+                          >
+                            <Route exact path="/" component={LandingPage} />
+                            <Route exact path="/login" component={LoginPage} />
+                            <Route exact path="/register" component={RegistrationPage} />
+                            <Route  component={DashboardRoutes} />
+                            </AnimatedSwitch>
+                      
+                          
+                          {/* <Route component={Error404}/> */}
+
+                   
                         
-                        <Route exact path="/" component={LandingPage} />
-                        <Route exact path="/register" component={RegistrationPage} />
-                        <Route exact path="/login" component={LoginPage} /> 
-                        <Route exact path="/dashboard" component={Dashboard} />
+                       
+                       
+                      </div>
+                    )} />
+
+
+                     
+                  
+                     
+                        
+                       
+                       
+                        {/* <Route exact path="/dashboard" component={Dashboard} />
                         <Route exact path="/create-event" component={NewEventMain} />
-                        <Route exact path="/guestevents/:eventId" component={GuestEventForm} />
-                        <Route component={Error404}/>
-                      </Switch>
-                    )}
-                  />
-                </CSSTransition>
-              </TransitionGroup>
-            );
-          }}
-        />
+                        <Route exact path="/guestevents/:eventId" component={GuestEventForm} /> */}
+                      
+                    
+               
+                
+
+       
        
                
                

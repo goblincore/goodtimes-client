@@ -17,10 +17,14 @@ ul {
   
   .header-bar {
     height:50px;
-    padding:10px 20px;
+    padding:20px 80px;
     width:100%;
     position:fixed;
     z-index:1
+  }
+
+  .header-bar h3{
+    margin:0px;
   }
 
   .header-nav {
@@ -30,4 +34,21 @@ ul {
   .header-logo{
     display:inline-block;
     float:left;
+  }
+
+  @media only screen and (max-width: 450px) {
+      .header-bar {
+        height: 50px;
+        padding: 20px 10px;
+        width: 100%;
+        position: fixed;
+        z-index: 1;
+    }
+
+  }
+
+
+  .smily{
+    margin-top: -3px;
+    margin-right:4px;
   }
