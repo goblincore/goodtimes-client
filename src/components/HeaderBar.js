@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import {Link} from 'react-router-dom';
 import {changeCurrentUser} from '../actions/Protected-Data';
 import {MdSentimentSatisfied} from 'react-icons/lib/md';
+import { slide, scale } from '../transitions';
 import './styles/HeaderBar.css';
 
 
@@ -24,10 +25,10 @@ export class HeaderBar extends Component {
            
         let signUpButton, logInButton;
              signUpButton =(
-                <button className="signup">Sign Up</button>
+                <button className="signup"  onClick={() => this.props.history.push({ pathname: '/register', state: slide })}>Sign Up</button>
             );
             logInButton =(
-                <button className="login">Log In</button>
+                <button className="login" onClick={() => this.props.history.push({ pathname: '/login', state: slide })} >Log In</button>
             );
 
             if(this.props.loggedIn){
@@ -57,8 +58,8 @@ export class HeaderBar extends Component {
                     
                             
                             
-                            <Link to="/register">{signUpButton}</Link>
-                            <Link to="/login">{logInButton}</Link>
+                            {signUpButton}
+                              {logInButton}
                        </div>
                
                 </section>

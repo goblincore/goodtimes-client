@@ -26,6 +26,7 @@
 
 body{
   font-family:'Akkurat Pro';
+  overflow-x:hidden;
 }
 
 input{
@@ -97,7 +98,7 @@ button{
 }
 /* Page */
 
-.page {
+/* .page {
   height: 100vh;
   padding: calc(10% + 1.5em) 5% 5%;
   overflow-y: auto;
@@ -119,7 +120,7 @@ button{
 
 .page-exit {
   /* box-shadow: 0 0 5em 0 rgba(0, 0, 0, .5) inset; */
-  transform: translate(100%,0);
+  /* transform: translate(100%,0);
 }
 
 .page--prev.page-enter {
@@ -137,9 +138,9 @@ button{
 .page-exit .page__inner {
   opacity: 0;
   /* transform: scale(0.9); */
-  transition: transform 1s ease, opacity 1s ease;
+  /* transition: transform 1s ease, opacity 1s ease;
 }
 
 .page h1 {
   margin-top: 0;
-}
+} */ 

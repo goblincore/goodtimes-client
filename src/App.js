@@ -11,10 +11,16 @@ import  {fetchProtectedData} from './actions/Protected-Data';
 import Error404 from './components/Error404';
 import RegistrationPage from './components/RegistrationPage';
 import LoginPage  from './components/LoginPage';
-import Router from 'react-router-dom/BrowserRouter';
+// import Router from 'react-router-dom/BrowserRouter';
 import { spring,AnimatedRoute, AnimatedSwitch} from 'react-router-transition';
 import styled from 'styled-components';
-import {Route, withRouter, BrowserRouter, Switch, Redirect} from 'react-router-dom';
+import Transitions from './transitions';
+import createHistory from 'history/createBrowserHistory';
+import { homePage, loginPage, registrationPage } from './Page';
+import Page from './Page';
+
+
+import {Route, withRouter, Router, BrowserRouter, Switch, Redirect} from 'react-router-dom';
 import { 
   CSSTransition, 
   TransitionGroup 
@@ -93,7 +99,7 @@ const emptyTransitions = {
   },
 };
 
-
+const history = createHistory();
 
 class App extends Component {
 
@@ -111,15 +117,15 @@ class App extends Component {
    
     
     return (
-      <BrowserRouter forceRefresh={!supportsHistory}>
+      <Router history={history}>
        <div className="App">
-           <HeaderBar />
+           <HeaderBar history={history} />
           <div className="app" lang="en">
                           <Route render={({ location }) => (
                       <div>
                       
                      
-                          <AnimatedSwitch
+                          {/* <AnimatedSwitch
                             css={switchRule}
                             {...pageTransitions}
                             // runOnMount={location.pathname === '/'}
@@ -131,12 +137,22 @@ class App extends Component {
                             <Route exact path="/login" component={LoginPage} />
                             <Route exact path="/register" component={RegistrationPage} />
                             <Route  component={DashboardRoutes} />
-                            </AnimatedSwitch>
+                            </AnimatedSwitch> */}
                       
                           
                           {/* <Route component={Error404}/> */}
 
-                   
+                    <Transitions pageKey={location.key} {...location.state}>
+                      <Switch location={location}>
+                          <Route path='/login' component={loginPage} />
+                          <Route path='/register' component={registrationPage} />
+                          <Route exact path='/' component={homePage} />
+                          {/* <Redirect from='/' to='/' /> */}
+                             {/* <Route exact path="/" component={LandingPage} />
+                            <Route exact path="/login" component={LoginPage} />
+                            <Route exact path="/register" component={RegistrationPage} /> */}
+                      </Switch>
+                    </Transitions>
                         
                        
                        
@@ -165,7 +181,7 @@ class App extends Component {
             
               </div>
         </div>
-      </BrowserRouter>
+      </Router>
     );
   }
 
