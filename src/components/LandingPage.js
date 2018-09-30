@@ -26,9 +26,10 @@ export class LandingPage extends Component {
     return (
      
           <div className="container">
-        
+        {/* <img className="home-img" src="../../assets/backgroundshape.png"/> */}
             <div className="hero"><h1>Let the good times roll! </h1></div>
            <img className="home-img" src="../../assets/home.png"/>
+           
           </div>
   
     );
