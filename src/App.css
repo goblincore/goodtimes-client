@@ -24,6 +24,10 @@
   font-kerning: normal;
 }
 
+#root {
+height:100%;
+}
+
 body{
   font-family:'Akkurat Pro';
   overflow-x:hidden;

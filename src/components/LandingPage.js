@@ -5,9 +5,8 @@ import { connect } from 'react-redux';
 //import Dashboard from './Dashboard';
 import {Link, Redirect} from 'react-router-dom';
 import './styles/LandingPage.css';
-import Page from './Page';
+import PageContain from './PageContain';
 
-import RegistrationForm  from './RegistrationForm';
 
 export class LandingPage extends Component {
 
@@ -25,13 +24,13 @@ export class LandingPage extends Component {
       return <Redirect to="/dashboard" />;
     }
     return (
-      <Page background="#ffec44">
+     
           <div className="container">
         
             <div className="hero"><h1>Let the good times roll! </h1></div>
            <img className="home-img" src="../../assets/home.png"/>
           </div>
-      </Page>
+  
     );
   }
 }

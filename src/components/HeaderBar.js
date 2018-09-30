@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 // import { clearAuth } from '../actions/Auth';
 // import { clearAuthToken } from '../Local-Storage';
-import {Link} from 'react-router-dom';
+import {NavLink, Link} from 'react-router-dom';
 import {changeCurrentUser} from '../actions/Protected-Data';
 import {MdSentimentSatisfied} from 'react-icons/lib/md';
 import { slide, scale } from '../transitions';
@@ -25,10 +25,10 @@ export class HeaderBar extends Component {
            
         let signUpButton, logInButton;
              signUpButton =(
-                <button className="signup"  onClick={() => this.props.history.push({ pathname: '/register', state: slide })}>Sign Up</button>
+                <NavLink to="/register" className="signup"  >Sign Up</NavLink>
             );
             logInButton =(
-                <button className="login" onClick={() => this.props.history.push({ pathname: '/login', state: slide })} >Log In</button>
+                <NavLink  to="/login" className="login" >Log In</NavLink>
             );
 
             if(this.props.loggedIn){
@@ -51,15 +51,15 @@ export class HeaderBar extends Component {
                 return (
                     <section className="header-bar">
                     <div className="header-logo">
-                    <h3>  <Link to="/"><MdSentimentSatisfied className="smily"/></Link>Goodtimes</h3>
+                    <h3>  <Link to="/home"><MdSentimentSatisfied className="smily"/></Link>Goodtimes</h3>
                     </div>
 
                         <div className="header-nav">
                     
                             
                             
-                            {signUpButton}
-                              {logInButton}
+                            <div className="navItem">{signUpButton}</div>
+                            <div className="navItem"> {logInButton}</div>
                        </div>
                
                 </section>

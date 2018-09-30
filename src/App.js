@@ -18,7 +18,7 @@ import Transitions from './transitions';
 import createHistory from 'history/createBrowserHistory';
 import { homePage, loginPage, registrationPage } from './Page';
 import Page from './Page';
-
+import { Transition, config, animated } from 'react-spring'
 
 import {Route, withRouter, Router, BrowserRouter, Switch, Redirect} from 'react-router-dom';
 import { 
@@ -142,7 +142,14 @@ class App extends Component {
                           
                           {/* <Route component={Error404}/> */}
 
-                    <Transitions pageKey={location.key} {...location.state}>
+   <Transition
+              native
+              config={{ tension: 1, friction: 10 }}
+              keys={location.pathname.split('/').filter(a => a)[0]}
+              from={{ transform: 'translateX(100%)', opacity: 1 }}
+              enter={{ transform: 'translateX(0px)', opacity: 1 }}
+              leave={{ transform: 'translateX(-100%)', opacity:1 }}>
+              {style => (
                       <Switch location={location}>
                           <Route path='/login' component={loginPage} />
                           <Route path='/register' component={registrationPage} />
@@ -152,8 +159,8 @@ class App extends Component {
                             <Route exact path="/login" component={LoginPage} />
                             <Route exact path="/register" component={RegistrationPage} /> */}
                       </Switch>
-                    </Transitions>
-                        
+                    )}
+                    </Transition>
                        
                        
                       </div>

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { withRouter } from 'react-router-dom';
 
-function Page({ 
+function PageContain({ 
   children, 
   color, 
   background,
@@ -30,15 +30,15 @@ function Page({
   );
 }
 
-Page.propTypes = {
+PageContain.propTypes = {
   children: PropTypes.node.isRequired,
   color: PropTypes.string,
   background: PropTypes.string,
 };
 
-Page.defaultProps = {
+PageContain.defaultProps = {
   color: '#333',
   background: '#ffffff',
 };
 
-export default withRouter(Page);
+export default withRouter(PageContain);
