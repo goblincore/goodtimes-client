@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import {NavLink, Link} from 'react-router-dom';
 import {changeCurrentUser} from '../actions/Protected-Data';
 import {MdSentimentSatisfied} from 'react-icons/lib/md';
-import { slide, scale } from '../transitions';
+
 import './styles/HeaderBar.css';
 
 

@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 //import Dashboard from './Dashboard';
 import {Link, Redirect} from 'react-router-dom';
 import './styles/LandingPage.css';
-import PageContain from './PageContain';
+
 
 
 export class LandingPage extends Component {

@@ -1,205 +1,172 @@
 import React, { Component } from 'react';
-import {connect} from 'react-redux';
-import './App.css';
-import DashboardRoutes from './DashboardRoutes';
-import HomepageRoutes from './HomepageRoutes';
-import LandingPage from './components/LandingPage';
-import Dashboard from './components/Dashboard';
-import NewEventMain from './components/Events/newEventMain'
-import HeaderBar from './components/HeaderBar.js';
-import  {fetchProtectedData} from './actions/Protected-Data';
-import Error404 from './components/Error404';
-import RegistrationPage from './components/RegistrationPage';
-import LoginPage  from './components/LoginPage';
-// import Router from 'react-router-dom/BrowserRouter';
-import { spring,AnimatedRoute, AnimatedSwitch} from 'react-router-transition';
-import styled from 'styled-components';
-import Transitions from './transitions';
-import createHistory from 'history/createBrowserHistory';
-import { homePage, loginPage, registrationPage } from './Page';
-import Page from './Page';
 import { Transition, config, animated } from 'react-spring'
+import {connect} from 'react-redux';
+import { BrowserRouter, Router, withRouter, Switch, Route, Link, Redirect } from 'react-router-dom'
 
-import {Route, withRouter, Router, BrowserRouter, Switch, Redirect} from 'react-router-dom';
-import { 
-  CSSTransition, 
-  TransitionGroup 
-} from 'react-transition-group';
+import  {fetchProtectedData} from './actions/Protected-Data';
 
-
-import SuccessfullyCreatedEvent from './components/Events/SuccessfullyCreatedEvent';
+//App components
+import LandingPage from './components/LandingPage';
+import RegistrationPage from './components/RegistrationPage';
+import HeaderBar from './components/HeaderBar.js';
+import LoginPage  from './components/LoginPage';
+import Error404 from './components/Error404';
+import Dashboard from './components/Dashboard';
+import NewEventMain from './components/Events/newEventMain';
 import GuestEventForm from './components/Events/GuestEventForm';
 
-// Does the user's browser support the HTML5 history API?
-// If the user's browser doesn't support the HTML5 history API then we
-// will force full page refreshes on each page change.
-const supportsHistory = 'pushState' in window.history;
-const switchRule = styled.div`
-  position: relative;
-  & > div {
-    position: absolute;
-  }
-`;
+//Used by React Router
+import createHistory from 'history/createBrowserHistory';
 
-const routeRule = styled.div`
-  position: relative;
-  & > div {
-    position: absolute;
-    width: 100%;
-  }
-`;
+//Main CSS Styles
+import './styles.css';
 
-function glide(val) {
-  return spring(val, {
-    stiffness: 174,
-    damping: 24,
-  });
-}
-
-function slide(val) {
-  return spring(val, {
-    stiffness: 125,
-    damping: 16,
-  });
-}
-
-const topBarTransitions = {
-  atEnter: {
-    offset: -100,
-  },
-  atLeave: {
-    offset: slide(-150),
-  },
-  atActive: {
-    offset: slide(0),
-  },
-};
-
-const pageTransitions = {
-  atEnter: {
-    offset: 100,
-  },
-  atLeave: {
-    offset: glide(-100),
-  },
-  atActive: {
-    offset: glide(0),
-  },
-};
-
-const emptyTransitions = {
-  atEnter: {
-    
-  },
-  atLeave: {
-   
-  },
-  atActive: {
-   
-  },
-};
 
 const history = createHistory();
 
-class App extends Component {
 
 
-  componentWillMount(){
-    if(localStorage.getItem('authToken')){
-       this.props.dispatch(fetchProtectedData());
-    } else {
-      return;
-    }
-  }
+class App extends Component{
+    componentWillMount(){
+        if(localStorage.getItem('authToken')){
+           this.props.dispatch(fetchProtectedData());
+        } else {
+          return;
+        }
+      }
+  
+    render() {
+        return (
+     <Router history={history}>
+            <Route
+            render={({ location, ...rest }) => (
+                <div className="fill">
+                <Route exact path="/" render={() => <Redirect to="/home" />} />
+                <HeaderBar history={history}/>
+                <div className="content">
+                <Transition
+                    native
+                    config={{
+                        tension: 1, 
+                        friction: 10,
 
-  render() {
-
-   
-    
-    return (
-      <Router history={history}>
-       <div className="App">
-           <HeaderBar history={history} />
-          <div className="app" lang="en">
-                          <Route render={({ location }) => (
-                      <div>
+                        restSpeedThreshold: 1,
+                        restDisplacementThreshold: 0.001,
+                        overshootClamping: true,
+                      }}
+                    keys={location.pathname.split('/').filter(a => a)[0]}
+                    from={item => {
+                        if (item !== 'dashboard'){
+                            return({ transform: 'translateX(80%)', opacity: 0, overflow:'none'})
+                        } else {
+                            return({  opacity: 0 })
+                        }
+                    }}
+                    enter={item => {
+                        if (item !== 'dashboard'){
+                            return({ transform: 'translateX(0px)', opacity: 1,overflow:'none'  })
+                        } else {
+                            return({  opacity: 1 })
+                        }
+                    }}
+                 
                       
-                     
-                          {/* <AnimatedSwitch
-                            css={switchRule}
-                            {...pageTransitions}
-                            // runOnMount={location.pathname === '/'}
-                            mapStyles={styles => ({
-                              transform: `translateX(${styles.offset}%)`,
-                            })}
-                          >
-                            <Route exact path="/" component={LandingPage} />
-                            <Route exact path="/login" component={LoginPage} />
-                            <Route exact path="/register" component={RegistrationPage} />
-                            <Route  component={DashboardRoutes} />
-                            </AnimatedSwitch> */}
-                      
-                          
-                          {/* <Route component={Error404}/> */}
-
-   <Transition
-              native
-              config={{ tension: 1, friction: 10 }}
-              keys={location.pathname.split('/').filter(a => a)[0]}
-              from={{ transform: 'translateX(100%)', opacity: 1 }}
-              enter={{ transform: 'translateX(0px)', opacity: 1 }}
-              leave={{ transform: 'translateX(-100%)', opacity:1 }}>
-              {style => (
-                      <Switch location={location}>
-                          <Route path='/login' component={loginPage} />
-                          <Route path='/register' component={registrationPage} />
-                          <Route exact path='/' component={homePage} />
-                          {/* <Redirect from='/' to='/' /> */}
-                             {/* <Route exact path="/" component={LandingPage} />
-                            <Route exact path="/login" component={LoginPage} />
-                            <Route exact path="/register" component={RegistrationPage} /> */}
-                      </Switch>
+                    leave={item => {
+                        if (item !== 'dashboard'){
+                            return({ transform: 'translateX(-80%)', opacity: 0 })
+                        } else {
+                            return({  opacity: 0 })
+                        }
+                    }}>
+                    {style => (
+                        <Switch location={location}>
+                        <Route exact path="/home" render={props => HomePage({...props, style})} />
+                        <Route exact path="/login" render={props => Login_Page({ ...props, style })} />
+                        <Route exact path="/register" render={props => RegisterPage({ ...props, style })} />
+                        <Route exact path="/dashboard" render={props => DashboardPage({ ...props, style })} />
+                        <Route exact path="/create-event" render={props => CreateEventPage({ ...props, style })} />
+                    <Route path="/guestevents/:eventId" render={props => GuestEventPage({ ...props, style })} />
+                    {/* //<GuestEventForm {...props} style={style}  */}
+                    {/* <Route exact path="/guestevents/:eventId" component={GuestEventForm} />  */}
+                        </Switch>
                     )}
                     </Transition>
-                       
-                       
-                      </div>
-                    )} />
-
-
-                     
-                  
-                     
-                        
-                       
-                       
-                        {/* <Route exact path="/dashboard" component={Dashboard} />
-                        <Route exact path="/create-event" component={NewEventMain} />
-                        <Route exact path="/guestevents/:eventId" component={GuestEventForm} /> */}
-                      
-                    
-               
-                
-
-       
-       
-               
-               
-            
-              </div>
-        </div>
-      </Router>
-    );
-  }
-
-
-}
-
-//  export default App;
+                </div>
+                </div>
+            )}
+            />
+        </Router>
+        )
+    }
+   }
 
 
 const mapStateToProps = state => ({
-  loggedIn: state.auth.currentUser !== null
-});
+    loggedIn: state.auth.currentUser !== null
+  });
 
-export default withRouter(connect(mapStateToProps)(App));
+  export default withRouter(connect(mapStateToProps)(App));
+
+
+const NavLink = props => (
+  <li className="navItem">
+    <Link {...props} style={{ cursor: 'pointer', color: 'inherit' }} />
+  </li>
+)
+
+const HomePage = ({ style }) => (
+  <animated.div className="mainRoute" style={{ ...style, background: `#fbfaf4` }}>
+    <div className="mainRouteItem">
+   <LandingPage />
+    </div>
+  </animated.div>
+);
+
+const RegisterPage = ({ style }) => (
+    <animated.div className="mainRoute" style={{ ...style, background: `#fbfaf4` }}>
+      <div className="mainRouteItem">
+     <RegistrationPage />
+      </div>
+    </animated.div>
+  );
+
+  const Login_Page = ({ style }) => (
+    <animated.div className="mainRoute" style={{ ...style, background: `#fbfaf4` }}>
+      <div className="mainRouteItem">
+       <LoginPage/>
+      </div>
+      
+    </animated.div>
+  )
+  
+  
+
+const DashboardPage = ({ style }) => (
+    <animated.div className="dashboardRoute" style={{ ...style, background: `#fbfaf4` }}>
+      <div className="dashboardRouteItem">
+     <Dashboard />
+      </div>
+
+    </animated.div>
+  )
+
+const CreateEventPage = ({ style }) => (
+  <animated.div  style={{ ...style, background: '#fbfaf4' }}>
+   <div className="dashboardRouteItem">
+   <NewEventMain/>
+   </div>
+  </animated.div>
+
+)
+
+const GuestEventPage = ({...props, style}) => (
+    <animated.div  style={{ ...style, background: '#fbfaf4' }}>
+     <div className="dashboardRouteItem">
+     <GuestEventForm {...props}/>
+   
+     </div>
+    </animated.div>
+  
+  )
+
+

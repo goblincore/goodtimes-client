@@ -22,7 +22,7 @@ export class Dashboard extends Component {
                              events that you've already created. Need Help? 
                          </p>
                              
-                           <Link to="dashboard/create-event"><h3>Create New Event  <MdAddCircleOutline /></h3></Link>
+                           <Link to="/create-event"><h3>Create New Event  <MdAddCircleOutline /></h3></Link>
                          <div id="event_boxes">
                          
                          </div>
