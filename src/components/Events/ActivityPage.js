@@ -1,19 +1,19 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import { fetchCategories, fetchActivities } from '../../actions/Activities';
-
-export class ActivitySelect extends React.Component {
+import moment from 'moment';
+export default class ActivitySelect extends React.Component {
 
   componentDidMount(){
+    console.log('PROPS=',this.props);
+    const times = this.props.times.sort();
     this.props.dispatch(fetchCategories());
-    this.props.dispatch(fetchActivities(this.props.latitude, this.props.longitude,'2018-12-02T12:00:00','2018-12-04T12:00:00' ));
+    this.props.dispatch(fetchActivities(this.props.latitude, this.props.longitude,times[0],times[times.length-1]));
   }
   filterEvents(e){
     e.preventDefault();
     return this.props.activities.activities.events.filter(activity => activity.category_id === e.target.value);
   }
-  //format: 40.7128
-  //format -74.0060
   //format: 2018-07-02T12:00:00Z
   //format: 2018-12-03T12:00:00Z  YYYY-MM-DDThh:mm:ssZ
   render(){
@@ -30,12 +30,11 @@ export class ActivitySelect extends React.Component {
     if(this.props.activities.activities !== undefined){
       const events = this.props.activities.activities.events;
       activityOptions = events.map(activity => {
-        console.log(activity.name.text);
         return <div>
           <input type="checkbox"></input>
           <a href={activity.url}>{activity.name.text}</a>
-          <p>Start: {activity.start.local}</p>
-          <p>End: {activity.end.local}</p>
+          <p>Start: {moment(activity.start.local).format('llll')}</p>
+          <p>End: {moment(activity.end.local).format('llll')}</p>
         </div>;
       });
     }
@@ -48,7 +47,6 @@ export class ActivitySelect extends React.Component {
       <div>
         <select onChange={(e) => {
           activityOptions = this.filterEvents(e);
-          console.log(activityOptions);
         }}>
           <option>Choose a category...</option>
           {categoryFilters}
@@ -58,14 +56,3 @@ export class ActivitySelect extends React.Component {
     );
   }
 }
-
-const mapStateToProps = state => ({
-  categories: state.activities.categories,
-  activities: state.activities.activities,
-  loading: state.activities.loading,
-  latitude: state.newEvent.location.latitude,
-  longitude: state.newEvent.location.longitude,
-  times: state.newEvent.scheduleOptions
-});
-
-export default connect(mapStateToProps)(ActivitySelect);

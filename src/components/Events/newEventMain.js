@@ -7,7 +7,7 @@ import PreviewEvent from './PreviewEvent';
 import { initialState } from '../../reducers/NewEvent';
 import ActivitySelect from './ActivityPage';
 import RestaurantSelect from './RestaurantSelect';
-
+import moment from 'moment';
 import SuccessfullyCreatedEvent from './SuccessfullyCreatedEvent';
 import { updateNewEventState, newEventErrorMessage } from '../../actions/New-Event';
 
@@ -78,6 +78,13 @@ export class NewEventMain extends React.Component {
           dispatch={this.props.dispatch} 
           eventState={this.props.newEvent}
           nextPage={this.nextPage}
+          categories={this.props.activities.categories}
+          activities={this.props.activities.activities}
+          loading={this.props.activities.loading}
+          latitude={this.props.newEvent.location.latitude}
+          longitude={this.props.newEvent.location.longitude}
+          times={this.props.newEvent.scheduleOptions.map(time => 
+                  moment(time.date, 'llll').format('YYYY-MM-DDTHH:mm:ss'))}
         />;
         break;
       case 5:
@@ -122,7 +129,8 @@ const mapStateToProps = state => ({
   newEvent: state.newEvent,
   loggedIn: state.auth.currentUser !== null,
   currentUser: state.auth.currentUser,
-  restaurants: state.restaurants
+  restaurants: state.restaurants,
+  activities: state.activities
 });
 
 export default withRouter(connect(mapStateToProps)(NewEventMain));
