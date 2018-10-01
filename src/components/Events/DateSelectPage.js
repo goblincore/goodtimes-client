@@ -1,14 +1,11 @@
-
 import React from 'react';
-import {connect} from 'react-redux';
-import ReactDom from 'react-dom';
 import moment from 'moment';
 import DateList from './DateList';
 import {updateNewEventState} from '../../actions/New-Event';
 import './Calendar/less/calendar-time.css';
 // import 'react-datepicker/dist/react-datepicker.css';
 import '../styles/DateTime.css';
-import {InputMoment, BigInputMoment, DatePicker, TimePicker} from './Calendar';
+import { InputMoment } from './Calendar';
 import {
   Box,
   Flex,
@@ -21,59 +18,32 @@ import {
 
 
 
-export class DateSelectPage extends React.Component {
+export default class DateSelectPage extends React.Component {
 
   constructor(props) {
     super(props);
       
     this.state = {
       inputMoment: moment(),
-      bigInputMoment: moment(),
-      datePickerMoment: moment(),
-      datePickerRangeStartMoment: moment().subtract(3, 'days'),
-      datePickerRangeEndMoment: moment(),
-      timePickerMoment: moment(),
       showSeconds: true,
       locale: 'en',
-      size: 'small',
-      savedDate:[],
+      size: 'small'
     };
-    this.handleChange = this.handleChange.bind(this);
   }
     
-  handleChange(date) {
-      
-    this.setState({
-      startDate: date,
-      m: date
-    });
-  };
-
-
 
     handleSave = () => {
-      let tempArr = this.state.savedDate;
-      let tempObj = { 
-        date: this.state.bigInputMoment.format('llll'),
-        votes:0
-      }
-      tempArr.push(tempObj);
-      // this.props.dispatch(updateNewEventState({scheduledOptions: [...this.props.times, this.state.savedDate]}))
-      this.setState({savedDate: tempArr});
-      console.log('ADDED DATE', this.state.savedDate);
-           
+      this.props.dispatch(updateNewEventState({
+        scheduleOptions: [
+          ...this.props.eventState.scheduleOptions, 
+          {date: this.state.inputMoment.format('llll'), votes: 0}
+        ]
+      }));
     };
-
-
-    updateRedux=()=>{
-
-      this.props.dispatch(updateNewEventState({scheduleOptions: [...this.state.savedDate]}))
-    }
      
 
   render(){
-    console.log('EVENT=',this.props.event);
-    let {inputMoment, bigInputMoment, datePickerMoment, datePickerRangeStartMoment, datePickerRangeEndMoment, timePickerMoment, showSeconds, locale, size} = this.state;
+    let {inputMoment, showSeconds, locale, size} = this.state;
     return (
       <div className="container">
         <div className="width1100">
@@ -94,14 +64,14 @@ export class DateSelectPage extends React.Component {
               <input
                 className="output"
                 type="text"
-                value={bigInputMoment.format('llll')}
+                value={inputMoment.format('llll')}
                 readOnly
               />
               <button onClick={this.handleSave}>
                  Add this date
               </button>
               <div className="dateList">
-                <DateList dateList={this.state.savedDate}/>
+                <DateList dateList={this.props.eventState.scheduleOptions} dispatch={this.props.dispatch}/>
               </div>
                   
             </Card>
@@ -117,10 +87,10 @@ export class DateSelectPage extends React.Component {
               borderRadius={6}
               border='1px dashed grey'>
               <InputMoment
-                moment={bigInputMoment}
+                moment={inputMoment}
                 locale={locale}
                 showSeconds={showSeconds}
-                onChange={date => this.setState({bigInputMoment: date})}
+                onChange={date => this.setState({inputMoment: date})}
               />
             </Card>
           </Flex>
@@ -132,10 +102,8 @@ export class DateSelectPage extends React.Component {
           {'<-'} Back
         </button>
          
-        <button onClick={()=>{
-          this.updateRedux();
-          this.props.nextPage();}}>
-                    Next Page
+        <button onClick={ () => this.props.nextPage()}>
+          Next Page
         </button>
                
       </div>
@@ -146,12 +114,3 @@ export class DateSelectPage extends React.Component {
    
 }
 
-const mapStateToProps = state => {
-  // const {currentUser} = state.auth;
-  return {
-    times: state.newEvent.scheduleOptions,
-    event: state.newEvent 
-  };
-};
-
-export default connect(mapStateToProps)(DateSelectPage);

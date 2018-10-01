@@ -11,9 +11,11 @@ export const initialState = {
   errorMessage: '',
 
   title: '',
+  city: '',
+  state: '',
+  description: '',
   draft: false,
   location: '',
-  description: '',
   scheduleOptions: [],
   restaurantOptions: [],
   id: null,
