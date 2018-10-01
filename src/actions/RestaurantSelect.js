@@ -18,9 +18,6 @@ export const fetchZomatoLocationError = (error) => ({
   error
 });
 export const fetchZomatoLocation = (lat, lon) => (dispatch, getState) => {
-  console.log('action dispatched');
-  lat = getState().newEvent.location.latitude;
-  lon = getState().newEvent.location.longitude;
   dispatch(fetchZomatoLocationRequest());
   return fetch(`${API_BASE_URL}/api/restaurants/${lat}/${lon}`, {
     method: 'GET'
@@ -52,7 +49,6 @@ export const fetchCuisinesError = (error) => ({
 });
 
 export const fetchCuisines = (cityCode) => (dispatch) => {
-  console.log('fetch cuisines disptched');
   dispatch(fetchCuisinesRequest());
   return fetch(`https://developers.zomato.com/api/v2.1/cuisines?city_id=${cityCode}`, {
     method: 'GET',

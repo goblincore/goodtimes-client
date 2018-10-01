@@ -1,5 +1,4 @@
 import React from 'react';
-import { toggleEventDetails } from '../actions/Auth';
 
 export default class EventItem extends React.Component{
   constructor(props){
@@ -16,27 +15,43 @@ export default class EventItem extends React.Component{
   }
 
   render(){
-    console.log(this.props)
     if(this.state.showDetails){
       return(
         <li className='user-event'>
           <h2>{this.props.event.title}</h2>
-          <button onClick={()=> this.toggleEventDetails(false)}>See Details</button>
           <p>{this.props.event.description}</p>
-          {
-            this.props.event.scheduleOptions.map((date,i) =>{
-              console.log(date);
-              return(
-                <div key={i} className='date-vote'>
-                  <p>Date:{date.date}</p>
-                  <p>Votes:{date.votes}</p>
-                </div>
-              );
-              
-            })
-          }
+          <button onClick={()=> this.toggleEventDetails(false)}>See Details</button>
+          <div className='date-options'>
+            <p>Date/Time options:</p>
+            {
+              this.props.event.scheduleOptions.map((date,i) =>{
+                console.log(date);
+                return(
+                    <div key={i} className='date-vote'>
+                      <p>Date: {date.date}</p>
+                      <p>Votes: {date.votes}</p>
+                    </div>
+                );
+                
+              })
+            }
+          </div>
+          <div className='date-options'>
+            <p>Restaurant options:</p>
+            {
+              this.props.event.restaurantOptions.map((food,i) =>{
+                return(
+                  <div key={i} className='date-vote'>
+                    <a href={food.website} target="_blank">{food.name}</a>
+                    <p>Votes: {food.votes}</p>
+                  </div>
+                );
+              })
+            }
+          </div>
         </li>
-    )}  
+      )
+    }  
     else{
       return(
         <li className='user-event'>
@@ -44,14 +59,7 @@ export default class EventItem extends React.Component{
           <p>{this.props.event.description}</p>
           <button onClick={()=> this.toggleEventDetails(true)}>See Details</button>
         </li>
-      )}    
-      
-    
-  // }else{
-  //   return(
-  //     <span>loading</span>
-  //   )
-
-  // }
+      )
+    }    
   }
 }

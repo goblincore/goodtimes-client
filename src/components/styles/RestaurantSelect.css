@@ -18,3 +18,7 @@
     max-width:800px;
     margin:auto;
 }
+
+#restaurant-list img {
+  max-width: 200px;
+}

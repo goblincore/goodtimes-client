@@ -22,11 +22,24 @@ export class ActivitySelect extends React.Component {
     const end = '2018-12-04T12:00:00';
     this.props.dispatch(fetchActivities(latitude, longitude, start, end));
     console.log('this.props.activities=', this.props.activities);
+    console.log('lat=', this.props.latitude, 'lon=', this.props.longitude, 'times=', this.props.times);
   }
   render(){
-    console.log('this.props.categories=',this.props.categories);
+    let categoryFilters;
+    if(this.props.categories.length >0){
+      categoryFilters = this.props.categories.map(category => {
+        <option key={category.id} id={category.id}>{category.name}</option>;
+      });
+    }else if(this.props.loading===true){
+      categoryFilters = <option>Loading categories...</option>;
+    }else{
+      categoryFilters = <option></option>;
+    }
     return(
       <div>
+        <select>
+          {categoryFilters}
+        </select>
         <button onClick={()=>this.getActivities()}>get activities</button>
       </div>
     );
@@ -35,7 +48,11 @@ export class ActivitySelect extends React.Component {
 
 const mapStateToProps = state => ({
   categories: state.activities.categories,
-  activities: state.activities.activities
+  activities: state.activities.activities,
+  loading: state.activities.loading,
+  latitude: state.newEvent.location.latitude,
+  longitude: state.newEvent.location.longitude,
+  times: state.newEvent.scheduleOptions
 });
 
 export default connect(mapStateToProps)(ActivitySelect);

@@ -114,7 +114,8 @@ export class NewEventMain extends React.Component {
 const mapStateToProps = state => ({
   newEvent: state.newEvent,
   loggedIn: state.auth.currentUser !== null,
-  currentUser: state.auth.currentUser
+  currentUser: state.auth.currentUser,
+  restaurants: state.restaurants
 });
 
 export default withRouter(connect(mapStateToProps)(NewEventMain));
