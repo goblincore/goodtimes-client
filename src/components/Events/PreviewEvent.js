@@ -47,7 +47,7 @@ class PreviewEvent extends Component {
         <div key={i} className="option_container">
           <input 
             type="radio" 
-            name="time-option" 
+            name={"time-option"+i} 
             value={option.id} />
   
           <label> {option.date} </label> 
@@ -60,7 +60,7 @@ class PreviewEvent extends Component {
         <div key={i} className="option_container">
           <input 
             type="radio" 
-            name="restaurant-option" 
+            name={"restaurant-option"+i}
             value={option.zomatoId} />
           <label> {link} </label>
         </div> );}); 

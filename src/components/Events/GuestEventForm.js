@@ -70,25 +70,25 @@ class GuestEventForm extends Component {
 
       const {title, description, scheduleOptions, restaurantOptions } = this.state.guestEvent;
 
-      timesDisplay = scheduleOptions.map(option => { 
+      timesDisplay = scheduleOptions.map((option, i) => { 
         return (
-          <div className="option_container">
+          <div key={i} className="option_container">
             <input 
-            type="radio" 
-            name="time-option" 
+            type="radio"
+            name={"time-option"+i}
             value={option.id} />
   
             <label> {option.date} </label> 
             </div>
             );});
 
-      restaurantsDisplay = restaurantOptions.map(option => { 
+      restaurantsDisplay = restaurantOptions.map((option, i) => { 
         let link = <a href={option.website}>{option.name}</a>;
         return (
-          <div className="option_container">
+          <div key={i} className="option_container">
             <input 
               type="radio" 
-              name="restaurant-option" 
+              name={"restaurant-option"+i}
               value={option.zomatoId} />
               <label> {link} </label>
             </div> );});        
