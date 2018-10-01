@@ -69,6 +69,7 @@ export class NewEventMain extends React.Component {
         prevPage={this.prevPage} 
         eventState={this.props.newEvent}
         restaurants={this.props.restaurants}
+        cityCode={this.props.restaurants.cityCode}
         />;
         break;
       case 4:
