@@ -84,7 +84,7 @@ export default function PreviewEvent (props) {
       
       <div className="guest-event-form-wrapper">
         <h3>You're invited to:</h3>
-        <h1>{this.props.eventState.title}</h1><br/>
+        <h1>{props.eventState.title}</h1><br/>
         <h3>Vote to decide on a time and place.</h3>
             
         <h3>Description</h3>

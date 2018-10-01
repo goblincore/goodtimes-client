@@ -4,6 +4,7 @@ import DateList from './DateList';
 import {updateNewEventState} from '../../actions/New-Event';
 import './Calendar/less/calendar-time.css';
 // import 'react-datepicker/dist/react-datepicker.css';
+import {MdAddCircleOutline} from 'react-icons/lib/md';
 import '../styles/DateTime.css';
 import { InputMoment } from './Calendar';
 import {
@@ -96,7 +97,8 @@ export default class DateSelectPage extends React.Component {
          
              <p className='selected-date-text'><strong>{ (this.state.inputMoment.format('llll') === this.state.thisTime.format('llll')) ? 'No time selected' : inputMoment.format('llll')}</strong></p>
              <button onClick={this.handleSave}>
-                 Add this date
+             <MdAddCircleOutline />
+             Add this time
               </button>
             
              <h3>Added Dates:</h3>
