@@ -50,17 +50,19 @@ export default class RestaurantSelect extends React.Component {
                 }));
               }
               else {
-                const tempArray =  this.props.eventState.restaurantOptions.filter(restaurant => restaurant.id !== e.target.id);
+                const tempArray =  this.props.eventState.restaurantOptions.filter(restaurant => restaurant.zomatoId !== e.target.id);
                 this.props.dispatch(updateNewEventState({restaurantOptions: tempArray}));
               }
             }}
             key={index} id={restaurant.restaurant.id} name={restaurant.restaurant.name} value={restaurant.restaurant.url} type="checkbox"></input>
+
           <img src={restaurant.restaurant.thumb==="" ? "https://www.redbytes.in/wp-content/uploads/2018/09/zomato-logo-AD6823E433-seeklogo.com_.png" : restaurant.restaurant.thumb} alt="Thumbnail"></img>
          <div className="restaurant-info">
             <a key={index+1} href={restaurant.restaurant.url} target="#">{restaurant.restaurant.name}</a>
             <p>{'$'.repeat(restaurant.restaurant.price_range)}</p>
             <p>Rating: {restaurant.restaurant.user_rating.aggregate_rating}</p>
           </div>
+
         </div>
       );
     });
@@ -81,6 +83,7 @@ export default class RestaurantSelect extends React.Component {
           <form id="select-cuisine-form">
             <label>Select Cuisine</label>
             <select onChange={e => this.getCuisines(e)}>
+              <option>Select a cuisine...</option>
               {cuisineOptions}
             </select>
           </form>
@@ -104,4 +107,3 @@ export default class RestaurantSelect extends React.Component {
     );
   }
 }
-

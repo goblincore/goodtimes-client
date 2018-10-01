@@ -18,6 +18,7 @@ export const initialState = {
   location: '',
   scheduleOptions: [],
   restaurantOptions: [],
+  activityOptions:[],
   id: null,
   loading: false
 };

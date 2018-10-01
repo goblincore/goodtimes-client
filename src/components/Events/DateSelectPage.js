@@ -31,17 +31,39 @@ export default class DateSelectPage extends React.Component {
       size: 'small'
     };
   }
-    
 
-    handleSave = () => {
-      this.props.dispatch(updateNewEventState({
-        scheduleOptions: [
-          ...this.props.eventState.scheduleOptions, 
-          {date: this.state.inputMoment.format('llll'), votes: 0}
-        ]
+
+  handleSave = () => {
+    let currentTime = moment();
+    //Error Handling...
+    if (this.state.inputMoment < currentTime) {
+      return this.props.dispatch(updateNewEventState({
+        errorMessage: 'No time-travel! Select a future date/time.'
       }));
-    };
+    } else if (this.props.eventState.scheduleOptions.find(date => date.date === this.state.inputMoment.format('llll'))) {
+      return this.props.dispatch(updateNewEventState({
+        errorMessage: 'That date/time is already an option.'
+      }))
+    }
+
+    //Update the Redux state
+    this.props.dispatch(updateNewEventState({
+      errorMessage: '',
+      scheduleOptions: [
+        ...this.props.eventState.scheduleOptions, 
+        {date: this.state.inputMoment.format('llll'), votes: 0}
+      ]
+    }));
+  };
      
+
+  handleNextPage = () => {
+    if (this.props.eventState.scheduleOptions.length === 0) {
+      this.props.dispatch(updateNewEventState({errorMessage: 'Must select a time.'}));
+    } else {
+      this.props.nextPage();
+    }
+  }
 
   render(){
     let {inputMoment, showSeconds, locale, size} = this.state;
@@ -84,24 +106,19 @@ export default class DateSelectPage extends React.Component {
               <div className="dateList">
                 <DateList dateList={this.props.eventState.scheduleOptions} dispatch={this.props.dispatch}/>
               </div>
-            </div>
-            
-        
-                  
-         
+              </div>
 
-          
-      
-          
-  
-        
+
+              <p className='error-message'>{this.props.eventState.errorMessage}</p>
+
+ 
         </div>
 
         <button type='button' onClick={() => this.props.prevPage()}>
           {'<-'} Back
         </button>
          
-        <button onClick={ () => this.props.nextPage()}>
+        <button onClick={ () => this.handleNextPage()}>
           Next Page
         </button>
                
