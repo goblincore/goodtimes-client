@@ -66,7 +66,13 @@ export class NewEventMain extends React.Component {
           break;
         case 3:
           //food options
-          component = <RestaurantSelect nextPage={this.nextPage} dispatch={this.props.dispatch} prevPage={this.prevPage} eventState={this.props.newEvent}/>;
+          component = <RestaurantSelect 
+            nextPage={this.nextPage} 
+            dispatch={this.props.dispatch} 
+            prevPage={this.prevPage} 
+            eventState={this.props.newEvent}
+            restaurants={this.props.restaurants}
+            />;
           break;
         case 4:
           //preview, confirm page
@@ -109,7 +115,8 @@ export class NewEventMain extends React.Component {
 const mapStateToProps = state => ({
   newEvent: state.newEvent,
   loggedIn: state.auth.currentUser !== null,
-  currentUser: state.auth.currentUser
+  currentUser: state.auth.currentUser,
+  restaurants: state.restaurants
 });
 
 export default withRouter(connect(mapStateToProps)(NewEventMain));
