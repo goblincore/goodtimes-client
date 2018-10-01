@@ -153,7 +153,7 @@ const DashboardPage = ({ style }) => (
 
 const CreateEventPage = ({ style }) => (
   <animated.div  style={{ ...style, background: '#fdfdfd' }}>
-   <div className="dashboardRouteItem">
+   <div className="newEventRouteItem">
    <NewEventMain/>
    </div>
   </animated.div>
@@ -162,7 +162,7 @@ const CreateEventPage = ({ style }) => (
 
 const GuestEventPage = ({...props, style}) => (
     <animated.div  style={{ ...style, background: '#fdfdfd' }}>
-     <div className="dashboardRouteItem">
+     <div className="newEventRouteItem">
      <GuestEventForm {...props}/>
    
      </div>

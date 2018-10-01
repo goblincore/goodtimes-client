@@ -85,6 +85,12 @@ label{
   align-items: center;
 }
 
+.newEventRouteItem{
+    width:100%;
+    position:absolute;
+    text-align:center;
+  }
+
   
   .mainRouteItem {
     text-align: center;

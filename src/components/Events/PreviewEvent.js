@@ -74,7 +74,7 @@ class PreviewEvent extends Component {
     return ( <h1>Loading...</h1> )
    } else { 
         return (
-
+  <div className="absolute-wrapper">
     <div className='preview-event'>
       <div>
         {/* <input type='image'/> */}
@@ -109,6 +109,7 @@ class PreviewEvent extends Component {
         <button type='button' onClick={() => this.onDraft()}>Save as Draft</button>
         <button type='button' onClick={() => this.onSubmit()}>Looks good!</button>
       </div>
+    </div>
     </div>
   );
 }
