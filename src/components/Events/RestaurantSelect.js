@@ -50,7 +50,7 @@ export default class RestaurantSelect extends React.Component {
                 }));
               }
               else {
-                const tempArray =  this.props.eventState.restaurantOptions.filter(restaurant => restaurant.id !== e.target.id);
+                const tempArray =  this.props.eventState.restaurantOptions.filter(restaurant => restaurant.zomatoId !== e.target.id);
                 this.props.dispatch(updateNewEventState({restaurantOptions: tempArray}));
               }
             }}

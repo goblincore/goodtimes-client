@@ -16,6 +16,7 @@ export const initialState = {
   description: '',
   scheduleOptions: [],
   restaurantOptions: [],
+  activityOptions:[],
   id: null,
   loading: false
 };

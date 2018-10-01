@@ -45,17 +45,24 @@ export const fetchActivitiesSuccess = (activities) => ({
   activities
 });
 
-//format: 40.7128
-//format -74.0060
-//format: 2018-07-02T12:00:00Z
-//format: 2018-12-03T12:00:00Z 
-export const fetchActivities = (latitude, longitude, start, end) => (dispatch) => {
+export const fetchActivities = (latitude, longitude, start, end, category) => (dispatch) => {
   dispatch(fetchActivitiesRequest());
-  return fetch(`https://www.eventbriteapi.com/v3/events/search/?location.latitude=${latitude}&location.longitude=${longitude}&start_date.range_start=${start}&start_date.range_end=${end}&token=LMGDQWGEPZAZZGFLKMKA`,{
-    method: 'GET',   
-  })
-    .then(res => normalizeResponseErrors(res))
-    .then(res => res.json())
-    .then(activities => dispatch(fetchActivitiesSuccess(activities)))
-    .catch(err => dispatch(fetchCategoriesError(err)));
+  if(!end){
+    return fetch(`https://www.eventbriteapi.com/v3/events/search/?sort_by=date&location.latitude=${latitude}&location.longitude=${longitude}&&categories=${category}&start_date.range_start=${start}&token=LMGDQWGEPZAZZGFLKMKA`,{
+      method: 'GET',   
+    })
+      .then(res => normalizeResponseErrors(res))
+      .then(res => res.json())
+      .then(activities => dispatch(fetchActivitiesSuccess(activities)))
+      .catch(err => dispatch(fetchCategoriesError(err)));
+  }
+  else{
+    return fetch(`https://www.eventbriteapi.com/v3/events/search/?sort_by=date&location.latitude=${latitude}&location.longitude=${longitude}&&categories=${category}&start_date.range_start=${start}&start_date.range_end=${end}&token=LMGDQWGEPZAZZGFLKMKA`,{
+      method: 'GET',   
+    })
+      .then(res => normalizeResponseErrors(res))
+      .then(res => res.json())
+      .then(activities => dispatch(fetchActivitiesSuccess(activities)))
+      .catch(err => dispatch(fetchCategoriesError(err)));
+  }
 };
