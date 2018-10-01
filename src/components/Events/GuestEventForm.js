@@ -37,21 +37,30 @@ class GuestEventForm extends Component {
   submitVotes(event){
     event.preventDefault();
 
-    //If restaurants or times section has not been filled out, return
-
     if(!document.querySelector('input[name="restaurant-option"]:checked') ||
     !document.querySelector('input[name="time-option"]:checked') ){
       return;
     }
-    const restaurantId = document.querySelector('input[name="restaurant-option"]:checked').value;
-    const dateId = document.querySelector('input[name="time-option"]:checked').value;
+    const restaurantId = document.querySelectorAll('input[name="restaurant-option"]:checked');
+    
+    const restaurantArr = [];
+    restaurantId.forEach(restaurant => {
+      restaurantArr.push(restaurant.value);
+    })
+    
+    const dateId = document.querySelectorAll('input[name="time-option"]:checked');
+    const dateArr = [];
+    dateId.forEach(date => {
+      dateArr.push(date.value);
+    })
+    
     const eventId = this.state.guestEvent.id;
 
     let selectionObject = {
-      dateSelection: dateId,
-      restaurantSelection: restaurantId
+      dateSelection: dateArr,
+      restaurantSelection: restaurantArr
     };
-    console.log('SELECTION OBJ', selectionObject);
+    // console.log('SELECTION OBJ', selectionObject);
     this.props.dispatch(updateEventVotes(selectionObject, eventId));
     this.setState({submitted:true});
   }
@@ -74,8 +83,9 @@ class GuestEventForm extends Component {
         return (
           <div key={i} className="option_container">
             <input 
-            type="radio"
-            name={"time-option"+i}
+            type="checkbox"
+            id={"time-option"+i}
+            name="time-option"
             value={option.id} />
   
             <label> {option.date} </label> 
@@ -87,8 +97,9 @@ class GuestEventForm extends Component {
         return (
           <div key={i} className="option_container">
             <input 
-              type="radio" 
-              name={"restaurant-option"+i}
+              type="checkbox" 
+              id={"restaurant-option"+i}
+              name="restaurant-option"
               value={option.zomatoId} />
               <label> {link} </label>
             </div> );});        

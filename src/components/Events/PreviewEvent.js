@@ -47,8 +47,9 @@ class PreviewEvent extends Component {
       return (
         <div key={i} className="option_container">
           <input 
-            type="radio" 
-            name={"time-option"+i} 
+            type="checkbox" 
+            id={"time-option"+i}
+            name="time-option" 
             value={option.id} />
   
           <label> {option.date} </label> 
@@ -60,8 +61,9 @@ class PreviewEvent extends Component {
       return (
         <div key={i} className="option_container">
           <input 
-            type="radio" 
-            name={"restaurant-option"+i}
+            type="checkbox" 
+            id={"restaurant-option"+i}
+            name="restaurant-option"
             value={option.zomatoId} />
           <label> {link} </label>
         </div> );}); 
