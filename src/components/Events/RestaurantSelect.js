@@ -1,12 +1,12 @@
 import React from 'react';
-import {connect} from 'react-redux';
+
 import { fetchRestaurants, fetchZomatoLocation } from '../../actions/RestaurantSelect';
 import { updateNewEventState } from '../../actions/New-Event';
 import '../styles/RestaurantSelect.css';
 
 
 
-export class RestaurantSelect extends React.Component {
+export default class RestaurantSelect extends React.Component {
 
   constructor(props){
     super(props);
@@ -25,7 +25,7 @@ export class RestaurantSelect extends React.Component {
   
   render(){
     let cuisineOptions;
-    if(this.props.restaurants.cityCode === null || this.props.restaurants.cityCode === undefined){
+    if(this.props.restaurants.cityCode === null){
       cuisineOptions = <option>Loading cuisine options...</option>;
 
     } else {
@@ -99,15 +99,3 @@ export class RestaurantSelect extends React.Component {
     );
   }
 }
-
-const mapStateToProps = state => ({
-  city: state.newEvent.location.city,
-  state: state.newEvent.location.state,
-  cuisines: state.restaurants.cuisines,
-  eventRestaurants: state.newEvent.restaurantOptions,
-  restaurants: state.restaurants.restaurants,
-  cityCode: state.restaurants.cityCode
-
-});
-
-export default connect(mapStateToProps)(RestaurantSelect);

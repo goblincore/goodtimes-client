@@ -63,7 +63,13 @@ export class NewEventMain extends React.Component {
         break;
       case 3:
         //food options
-        component = <RestaurantSelect nextPage={this.nextPage} dispatch={this.props.dispatch} prevPage={this.prevPage} eventState={this.props.newEvent}/>;
+        component = <RestaurantSelect 
+        nextPage={this.nextPage} 
+        dispatch={this.props.dispatch} 
+        prevPage={this.prevPage} 
+        eventState={this.props.newEvent}
+        restaurants={this.props.restaurants}
+        />;
         break;
       case 4:
         //activity options
