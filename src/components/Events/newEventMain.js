@@ -43,6 +43,7 @@ export class NewEventMain extends React.Component {
     this.setState({pageCount:0})
   }
   render(){
+    console.log('FROM NEW EVENT MAIN', this.props);
     if(this.state.redirect){
       return <Redirect to="/" />
     }

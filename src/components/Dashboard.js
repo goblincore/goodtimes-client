@@ -9,27 +9,30 @@ export class Dashboard extends Component {
 constructor(props){
     super(props);
     this.state = {
-        display: true
+        drafts: false
     }
 }
 
 displayEvents(){
-this.setState({display:true});
+this.setState({drafts: false});
 }
 displayDrafts(){
-    this.setState({display:false});
+    this.setState({drafts: true});
 }
     render() {
         let eventsToDisplay=[];
+        //let drafts;
         if(this.props.userEvents !==null && this.props.userEvents.length >= 1){
 
-            switch(this.state.display){
+            switch(this.state.drafts){
                 //true = display active events, false = display drafts
-                case true:
-                    eventsToDisplay = this.props.userEvents.filter(event => event.draft !==true );
-                    break;
                 case false:
+                    eventsToDisplay = this.props.userEvents.filter(event => event.draft !==true );
+                    //drafts = false;
+                    break;
+                case true:
                     eventsToDisplay = this.props.userEvents.filter(event => event.draft === true);
+                   // drafts = true;
             }
         }
       
@@ -46,7 +49,7 @@ displayDrafts(){
                              <button id="display-active-events" onClick={() => this.displayEvents()}>Active Events</button>
                            <Link to="/create-event"><h3>Create New Event  <MdAddCircleOutline /></h3></Link>
                          <div id="event_boxes">
-                         <EventList userEvents={eventsToDisplay}/>
+                         <EventList drafts={this.state.drafts} userEvents={eventsToDisplay}/>
                          </div>
                     
                     </div>

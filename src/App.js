@@ -38,6 +38,10 @@ class App extends Component {
                 <Route exact path="/login" component={LoginPage} /> 
                 <Route exact path="/dashboard" component={Dashboard} />
                 <Route exact path="/create-event" component={NewEventMain} />
+                <Route exact path="/edit-draft" render={(props) => (
+      
+                     <NewEventMain {...props} {...this.props.location.state} />
+                        )}/>
                 <Route exact path="/guestevents/:eventId" component={GuestEventForm} />
           
             </div>
