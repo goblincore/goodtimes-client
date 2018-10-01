@@ -15,7 +15,7 @@ label{
       font-family:'Akkurat Pro';
    
       color:#575e96;
-      background-color:#fbfaf4;
+      background-color:#fdfdfd;
   }
   button{
     background-color:transparent;
@@ -32,6 +32,8 @@ label{
   .paddingTop{
       padding-top:100px;
   }
+
+
 input{
     width:100%;
     padding:10px;

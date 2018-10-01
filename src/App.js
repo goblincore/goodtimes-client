@@ -48,7 +48,7 @@ class App extends Component{
                     native
                     config={{
                         tension: 1, 
-                        friction: 10,
+                        friction: 8,
 
                         restSpeedThreshold: 1,
                         restDisplacementThreshold: 0.001,
@@ -56,14 +56,15 @@ class App extends Component{
                       }}
                     keys={location.pathname.split('/').filter(a => a)[0]}
                     from={item => {
-                        if (item !== 'dashboard'){
+                        if (item === 'home' || item === 'register' || item === 'login'){
+                          console.log('HOME OR REGISTER');
                             return({ transform: 'translateX(80%)', opacity: 0, overflow:'none'})
-                        } else {
+                        } else  {
                             return({  opacity: 0 })
                         }
                     }}
                     enter={item => {
-                        if (item !== 'dashboard'){
+                      if (item === 'home' || item === 'register' || item === 'login'){
                             return({ transform: 'translateX(0px)', opacity: 1,overflow:'none'  })
                         } else {
                             return({  opacity: 1 })
@@ -72,7 +73,7 @@ class App extends Component{
                  
                       
                     leave={item => {
-                        if (item !== 'dashboard'){
+                      if (item === 'home' || item === 'register' || item === 'login'){
                             return({ transform: 'translateX(-80%)', opacity: 0 })
                         } else {
                             return({  opacity: 0 })
@@ -115,7 +116,7 @@ const NavLink = props => (
 )
 
 const HomePage = ({ style }) => (
-  <animated.div className="mainRoute" style={{ ...style, background: `#fbfaf4` }}>
+  <animated.div className="mainRoute" style={{ ...style, background: `#fdfdfd` }}>
     <div className="mainRouteItem">
    <LandingPage />
     </div>
@@ -123,7 +124,7 @@ const HomePage = ({ style }) => (
 );
 
 const RegisterPage = ({ style }) => (
-    <animated.div className="mainRoute" style={{ ...style, background: `#fbfaf4` }}>
+    <animated.div className="mainRoute" style={{ ...style, background: `#fdfdfd` }}>
       <div className="mainRouteItem">
      <RegistrationPage />
       </div>
@@ -131,7 +132,7 @@ const RegisterPage = ({ style }) => (
   );
 
   const Login_Page = ({ style }) => (
-    <animated.div className="mainRoute" style={{ ...style, background: `#fbfaf4` }}>
+    <animated.div className="mainRoute" style={{ ...style, background: `#fdfdfd` }}>
       <div className="mainRouteItem">
        <LoginPage/>
       </div>
@@ -142,7 +143,7 @@ const RegisterPage = ({ style }) => (
   
 
 const DashboardPage = ({ style }) => (
-    <animated.div className="dashboardRoute" style={{ ...style, background: `#fbfaf4` }}>
+    <animated.div className="dashboardRoute" style={{ ...style, background: `#fdfdfd` }}>
       <div className="dashboardRouteItem">
      <Dashboard />
       </div>
@@ -151,7 +152,7 @@ const DashboardPage = ({ style }) => (
   )
 
 const CreateEventPage = ({ style }) => (
-  <animated.div  style={{ ...style, background: '#fbfaf4' }}>
+  <animated.div  style={{ ...style, background: '#fdfdfd' }}>
    <div className="dashboardRouteItem">
    <NewEventMain/>
    </div>
@@ -160,7 +161,7 @@ const CreateEventPage = ({ style }) => (
 )
 
 const GuestEventPage = ({...props, style}) => (
-    <animated.div  style={{ ...style, background: '#fbfaf4' }}>
+    <animated.div  style={{ ...style, background: '#fdfdfd' }}>
      <div className="dashboardRouteItem">
      <GuestEventForm {...props}/>
    

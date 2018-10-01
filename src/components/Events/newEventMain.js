@@ -9,7 +9,7 @@ import { initialState } from '../../reducers/NewEvent';
 import RestaurantSelect from './RestaurantSelect';
 
 import SuccessfullyCreatedEvent from './SuccessfullyCreatedEvent';
-import { updateNewEventState } from '../../actions/New-Event';
+import { updateNewEventState, newEventErrorMessage } from '../../actions/New-Event';
 
 
 export class NewEventMain extends React.Component {
@@ -17,7 +17,7 @@ export class NewEventMain extends React.Component {
     super(props);
 
     this.state = {
-      pageCount: 1
+      pageCount: 1,
     }
   }
 
@@ -28,14 +28,24 @@ export class NewEventMain extends React.Component {
   
 
   nextPage = () => {
-    this.setState({pageCount: this.state.pageCount + 1})
+    this.setState({pageCount: this.state.pageCount + 1}, 
+      () => this.props.dispatch(newEventErrorMessage(null))
+    )
   }
 
   prevPage = () => {
-    this.setState({pageCount: this.state.pageCount - 1})
+    this.setState({pageCount: this.state.pageCount - 1}, 
+      () => this.props.dispatch(newEventErrorMessage(null))
+    )  
   }
 
+  goHome = () => {
+    this.setState({pageCount:0})
+  }
   render(){
+    if(this.state.redirect){
+      return <Redirect to="/" />
+    }
     if(this.props.loggedIn){
       let component;
       switch (this.state.pageCount) {
@@ -43,7 +53,12 @@ export class NewEventMain extends React.Component {
           return <Redirect to='/dashboard' />;
         case 1:
           //title, location, description
-          component = <CreateEvent nextPage={this.nextPage} dispatch={this.props.dispatch} prevPage={this.prevPage} eventState={this.props.newEvent}/>;
+          component = <CreateEvent 
+            nextPage={this.nextPage} 
+            dispatch={this.props.dispatch} 
+            prevPage={this.prevPage} 
+            eventState={this.props.newEvent}
+          />;
           break;
         case 2:
           //date/time options
@@ -51,12 +66,19 @@ export class NewEventMain extends React.Component {
           break;
         case 3:
           //food options
-          component = <RestaurantSelect nextPage={this.nextPage} dispatch={this.props.dispatch} prevPage={this.prevPage} eventState={this.props.newEvent}/>;
+          component = <RestaurantSelect 
+            nextPage={this.nextPage} 
+            dispatch={this.props.dispatch} 
+            prevPage={this.prevPage} 
+            eventState={this.props.newEvent}
+            restaurants={this.props.restaurants}
+            />;
           break;
         case 4:
           //preview, confirm page
           component = <PreviewEvent 
-            nextPage={this.nextPage} 
+            nextPage={this.nextPage}
+            goHome={this.goHome} 
             dispatch={this.props.dispatch} 
             prevPage={this.prevPage} 
             eventState={this.props.newEvent}
@@ -93,7 +115,8 @@ export class NewEventMain extends React.Component {
 const mapStateToProps = state => ({
   newEvent: state.newEvent,
   loggedIn: state.auth.currentUser !== null,
-  currentUser: state.auth.currentUser
+  currentUser: state.auth.currentUser,
+  restaurants: state.restaurants
 });
 
 export default withRouter(connect(mapStateToProps)(NewEventMain));

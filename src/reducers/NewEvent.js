@@ -1,16 +1,18 @@
 import { 
   SHOW_NEW_EVENT_STATE, 
   UPDATE_NEW_EVENT_STATE,
-  NEW_EVENT_ERROR_MESSAGE, 
+  NEW_EVENT_ERROR_MESSAGE,
   POST_NEW_EVENT_REQUEST,
-  POST_NEW_EVENT_SUCCESS
+  POST_NEW_EVENT_SUCCESS 
 } from '../actions/New-Event';
 
 export const initialState = {
   showNewEvent: false,
   errorMessage: '',
+
   title: '',
-  location: '', //  <-- maybe switch this to {lat: ..., long: ...} ??
+  draft: false,
+  location: '',
   description: '',
   scheduleOptions: [],
   restaurantOptions: [],
@@ -39,10 +41,14 @@ export default function newEventReducer (state=initialState, action) {
     return Object.assign({}, state, {
       loading: false
     });
-  } else if (action.type === NEW_EVENT_ERROR_MESSAGE) {
-
+  }   else if (action.type === POST_NEW_EVENT_SUCCESS) {
     return Object.assign({}, state, {
-      errorMessage: action.message
+      loading: false
+    });
+  } else if (action.type === NEW_EVENT_ERROR_MESSAGE) {
+    return Object.assign({}, state, {
+      errorMessage: action.message,
+      loading: false
     });
   } else {
     return state;

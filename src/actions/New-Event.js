@@ -34,6 +34,8 @@ export const postNewEventSuccess = message => ({
   
 })
 
+
+
 export const postNewEvent = eventData => dispatch => {
   dispatch(postNewEventRequest());
   const token = localStorage.getItem('authToken');
@@ -48,13 +50,12 @@ export const postNewEvent = eventData => dispatch => {
   .then(res => normalizeResponseErrors(res))
   .then(res => res.json())
   .then(res => {
-   dispatch(updateNewEventState({id: res.id}));
+    dispatch(updateNewEventState({id: res.id}));
     
   })
-  .then(() => {
-    dispatch(postNewEventSuccess());
-    return Promise.resolve();
-}
-)
+  .then(() => { 
+  dispatch(postNewEventSuccess());
+  return Promise.resolve();
+})
   .catch(err => Promise.reject(err) )
 }
