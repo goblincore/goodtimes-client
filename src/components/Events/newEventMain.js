@@ -17,7 +17,7 @@ export class NewEventMain extends React.Component {
     super(props);
 
     this.state = {
-      pageCount: 1,
+      pageCount: 2,
     }
   }
 
