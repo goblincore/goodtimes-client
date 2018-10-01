@@ -151,10 +151,18 @@ export class CreateEvent extends React.Component {
           id="eventTitle"
           name="eventTitle"
           placeholder="Get together"
-          onChange={() => this.props.dispatch(newEventErrorMessage(null))}
+          value={this.props.eventState.title}
+          onChange={(e) => {
+            this.props.dispatch(updateNewEventState({title: e.target.value}));
+            this.props.dispatch(newEventErrorMessage(null));
+          }}
         />
         <label htmlFor='stateLocation'>Location</label>
-        <select name="stateLocation" id="stateLocation" defaultValue="Select a State" onChange={() => this.setState({locationOption: 0}, () => this.validateCity() )}>
+        <select name="stateLocation" id="stateLocation" value={this.props.eventState.state} 
+          onChange={e => {
+            this.props.dispatch(updateNewEventState({state: e.target.value}));
+            this.setState({locationOption: 0}, () => this.validateCity() );
+          }}>
 
           <option value="AL">Alabama</option>
           <option value="AK">Alaska</option>
@@ -215,7 +223,9 @@ export class CreateEvent extends React.Component {
           id="cityLocation"
           name="cityLocation"
           placeholder="Please enter a City"
-          onChange={() => {
+          value={this.props.eventState.city}
+          onChange={e => {
+            this.props.dispatch(updateNewEventState({city: e.target.value}));
             this.setState({locationOption: 0}, () => this.props.dispatch(newEventErrorMessage(null)));
           }}
           onBlur={() => this.validateCity()}
@@ -225,7 +235,10 @@ export class CreateEvent extends React.Component {
 
         <label htmlFor="eventDescription">
                   Enter a short description for your event:
-          <textarea rows="4" cols="50" name="eventDescription"/>
+          <textarea rows="4" cols="50" name="eventDescription" 
+            value={this.props.eventState.description} 
+            onChange={e => this.props.dispatch(updateNewEventState({description: e.target.value}))}
+          />
         </label>
               
         <button type='button' onClick={() => this.props.prevPage()}>
