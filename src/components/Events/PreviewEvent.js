@@ -31,7 +31,8 @@ class PreviewEvent extends Component {
       description: this.props.eventState.description,
       location: this.props.eventState.location,  //zomato location ID
       scheduleOptions: this.props.eventState.scheduleOptions,
-      restaurantOptions: this.props.eventState.restaurantOptions
+      restaurantOptions: this.props.eventState.restaurantOptions,
+      
     };
     return this.props.dispatch(postNewEvent(newEvent))
       .then(() => this.props.goHome())
