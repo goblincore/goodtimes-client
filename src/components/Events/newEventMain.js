@@ -135,6 +135,7 @@ export class NewEventMain extends React.Component {
           dispatch={this.props.dispatch} 
           eventState={this.props.newEvent}
           nextPage={this.nextPage}
+          // userEmail={this.props.currentUser.email}
         />;
         break;
       case 7:

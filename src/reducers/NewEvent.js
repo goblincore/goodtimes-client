@@ -6,6 +6,7 @@ import {
   POST_NEW_EVENT_SUCCESS,
   RESET_NEW_EVENT_STATE
 } from '../actions/New-Event';
+import { SEND_EMAIL_REQUEST, SEND_EMAIL_ERROR, SEND_EMAIL_SUCCESS } from '../actions/Email';
 
 export const initialState = {
   showNewEvent: false,
@@ -20,7 +21,14 @@ export const initialState = {
   restaurantOptions: [],
   activityOptions:[],
   id: null,
-  loading: false
+  loading: false,
+  inviteEmail: {
+    to: '',
+    from: '',
+    subject: '',
+    text: '',
+    html: ''
+  }
 };
 
 
@@ -54,7 +62,27 @@ export default function newEventReducer (state=initialState, action) {
       errorMessage: action.message,
       loading: false
     });
-  } else {
+  } else if(action.type === SEND_EMAIL_REQUEST){
+    console.log(action);
+    return Object.assign({}, state, {
+      loading:true
+    });
+  }
+  else if(action.type === SEND_EMAIL_ERROR){
+    console.log(action);
+    return Object.assign({}, state, {
+      loading: false,
+      errorMessage: action.error,
+    });
+  }
+  else if(action.type === SEND_EMAIL_SUCCESS){
+    console.log(action);
+    return Object.assign({}, state, {
+      loading: false,
+      email: action.email
+    });
+  }
+  else {
     return state;
   }
 }
