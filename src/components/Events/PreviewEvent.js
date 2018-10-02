@@ -12,7 +12,8 @@ export default function PreviewEvent (props) {
       description: props.eventState.description,
       location: props.eventState.location,  //{latitude: ..., longitude: ...}
       scheduleOptions: props.eventState.scheduleOptions,
-      restaurantOptions: props.eventState.restaurantOptions
+      restaurantOptions: props.eventState.restaurantOptions,
+      activityOptions: props.eventState.activityOptions
     };
     return props.dispatch(postNewEvent(newEvent))
       .then(() => props.nextPage())
@@ -28,6 +29,7 @@ export default function PreviewEvent (props) {
       location: props.eventState.location,  //{latitude: ..., longitude: ...}
       scheduleOptions: props.eventState.scheduleOptions,
       restaurantOptions: props.eventState.restaurantOptions,
+      activityOptions: props.eventState.activityOptions
     };
     return props.dispatch(postNewEvent(newEvent))
       .then(() => {
@@ -40,30 +42,44 @@ export default function PreviewEvent (props) {
   }
 
 
-  let timesDisplay, restaurantsDisplay;
+  let timesDisplay, restaurantsDisplay, activitiesDisplay;
 
-  timesDisplay = props.eventState.scheduleOptions.map((option, i) => { 
-    return (
-      <div key={i} className="option_container">
-        <input 
-          type="radio" 
-          name="time-option" 
-          value={option.id} />
-
-        <label> {option.date} </label> 
-      </div>
-    );});
-
-  restaurantsDisplay = props.eventState.restaurantOptions.map((option,i) => { 
-    let link = <a href={option.website}>{option.name}</a>;
-    return (
-      <div key={i} className="option_container">
-        <input 
-          type="radio" 
-          name="restaurant-option" 
-          value={option.zomatoId} />
-        <label> {link} </label>
-      </div> );}); 
+    timesDisplay = props.eventState.scheduleOptions.map((option, i) => { 
+      return (
+        <div key={i} className="option_container">
+          <input 
+            type="checkbox" 
+            id={"time-option"+i}
+            name="time-option" 
+            value={option.id} />
+  
+          <label> {option.date} </label> 
+        </div>
+      );});
+  
+    restaurantsDisplay = props.eventState.restaurantOptions.map((option,i) => { 
+      let link = <a href={option.website}>{option.name}</a>;
+      return (
+        <div key={i} className="option_container">
+          <input 
+            type="checkbox" 
+            id={"restaurant-option"+i}
+            name="restaurant-option"
+            value={option.zomatoId} />
+          <label> {link} </label>
+        </div> );}); 
+      
+    activitiesDisplay = props.eventState.activityOptions.map((option,i) => { 
+      let link = <a href={option.link}>{option.title}</a>;
+      return (
+        <div key={i} className="option_container">
+          <input 
+            type="checkbox" 
+            id={"activity-option"+i}
+            name="activity-option"
+            value={option.ebId} />
+          <label> {link} </label>
+        </div> );}); 
 
   if(props.eventState.loading){
     return ( <h1>Loading...</h1> )
@@ -94,6 +110,10 @@ export default function PreviewEvent (props) {
           <div className="restaurant-options"> 
             <h4>Choose a Place:</h4>
             {restaurantsDisplay}
+          </div>
+          <div className="activity-options"> 
+            <h4>Choose a Place:</h4>
+            {activitiesDisplay}
           </div>
           <br/>
           <br/>
