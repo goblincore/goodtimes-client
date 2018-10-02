@@ -1,28 +1,43 @@
 import React from 'react';
+import { connect, mapStateToProps } from 'react-redux';
 import {Link, Redirect, withRouter} from 'react-router-dom';
-import './styles/Index.css';
 
-export default class DraftItem extends React.Component{
+import './styles/Index.css';
+import { updateNewEventState } from '../actions/New-Event';
+
+ class DraftItem extends React.Component{
   constructor(props){
     super(props);
     this.state = {
       showDetails: false
     }
   }
-  editDraft(){
-
+ addDraftToReduxState(draft){
+     console.log('This.props.event',  draft);
+this.props.dispatch(updateNewEventState({draft}));
+//.then( () => this.props.history.push('/edit-draft'));
+this.props.history.push({
+    pathname: '/edit-draft',
+    state: {pageCount: 2}
+});
   }
   toggleEventDetails(bool){
     this.setState(
       {showDetails: bool}
     )
   }
-
+//   <Link to={{ pathname: "/edit-draft", state: { 
+//     pageCount: 2
+// }}} onClick={()=>this.addDraftToReduxState(this.props.event)}>Edit times</Link>
   render(){
       console.log('EVENT', this.props.event);
       let menu = ( 
           <div>  
-    <Link to={{ pathname: "/edit-draft", state: { eventState: this.props.event} }}
+    <Link to={{ pathname: "/edit-draft", state: { 
+        eventState: this.props.event,
+        pageCount: 1
+                 } 
+              }}
                     >Edit</Link>
 
         
@@ -53,8 +68,13 @@ export default class DraftItem extends React.Component{
           <button onClick={()=> this.toggleEventDetails(false)}>See Details</button>
           <div className='date-options'>
             <p>Date/Time options:</p>
-            {
-              this.props.event.scheduleOptions.map((date,i) =>{
+
+            
+
+            <a onClick={()=>this.addDraftToReduxState(this.props.event)}>Edit times</a>
+            
+            
+            {this.props.event.scheduleOptions.map((date,i) =>{
                 console.log(date);
                 return(
                     <div key={i} className='date-vote'>
@@ -68,8 +88,13 @@ export default class DraftItem extends React.Component{
           </div>
           <div className='date-options'>
             <p>Restaurant options:</p>
-            {
-              this.props.event.restaurantOptions.map((food,i) =>{
+
+            <Link to={{ pathname: "/edit-draft", state: { 
+                        eventState: this.props.event,
+                        pageCount: 3
+                }}}>Edit Restaurants</Link>
+            
+            {this.props.event.restaurantOptions.map((food,i) =>{
                 return(
                   <div key={i} className='date-vote'>
                     <a href={food.website} target="_blank">{food.name}</a>
@@ -95,3 +120,5 @@ export default class DraftItem extends React.Component{
     }    
   }
 }
+
+export default withRouter(connect()(DraftItem));

@@ -20,7 +20,11 @@ export class NewEventMain extends React.Component {
       pageCount: 1,
     }
   }
-
+componentDidMount(){
+  if(this.props.pageCount){
+    this.setState({pageCount: this.props.pageCount});
+  }
+}
   //reset Redux state if page changes
   componentWillUnmount(){
     this.props.dispatch(updateNewEventState(initialState));
