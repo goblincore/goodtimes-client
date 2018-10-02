@@ -1,10 +1,13 @@
 import React from 'react';
+import './styles/Error404.css';
 
 
 export default function Error404() {
   return (
-   
-      <h1>Page not found</h1>
-   
+   <div className="container">
+    <div className="f404Wrapper">
+      <h1>Oops...Page not found</h1>
+      </div>
+   </div>
   );
 }

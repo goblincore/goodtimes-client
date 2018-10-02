@@ -75,26 +75,32 @@ class App extends Component{
                       }
                     keys={location.pathname.split('/').filter(a => a)[0]}
                     from={item => {
-                        if (item === 'home' || item === 'register' || item === 'login'){
+                        if (item === 'home' || item === 'register' || item === 'login' || item === 'dashboard'){
                           console.log('HOME OR REGISTER');
-                            return({ transform: 'translateX(80%)', opacity: 0})
+                            return({ transform: 'translate(80%,0%)', opacity: 0})
                         } else  {
-                            return({ transform: 'translateY(100%)', opacity: 0 })
+                            return({ transform: 'translate(0%,100%)', opacity: 0 })
                         }
                     }}
                     enter={item => {
-                      if (item === 'home' || item === 'register' || item === 'login'){
-                            return({ transform: 'translateX(0px)', opacity: 1  })
+                      if (item === 'home' || item === 'register' || item === 'login'  || item === 'dashboard'){
+                            return({ transform: 'translate(0,0)', opacity: 1  })
                         } else {
-                            return({  transform: 'translateY(0px)',opacity: 1 })
+                            return({  transform: 'translate(0,0)',opacity: 1 })
                         }
                     }}
 
                     leave={item => {
                       if (item === 'home' || item === 'register' || item === 'login'){
-                            return({ transform: 'translateX(-80%)', opacity: 0 })
-                        } else {
-                            return({  transform: 'translateY(-100%)', opacity: 0, })
+                            return({ transform: 'translate(-80%,0%)', opacity: 0 })
+                        } if(item === 'create-event'){
+                          let el = document.querySelector(".createEventRoute");
+                          if(el !== null) {
+                            el.classList.remove('notransform');
+                            return({  transform: 'translate(-80%,0%)', opacity: 0, })
+                          }
+                        }else {
+                            return({  transform: 'translate(0%,-100%)', opacity: 0, })
                         }
                     }}
 
@@ -117,7 +123,8 @@ class App extends Component{
                         <Route exact path="/register" render={props => RegisterPage({ ...props, style })} />
                         <Route exact path="/dashboard" render={props => DashboardPage({ ...props, style })} />
                         <Route exact path="/create-event" render={props => CreateEventPage({ ...props, style })} />
-                    <Route path="/guestevents/:eventId" render={props => GuestEventPage({ ...props, style })} />
+                         <Route path="/guestevents/:eventId" render={props => GuestEventPage({ ...props, style })} />
+                        {/* <Route render={props => <Error404 {...props} style={style} />} />; */}
                     {/* //<GuestEventForm {...props} style={style}  */}
                     {/* <Route exact path="/guestevents/:eventId" component={GuestEventForm} />  */}
                         </Switch>
@@ -163,7 +170,7 @@ const RegisterPage = ({ style }) => (
   );
 
   const Login_Page = ({ style }) => (
-    <animated.div className="mainRoute" style={{ ...style, background: `#fdfdfd` }}>
+    <animated.div className="mainRoute bg" style={{ ...style, background: `#fdfdfd` }}>
       <div className="mainRouteItem">
        <LoginPage/>
       </div>

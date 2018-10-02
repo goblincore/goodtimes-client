@@ -18,11 +18,14 @@ export function LoginPage(props) {
     return ( 
         
         <div className="container">
+   
            <div className="form-container">
            <h1>Welcome Back!</h1>
            <p>Sign in to access your dashboard, manage your events and create new ones. </p>
               <LoginForm />
             </div>
+
+                 <div className="bg"></div>
          </div>
        
                 

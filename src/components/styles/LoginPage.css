@@ -10,3 +10,9 @@
     margin-top:19%;
     font-size:60px;
 }
+
+.bg{
+background:url('/assets/background-2.png') !important;
+background-size:cover !important;
+
+}
