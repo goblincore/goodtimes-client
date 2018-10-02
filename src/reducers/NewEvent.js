@@ -3,7 +3,8 @@ import {
   UPDATE_NEW_EVENT_STATE,
   NEW_EVENT_ERROR_MESSAGE,
   POST_NEW_EVENT_REQUEST,
-  POST_NEW_EVENT_SUCCESS 
+  POST_NEW_EVENT_SUCCESS,
+  RESET_NEW_EVENT_STATE
 } from '../actions/New-Event';
 
 export const initialState = {
@@ -47,6 +48,8 @@ export default function newEventReducer (state=initialState, action) {
     return Object.assign({}, state, {
       loading: false
     });
+  } else if (action.type === RESET_NEW_EVENT_STATE) {
+    return Object.assign({}, state, initialState);
   } else if (action.type === NEW_EVENT_ERROR_MESSAGE) {
     return Object.assign({}, state, {
       errorMessage: action.message,

@@ -10,6 +10,7 @@ import RestaurantSelect from './RestaurantSelect';
 import moment from 'moment';
 import SuccessfullyCreatedEvent from './SuccessfullyCreatedEvent';
 import { updateNewEventState, newEventErrorMessage } from '../../actions/New-Event';
+import throttle from 'lodash/throttle';
 
 
 export class NewEventMain extends React.Component {
@@ -25,12 +26,18 @@ export class NewEventMain extends React.Component {
 
   /* ------------ Persists the state of our New Event --------------------------*/
   componentWillMount(){
-    if(localStorage.getItem('eventDraft')){
-      const eventDraft = localStorage.getItem('eventDraft')
-      this.props.dispatch(updateNewEventState(JSON.parse(eventDraft)));
-      if (localStorage.getItem('newEventPageCount')) {
-        this.setState({pageCount: Number(localStorage.getItem('newEventPageCount'))});
+    try {
+      const eventDraft = localStorage.getItem('eventDraft');
+      if (eventDraft) {
+        this.props.dispatch(updateNewEventState(JSON.parse(eventDraft)));
+        const newEventPageCount = localStorage.getItem('newEventPageCount');
+        if (newEventPageCount) {
+          this.setState({pageCount: Number(newEventPageCount)});
+        }
       }
+    }
+    catch (err) {
+      console.log(err);
     }
   }
 
@@ -39,8 +46,13 @@ export class NewEventMain extends React.Component {
   }
 
   componentDidUpdate(){
-    localStorage.setItem('eventDraft', JSON.stringify(this.props.newEvent));
-    localStorage.setItem('newEventPageCount', this.state.pageCount);
+      try {
+        localStorage.setItem('eventDraft', JSON.stringify(this.props.newEvent));
+        localStorage.setItem('newEventPageCount', this.state.pageCount);
+      }
+      catch (err) {
+        console.log(err);
+      }
   }
   /* ------------------------------------------------------------------------------*/
 

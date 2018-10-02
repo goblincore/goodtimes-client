@@ -1,5 +1,5 @@
 import React from 'react';
-import { postNewEvent } from '../../actions/New-Event';
+import { postNewEvent, resetNewEventState } from '../../actions/New-Event';
 
 
 export default function PreviewEvent (props) {
@@ -31,10 +31,10 @@ export default function PreviewEvent (props) {
     };
     return props.dispatch(postNewEvent(newEvent))
       .then(() => {
+        props.dispatch(resetNewEventState());
         localStorage.removeItem('eventDraft');
         localStorage.removeItem('newEventPageCount');
         props.goHome();
-        window.location.reload();
       })
       .catch(err => console.log('ERROR HANDLING HERE dispatch(changeErrorMessaeg(err.message))'));
   }
