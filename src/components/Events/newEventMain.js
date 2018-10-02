@@ -4,8 +4,12 @@ import {Redirect,withRouter} from 'react-router-dom';
 import { initialState } from '../../reducers/NewEvent';
 
 import { updateNewEventState, newEventErrorMessage } from '../../actions/New-Event';
+
 import EventBottomNav from './EventBottomNav';
 import CreateEventContainer from './CreateEventContainer';
+
+import throttle from 'lodash/throttle';
+
 
 
 export class NewEventMain extends React.Component {
@@ -17,23 +21,44 @@ export class NewEventMain extends React.Component {
     };
   }
 
-  componentDidMount(){
-   let el = document.querySelector(".createEventRoute");
-   console.log('el found',el);
-  //  el.classList.add('notransform');
-  //  el.addEventListener("transitionend", function(){
-  //    el.style.transform='';
-  //  }, false);
 
+
+
+  /* ------------ Persists the state of our New Event --------------------------*/
+  componentWillMount(){
+    try {
+      const eventDraft = localStorage.getItem('eventDraft');
+      if (eventDraft) {
+        this.props.dispatch(updateNewEventState(JSON.parse(eventDraft)));
+        const newEventPageCount = localStorage.getItem('newEventPageCount');
+        if (newEventPageCount) {
+          this.setState({pageCount: Number(newEventPageCount)});
+        }
+      }
+    }
+    catch (err) {
+      console.log(err);
+    }
   }
 
-  
 
-  //reset Redux state if page changes
   componentWillUnmount(){
-    this.props.dispatch(updateNewEventState(initialState));
+    localStorage.removeItem('newEventPageCount');
   }
-  
+
+  componentDidUpdate(){
+      try {
+        localStorage.setItem('eventDraft', JSON.stringify(this.props.newEvent));
+        localStorage.setItem('newEventPageCount', this.state.pageCount);
+      }
+      catch (err) {
+        console.log(err);
+      }
+  }
+  /* ------------------------------------------------------------------------------*/
+
+
+
 
   nextPage = () => {
     this.setState({pageCount: this.state.pageCount + 1}, 
@@ -86,7 +111,8 @@ export class NewEventMain extends React.Component {
 
 const mapStateToProps = state => ({
   newEvent: state.newEvent,
-  loggedIn: state.auth.currentUser !== null,
+  //loggedIn: state.auth.currentUser !== null,
+  loggedIn: localStorage.getItem('authToken') !== null,
   currentUser: state.auth.currentUser,
   restaurants: state.restaurants,
   activities: state.activities

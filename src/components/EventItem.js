@@ -49,6 +49,19 @@ export default class EventItem extends React.Component{
               })
             }
           </div>
+          <div className='date-options'>
+            <p>Event options:</p>
+            {
+              this.props.event.activityOptions.map((act,i) =>{
+                return(
+                  <div key={i} className='date-vote'>
+                    <a href={act.link} target="_blank">{act.title}</a>
+                    <p>Votes: {act.votes}</p>
+                  </div>
+                );
+              })
+            }
+          </div>
         </li>
       )
     }  

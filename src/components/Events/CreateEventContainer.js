@@ -65,7 +65,7 @@ export default function CreateEventContainer(props){
         dispatch={props.props.dispatch} 
         prevPage={props.prevPage} 
         eventState={props.props.newEvent}
-        userId={props.props.currentUser.id}
+        currentUser={props.props.currentUser}
       />;
       break;
     case 6:

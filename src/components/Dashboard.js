@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import {MdAddCircleOutline} from 'react-icons/lib/md';
 import './styles/Dashboard.css';
 import {Link, Redirect, withRouter} from 'react-router-dom';
+import { fetchUserEvents } from '../actions/Protected-Data';
 
 export class Dashboard extends Component {
 constructor(props){
@@ -12,6 +13,22 @@ constructor(props){
         display: true
     }
 }
+
+// Get most recent event state whenever Dashboard renders
+// and once every 15 seconds
+componentWillMount(){
+  this.props.dispatch(fetchUserEvents());
+  this.interval = setInterval(() => {
+    this.props.dispatch(fetchUserEvents());
+  }, 1000 * 15);
+}
+
+// Stop the periodic refresh when Dashboard unmounts
+componentWillUnmount(){
+  clearInterval(this.interval);
+}
+
+
 
 displayEvents(){
 this.setState({display:true});

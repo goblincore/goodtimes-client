@@ -1,5 +1,5 @@
 import React from 'react';
-import { postNewEvent } from '../../actions/New-Event';
+import { postNewEvent, resetNewEventState } from '../../actions/New-Event';
 
 
 import '../styles/PreviewEvent.css'
@@ -13,13 +13,14 @@ export default function PreviewEvent (props) {
 
   function onSubmit() {
     const newEvent = {
-      userId: props.userId,
+      userId: props.currentUser.id,
       title: props.eventState.title,
       draft: false,
       description: props.eventState.description,
       location: props.eventState.location,  //{latitude: ..., longitude: ...}
       scheduleOptions: props.eventState.scheduleOptions,
-      restaurantOptions: props.eventState.restaurantOptions
+      restaurantOptions: props.eventState.restaurantOptions,
+      activityOptions: props.eventState.activityOptions
     };
     return props.dispatch(postNewEvent(newEvent))
       .then(() => props.nextPage())
@@ -28,44 +29,64 @@ export default function PreviewEvent (props) {
 
  function onDraft () {
     const newEvent = {
-      userId: props.userId,
+      userId: props.currentUser.id,
       title: props.eventState.title,
       draft: true,
       description: props.eventState.description,
       location: props.eventState.location,  //{latitude: ..., longitude: ...}
       scheduleOptions: props.eventState.scheduleOptions,
       restaurantOptions: props.eventState.restaurantOptions,
+      activityOptions: props.eventState.activityOptions
     };
     return props.dispatch(postNewEvent(newEvent))
-      .then(() => props.goHome())
+      .then(() => {
+        props.dispatch(resetNewEventState());
+        localStorage.removeItem('eventDraft');
+        localStorage.removeItem('newEventPageCount');
+        props.goHome();
+      })
       .catch(err => console.log('ERROR HANDLING HERE dispatch(changeErrorMessaeg(err.message))'));
   }
 
 
-  let timesDisplay, restaurantsDisplay;
+  let timesDisplay, restaurantsDisplay, activitiesDisplay;
 
-  timesDisplay = props.eventState.scheduleOptions.map((option, i) => { 
-    return (
-      <div key={i} className="option_container">
-        <input 
-          type="radio" 
-          name="time-option" 
-          value={option.id} />
-
-        <label> {option.date} </label> 
-      </div>
-    );});
-
-  restaurantsDisplay = props.eventState.restaurantOptions.map((option,i) => { 
-    let link = <a href={option.website}>{option.name}</a>;
-    return (
-      <div key={i} className="option_container">
-        <input 
-          type="radio" 
-          name="restaurant-option" 
-          value={option.zomatoId} />
-        <label> {link} </label>
-      </div> );}); 
+    timesDisplay = props.eventState.scheduleOptions.map((option, i) => { 
+      return (
+        <div key={i} className="option_container">
+          <input 
+            type="checkbox" 
+            id={"time-option"+i}
+            name="time-option" 
+            value={option.id} />
+  
+          <label> {option.date} </label> 
+        </div>
+      );});
+  
+    restaurantsDisplay = props.eventState.restaurantOptions.map((option,i) => { 
+      let link = <a href={option.website}>{option.name}</a>;
+      return (
+        <div key={i} className="option_container">
+          <input 
+            type="checkbox" 
+            id={"restaurant-option"+i}
+            name="restaurant-option"
+            value={option.zomatoId} />
+          <label> {link} </label>
+        </div> );}); 
+      
+    activitiesDisplay = props.eventState.activityOptions.map((option,i) => { 
+      let link = <a href={option.link}>{option.title}</a>;
+      return (
+        <div key={i} className="option_container">
+          <input 
+            type="checkbox" 
+            id={"activity-option"+i}
+            name="activity-option"
+            value={option.ebId} />
+          <label> {link} </label>
+        </div> );}); 
 
   if(props.eventState.loading){
     return ( <h1>Loading...</h1> )
@@ -96,6 +117,10 @@ export default function PreviewEvent (props) {
           <div className="restaurant-options"> 
             <h4>Choose a Place:</h4>
             {restaurantsDisplay}
+          </div>
+          <div className="activity-options"> 
+            <h4>Choose a Place:</h4>
+            {activitiesDisplay}
           </div>
           <br/>
           <br/>
