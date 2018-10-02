@@ -5,7 +5,6 @@ import { updateNewEventState } from '../../actions/New-Event';
 import '../styles/RestaurantSelect.css';
 
 
-
 export default class RestaurantSelect extends React.Component {
 
   constructor(props){
@@ -56,7 +55,7 @@ export default class RestaurantSelect extends React.Component {
             }}
             key={index} id={restaurant.restaurant.id} name={restaurant.restaurant.name} value={restaurant.restaurant.url} type="checkbox"></input>
 
-          <img src={restaurant.restaurant.thumb==="" ? "https://www.redbytes.in/wp-content/uploads/2018/09/zomato-logo-AD6823E433-seeklogo.com_.png" : restaurant.restaurant.thumb} alt="Thumbnail"></img>
+          <img src={restaurant.restaurant.thumb ==="" ? "https://www.redbytes.in/wp-content/uploads/2018/09/zomato-logo-AD6823E433-seeklogo.com_.png" : restaurant.restaurant.thumb} alt="Thumbnail"></img>
          <div className="restaurant-info">
             <a key={index+1} href={restaurant.restaurant.url} target="#">{restaurant.restaurant.name}</a>
             <p>{'$'.repeat(restaurant.restaurant.price_range)}</p>

@@ -1,10 +1,8 @@
 import React from 'react';
 import '../styles/EventBottomNav.css';
 
-
 export default function EventBottomNav (props) {
    
-
         let message;
         switch(props.pageNum){
             case 1:
@@ -22,9 +20,6 @@ export default function EventBottomNav (props) {
                 break;
         }
         
-
-         
-
         return (
             <div className="bottom-nav-container">
               <div className="bottom-nav-progress"><p>{message}</p></div>
@@ -35,5 +30,4 @@ export default function EventBottomNav (props) {
             </div>
         )
 
-    
 }

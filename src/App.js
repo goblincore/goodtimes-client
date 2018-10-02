@@ -104,6 +104,7 @@ class App extends Component{
                         let el = document.querySelector(".createEventRoute");
                         if(el !== null) {
                           el.style.transform='';
+                          el.classList.add('notransform');
                         }
                         console.log('ONREST el',el);
                       }

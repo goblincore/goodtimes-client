@@ -17,7 +17,18 @@ export class NewEventMain extends React.Component {
     };
   }
 
+  componentDidMount(){
+   let el = document.querySelector(".createEventRoute");
+   console.log('el found',el);
+  //  el.classList.add('notransform');
+  //  el.addEventListener("transitionend", function(){
+  //    el.style.transform='';
+  //  }, false);
+
+  }
+
   
+
   //reset Redux state if page changes
   componentWillUnmount(){
     this.props.dispatch(updateNewEventState(initialState));
