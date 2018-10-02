@@ -21,11 +21,31 @@ export class NewEventMain extends React.Component {
     };
   }
 
-  //reset Redux state if page changes
-  componentWillUnmount(){
-    this.props.dispatch(updateNewEventState(initialState));
+
+
+  /* ------------ Persists the state of our New Event --------------------------*/
+  componentWillMount(){
+    if(localStorage.getItem('eventDraft')){
+      const eventDraft = localStorage.getItem('eventDraft')
+      this.props.dispatch(updateNewEventState(JSON.parse(eventDraft)));
+      if (localStorage.getItem('newEventPageCount')) {
+        this.setState({pageCount: Number(localStorage.getItem('newEventPageCount'))});
+      }
+    }
   }
-  
+
+  componentWillUnmount(){
+    localStorage.removeItem('newEventPageCount');
+  }
+
+  componentDidUpdate(){
+    localStorage.setItem('eventDraft', JSON.stringify(this.props.newEvent));
+    localStorage.setItem('newEventPageCount', this.state.pageCount);
+  }
+  /* ------------------------------------------------------------------------------*/
+
+
+
 
   nextPage = () => {
     this.setState({pageCount: this.state.pageCount + 1}, 
@@ -78,6 +98,7 @@ export class NewEventMain extends React.Component {
           dispatch={this.props.dispatch} 
           eventState={this.props.newEvent}
           nextPage={this.nextPage}
+          prevPage={this.prevPage}
           categories={this.props.activities.categories}
           activities={this.props.activities.activities}
           loading={this.props.activities.loading}
@@ -95,7 +116,7 @@ export class NewEventMain extends React.Component {
           dispatch={this.props.dispatch} 
           prevPage={this.prevPage} 
           eventState={this.props.newEvent}
-          userId={this.props.currentUser.id}
+          currentUser={this.props.currentUser}
         />;
         break;
       case 6:
@@ -127,7 +148,8 @@ export class NewEventMain extends React.Component {
 
 const mapStateToProps = state => ({
   newEvent: state.newEvent,
-  loggedIn: state.auth.currentUser !== null,
+  //loggedIn: state.auth.currentUser !== null,
+  loggedIn: localStorage.getItem('authToken') !== null,
   currentUser: state.auth.currentUser,
   restaurants: state.restaurants,
   activities: state.activities

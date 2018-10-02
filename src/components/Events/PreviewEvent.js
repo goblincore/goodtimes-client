@@ -6,7 +6,7 @@ export default function PreviewEvent (props) {
 
   function onSubmit() {
     const newEvent = {
-      userId: props.userId,
+      userId: props.currentUser.id,
       title: props.eventState.title,
       draft: false,
       description: props.eventState.description,
@@ -21,7 +21,7 @@ export default function PreviewEvent (props) {
 
  function onDraft () {
     const newEvent = {
-      userId: props.userId,
+      userId: props.currentUser.id,
       title: props.eventState.title,
       draft: true,
       description: props.eventState.description,
@@ -30,7 +30,12 @@ export default function PreviewEvent (props) {
       restaurantOptions: props.eventState.restaurantOptions,
     };
     return props.dispatch(postNewEvent(newEvent))
-      .then(() => props.goHome())
+      .then(() => {
+        localStorage.removeItem('eventDraft');
+        localStorage.removeItem('newEventPageCount');
+        props.goHome();
+        window.location.reload();
+      })
       .catch(err => console.log('ERROR HANDLING HERE dispatch(changeErrorMessaeg(err.message))'));
   }
 

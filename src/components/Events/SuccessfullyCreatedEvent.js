@@ -23,7 +23,6 @@ export default class SuccessfullyCreatedEvent extends React.Component {
     document.execCommand('copy',false);
     inp.remove();
     this.setState({copied:true});
-    
   }
 
   
@@ -41,7 +40,16 @@ export default class SuccessfullyCreatedEvent extends React.Component {
           <button onClick={this.handleCopy}>Copy Link</button>  
           {this.state.copied ? <span style={{color: 'red'}}><p>Copied</p></span> : null}
             <p></p>
-          <Link to="/dashboard"> <button id="back-to-dashboard" >Back to Dashboard</button></Link>
+          <Link to="/dashboard"> 
+            <button id="back-to-dashboard"
+              onClick={() => {
+                localStorage.removeItem('eventDraft');
+                localStorage.removeItem('newEventPageCount');
+                window.location.reload();
+              }}>
+                Back to Dashboard
+            </button>
+          </Link>
         </div>
 
       </div>
