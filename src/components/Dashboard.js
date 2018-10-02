@@ -35,7 +35,7 @@ displayDrafts(){
       
         if(this.props.loggedIn){
             return (
-                <div className="dashboard-wrapper">
+                <div className="container">
                    
                     <div id="dashboard_main">
                          <h2>Hey {this.props.currentUser.username}!</h2>

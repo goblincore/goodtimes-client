@@ -15,6 +15,7 @@ import Dashboard from './components/Dashboard';
 import NewEventMain from './components/Events/newEventMain';
 import GuestEventForm from './components/Events/GuestEventForm';
 
+
 //Used by React Router
 import createHistory from 'history/createBrowserHistory';
 
@@ -46,39 +47,68 @@ class App extends Component{
                 <div className="content">
                 <Transition
                     native
-                    config={{
-                        tension: 1, 
-                        friction: 8,
+                    config={ item=> {
+                        console.log('item config transition',item);
+                        if (item === 'transform'){
+                          return {
+                            tension: 1, 
+                            friction: 8,
+    
+                            restSpeedThreshold: 1,
+                            restDisplacementThreshold: 0.001,
+                            overshootClamping: true,
+                            }
+                        }
+                        else{
+                       
+                            return {
+                              tension: 1, 
+                              friction: 6,
+                              // restSpeedThreshold: 1,
+                              // restDisplacementThreshold: 0.001,
+                              overshootClamping: true,
 
-                        restSpeedThreshold: 1,
-                        restDisplacementThreshold: 0.001,
-                        overshootClamping: true,
-                      }}
+                          }
+                        }
+                      }
+                       
+                      }
                     keys={location.pathname.split('/').filter(a => a)[0]}
                     from={item => {
                         if (item === 'home' || item === 'register' || item === 'login'){
                           console.log('HOME OR REGISTER');
-                            return({ transform: 'translateX(80%)', opacity: 0, overflow:'none'})
+                            return({ transform: 'translateX(80%)', opacity: 0})
                         } else  {
-                            return({  opacity: 0 })
+                            return({ transform: 'translateY(100%)', opacity: 0 })
                         }
                     }}
                     enter={item => {
                       if (item === 'home' || item === 'register' || item === 'login'){
-                            return({ transform: 'translateX(0px)', opacity: 1,overflow:'none'  })
+                            return({ transform: 'translateX(0px)', opacity: 1  })
                         } else {
-                            return({  opacity: 1 })
+                            return({  transform: 'translateY(0px)',opacity: 1 })
                         }
                     }}
-                 
-                      
+
                     leave={item => {
                       if (item === 'home' || item === 'register' || item === 'login'){
                             return({ transform: 'translateX(-80%)', opacity: 0 })
                         } else {
-                            return({  opacity: 0 })
+                            return({  transform: 'translateY(-100%)', opacity: 0, })
                         }
-                    }}>
+                    }}
+
+                    onRest={(item, v) => {
+                      if(item === 'create-event'){
+                        console.log('ONREST',item, v);
+                        let el = document.querySelector(".createEventRoute");
+                        if(el !== null) {
+                          el.style.transform='';
+                        }
+                        console.log('ONREST el',el);
+                      }
+                      }}
+                    >
                     {style => (
                         <Switch location={location}>
                         <Route exact path="/home" render={props => HomePage({...props, style})} />
@@ -143,8 +173,8 @@ const RegisterPage = ({ style }) => (
   
 
 const DashboardPage = ({ style }) => (
-    <animated.div className="dashboardRoute" style={{ ...style, background: `#fdfdfd` }}>
-      <div className="dashboardRouteItem">
+  <animated.div className="dashboardRoute" style={{ ...style, background: `#fdfdfd` }}>
+  <div className="mainRouteItem">
      <Dashboard />
       </div>
 
@@ -152,9 +182,11 @@ const DashboardPage = ({ style }) => (
   )
 
 const CreateEventPage = ({ style }) => (
-  <animated.div  style={{ ...style, background: '#fdfdfd' }}>
-   <div className="newEventRouteItem">
+  <animated.div className="createEventRoute" style={{ ...style, background: `#fdfdfd` }}>
+  
+  <div className="mainRouteItem">
    <NewEventMain/>
+   {/* <EventContainer/> */}
    </div>
   </animated.div>
 
@@ -162,7 +194,7 @@ const CreateEventPage = ({ style }) => (
 
 const GuestEventPage = ({...props, style}) => (
     <animated.div  style={{ ...style, background: '#fdfdfd' }}>
-     <div className="newEventRouteItem">
+     <div className="newEventRouteItem" >
      <GuestEventForm {...props}/>
    
      </div>

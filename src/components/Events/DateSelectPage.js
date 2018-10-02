@@ -3,6 +3,7 @@ import moment from 'moment';
 import DateList from './DateList';
 import {updateNewEventState} from '../../actions/New-Event';
 import './Calendar/less/calendar-time.css';
+
 // import 'react-datepicker/dist/react-datepicker.css';
 import {MdAddCircleOutline} from 'react-icons/lib/md';
 import '../styles/DateTime.css';
@@ -75,8 +76,8 @@ export default class DateSelectPage extends React.Component {
         <div className="width1100">
 
             <div className="card border-right">
-            <h1>Some good times are </h1>
-              <p>Select a date and time. You can add multiple dates and times!</p>
+            <h2>Some good times for {this.props.eventState.title} are... </h2>
+              <p>Select possible dates and times for your event. You can add multiple dates and times!</p>
               <InputMoment
                 moment={inputMoment}
                 locale={locale}
@@ -123,7 +124,7 @@ export default class DateSelectPage extends React.Component {
         <button onClick={ () => this.handleNextPage()}>
           Next Page
         </button>
-               
+      
       </div>
 
             
