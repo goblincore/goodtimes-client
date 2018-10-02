@@ -10,6 +10,7 @@ import RestaurantSelect from './RestaurantSelect';
 import moment from 'moment';
 import SuccessfullyCreatedEvent from './SuccessfullyCreatedEvent';
 import { updateNewEventState, newEventErrorMessage } from '../../actions/New-Event';
+import throttle from 'lodash/throttle';
 
 
 export class NewEventMain extends React.Component {
@@ -20,16 +21,52 @@ export class NewEventMain extends React.Component {
       pageCount: 1,
     };
   }
+<<<<<<< HEAD
 componentDidMount(){
   if(this.props.pageCount){
     this.setState({pageCount: this.props.pageCount});
   }
 }
   //reset Redux state if page changes
-  componentWillUnmount(){
-    this.props.dispatch(updateNewEventState(initialState));
+=======
+
+
+
+  /* ------------ Persists the state of our New Event --------------------------*/
+  componentWillMount(){
+    try {
+      const eventDraft = localStorage.getItem('eventDraft');
+      if (eventDraft) {
+        this.props.dispatch(updateNewEventState(JSON.parse(eventDraft)));
+        const newEventPageCount = localStorage.getItem('newEventPageCount');
+        if (newEventPageCount) {
+          this.setState({pageCount: Number(newEventPageCount)});
+        }
+      }
+    }
+    catch (err) {
+      console.log(err);
+    }
   }
-  
+
+>>>>>>> 27da6caa53b0831445da3a6f845f0f02cae5c280
+  componentWillUnmount(){
+    localStorage.removeItem('newEventPageCount');
+  }
+
+  componentDidUpdate(){
+      try {
+        localStorage.setItem('eventDraft', JSON.stringify(this.props.newEvent));
+        localStorage.setItem('newEventPageCount', this.state.pageCount);
+      }
+      catch (err) {
+        console.log(err);
+      }
+  }
+  /* ------------------------------------------------------------------------------*/
+
+
+
 
   nextPage = () => {
     this.setState({pageCount: this.state.pageCount + 1}, 
@@ -86,6 +123,7 @@ componentDidMount(){
           dispatch={this.props.dispatch} 
           eventState={this.props.newEvent}
           nextPage={this.nextPage}
+          prevPage={this.prevPage}
           categories={this.props.activities.categories}
           activities={this.props.activities.activities}
           loading={this.props.activities.loading}
@@ -103,7 +141,7 @@ componentDidMount(){
           dispatch={this.props.dispatch} 
           prevPage={this.prevPage} 
           eventState={this.props.newEvent}
-          userId={this.props.currentUser.id}
+          currentUser={this.props.currentUser}
         />;
         break;
       case 6:
@@ -135,7 +173,8 @@ componentDidMount(){
 
 const mapStateToProps = state => ({
   newEvent: state.newEvent,
-  loggedIn: state.auth.currentUser !== null,
+  //loggedIn: state.auth.currentUser !== null,
+  loggedIn: localStorage.getItem('authToken') !== null,
   currentUser: state.auth.currentUser,
   restaurants: state.restaurants,
   activities: state.activities

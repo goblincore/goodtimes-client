@@ -3,8 +3,8 @@ import {
   UPDATE_NEW_EVENT_STATE,
   NEW_EVENT_ERROR_MESSAGE,
   POST_NEW_EVENT_REQUEST,
-  POST_NEW_EVENT_SUCCESS ,
- 
+  POST_NEW_EVENT_SUCCESS,
+  RESET_NEW_EVENT_STATE
 } from '../actions/New-Event';
 
 import {
@@ -45,7 +45,6 @@ console.log('NewEvent Request');
       loading: true
     });
   }else if (action.type === UPDATE_NEW_EVENT_STATE) {
-    console.log('update action=',action);
     return Object.assign({}, state, action.updateObject); //example:  {restaurantOptions: [{zomatoId: '123'}]}
 
   } else if (action.type === POST_NEW_EVENT_SUCCESS) {
@@ -67,7 +66,9 @@ console.log('New event Success');
   return Object.assign({}, state, {
     loading: false
   });
-} else if (action.type === NEW_EVENT_ERROR_MESSAGE) {
+}  else if (action.type === RESET_NEW_EVENT_STATE) {
+    return Object.assign({}, state, initialState);
+  } else if (action.type === NEW_EVENT_ERROR_MESSAGE) {
     return Object.assign({}, state, {
       errorMessage: action.message,
       loading: false

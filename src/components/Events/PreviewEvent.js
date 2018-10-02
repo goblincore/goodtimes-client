@@ -1,14 +1,13 @@
 import React from 'react';
-import { postNewEvent } from '../../actions/New-Event';
 import { putUpdatedDraft } from '../../actions/Edit-Draft';
+import { postNewEvent, resetNewEventState } from '../../actions/New-Event';
+
 
 export default function PreviewEvent (props) {
 
   function onSubmit() {
-
- 
     const event = {
-      userId: props.userId,
+      userId: props.currentUser.id,
       title: props.eventState.title,
       draft: false,
       description: props.eventState.description,
@@ -41,7 +40,7 @@ export default function PreviewEvent (props) {
   //console.log('Preview Event' ,props.eventState);
    if(!props.eventState.draft){ 
     const newEvent = {
-      userId: props.userId,
+      userId: props.currentUser.id,
       title: props.eventState.title,
       draft: true,
       description: props.eventState.description,
@@ -53,7 +52,12 @@ export default function PreviewEvent (props) {
       activityOptions: props.eventState.activityOptions
     };
     return props.dispatch(postNewEvent(newEvent))
-      .then(() => props.goHome())
+      .then(() => {
+        props.dispatch(resetNewEventState());
+        localStorage.removeItem('eventDraft');
+        localStorage.removeItem('newEventPageCount');
+        props.goHome();
+      })
       .catch(err => console.log('ERROR HANDLING HERE dispatch(changeErrorMessaeg(err.message))'));
   } 
   else {
