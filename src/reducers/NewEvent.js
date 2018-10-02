@@ -12,11 +12,10 @@ export const initialState = {
   errorMessage: '',
 
   title: '',
-  city: '',
-  state: '',
   description: '',
   draft: false,
-  location: '',
+  location: '', // i.e. {latitude: 55, longitude: -55}
+  locationCity: '', // i.e. {city: 'Denver', state: 'CO'}
   scheduleOptions: [],
   restaurantOptions: [],
   activityOptions:[],

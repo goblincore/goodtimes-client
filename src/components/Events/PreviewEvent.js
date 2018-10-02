@@ -11,6 +11,7 @@ export default function PreviewEvent (props) {
       draft: false,
       description: props.eventState.description,
       location: props.eventState.location,  //{latitude: ..., longitude: ...}
+      locationCity: props.eventState.locationCity,
       scheduleOptions: props.eventState.scheduleOptions,
       restaurantOptions: props.eventState.restaurantOptions,
       activityOptions: props.eventState.activityOptions
@@ -27,6 +28,7 @@ export default function PreviewEvent (props) {
       draft: true,
       description: props.eventState.description,
       location: props.eventState.location,  //{latitude: ..., longitude: ...}
+      locationCity: props.eventState.locationCity,
       scheduleOptions: props.eventState.scheduleOptions,
       restaurantOptions: props.eventState.restaurantOptions,
       activityOptions: props.eventState.activityOptions
