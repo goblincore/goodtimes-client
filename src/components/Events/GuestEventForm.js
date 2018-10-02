@@ -54,13 +54,20 @@ class GuestEventForm extends Component {
       dateArr.push(date.value);
     })
     
+    const activityId = document.querySelectorAll('input[name="activity-option"]:checked');
+    const activityArr = [];
+    activityId.forEach(act => {
+      activityArr.push(act.value);
+    })
+
     const eventId = this.state.guestEvent.id;
 
     let selectionObject = {
       dateSelection: dateArr,
-      restaurantSelection: restaurantArr
+      restaurantSelection: restaurantArr,
+      activitySelection: activityArr
     };
-    // console.log('SELECTION OBJ', selectionObject);
+    console.log('SELECTION OBJ', selectionObject);
     this.props.dispatch(updateEventVotes(selectionObject, eventId));
     this.setState({submitted:true});
   }
@@ -75,9 +82,9 @@ class GuestEventForm extends Component {
         <p>Loading...</p>
       );
     } else { 
-      let timesDisplay, restaurantsDisplay;
+      let timesDisplay, restaurantsDisplay, activitiesDisplay;
 
-      const {title, description, scheduleOptions, restaurantOptions } = this.state.guestEvent;
+      const {title, description, scheduleOptions, restaurantOptions, activityOptions } = this.state.guestEvent;
 
       timesDisplay = scheduleOptions.map((option, i) => { 
         return (
@@ -102,7 +109,19 @@ class GuestEventForm extends Component {
               name="restaurant-option"
               value={option.zomatoId} />
               <label> {link} </label>
-            </div> );});        
+            </div> );});   
+
+      activitiesDisplay = activityOptions.map((option, i) => { 
+        let link = <a href={option.link}>{option.title}</a>;
+        return (
+          <div key={i} className="option_container">
+            <input 
+              type="checkbox" 
+              id={"activity-option"+i}
+              name="activity-option"
+              value={option.ebId} />
+              <label> {link} </label>
+            </div> );});
 
       return (
         <div className="guest-event-form-wrapper">
@@ -119,6 +138,10 @@ class GuestEventForm extends Component {
             <div className="restaurant-options"> 
               <h4>Let's go eat at...</h4>
               {restaurantsDisplay}
+            </div>
+            <div className="activity-options"> 
+              <h4>Let's go to this event...</h4>
+              {activitiesDisplay}
             </div>
             <br/>
             <br/>
