@@ -61,10 +61,14 @@ export default class SuccessfullyCreatedEvent extends React.Component {
           <p id="event-link">{CLIENT_BASE_URL}/guestevents/{this.props.eventState.id}</p>
           <h3>Email an invite to your friends!</h3>
           <form onSubmit={(e) => this.sendEmail(e)}>
+          <label htmlFor='from'>Enter your e-mail.</label>
             <input placeholder='user@example.com' id='from'></input>
-            <input placeholder="Enter your friends' e-mails, separated by a comma." id="to"></input>
-            <input placeholder='Subject Line' id="subject"></input>
-            <textarea placeholder="Hi!  Let's get together. Please vote on when and where we should hang out." id="message"></textarea>
+            <label htmlFor='to'>Enter recipients' e-mails separated by a comma.</label>
+            <input placeholder="friend1@example.com, friend2@example.com, friend3@example.com" id="to"></input>
+            <label htmlFor='subject'>Enter the subject of the e-mail.</label>
+            <input placeholder="Let's hang out!" id="subject"></input>
+            <label htmlFor='message'>Write the body of the e-mail.</label>
+            <textarea placeholder={`Hi!  Let's get together. Please vote on when and where we should hang out here: ${CLIENT_BASE_URL}/guestevents/${this.props.eventState.id}`} id="message"></textarea>
             <button type="submit">Send</button>
           </form>
           <Link to="/dashboard"> 
