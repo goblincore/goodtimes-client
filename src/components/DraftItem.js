@@ -3,7 +3,7 @@ import { connect, mapStateToProps } from 'react-redux';
 import {Link, Redirect, withRouter} from 'react-router-dom';
 
 import './styles/Index.css';
-import { updateDraftState } from '../actions/Edit-Draft';
+import { loadDraftIntoReduxState } from '../actions/Edit-Draft';
 
  class DraftItem extends React.Component{
   constructor(props){
@@ -16,8 +16,8 @@ import { updateDraftState } from '../actions/Edit-Draft';
   }
   //LOADS DRAFT INTO 'newEvent' of Redux state and redirects page to edit
  addDraftToReduxState(updateObject, pageCount){
-     console.log('This.props.event',  updateObject);
-      this.props.dispatch(updateDraftState(updateObject));
+     //console.log('This.props.event',  updateObject);
+      this.props.dispatch(loadDraftIntoReduxState(updateObject));
 
         this.props.history.push({
           pathname: '/edit-draft',

@@ -8,7 +8,10 @@ import {
 } from '../actions/New-Event';
 
 import {
-  UPDATE_DRAFT_STATE
+  LOAD_DRAFT_INTO_REDUX_STATE,
+  PUT_UPDATED_DRAFT_REQUEST,
+  PUT_UPDATED_DRAFT_SUCCESS
+
 } from '../actions/Edit-Draft';
 
 export const initialState = {
@@ -28,7 +31,8 @@ export const initialState = {
   loading: false
 };
 
-
+//draft that's being edited 
+//currently uses 'update new event state'
 export default function newEventReducer (state=initialState, action) {
   if (action.type === SHOW_NEW_EVENT_STATE) {
     return Object.assign({}, state, {
@@ -49,11 +53,20 @@ export default function newEventReducer (state=initialState, action) {
     return Object.assign({}, state, {
       loading: false
     });
-  }  else if (action.type === UPDATE_DRAFT_STATE) {
+  }  else if (action.type === PUT_UPDATED_DRAFT_REQUEST) {
+    return Object.assign({}, state, {
+      loading: true
+    });
+  } else if (action.type === LOAD_DRAFT_INTO_REDUX_STATE) {
     console.log('update action=',action.draftObject);
     
     return Object.assign({}, state,  action.draftObject
       ); 
+} else if (action.type === PUT_UPDATED_DRAFT_SUCCESS) {
+
+  return Object.assign({}, state, {
+    loading: false
+  });
 } else if (action.type === NEW_EVENT_ERROR_MESSAGE) {
     return Object.assign({}, state, {
       errorMessage: action.message,

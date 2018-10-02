@@ -1,15 +1,19 @@
 import React from 'react';
 import { postNewEvent } from '../../actions/New-Event';
-
+import { putUpdatedDraft } from '../../actions/Edit-Draft';
 
 export default function PreviewEvent (props) {
 
   function onSubmit() {
+
+    if(!props.eventState.draft){ 
     const newEvent = {
       userId: props.userId,
       title: props.eventState.title,
       draft: false,
       description: props.eventState.description,
+      city: props.eventState.city,
+      state: props.eventState.state,
       location: props.eventState.location,  //{latitude: ..., longitude: ...}
       scheduleOptions: props.eventState.scheduleOptions,
       restaurantOptions: props.eventState.restaurantOptions,
@@ -18,14 +22,23 @@ export default function PreviewEvent (props) {
     return props.dispatch(postNewEvent(newEvent))
       .then(() => props.nextPage())
       .catch(err => console.log('ERROR HANDLING HERE dispatch(changeErrorMessaeg(err.message))'));
-  }
+
+        } 
+      }
+        //submit draft as new event - delete draft
+ 
+
 
  function onDraft () {
+  //console.log('Preview Event' ,props.eventState);
+   if(!props.eventState.draft){ 
     const newEvent = {
       userId: props.userId,
       title: props.eventState.title,
       draft: true,
       description: props.eventState.description,
+      city: props.eventState.city,
+      state: props.eventState.state,
       location: props.eventState.location,  //{latitude: ..., longitude: ...}
       scheduleOptions: props.eventState.scheduleOptions,
       restaurantOptions: props.eventState.restaurantOptions,
@@ -34,9 +47,28 @@ export default function PreviewEvent (props) {
     return props.dispatch(postNewEvent(newEvent))
       .then(() => props.goHome())
       .catch(err => console.log('ERROR HANDLING HERE dispatch(changeErrorMessaeg(err.message))'));
-  }
+  } 
+  else {
+    const updatedDraft = { 
+      id: props.eventState.id,
+    userId: props.userId,
+      title: props.eventState.title,
+      draft: true,
+      description: props.eventState.description,
+      city: props.eventState.city,
+      state: props.eventState.state,
+      location: props.eventState.location,  //{latitude: ..., longitude: ...}
+      scheduleOptions: props.eventState.scheduleOptions,
+      restaurantOptions: props.eventState.restaurantOptions,
+      activityOptions: props.eventState.activityOptions
+     }  
+     return props.dispatch(putUpdatedDraft(updatedDraft))
+     .then(() => props.goHome())
+     .catch(err => console.log('ERROR HANDLING HERE dispatch(changeErrorMessaeg(err.message))'));
+  
+     }
 
-
+ }
   let timesDisplay, restaurantsDisplay, activitiesDisplay;
 
     timesDisplay = props.eventState.scheduleOptions.map((option, i) => { 
