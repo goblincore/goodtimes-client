@@ -27,7 +27,13 @@ export class LandingPage extends Component {
      
           <div className="container">
         {/* <img className="home-img" src="../../assets/backgroundshape.png"/> */}
-            <div className="hero"><h1>Let the good times roll! </h1></div>
+            <div className="hero">
+              <h1>Let the good times roll! </h1>
+              <hr></hr>
+              <h3>Easy event planning for groups and friends</h3>
+              <button>Learn More</button>
+            </div>
+          
            <img className="home-img" src="../../assets/home.png"/>
            
           </div>

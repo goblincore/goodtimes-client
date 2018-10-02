@@ -162,7 +162,7 @@ const HomePage = ({ style }) => (
 );
 
 const RegisterPage = ({ style }) => (
-    <animated.div className="mainRoute" style={{ ...style, background: `#fdfdfd` }}>
+    <animated.div className="mainRoute bg2" style={{ ...style, background: `#fdfdfd` }}>
       <div className="mainRouteItem">
      <RegistrationPage />
       </div>
