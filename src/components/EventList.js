@@ -5,7 +5,6 @@ import DraftItem from './DraftItem';
 
 export function EventList(props) {
   if(props.userEvents !== null ){
-    console.log('DRAFTS-STATUS', props.drafts);
     switch(props.drafts){
 
         case false:

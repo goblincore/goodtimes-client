@@ -16,7 +16,7 @@ import { loadDraftIntoReduxState } from '../actions/Edit-Draft';
   }
   //LOADS DRAFT INTO 'newEvent' of Redux state and redirects page to edit
  addDraftToReduxState(updateObject, pageCount){
-     
+     localStorage.removeItem('eventDraft');
       this.props.dispatch(loadDraftIntoReduxState(updateObject));
 
         this.props.history.push({
@@ -49,7 +49,7 @@ import { loadDraftIntoReduxState } from '../actions/Edit-Draft';
           <div className='date-options'>
             <p>Date/Time options:</p>
                  <MdEdit
-                 className="edit-time-options"
+                 className="edit-schedule-options"
                 onClick={()=>this.addDraftToReduxState(this.props.event, 2)}/>
             
             {this.props.event.scheduleOptions.map((date,i) =>{

@@ -9,7 +9,7 @@ import ActivitySelect from './ActivityPage';
 import RestaurantSelect from './RestaurantSelect';
 import moment from 'moment';
 import SuccessfullyCreatedEvent from './SuccessfullyCreatedEvent';
-import { updateNewEventState, newEventErrorMessage } from '../../actions/New-Event';
+import { updateNewEventState, newEventErrorMessage, resetNewEventState } from '../../actions/New-Event';
 import throttle from 'lodash/throttle';
 
 
@@ -18,17 +18,10 @@ export class NewEventMain extends React.Component {
     super(props);
 
     this.state = {
-      pageCount: 1,
+      pageCount: this.props.pageCount ? this.props.pageCount :  1
     };
+  
   }
-<<<<<<< HEAD
-componentDidMount(){
-  if(this.props.pageCount){
-    this.setState({pageCount: this.props.pageCount});
-  }
-}
-  //reset Redux state if page changes
-=======
 
 
 
@@ -49,9 +42,10 @@ componentDidMount(){
     }
   }
 
->>>>>>> 27da6caa53b0831445da3a6f845f0f02cae5c280
   componentWillUnmount(){
+  
     localStorage.removeItem('newEventPageCount');
+
   }
 
   componentDidUpdate(){
@@ -84,7 +78,7 @@ componentDidMount(){
     this.setState({pageCount:0})
   }
   render(){
-    console.log('FROM NEW EVENT MAIN', this.props);
+    
     if(this.state.redirect){
       return <Redirect to="/" />
     }
