@@ -55,6 +55,7 @@ export const postNewEvent = eventData => dispatch => {
     
   })
   .then(() => { 
+    console.log('New event SUCCESS called from action');
   dispatch(postNewEventSuccess());
   return Promise.resolve();
 })

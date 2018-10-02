@@ -10,13 +10,6 @@ export const loadDraftIntoReduxState = draftObject => ({
 
 
 
-// export const PUT_UPDATED_DRAFT = 'PUT_UPDATED_DRAFT';
-// export const putUpdatedDraft = draftObject => ({
-//   type: PUT_UPDATED_DRAFT,
-//   draftObject
-// });
-
-
 export const PUT_UPDATED_DRAFT_REQUEST = 'PUT_UPDATED_DRAFT_REQUEST';
 export const putUpdatedDraftRequest = message => ({
   type: PUT_UPDATED_DRAFT_REQUEST,

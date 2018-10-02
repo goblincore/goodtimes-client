@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect, mapStateToProps } from 'react-redux';
 import {Link, Redirect, withRouter} from 'react-router-dom';
-
+import { MdEdit } from 'react-icons/lib/md';
 import './styles/Index.css';
 import { loadDraftIntoReduxState } from '../actions/Edit-Draft';
 
@@ -16,7 +16,7 @@ import { loadDraftIntoReduxState } from '../actions/Edit-Draft';
   }
   //LOADS DRAFT INTO 'newEvent' of Redux state and redirects page to edit
  addDraftToReduxState(updateObject, pageCount){
-     //console.log('This.props.event',  updateObject);
+     
       this.props.dispatch(loadDraftIntoReduxState(updateObject));
 
         this.props.history.push({
@@ -32,42 +32,25 @@ import { loadDraftIntoReduxState } from '../actions/Edit-Draft';
   }
 
   render(){
-      console.log('EVENT', this.props.event);
-  
-      let menu = ( 
-        <div>
-        <a onClick={()=>this.addDraftToReduxState(this.props.event, 1)}>
-        Event Info</a>
-          
-          {/* kebab, dropdown, and x to close */}
-          <div className="kebab">
-             <figure></figure>
-                <figure className="middle"
-                ></figure>
-                <p className="cross">x</p>
-                <figure></figure>
-                     <ul className="dropdown">
-                        <li>Drop down elements are listed here</li>
-                        <li>Delete</li>
-                         </ul>
-                </div>
-                </div>
-      );
     
-      
     if(this.state.showDetails){
       return(
 
         <li className='user-event'>
 <h2>{this.props.event.title}</h2>
-          {menu}
+     
+          <MdEdit
+          className="edit-event-info"
+          onClick={()=>this.addDraftToReduxState(this.props.event, 1)}
+          />
+    
           <p>{this.props.event.description}</p>
           <button onClick={()=> this.toggleEventDetails(false)}>See Details</button>
           <div className='date-options'>
             <p>Date/Time options:</p>
-
-                <a onClick={()=>this.addDraftToReduxState(this.props.event, 2)}>
-                 Edit times</a>
+                 <MdEdit
+                 className="edit-time-options"
+                onClick={()=>this.addDraftToReduxState(this.props.event, 2)}/>
             
             {this.props.event.scheduleOptions.map((date,i) =>{
                 console.log(date);
@@ -83,10 +66,10 @@ import { loadDraftIntoReduxState } from '../actions/Edit-Draft';
           </div>
           <div className='date-options'>
             <p>Restaurant options:</p>
+                 <MdEdit
+                 className="edit-restaurant-options"
+                onClick={()=>this.addDraftToReduxState(this.props.event, 3)}/>
 
-           <a onClick={()=>this.addDraftToReduxState(this.props.event, 3)}>
-               Edit Restaurants</a>
-            
             {this.props.event.restaurantOptions.map((food,i) =>{
                 return(
                   <div key={i} className='date-vote'>
@@ -103,9 +86,11 @@ import { loadDraftIntoReduxState } from '../actions/Edit-Draft';
     else{
       return(
         <li className='user-event'>
-
+            
           <h2>{this.props.event.title}</h2>
-          {menu}
+          <MdEdit
+               className="edit-event-info"
+               onClick={()=>this.addDraftToReduxState(this.props.event, 1)} />
           <p>{this.props.event.description}</p>
           <button onClick={()=> this.toggleEventDetails(true)}>See Details</button>
         </li>
