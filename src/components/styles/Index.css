@@ -41,16 +41,6 @@
   transform: translate(-50%, -50%) scale(1);
   transition: all 0.15s cubic-bezier(0.32, 2.04, 0.85, 0.54); }
 
-h1, a, li {
-  font-family: Roboto, sans-serif; }
-
-h1 {
-  font-size: 26px;
-  background: #00bcd4;
-  color: white;
-  padding: 40px 0 40px 20%;
-  margin-bottom: 50px; }
-
 a, li {
   color: #6b6b6b;
   text-decoration: none; }

@@ -3,8 +3,13 @@ import {
   UPDATE_NEW_EVENT_STATE,
   NEW_EVENT_ERROR_MESSAGE,
   POST_NEW_EVENT_REQUEST,
-  POST_NEW_EVENT_SUCCESS 
+  POST_NEW_EVENT_SUCCESS ,
+ 
 } from '../actions/New-Event';
+
+import {
+  UPDATE_DRAFT_STATE
+} from '../actions/Edit-Draft';
 
 export const initialState = {
   showNewEvent: false,
@@ -18,6 +23,7 @@ export const initialState = {
   location: '',
   scheduleOptions: [],
   restaurantOptions: [],
+  activityOptions:[],
   id: null,
   loading: false
 };
@@ -43,11 +49,12 @@ export default function newEventReducer (state=initialState, action) {
     return Object.assign({}, state, {
       loading: false
     });
-  }   else if (action.type === POST_NEW_EVENT_SUCCESS) {
-    return Object.assign({}, state, {
-      loading: false
-    });
-  } else if (action.type === NEW_EVENT_ERROR_MESSAGE) {
+  }  else if (action.type === UPDATE_DRAFT_STATE) {
+    console.log('update action=',action.draftObject);
+    
+    return Object.assign({}, state,  action.draftObject
+      ); 
+} else if (action.type === NEW_EVENT_ERROR_MESSAGE) {
     return Object.assign({}, state, {
       errorMessage: action.message,
       loading: false

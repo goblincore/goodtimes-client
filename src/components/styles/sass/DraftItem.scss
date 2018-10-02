@@ -62,17 +62,7 @@ $shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.16), 0 2px 8px 0 rgba(0, 0, 0, 0.12);
 
 // Other styling
 
-h1, a, li {
-  font-family: $roboto;
-}
 
-h1 {
-  font-size: 26px;
-  background: $cyan;
-  color: white;
-  padding: 40px 0 40px 20%;
-  margin-bottom: 50px;
-}
 
 a, li {
   color: darken($grey, 20%);
@@ -154,6 +144,7 @@ a, li {
     }
   }
 }
+
 
 @media screen and (max-width: 800px) {
   .follow {
