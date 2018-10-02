@@ -38,8 +38,6 @@ export const postNewEventSuccess = message => ({
   
 });
 
-
-
 export const postNewEvent = eventData => dispatch => {
   dispatch(postNewEventRequest());
   const token = localStorage.getItem('authToken');
@@ -62,4 +60,36 @@ export const postNewEvent = eventData => dispatch => {
       return Promise.resolve();
     })
     .catch(err => Promise.reject(err) );
+};
+
+export const DELETE_EVENT_REQUEST = 'DELETE_EVENT_REQUEST';
+export const deleteEventRequest = () => ({
+  type: DELETE_EVENT_REQUEST
+});
+
+export const DELETE_EVENT_ERROR = 'DELETE_EVENT_ERROR';
+export const deleteEventError = (error) => ({
+  type: DELETE_EVENT_ERROR,
+  error
+});
+
+export const DELETE_EVENT_SUCCESS = 'DELETE_EVENT_SUCCESS';
+export const deleteEventSuccess = () => ({
+  type: DELETE_EVENT_SUCCESS
+});
+
+export const deleteEvent = (eventId) => dispatch => {
+  dispatch(deleteEventRequest());
+  const token = localStorage.getItem('authToken');
+  return fetch(`${API_BASE_URL}/api/events/${eventId}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    }
+  })
+    .then(res => normalizeResponseErrors(res))
+    // .then(res => res.json())
+    .then(() => dispatch(deleteEventSuccess()))
+    .catch(err => Promise.reject(err));
 };
