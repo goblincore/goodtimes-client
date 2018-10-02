@@ -4,13 +4,11 @@ import { CreateEvent } from './CreateEvent';
 import DateSelectPage from './DateSelectPage';
 import {Redirect,withRouter} from 'react-router-dom';
 import PreviewEvent from './PreviewEvent';
-import { initialState } from '../../reducers/NewEvent';
 import ActivitySelect from './ActivityPage';
 import RestaurantSelect from './RestaurantSelect';
 import moment from 'moment';
 import SuccessfullyCreatedEvent from './SuccessfullyCreatedEvent';
 import { updateNewEventState, newEventErrorMessage } from '../../actions/New-Event';
-import throttle from 'lodash/throttle';
 
 
 export class NewEventMain extends React.Component {
