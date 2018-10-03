@@ -1,4 +1,8 @@
-import { FETCH_CATEGORIES_REQUEST, FETCH_CATEGORIES_ERROR, FETCH_CATEGORIES_SUCCESS, FETCH_ACTIVITIES_REQUEST, FETCH_ACTIVITIES_ERROR, FETCH_ACTIVITIES_SUCCESS } from '../actions/Activities';
+import { 
+  FETCH_CATEGORIES_REQUEST, FETCH_CATEGORIES_ERROR, FETCH_CATEGORIES_SUCCESS, 
+  FETCH_ACTIVITIES_REQUEST, FETCH_ACTIVITIES_ERROR, FETCH_ACTIVITIES_SUCCESS,
+  RESET_ACTIVITIES_REDUCER
+} from '../actions/Activities';
 
 
 const initialState = {
@@ -44,6 +48,8 @@ export default function reducer(state = initialState, action){
       loading: false,
       activities: action
     });
+  } else if (action.type === RESET_ACTIVITIES_REDUCER) {
+    return Object.assign({}, state, initialState);
   }
   return state;
 }

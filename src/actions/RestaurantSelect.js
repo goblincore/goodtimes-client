@@ -94,3 +94,9 @@ export const fetchRestaurants = (cityCode, cuisine) => (dispatch) => {
     .then(restaurants => dispatch(fetchRestaurantsSuccess(restaurants)))
     .catch(err => dispatch(fetchRestaurantsError(err)));
 };
+
+
+export const RESET_RESTAURANTS_REDUCER = 'RESET_RESTAURANTS_REDUCER';
+export const resetRestaruantsReducer = () => ({
+  type: RESET_RESTAURANTS_REDUCER
+})
