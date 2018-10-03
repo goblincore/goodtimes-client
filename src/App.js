@@ -69,7 +69,6 @@ class App extends Component{
                               // restSpeedThreshold: 1,
                               // restDisplacementThreshold: 0.001,
                               overshootClamping: true,
-
                           }
                         }
                       }
@@ -115,7 +114,7 @@ class App extends Component{
                     }}
 
                     onRest={(item, v) => {
-                      if(item === 'create-event'){
+                      if(item === 'create-event' || item === 'edit-draft'){
                         // console.log('ONREST',item, v);
                         let el = document.querySelector(".createEventRoute");
                         if(el !== null) {
