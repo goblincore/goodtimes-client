@@ -13,7 +13,6 @@ export function EventList(props) {
   }
 
  
-
   if (props.events) {
     if(props.userEvents.length < 1){
       return <p><strong>No Events Found! Why don't you create one?</strong></p>
@@ -26,14 +25,14 @@ export function EventList(props) {
     }
     
   } else {
-
+    if(props.userEvents.length < 1){
+      return <p><strong>No Drafts Found! </strong></p>
+    } else{
     return (
       <div>
         {props.userEvents.map((event, i)=> <DraftItem key={i} event={event} dispatch={props.dispatch}/> )}
       </div>
     )
+    }
   }
-
-
-
 }
