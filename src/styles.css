@@ -1,3 +1,13 @@
+@font-face {
+  font-family: 'Graebenbach';
+  src: url('/assets/fonts/Graebenbach-Medium.woff') format('woff'),
+       url('/assets/fonts/Graebenbach-Medium.eot') format('eot'),
+       url('/assets/fonts/Graebenbach-Medium.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+
+}
+
 
 *, *:before, *:after {
     box-sizing: border-box;
