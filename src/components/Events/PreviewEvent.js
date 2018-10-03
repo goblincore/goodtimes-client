@@ -99,6 +99,9 @@ export default function PreviewEvent (props) {
         <button type='button' onClick={() => props.prevPage()}>
           {'<-'} Back
         </button>
+
+           <button type='button' onClick={() => onDraft()}>Save as Draft</button>
+        <button type='button' onClick={() => onSubmit()}>Looks good!</button>
         <h1>Preview Event Form</h1>
       </div>
 
@@ -127,10 +130,10 @@ export default function PreviewEvent (props) {
         </form>     
       </div>
 
-      <div>
+      {/* <div>
         <button type='button' onClick={() => onDraft()}>Save as Draft</button>
         <button type='button' onClick={() => onSubmit()}>Looks good!</button>
-      </div>
+      </div> */}
     </div>
     </div>
   );

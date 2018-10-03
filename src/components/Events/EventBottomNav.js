@@ -18,14 +18,17 @@ export default function EventBottomNav (props) {
             case 4:
                 message='Step 4 of 5: Go somewhere, do something';
                 break;
+            case 5:
+                message='Step 4 of 5: Preview';
+                break;
         }
         
         return (
             <div className="bottom-nav-container">
               <div className="bottom-nav-progress"><p>{message}</p></div>
               <div className="bottom-nav-button-container">
-                 <button onClick={props.nextPage}>Next Step</button>
-                 <button onClick={props.prevPage}>Previous Step</button>
+                 {/* <button onClick={props.nextPage}>Next Step</button>
+                 <button onClick={props.prevPage}>Previous Step</button> */}
               </div>
             </div>
         )

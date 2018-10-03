@@ -30,3 +30,6 @@ select{
   font-size:16px;
 }
 
+.bottom-offset{
+  margin-bottom:90px !important;
+}

@@ -81,7 +81,7 @@ export default function CreateEventContainer(props){
     }
 
     return (
-      <div className='new-event-form'>
+      <div className='new-event-form bottom-offset'>
         {component}
       </div>
     );
