@@ -1,4 +1,9 @@
-import { FETCH_CUISINES_REQUEST, FETCH_CUISINES_ERROR, FETCH_CUISINES_SUCCESS, FETCH_RESTAURANTS_REQUEST, FETCH_RESTAURANTS_ERROR, FETCH_RESTAURANTS_SUCCESS, FETCH_ZOMATO_LOCATION_REQUEST, FETCH_ZOMATO_LOCATION_ERROR, FETCH_ZOMATO_LOCATION_SUCCESS } from '../actions/RestaurantSelect';
+import { 
+  FETCH_CUISINES_REQUEST, FETCH_CUISINES_ERROR, FETCH_CUISINES_SUCCESS, 
+  FETCH_RESTAURANTS_REQUEST, FETCH_RESTAURANTS_ERROR, FETCH_RESTAURANTS_SUCCESS, 
+  FETCH_ZOMATO_LOCATION_REQUEST, FETCH_ZOMATO_LOCATION_ERROR, FETCH_ZOMATO_LOCATION_SUCCESS,
+  RESET_RESTAURANTS_REDUCER
+ } from '../actions/RestaurantSelect';
 
 const initialState = {
   cityCode:null,
@@ -63,6 +68,8 @@ export default function reducer(state = initialState, action){
       loading: false,
       restaurants:  action.restaurants.restaurants
     });
+  } else if (action.type === RESET_RESTAURANTS_REDUCER) {
+    return Object.assign({}, state, initialState);
   }
   return state;
 }
