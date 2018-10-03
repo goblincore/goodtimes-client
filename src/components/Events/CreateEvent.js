@@ -9,14 +9,14 @@ export class CreateEvent extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      locationOption: 0,
+      locationOption: 1,
       locationFeedback: ''
     }
   }
 
 
   validateCity = () => {
-    const city = document.getElementsByName('cityLocation')[0].value;
+    const city = document.getElementsByName('cityLocation')[0].value.trim();
     const state = document.getElementsByName('stateLocation')[0].value;
     //Error Handle
     if (!city || !state) {
@@ -27,49 +27,42 @@ export class CreateEvent extends React.Component {
 
     this.setState({locationFeedback: 'Checking city...'});
     //Get Latitude and Longitude
-    return fetch(`http://dev.virtualearth.net/REST/v1/Locations/US/${state}/${city}/addressLine?includeNeighborhood=0&include=0&key=${bingMapsKey}`)
+    return fetch(`http://dev.virtualearth.net/REST/v1/Locations?q=${state}%20${city}&includeNeighborhood=0&&key=${bingMapsKey}`)
       .then(res => res.json())
       .then(bingMapsResult => {
         const possibleResults = bingMapsResult.resourceSets[0].resources;
-        if (possibleResults.length === 1) {
-          let message = `Successfully found ${possibleResults[0].name}`;
-          if (!possibleResults[0].address.locality) {
-            message = `Must provide a valid city name.`
-          }
-          this.setState({
-            locationFeedback: message,
-            locationOption: 0
+        let verifiedCity = possibleResults.find(place => place.name.toLowerCase() === `${city}, ${state}`.toLowerCase())
+        if (verifiedCity) {
+          return this.setState({
+            locationFeedback: `Successfully found ${verifiedCity.name}.`,
+            locationOption: 1
           }, () => {
-            this.props.dispatch(updateNewEventState({
-              location: {
-                'latitude': possibleResults[0].point.coordinates[0], 
-                'longitude': possibleResults[0].point.coordinates[1]
-              }
-            }));
-          })
-
-        } else if (this.state.locationOption < possibleResults.length) {
-          let message = `You selected ${possibleResults[this.state.locationOption].name}`;
-          if (!possibleResults[this.state.locationOption].address.locality) {
-            message = `Must provide a valid city name.`
-          }
-          this.setState({locationFeedback: message}, () => {
-            this.props.dispatch(updateNewEventState({
-              location: {
-                'latitude': possibleResults[this.state.locationOption].point.coordinates[0],
-                'longitude': possibleResults[this.state.locationOption].point.coordinates[1]
-              }
-            }))
+            this.props.dispatch(updateNewEventState({location: {latitude: verifiedCity.point.coordinates[0], longitude: verifiedCity.point.coordinates[1]}}));
           })
         } else {
-          this.setState({
-            locationFeedback: 'No more options. Please try a different city.',
-            locationOption: 0
-          }, () => {
-            this.props.dispatch(updateNewEventState({location: ''}));
+          let optionCount = 0;
+          possibleResults.forEach( (place, i) => {
+            if (place.address.locality) {
+              optionCount++;
+              if (optionCount === this.state.locationOption 
+                && ( !possibleResults[i-1] || place.name !== possibleResults[i-1].name) ) {
+                verifiedCity = place;
+              }
+            }
           })
+          if (verifiedCity) {
+            return this.setState({locationFeedback: `Did you mean ${verifiedCity.name}?`}, () => {
+              this.props.dispatch(updateNewEventState({location: 
+                {latitude: verifiedCity.point.coordinates[0], longitude: verifiedCity.point.coordinates[1]}
+              }));
+            })
+          } else {
+            return this.setState({
+              locationFeedback: 'Must provide a valid city and state.',
+              locationOption: 1
+            });
+          }
         }
-        return;
       })
       .catch(err => console.log(err));
   }
@@ -86,7 +79,6 @@ export class CreateEvent extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault();
     if (this.props.eventState.errorMessage) return;
-    if (this.state.locationFeedback.startsWith('No more options')) return;
     if (this.state.locationFeedback.startsWith('Must provide')) return;
     if (this.state.locationFeedback === 'Checking city...') return;
 
@@ -100,7 +92,6 @@ export class CreateEvent extends React.Component {
     let requiredFields = ['title', 'state', 'city'];
     for(let i = 0; i < requiredFields.length; i++){
       if (!requiredInfo[i]) {
-        console.log('HANDLE SUBMIT');
         return this.props.dispatch(newEventErrorMessage(`Must include ${requiredFields[i]} for your new event.`));
       }
     }
@@ -124,7 +115,6 @@ export class CreateEvent extends React.Component {
 
     if ( this.state.locationFeedback === 'Checking city...' || 
         this.state.locationFeedback.startsWith('Successfully found') ||
-        this.state.locationFeedback.startsWith('No more options.') ||
         this.state.locationFeedback.startsWith('Must provide') ||
         !this.state.locationFeedback) {
       locationMessage = <p>{this.state.locationFeedback}</p>
@@ -132,7 +122,18 @@ export class CreateEvent extends React.Component {
         locationMessage = (
           <p>
             {this.state.locationFeedback}
-            <button type='button' onClick={() => this.setState({locationFeedback: ''})}>Yes</button>
+            <button type='button' 
+              onClick={() => {
+                const city = this.state.locationFeedback.split(',')[0].split('mean')[1].trim();
+                const state = this.state.locationFeedback.split(',')[1].split('?')[0].trim();
+                this.props.dispatch(updateNewEventState({
+                  locationCity: {city, state} 
+                }))
+                this.setState({
+                  locationFeedback: '',
+                  locationOption: 1
+                })
+              }}>Yes</button>
             <button type='button' onClick={() => this.handleIncorrectCity()}>No</button>
           </p>
         )
@@ -168,7 +169,7 @@ export class CreateEvent extends React.Component {
             this.props.dispatch(updateNewEventState({
               locationCity: {city, state: e.target.value}
             }));
-            this.setState({locationOption: 0}, () => this.validateCity() );
+            this.setState({locationOption: 1}, () => this.validateCity() );
           }}>
 
           <option value="AL">Alabama</option>
@@ -236,7 +237,7 @@ export class CreateEvent extends React.Component {
             this.props.dispatch(updateNewEventState({
               locationCity: {city: e.target.value, state}
             }));
-            this.setState({locationOption: 0}, () => this.props.dispatch(newEventErrorMessage(null)));
+            this.setState({locationOption: 1}, () => this.props.dispatch(newEventErrorMessage(null)));
           }}
           onBlur={() => this.validateCity()}
         />
