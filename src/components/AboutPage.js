@@ -11,7 +11,7 @@ export default class AboutPage extends React.Component {
           
              
           
-            <h1>Easy as 1, 2, 3 (well, five!)</h1>
+            <h1>Easy as 1, 2, 3 </h1>
             <p>
             <strong>Goodtimes</strong> simplifies planning get-togethers for large groups of friends by collecting
             the big questions - when?, where?, what-to-eat?, what to do? -
@@ -19,7 +19,30 @@ export default class AboutPage extends React.Component {
             Tally up the votes - bam!- <em>let the good times roll.</em>
             </p>
             <hr></hr>
-            <strong>The five steps:</strong>
+            <div className="about-icon-container" >
+                <div className="boxItem">
+                  <img src="./assets/calendarcolor.png" />
+                  <strong>Select dates</strong>
+                </div>
+
+                <div className="boxItem">
+                <img src="./assets/foodcolor.png" />
+                <strong>Select dining</strong>
+                </div>
+
+                <div className="boxItem">
+                    <img src="./assets/eventcolor.png" />
+                    <strong>Select events</strong>
+                </div>
+
+            </div>
+            <hr></hr>
+              <div >
+               <strong> Voila! Send your completed form to your friends via email directly from the website or share it via the generated link!</strong>
+                <h3>   <Link to="/register"> Sign up </Link>to get started. </h3> 
+                </div>  
+        
+            {/* <strong>The five steps:</strong>
                 <ul>
                     <li>Create a new event and provide location details</li>
                     <li>Choose dates and times</li>
@@ -28,7 +51,7 @@ export default class AboutPage extends React.Component {
                     <li>Send your friends the newly created form</li>
                 </ul>
                 <hr></hr>
-               <h3>Voila! <Link to="/register"> Sign up </Link>to get started. </h3>  
+               <h3>Voila! <Link to="/register"> Sign up </Link>to get started. </h3>   */}
         
              
              </div>

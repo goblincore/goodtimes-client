@@ -14,8 +14,6 @@ import './styles/Button.css';
 
 export class HeaderBar extends Component {
 
-   
-
     logOut() {
         localStorage.removeItem('authToken');
         this.props.dispatch(changeCurrentUser(null));
@@ -40,7 +38,7 @@ export class HeaderBar extends Component {
                 return(
                     <section className="header-bar">
                     <div className="header-logo">
-                        <h3> <Link to="/dashboard"><MdSentimentSatisfied className="smily"/></Link>Goodtimes</h3>
+                        <h3> <Link to="/dashboard"><MdSentimentSatisfied className="smily"/>goodtimes</Link></h3>
                     </div>
     
                         <div className="header-nav">    
@@ -56,7 +54,7 @@ export class HeaderBar extends Component {
                 return (
                     <section className="header-bar">
                     <div className="header-logo">
-                    <h3>  <Link to="/home"><MdSentimentSatisfied className="smily"/></Link>Goodtimes</h3>
+                    <h3>  <Link to="/home"><MdSentimentSatisfied className="smily"/>goodtimes</Link></h3>
                     </div>
 
                         <div className="header-nav">

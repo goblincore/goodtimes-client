@@ -37,7 +37,15 @@ ul {
     display:inline-block;
     float:left;
     transform:translateY(-10px);
+    color:#575d98;
+    text-decoration:none;
   }
+
+  .header-logo a{
+    color:#575d98;
+    text-decoration:none;
+  }
+
 
   @media only screen and (max-width: 450px) {
       .header-bar {
@@ -52,7 +60,7 @@ ul {
 
 
   .smily{
-    margin-top: -3px;
+    margin-top: -2px;
     margin-right:4px;
   }
 

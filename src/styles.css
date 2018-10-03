@@ -34,7 +34,7 @@ input{
     padding:10px;
     margin:10 0px;
     border-radius:6px;
-    border:1px solid #666666;
+    border:1px solid #cccccc;
     font-size:16px;
     
   }
@@ -157,6 +157,7 @@ align-items: center; */
   
   p{
     line-height:180%;
+    font-weight:200;
   }
 
   hr{
