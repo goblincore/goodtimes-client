@@ -1,19 +1,20 @@
 import React from 'react';
 import './styles/EventList.css';
 import EventItem from './EventItem';
+import DraftItem from './DraftItem';
 
 export function EventList(props) {
- 
-  if(props.userEvents !== null ){
-    return props.userEvents.map((event, i)=>{
-      return(
-        <EventItem key={i} event={event} dispatch={props.dispatch}/>
-      )
-    });
-  }
-  else{
-    return(
-      null
+  if (props.drafts) {
+    return (
+      <div>
+        {props.userEvents.map((event, i)=> <EventItem key={i} event={event} dispatch={props.dispatch}/> )}
+      </div>
+    )
+  } else {
+    return (
+      <div>
+        {props.userEvents.map((event, i)=> <DraftItem key={i} event={event} dispatch={props.dispatch}/> )}
+      </div>
     )
   }
 }

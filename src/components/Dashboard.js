@@ -37,6 +37,7 @@ export class Dashboard extends Component {
     this.setState({display:false});
   }
   render() {
+    console.log('THis.props.user events', this.props.userEvents);
     let eventsToDisplay=[];
     if(this.props.userEvents !==null && this.props.userEvents.length >= 1){
 
@@ -47,9 +48,10 @@ export class Dashboard extends Component {
         break;
       case false:
         eventsToDisplay = this.props.userEvents.filter(event => event.draft === true);
+        break;
       }
     }
-      
+      console.log('EVENTS to display',eventsToDisplay);
     if(this.props.loggedIn){
       return (
         <div className="dashboard-wrapper">
@@ -63,7 +65,7 @@ export class Dashboard extends Component {
             <button id="display-active-events" onClick={() => this.displayEvents()}>Active Events</button>
             <Link to="/create-event"><h3>Create New Event  <MdAddCircleOutline /></h3></Link>
             <div id="event_boxes">
-              <EventList userEvents={eventsToDisplay} dispatch={this.props.dispatch} />
+              <EventList userEvents={eventsToDisplay} dispatch={this.props.dispatch} drafts={this.state.display}/>
             </div>
                     
           </div>

@@ -16,6 +16,8 @@ export default class EventItem extends React.Component{
   }
 
   render(){
+
+
     if(this.state.showDetails){
       return(
         <li className='user-event'>

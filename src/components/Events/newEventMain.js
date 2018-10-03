@@ -16,8 +16,9 @@ export class NewEventMain extends React.Component {
     super(props);
 
     this.state = {
-      pageCount: 1,
+      pageCount: this.props.pageCount ? this.props.pageCount :  1
     };
+  
   }
 
 
@@ -40,7 +41,9 @@ export class NewEventMain extends React.Component {
   }
 
   componentWillUnmount(){
+  
     localStorage.removeItem('newEventPageCount');
+
   }
 
   componentDidUpdate(){
@@ -73,6 +76,10 @@ export class NewEventMain extends React.Component {
     this.setState({pageCount:0})
   }
   render(){
+    
+    if(this.state.redirect){
+      return <Redirect to="/" />
+    }
     if(this.props.loggedIn){
       let component;
       switch (this.state.pageCount) {
