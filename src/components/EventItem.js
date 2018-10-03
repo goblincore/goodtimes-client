@@ -15,10 +15,7 @@ export default class EventItem extends React.Component{
   }
 
   render(){
-    let displayRestaurantOptions, displayEventOptions;
-if(this.props.event.restaurantOptions){
 
-}
 
     if(this.state.showDetails){
       return(
