@@ -30,32 +30,54 @@ export default class ActivitySelect extends React.Component {
       optionDisplay = <div></div>;
     }
     else if(this.state.display === 'write'){
-      optionDisplay =   <WriteActivity 
-        dispatch={this.props.dispatch} 
-        eventState={this.props.newEvent}
-        prevPage={this.prevPage} 
-        nextPage={this.nextPage}
-        categories={this.props.activities.categories}
-        activities={this.props.activities.activities}
-        loading={this.props.activities.loading}
-        latitude={this.props.newEvent.location.latitude}
-        longitude={this.props.newEvent.location.longitude}
-        times={this.props.newEvent.scheduleOptions.map(time => 
-          moment(time.date, 'llll').format('YYYY-MM-DDTHH:mm:ss'))}/>;
+      optionDisplay =   
+      <div>
+        <WriteActivity 
+          dispatch={this.props.dispatch} 
+          eventState={this.props.eventState}
+          prevPage={this.props.prevPage} 
+          nextPage={this.props.nextPage}
+          categories={this.props.categories}
+          activities={this.props.activities}
+          loading={this.props.loading}
+          latitude={this.props.latitude}
+          longitude={this.props.longitude}
+          times={this.props.times}
+        />
+        <button 
+          onClick={(e) => {
+            const form = e.target.parentElement.firstChild;
+            this.props.dispatch(updateNewEventState({
+              activityOptions: [...this.props.eventState.activityOptions, {
+                ebId: form.title.value, link: '#', description: form.description.value, title: form.title.value
+              }]
+            })
+            );
+            this.setState({display:'none'});
+          }}
+        >Save Event</button>
+      </div>;
     }
     else if(this.state.display === 'choose'){
       optionDisplay = <SelectActivity 
         dispatch={this.props.dispatch} 
-        eventState={this.props.newEvent}
-        prevPage={this.prevPage} 
-        nextPage={this.nextPage}
-        categories={this.props.activities.categories}
-        activities={this.props.activities.activities}
-        loading={this.props.activities.loading}
-        latitude={this.props.newEvent.location.latitude}
-        longitude={this.props.newEvent.location.longitude}
-        times={this.props.newEvent.scheduleOptions.map(time => 
-          moment(time.date, 'llll').format('YYYY-MM-DDTHH:mm:ss'))}/>;
+        eventState={this.props.eventState}
+        prevPage={this.props.prevPage} 
+        nextPage={this.props.nextPage}
+        categories={this.props.categories}
+        activities={this.props.activities}
+        loading={this.props.loading}
+        latitude={this.props.latitude}
+        longitude={this.props.longitude}
+        times={this.props.times}/>;
+    }
+    let selectedActivitiesDisplay;
+    if ( this.props.eventState.activityOptions.length > 0 ){
+      selectedActivitiesDisplay = this.props.eventState.activityOptions.map((activity,index) => <div key={index}>
+        <a href={activity.link} target='blank'>{activity.title}:</a>
+        <p>{activity.description.length > 50 ? `${activity.description.slice(0,50)}...` : activity.description}</p>
+      </div>
+      );
     }
     return(
       <div>
@@ -63,6 +85,7 @@ export default class ActivitySelect extends React.Component {
         <p>You can choose from events in your area or create your own!</p>
         <button onClick={() => this.setState({display: 'choose'})}>Choose From List</button>
         <button onClick={() => this.setState({display: 'write'})}>Create My Own</button>
+        <div>Event Choices{selectedActivitiesDisplay}</div>
         {optionDisplay}
         <button type='button' onClick={() => this.props.prevPage()}>
           {'<-'} Back

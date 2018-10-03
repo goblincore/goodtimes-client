@@ -30,6 +30,7 @@ export default class SelectActivity extends React.Component {
       const events = this.props.activities.activities.events;
       if(events.length >0){
         activityOptions = events.map((activity, index) => {
+          const description= activity.description.text;
           return (
             <div key={index}>
               <input 
@@ -37,17 +38,17 @@ export default class SelectActivity extends React.Component {
                 value={activity.url}
                 name={activity.name.text}
                 onChange={(e) => {
+                  console.log('description=', description);
                   if(e.target.checked === true){
                     this.props.dispatch(updateNewEventState({
                       activityOptions: [...this.props.eventState.activityOptions, {
-                        ebId: e.target.id, link: e.target.value, title: e.target.name
+                        ebId: e.target.id, link: e.target.value, title: e.target.name, description: description
                       }]
                     }));
                   }
                   else {
-                    console.log('activity id=',activity.id, 'e.target.id=', e.target.id);
+                    console.log('activity=',activity);
                     const tempArray = this.props.eventState.activityOptions.filter(activity => activity.ebId !== e.target.id);
-                    console.log('temp array=',tempArray);
                     this.props.dispatch(updateNewEventState({activityOptions: tempArray}));
                   }
                 }}
@@ -67,11 +68,7 @@ export default class SelectActivity extends React.Component {
       categoryFilters = <option>Loading categories...</option>;
       activityOptions = <div>Loading event options...</div>;
     }
-    let selectedActivitiesDisplay;
-    if ( this.props.eventState.activityOptions.length > 0 ){
-      console.log('selected activities', this.props.eventState.activityOptions);
-      selectedActivitiesDisplay = this.props.eventState.activityOptions.map((activity,index) => <li key={index}>{activity.title}</li>);
-    }
+  
     return(
       <div>
         <p>Change the category to see a list of events in your area during the times you selected. Check off events to add them to your list of activity options. You can select multiple events!</p>
@@ -81,7 +78,6 @@ export default class SelectActivity extends React.Component {
           <option>Choose a category...</option>
           {categoryFilters}
         </select>
-        <ul>Event Choices{selectedActivitiesDisplay}</ul>
         
         {activityOptions}
       </div>

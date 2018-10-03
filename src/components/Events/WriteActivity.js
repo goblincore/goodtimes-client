@@ -6,7 +6,12 @@ import moment from 'moment';
 export default class WriteActivity extends React.Component {
   render(){
     return (
-      <div>write</div>
+      <form>
+        <label>Title</label>
+        <input name='title'placeholder='Game Night!'></input>
+        <label>Details</label>
+        <input name='description' placeholder='Pictionary, charades, and more!'></input>
+      </form>
     );
   }
 }
