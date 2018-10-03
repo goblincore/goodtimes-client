@@ -17,11 +17,16 @@ export default class RestaurantSelect extends React.Component {
   }
 
   getCuisines(e){
-    const cuisineCode = e.target.value;
+    const cuisineCode = e.target.name;
     e.preventDefault();
     this.props.dispatch(fetchRestaurants(this.props.cityCode, cuisineCode));
   }
-  
+  deleteWhenClicked(e){
+    const { restaurantOptions } = this.props.eventState;
+    const idOfRestaurantToDelete = e.target.id;
+    const filteredRestaurants = restaurantOptions.filter((option) => option._id !== idOfRestaurantToDelete);
+    this.props.dispatch(updateNewEventState({restaurantOptions: filteredRestaurants}));
+  }
   render(){
     let cuisineOptions;
     if(this.props.restaurants.cityCode === null){
@@ -38,7 +43,9 @@ export default class RestaurantSelect extends React.Component {
 
     let restaurantChoices = this.props.restaurants.restaurants.map((restaurant,index) => {
       return (
-        <div className="restaurant-item" key={index}>
+
+        <div className="restaurant-item" key={restaurant.restaurant.name}>
+
           <input 
             onChange={(e)=>{
               if (e.target.checked === true) {
@@ -53,14 +60,12 @@ export default class RestaurantSelect extends React.Component {
                 this.props.dispatch(updateNewEventState({restaurantOptions: tempArray}));
               }
             }}
-            key={index} id={restaurant.restaurant.id} name={restaurant.restaurant.name} value={restaurant.restaurant.url} type="checkbox"></input>
 
-          <img src={restaurant.restaurant.thumb ==="" ? "https://www.redbytes.in/wp-content/uploads/2018/09/zomato-logo-AD6823E433-seeklogo.com_.png" : restaurant.restaurant.thumb} alt="Thumbnail"></img>
-         <div className="restaurant-info">
-            <a key={index+1} href={restaurant.restaurant.url} target="#">{restaurant.restaurant.name}</a>
-            <p>{'$'.repeat(restaurant.restaurant.price_range)}</p>
-            <p>Rating: {restaurant.restaurant.user_rating.aggregate_rating}</p>
-          </div>
+            id={restaurant.restaurant.id} name={restaurant.restaurant.name} value={restaurant.restaurant.url} type="checkbox" ></input>
+          <img src={restaurant.restaurant.thumb==='' ? 'https://www.redbytes.in/wp-content/uploads/2018/09/zomato-logo-AD6823E433-seeklogo.com_.png' : restaurant.restaurant.thumb} alt="Thumbnail"></img>
+          <a href={restaurant.restaurant.url} target="#">{restaurant.restaurant.name}</a>
+          <p>{'$'.repeat(restaurant.restaurant.price_range)}</p>
+          <p>Rating: {restaurant.restaurant.user_rating.aggregate_rating}</p>
 
         </div>
       );
@@ -69,7 +74,8 @@ export default class RestaurantSelect extends React.Component {
 
     let selectedRestaurantsDisplay;
     if ( this.props.eventState.restaurantOptions.length > 0 ){
-      selectedRestaurantsDisplay = this.props.eventState.restaurantOptions.map((restaurant,index) => <li key={index}>{restaurant.name}</li>);
+      selectedRestaurantsDisplay = this.props.eventState.restaurantOptions.map((restaurant,index) => 
+      <li key={index} id={restaurant._id} onClick={(e) => this.deleteWhenClicked(e)}>{restaurant.name} </li>);
     }
     
     return(

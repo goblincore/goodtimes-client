@@ -4,13 +4,16 @@ import React from 'react';
 import '../styles/CreateEvent.css';
 import { updateNewEventState, newEventErrorMessage } from '../../actions/New-Event';
 import { bingMapsKey } from '../../config';
+import { resetRestaruantsReducer } from '../../actions/RestaurantSelect';
+import { resetActivitiesReducer } from '../../actions/Activities';
 
 export class CreateEvent extends React.Component {
   constructor(props){
     super(props);
     this.state = {
       locationOption: 1,
-      locationFeedback: ''
+      locationFeedback: '',
+      initialLocation: this.props.eventState.location
     }
   }
 
@@ -27,10 +30,12 @@ export class CreateEvent extends React.Component {
 
     this.setState({locationFeedback: 'Checking city...'});
     //Get Latitude and Longitude
-    return fetch(`http://dev.virtualearth.net/REST/v1/Locations?q=${state}%20${city}&includeNeighborhood=0&&key=${bingMapsKey}`)
+    return fetch(`https://dev.virtualearth.net/REST/v1/Locations?q=${state}%20${city}&includeNeighborhood=0&&key=${bingMapsKey}`)
       .then(res => res.json())
       .then(bingMapsResult => {
-        const possibleResults = bingMapsResult.resourceSets[0].resources;
+        let possibleResults = bingMapsResult.resourceSets[0].resources;
+        possibleResults = possibleResults.filter(place => place.address.countryRegion === 'United States');
+        console.log('Possible Reslts: ', possibleResults);
         let verifiedCity = possibleResults.find(place => place.name.toLowerCase() === `${city}, ${state}`.toLowerCase())
         if (verifiedCity) {
           return this.setState({
@@ -58,7 +63,7 @@ export class CreateEvent extends React.Component {
             })
           } else {
             return this.setState({
-              locationFeedback: 'Must provide a valid city and state.',
+              locationFeedback: 'Must provide a valid US city and state.',
               locationOption: 1
             });
           }
@@ -96,16 +101,35 @@ export class CreateEvent extends React.Component {
       }
     }
 
-    this.props.dispatch(updateNewEventState({
-      title, 
-      description, 
-      locationCity: {city, state}
-    }));
+    //If location changes, reset the restaurant and event options
+    if (this.state.initialLocation 
+      && this.state.initialLocation.latitude === this.props.eventState.location.latitude
+      && this.state.initialLocation.latitude === this.props.eventState.location.latitude ) {
+        this.props.dispatch(updateNewEventState({
+          title, 
+          description, 
+          locationCity: {city, state}
+        }));
+    } else {
+      this.props.dispatch(updateNewEventState({
+        title, 
+        description, 
+        locationCity: {city, state},
+        restaurantOptions: [],
+        activityOptions: []
+      }));
+      //clear Restaurant and Event reducer
+      this.props.dispatch(resetRestaruantsReducer());
+      this.props.dispatch(resetActivitiesReducer());
+    }
+    
     this.props.nextPage();
   }
 
 
-  ////// RENDER BEGINS HERE ////////
+
+
+
   render(){
 
     console.log('PAGE 1: CreateEVENT this.props:', this.props);

@@ -73,7 +73,7 @@ export class Dashboard extends Component {
                     </div>
                     <div id="dashboard_eventlist">
                      <ul className="block-li">
-                     <EventList loading={this.props.loading} userEvents={eventsToDisplay} dispatch={this.props.dispatch} drafts={this.state.display}/>
+                     <EventList loading={this.props.loading} userEvents={eventsToDisplay} dispatch={this.props.dispatch} events={this.state.display}/>
                      </ul>
                     </div>
                 </div>
