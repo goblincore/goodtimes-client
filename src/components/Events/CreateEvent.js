@@ -1,11 +1,12 @@
-
 import React from 'react';
-
 import '../styles/CreateEvent.css';
-import { updateNewEventState, newEventErrorMessage } from '../../actions/New-Event';
+
 import { bingMapsKey } from '../../config';
+
+import { updateNewEventState, newEventErrorMessage } from '../../actions/New-Event';
 import { resetRestaruantsReducer } from '../../actions/RestaurantSelect';
 import { resetActivitiesReducer } from '../../actions/Activities';
+
 
 export class CreateEvent extends React.Component {
   constructor(props){
@@ -132,8 +133,6 @@ export class CreateEvent extends React.Component {
 
   render(){
 
-    console.log('PAGE 1: CreateEVENT this.props:', this.props);
-
    // console.log('PROPS in CREATE EVENT',this.props);
     let errorMessage = null;
     let locationMessage = null;
@@ -166,7 +165,7 @@ export class CreateEvent extends React.Component {
           </p>
         )
       }
-console.log('Create EVENT', this.props);
+
     return (
       <div>
       <h3>Let's get started!</h3>
@@ -283,8 +282,17 @@ console.log('Create EVENT', this.props);
         <button type='button' onClick={() => this.props.prevPage()}>
           {'<-'} Back
         </button>
+        <button type='button' 
+          onClick={() => {
+            if (!this.props.eventState.title) {
+              return this.props.dispatch(newEventErrorMessage('Must provide a title to save.'));
+            }
+            this.props.saveAsDraft();
+          }}>
+          Save as Draft
+        </button>
         <button type='submit'>
-          Next Page
+          Next {'->'}
         </button>
       </form>
     </div>

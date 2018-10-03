@@ -3,16 +3,17 @@ import { connect } from 'react-redux';
 import {Redirect,withRouter} from 'react-router-dom';
 import { initialState } from '../../reducers/NewEvent';
 
-import { updateNewEventState, newEventErrorMessage } from '../../actions/New-Event';
+import { updateNewEventState, newEventErrorMessage, resetNewEventState } from '../../actions/New-Event';
 
 import EventBottomNav from './EventBottomNav';
 import CreateEventContainer from './CreateEventContainer';
+import { resetActivitiesReducer } from '../../actions/Activities';
+import { resetRestaruantsReducer } from '../../actions/RestaurantSelect';
 
 
 export class NewEventMain extends React.Component {
   constructor(props){
     super(props);
-    console.log('New Event Main props',props);
     this.state = {
       pageCount: this.props.pageCount ? this.props.pageCount :  1
     };
@@ -23,38 +24,38 @@ export class NewEventMain extends React.Component {
 
 
   /* ------------ Persists the state of our New Event --------------------------*/
-  componentWillMount(){
-    try {
-      const eventDraft = localStorage.getItem('eventDraft');
-      if (eventDraft) {
-        this.props.dispatch(updateNewEventState(JSON.parse(eventDraft)));
-        const newEventPageCount = localStorage.getItem('newEventPageCount');
-        if (newEventPageCount) {
-          this.setState({pageCount: Number(newEventPageCount)});
-        }
-      }
-    }
-    catch (err) {
-      console.log(err);
-    }
-  }
+  // componentWillMount(){
+  //   try {
+  //     const eventDraft = localStorage.getItem('eventDraft');
+  //     if (eventDraft) {
+  //       this.props.dispatch(updateNewEventState(JSON.parse(eventDraft)));
+  //       const newEventPageCount = localStorage.getItem('newEventPageCount');
+  //       if (newEventPageCount) {
+  //         this.setState({pageCount: Number(newEventPageCount)});
+  //       }
+  //     }
+  //   }
+  //   catch (err) {
+  //     console.log(err);
+  //   }
+  // }
 
 
   componentWillUnmount(){
-  
-    localStorage.removeItem('newEventPageCount');
-
+    this.props.dispatch(resetActivitiesReducer());
+    this.props.dispatch(resetRestaruantsReducer());
+    this.props.dispatch(resetNewEventState());
   }
 
-  componentDidUpdate(){
-      try {
-        localStorage.setItem('eventDraft', JSON.stringify(this.props.newEvent));
-        localStorage.setItem('newEventPageCount', this.state.pageCount);
-      }
-      catch (err) {
-        console.log(err);
-      }
-  }
+  // componentDidUpdate(){
+  //     try {
+  //       localStorage.setItem('eventDraft', JSON.stringify(this.props.newEvent));
+  //       localStorage.setItem('newEventPageCount', this.state.pageCount);
+  //     }
+  //     catch (err) {
+  //       console.log(err);
+  //     }
+  // }
   /* ------------------------------------------------------------------------------*/
 
 
@@ -87,17 +88,20 @@ export class NewEventMain extends React.Component {
        
          <CreateEventContainer 
             pageNum={this.state.pageCount} 
-            props={this.props} 
+            eventState={this.props.newEvent}
             nextPage={this.nextPage} 
             prevPage={this.prevPage} 
-            goHome={this.goHome}/>
+            goHome={this.goHome}
+            {...this.props} 
+            />
 
           <EventBottomNav 
             pageNum={this.state.pageCount} 
-            props={this.props} 
             nextPage={this.nextPage} 
             prevPage={this.prevPage}
-            goHome={this.goHome} />
+            goHome={this.goHome} 
+            {...this.props}
+            />
 
        </div>
       )
