@@ -32,10 +32,6 @@ import { loadDraftIntoReduxState } from '../actions/Edit-Draft';
   }
 
 
-  ComponentDidMount(){
-    console('Draft Item mounted');
-  }
-
   render(){
     
     if(this.state.showDetails){
