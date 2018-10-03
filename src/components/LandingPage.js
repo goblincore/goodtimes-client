@@ -33,7 +33,7 @@ export class LandingPage extends Component {
                <Button to="/about">Learn More</Button>
             </div>
           
-           <img className="home-img" src="../../assets/home.png"/>
+           <img className="home-img" src="../../assets/home-calendar.png" alt="Homepage image"/>
            
           </div>
   

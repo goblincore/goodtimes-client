@@ -16,7 +16,7 @@ export function RegistrationPage(props) {
         <div className="container">
            <div className="form-container">
            <h1>Join Goodtimes</h1>
-           <p>Create an account and find events, invite your friends and more!</p>
+           <p>Create an account, create events, invite your friends and more!</p>
               <RegistrationForm />
             </div>
          </div>
