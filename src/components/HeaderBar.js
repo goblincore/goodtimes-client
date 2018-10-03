@@ -21,7 +21,7 @@ export class HeaderBar extends Component {
 
 
     render(){
-        console.log('Header bar props',this.props);
+       
            
         let signUpButton, logInButton, aboutButton;
             aboutButton=(

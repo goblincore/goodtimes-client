@@ -31,13 +31,18 @@ import { loadDraftIntoReduxState } from '../actions/Edit-Draft';
     )
   }
 
+
+  ComponentDidMount(){
+    console('Draft Item mounted');
+  }
+
   render(){
     
     if(this.state.showDetails){
       return(
 
         <li className='user-event'>
-<h2>{this.props.event.title}</h2>
+          <h2>{this.props.event.title}</h2>
      
           <MdEdit
           className="edit-event-info"

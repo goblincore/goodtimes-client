@@ -37,7 +37,7 @@ export class Dashboard extends Component {
     this.setState({display:false});
   }
   render() {
-    console.log('THis.props.user events', this.props.userEvents);
+    // console.log('THis.props.user events', this.props.userEvents);
     let eventsToDisplay=[];
     if(this.props.userEvents !==null && this.props.userEvents.length >= 1){
 
@@ -51,7 +51,7 @@ export class Dashboard extends Component {
         break;
       }
     }
-      console.log('EVENTS to display',eventsToDisplay);
+      // console.log('EVENTS to display',eventsToDisplay);
     if(this.props.loggedIn){
       return (
         <div className="dashboard-wrapper">
