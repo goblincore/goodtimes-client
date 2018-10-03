@@ -1,17 +1,18 @@
 import React from 'react';
+import { deleteEvent } from '../actions/New-Event';
 
 export default class EventItem extends React.Component{
   constructor(props){
     super(props);
     this.state = {
       showDetails: false
-    }
+    };
   }
 
   toggleEventDetails(bool){
     this.setState(
       {showDetails: bool}
-    )
+    );
   }
 
   render(){
@@ -29,10 +30,10 @@ export default class EventItem extends React.Component{
               this.props.event.scheduleOptions.map((date,i) =>{
                 console.log(date);
                 return(
-                    <div key={i} className='date-vote'>
-                      <p>Date: {date.date}</p>
-                      <p>Votes: {date.votes}</p>
-                    </div>
+                  <div key={i} className='date-vote'>
+                    <p>Date: {date.date}</p>
+                    <p>Votes: {date.votes}</p>
+                  </div>
                 );
                 
               })
@@ -65,7 +66,7 @@ export default class EventItem extends React.Component{
             }
           </div>
         </li>
-      )
+      );
     }  
     else{
       return(
@@ -73,8 +74,9 @@ export default class EventItem extends React.Component{
           <h2>{this.props.event.title}</h2>
           <p>{this.props.event.description}</p>
           <button onClick={()=> this.toggleEventDetails(true)}>See Details</button>
+          <button onClick={()=> this.props.dispatch(deleteEvent(this.props.event.id))}>Delete</button>
         </li>
-      )
+      );
     }    
   }
 }

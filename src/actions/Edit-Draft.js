@@ -11,12 +11,12 @@ export const loadDraftIntoReduxState = draftObject => ({
 
 
 export const PUT_UPDATED_DRAFT_REQUEST = 'PUT_UPDATED_DRAFT_REQUEST';
-export const putUpdatedDraftRequest = message => ({
+export const putUpdatedDraftRequest = () => ({
   type: PUT_UPDATED_DRAFT_REQUEST,
   
 })
 export const PUT_UPDATED_DRAFT_SUCCESS = 'PUT_UPDATED_DRAFT_SUCCESS';
-export const putUpdatedDraftSuccess = message => ({
+export const putUpdatedDraftSuccess = () => ({
   type: PUT_UPDATED_DRAFT_SUCCESS,
   
 })
