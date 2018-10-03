@@ -2,6 +2,7 @@
 import React from 'react';
 import {Field, reduxForm, focus} from 'redux-form';
 import Input from './Input';
+import Button from './Button';
 import {login} from '../actions/Auth';
 import {required, nonEmpty} from '../Validators';
 const uuidv4 = require('uuid/v4');
@@ -69,9 +70,11 @@ export class LoginForm extends React.Component {
                     id={this.passwordId}
                     validate={[required, nonEmpty]}
                 />
-                <button disabled={this.props.pristine || this.props.submitting}>
-                    Log in
-                </button>
+                <div className='align-right'>
+                    <button disabled={this.props.pristine || this.props.submitting}>
+                        Log in
+                    </button>
+                </div>
             </form>
         );
     }

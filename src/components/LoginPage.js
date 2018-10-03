@@ -3,14 +3,11 @@ import { connect } from 'react-redux';
 
 import LoginForm from './LoginForm';
 import { Redirect } from 'react-router-dom';
-
 import './styles/LoginPage.css';
 
 
 export function LoginPage(props) {
  
-        
-
     console.log(props.loggedIn,'Login');
     if (props.loggedIn) {
         return <Redirect to="/dashboard" />;

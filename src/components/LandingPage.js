@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-//import { Link, Redirect } from 'react-router-dom';
-//import LoginForm from './LoginForm';
 import { connect } from 'react-redux';
 //import Dashboard from './Dashboard';
 import {Link, Redirect} from 'react-router-dom';
 import './styles/LandingPage.css';
+import Button from './Button';
 
 
 
@@ -26,12 +25,12 @@ export class LandingPage extends Component {
     return (
      
           <div className="container">
-        {/* <img className="home-img" src="../../assets/backgroundshape.png"/> */}
+ 
             <div className="hero">
               <h1>Let the good times roll! </h1>
               <hr></hr>
               <h3>Easy event planning for groups and friends</h3>
-              <button>Learn More</button>
+               <Button to="/about">Learn More</Button>
             </div>
           
            <img className="home-img" src="../../assets/home.png"/>

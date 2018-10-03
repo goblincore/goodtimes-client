@@ -11,6 +11,7 @@ import RegistrationPage from './components/RegistrationPage';
 import HeaderBar from './components/HeaderBar.js';
 import LoginPage  from './components/LoginPage';
 import Error404 from './components/Error404';
+import AboutPage from './components/AboutPage';
 import Dashboard from './components/Dashboard';
 import NewEventMain from './components/Events/newEventMain';
 import GuestEventForm from './components/Events/GuestEventForm';
@@ -75,7 +76,11 @@ class App extends Component{
                       }
                     keys={location.pathname.split('/').filter(a => a)[0]}
                     from={item => {
-                        if (item === 'home' || item === 'register' || item === 'login' || item === 'dashboard'){
+                      if (item === 'home' ||
+                          item === 'register' || 
+                          item === 'login'  || 
+                          item === 'dashboard'  ||
+                          item === 'about'){
                           console.log('HOME OR REGISTER');
                             return({ transform: 'translate(80%,0%)', opacity: 0})
                         } else  {
@@ -83,7 +88,11 @@ class App extends Component{
                         }
                     }}
                     enter={item => {
-                      if (item === 'home' || item === 'register' || item === 'login'  || item === 'dashboard'){
+                      if (item === 'home' ||
+                          item === 'register' || 
+                          item === 'login'  || 
+                          item === 'dashboard'  ||
+                          item === 'about'){
                             return({ transform: 'translate(0,0)', opacity: 1  })
                         } else {
                             return({  transform: 'translate(0,0)',opacity: 1 })
@@ -91,7 +100,7 @@ class App extends Component{
                     }}
 
                     leave={item => {
-                      if (item === 'home' || item === 'register' || item === 'login'){
+                      if (item === 'home' || item === 'register' || item === 'login' || item === 'about'){
                             return({ transform: 'translate(-80%,0%)', opacity: 0 })
                         } if(item === 'create-event'){
                           let el = document.querySelector(".createEventRoute");
@@ -119,6 +128,7 @@ class App extends Component{
                     {style => (
                         <Switch location={location}>
                         <Route exact path="/home" render={props => HomePage({...props, style})} />
+                        <Route exact path="/about" render={props => About_Page({ ...props, style })} />
                         <Route exact path="/login" render={props => Login_Page({ ...props, style })} />
                         <Route exact path="/register" render={props => RegisterPage({ ...props, style })} />
                         <Route exact path="/dashboard" render={props => DashboardPage({ ...props, style })} />
@@ -141,7 +151,9 @@ class App extends Component{
 
 
 const mapStateToProps = state => ({
-    loggedIn: state.auth.currentUser !== null
+    loggedIn: state.auth.currentUser !== null,
+    router:state.router
+
   });
 
   export default withRouter(connect(mapStateToProps)(App));
@@ -210,4 +222,14 @@ const GuestEventPage = ({...props, style}) => (
   
   )
 
+
+  const About_Page = ({...props, style}) => (
+    <animated.div className="mainRoute bg-about" style={{ ...style, background: '#fdfdfd' }}>
+     <div className="mainRouteItem" >
+     <AboutPage/>
+   
+     </div>
+    </animated.div>
+  
+  )
 

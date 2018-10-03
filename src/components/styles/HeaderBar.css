@@ -20,7 +20,8 @@ ul {
     padding:20px 80px;
     width:100%;
     position:fixed;
-    z-index:1
+    z-index:1;
+    border-bottom:1px dashed #ccc;
   }
 
   .header-bar h3{
@@ -29,11 +30,13 @@ ul {
 
   .header-nav {
       float: right;
+      transform:translateY(-10px);
   }
 
   .header-logo{
     display:inline-block;
     float:left;
+    transform:translateY(-10px);
   }
 
   @media only screen and (max-width: 450px) {

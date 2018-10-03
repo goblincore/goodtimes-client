@@ -102,6 +102,11 @@ button{
 }
 
 
+.button{
+  border:1px dashed grey;
+  border-radius:6px;
+}
+
 
 /* Page */
 

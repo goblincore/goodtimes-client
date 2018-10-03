@@ -1,0 +1,21 @@
+.about-info{
+
+    max-width:500px;
+    text-align:left;
+
+}
+
+
+.about-info ul{
+    list-style-type:circle;
+    list-style-position: inside;
+}
+
+.about-info li{
+    font-weight:bold;
+}
+
+.bg-about{
+    background:url('/assets/home-about.png') !important;
+background-size:cover !important;
+}

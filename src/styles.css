@@ -17,12 +17,7 @@ label{
       color:#575e96;
       background-color:#fdfdfd;
   }
-  button{
-    background-color:transparent;
-    font-size:16px;
-    padding:6px;
-    margin:10px;
-  }
+ 
 
   .container{
     text-align:center;
@@ -162,4 +157,9 @@ align-items: center; */
   
   p{
     line-height:180%;
+  }
+
+  hr{
+    border:none;
+    border:1px dashed #ddd;
   }
