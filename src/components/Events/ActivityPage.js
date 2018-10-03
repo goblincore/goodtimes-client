@@ -22,6 +22,13 @@ export default class ActivitySelect extends React.Component {
     e.preventDefault();
     this.props.dispatch(fetchActivities(this.props.latitude, this.props.longitude,times[0],times[times.length-1], e.target.value));
   }
+
+  deleteWhenClicked(e){
+    const { activityOptions }  = this.props.eventState;
+    const idOfActivityToDelete = e.target.id;
+    const filteredActivities = activityOptions.filter((option) => option._id !== idOfActivityToDelete);
+  this.props.dispatch(updateNewEventState({activityOptions: filteredActivities}));
+  }
   render(){
     
     let optionDisplay;
@@ -79,6 +86,7 @@ export default class ActivitySelect extends React.Component {
       </div>
       );
     }
+
     return(
       <div>
         <h1>Let's do something!</h1>
