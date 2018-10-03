@@ -4,30 +4,17 @@ import EventItem from './EventItem';
 import DraftItem from './DraftItem';
 
 export function EventList(props) {
-  console.log('PROPS', props);
-  if(props.userEvents !== null ){
-    switch(props.drafts){
-
-        case false:
-            return props.userEvents.map((event, i)=>{
-                return(
-                  <EventItem key={i} event={event} dispatch={props.dispatch}/>
-               )
-            });
-
-    case true:
-    return props.userEvents.map((event, i)=>{
-      return(
-         <DraftItem key={i} event={event} dispatch={props.dispatch}/>
-         )
-        });
-      }
-      }
-        
-  else{
-    return(
-      null
+  if (props.drafts) {
+    return (
+      <div>
+        {props.userEvents.map((event, i)=> <EventItem key={i} event={event} dispatch={props.dispatch}/> )}
+      </div>
+    )
+  } else {
+    return (
+      <div>
+        {props.userEvents.map((event, i)=> <DraftItem key={i} event={event} dispatch={props.dispatch}/> )}
+      </div>
     )
   }
 }
-

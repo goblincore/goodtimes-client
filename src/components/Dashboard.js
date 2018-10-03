@@ -65,7 +65,7 @@ export class Dashboard extends Component {
             <button id="display-active-events" onClick={() => this.displayEvents()}>Active Events</button>
             <Link to="/create-event"><h3>Create New Event  <MdAddCircleOutline /></h3></Link>
             <div id="event_boxes">
-              <EventList userEvents={eventsToDisplay} dispatch={this.props.dispatch} />
+              <EventList userEvents={eventsToDisplay} dispatch={this.props.dispatch} drafts={this.state.display}/>
             </div>
                     
           </div>
