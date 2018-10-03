@@ -11,8 +11,6 @@ export default function PreviewEvent (props) {
       title: props.eventState.title,
       draft: false,
       description: props.eventState.description,
-      city: props.eventState.city,
-      state: props.eventState.state,
       location: props.eventState.location,  //{latitude: ..., longitude: ...}
       locationCity: props.eventState.locationCity,
       scheduleOptions: props.eventState.scheduleOptions,
