@@ -5,7 +5,6 @@ import { updateNewEventState } from '../../actions/New-Event';
 import '../styles/RestaurantSelect.css';
 
 
-
 export default class RestaurantSelect extends React.Component {
 
   constructor(props){
@@ -23,9 +22,10 @@ export default class RestaurantSelect extends React.Component {
     this.props.dispatch(fetchRestaurants(this.props.cityCode, cuisineCode));
   }
   deleteWhenClicked(e){
+ 
     const { restaurantOptions } = this.props.eventState;
-    const textOfRestaurantToDelete = e.target.id;
-    const filteredRestaurants = restaurantOptions.filter((option) => option.name !== textOfRestaurantToDelete);
+    const titleOfRestaurantToDelete = e.target.id;
+    const filteredRestaurants = restaurantOptions.filter((option) => option.name !== titleOfRestaurantToDelete);
     this.props.dispatch(updateNewEventState({restaurantOptions: filteredRestaurants}));
   }
   render(){
@@ -44,7 +44,9 @@ export default class RestaurantSelect extends React.Component {
 
     let restaurantChoices = this.props.restaurants.restaurants.map((restaurant,index) => {
       return (
-        <div key={index}>
+
+        <div className="restaurant-item" key={restaurant.restaurant.name}>
+
           <input 
             onChange={(e)=>{
               if (e.target.checked === true) {
@@ -59,11 +61,13 @@ export default class RestaurantSelect extends React.Component {
                 this.props.dispatch(updateNewEventState({restaurantOptions: tempArray}));
               }
             }}
-            key={index} id={restaurant.restaurant.id} name={restaurant.restaurant.name} value={restaurant.restaurant.url} type="checkbox"></input>
+
+            id={restaurant.restaurant.id} name={restaurant.restaurant.name} value={restaurant.restaurant.url} type="checkbox" ></input>
           <img src={restaurant.restaurant.thumb==='' ? 'https://www.redbytes.in/wp-content/uploads/2018/09/zomato-logo-AD6823E433-seeklogo.com_.png' : restaurant.restaurant.thumb} alt="Thumbnail"></img>
-          <a key={index+1} href={restaurant.restaurant.url} target="#">{restaurant.restaurant.name}</a>
+          <a href={restaurant.restaurant.url} target="#">{restaurant.restaurant.name}</a>
           <p>{'$'.repeat(restaurant.restaurant.price_range)}</p>
           <p>Rating: {restaurant.restaurant.user_rating.aggregate_rating}</p>
+
         </div>
       );
     });
@@ -76,8 +80,11 @@ export default class RestaurantSelect extends React.Component {
     }
     
     return(
-      <div className="container">
-        <p>Change the cuisine to see a list of restaurant options. Check off restaurants to add them to your list of options. You can select multiple restaurants!</p>
+      <div className="container text-left">
+      <h1>Let's go eat!</h1>
+        <p>Change the cuisine to see a list of restaurant options. 
+          Check off restaurants to add them to your list of options.
+           You can select multiple restaurants!</p>
         <div id="select-cuisine">
           <form id="select-cuisine-form">
             <label>Select Cuisine</label>

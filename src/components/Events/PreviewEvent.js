@@ -1,6 +1,7 @@
 import React from 'react';
 import { putUpdatedDraft } from '../../actions/Edit-Draft';
 import { postNewEvent, resetNewEventState } from '../../actions/New-Event';
+import '../styles/PreviewEvent.css'
 
 
 export default function PreviewEvent (props) {
@@ -11,8 +12,6 @@ export default function PreviewEvent (props) {
       title: props.eventState.title,
       draft: false,
       description: props.eventState.description,
-      city: props.eventState.city,
-      state: props.eventState.state,
       location: props.eventState.location,  //{latitude: ..., longitude: ...}
       locationCity: props.eventState.locationCity,
       scheduleOptions: props.eventState.scheduleOptions,
@@ -45,8 +44,6 @@ export default function PreviewEvent (props) {
       title: props.eventState.title,
       draft: true,
       description: props.eventState.description,
-      city: props.eventState.city,
-      state: props.eventState.state,
       location: props.eventState.location,  //{latitude: ..., longitude: ...}
       locationCity: props.eventState.locationCity,
       scheduleOptions: props.eventState.scheduleOptions,
@@ -69,9 +66,8 @@ export default function PreviewEvent (props) {
       title: props.eventState.title,
       draft: true,
       description: props.eventState.description,
-      city: props.eventState.city,
-      state: props.eventState.state,
       location: props.eventState.location,  //{latitude: ..., longitude: ...}
+      locationCity: props.eventState.locationCity,
       scheduleOptions: props.eventState.scheduleOptions,
       restaurantOptions: props.eventState.restaurantOptions,
       activityOptions: props.eventState.activityOptions
@@ -126,20 +122,23 @@ export default function PreviewEvent (props) {
     return ( <h1>Loading...</h1> )
    } else { 
         return (
-
+  <div className="absolute-wrapper">
     <div className='preview-event'>
       <div>
         {/* <input type='image'/> */}
         <button type='button' onClick={() => props.prevPage()}>
           {'<-'} Back
         </button>
+
+           <button type='button' onClick={() => onDraft()}>Save as Draft</button>
+        <button type='button' onClick={() => onSubmit()}>Looks good!</button>
         <h1>Preview Event Form</h1>
       </div>
 
       
       <div className="guest-event-form-wrapper">
         <h3>You're invited to:</h3>
-        <h1>Title</h1><br/>
+        <h1>{props.eventState.title}</h1><br/>
         <h3>Vote to decide on a time and place.</h3>
             
         <h3>Description</h3>
@@ -161,10 +160,11 @@ export default function PreviewEvent (props) {
         </form>     
       </div>
 
-      <div>
+      {/* <div>
         <button type='button' onClick={() => onDraft()}>Save as Draft</button>
         <button type='button' onClick={() => onSubmit()}>Looks good!</button>
-      </div>
+      </div> */}
+    </div>
     </div>
   );
 }

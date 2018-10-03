@@ -66,3 +66,9 @@ export const fetchActivities = (latitude, longitude, start, end, category) => (d
       .catch(err => dispatch(fetchCategoriesError(err)));
   }
 };
+
+
+export const RESET_ACTIVITIES_REDUCER = 'RESET_ACTIVITIES_REDUCER';
+export const resetActivitiesReducer = () => ({
+  type: RESET_ACTIVITIES_REDUCER
+})

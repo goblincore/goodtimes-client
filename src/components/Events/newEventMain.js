@@ -1,25 +1,24 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { CreateEvent } from './CreateEvent';
-import DateSelectPage from './DateSelectPage';
 import {Redirect,withRouter} from 'react-router-dom';
-import PreviewEvent from './PreviewEvent';
-import ActivitySelect from './ActivityPage';
-import RestaurantSelect from './RestaurantSelect';
-import moment from 'moment';
-import SuccessfullyCreatedEvent from './SuccessfullyCreatedEvent';
+import { initialState } from '../../reducers/NewEvent';
+
 import { updateNewEventState, newEventErrorMessage } from '../../actions/New-Event';
+
+import EventBottomNav from './EventBottomNav';
+import CreateEventContainer from './CreateEventContainer';
 
 
 export class NewEventMain extends React.Component {
   constructor(props){
     super(props);
-
+    console.log('New Event Main props',props);
     this.state = {
       pageCount: this.props.pageCount ? this.props.pageCount :  1
     };
   
   }
+
 
 
 
@@ -39,6 +38,7 @@ export class NewEventMain extends React.Component {
       console.log(err);
     }
   }
+
 
   componentWillUnmount(){
   
@@ -73,7 +73,8 @@ export class NewEventMain extends React.Component {
   }
 
   goHome = () => {
-    this.setState({pageCount:0})
+    this.props.history.push(`/dashboard`);
+ 
   }
   render(){
     
@@ -81,79 +82,27 @@ export class NewEventMain extends React.Component {
       return <Redirect to="/" />
     }
     if(this.props.loggedIn){
-      let component;
-      switch (this.state.pageCount) {
-      case 0:
-        return <Redirect to='/dashboard' />;
-      case 1:
-        //title, location, description
-        component = <CreateEvent 
-          nextPage={this.nextPage} 
-          dispatch={this.props.dispatch} 
-          prevPage={this.prevPage} 
-          eventState={this.props.newEvent}
-        />;
-        break;
-      case 2:
-        //date/time options
-        component = <DateSelectPage nextPage={this.nextPage} dispatch={this.props.dispatch} prevPage={this.prevPage} eventState={this.props.newEvent}/>;
-        break;
-      case 3:
-        //food options
-        component = <RestaurantSelect 
-        nextPage={this.nextPage} 
-        dispatch={this.props.dispatch} 
-        prevPage={this.prevPage} 
-        eventState={this.props.newEvent}
-        restaurants={this.props.restaurants}
-        cityCode={this.props.restaurants.cityCode}
-        />;
-        break;
-      case 4:
-        //activity options
-        component = <ActivitySelect
-          dispatch={this.props.dispatch} 
-          eventState={this.props.newEvent}
-          nextPage={this.nextPage}
-          prevPage={this.prevPage}
-          categories={this.props.activities.categories}
-          activities={this.props.activities.activities}
-          loading={this.props.activities.loading}
-          latitude={this.props.newEvent.location.latitude}
-          longitude={this.props.newEvent.location.longitude}
-          times={this.props.newEvent.scheduleOptions.map(time => 
-                  moment(time.date, 'llll').format('YYYY-MM-DDTHH:mm:ss'))}
-        />;
-        break;
-      case 5:
-        //preview, confirm page
-        component = <PreviewEvent 
-          nextPage={this.nextPage}
-          goHome={this.goHome} 
-          dispatch={this.props.dispatch} 
-          prevPage={this.prevPage} 
-          eventState={this.props.newEvent}
-          currentUser={this.props.currentUser}
-        />;
-        break;
-      case 6:
-        //successful submition page
-        component = <SuccessfullyCreatedEvent 
-          dispatch={this.props.dispatch} 
-          eventState={this.props.newEvent}
-          nextPage={this.nextPage}
-          // userEmail={this.props.currentUser.email}
-        />;
-        break;
-      case 7:
-        return <Redirect to='/dashboard'/>;
-      }
+      return(
+       <div className="newEventWrapper">
+       
+         <CreateEventContainer 
+            pageNum={this.state.pageCount} 
+            props={this.props} 
+            nextPage={this.nextPage} 
+            prevPage={this.prevPage} 
+            goHome={this.goHome}/>
 
-      return (
-        <div className='new-event-form'>
-          {component}
-        </div>
-      );
+          <EventBottomNav 
+            pageNum={this.state.pageCount} 
+            props={this.props} 
+            nextPage={this.nextPage} 
+            prevPage={this.prevPage}
+            goHome={this.goHome} />
+
+       </div>
+      )
+
+
     } else {
       return <Redirect to="/" />;
     }

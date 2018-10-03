@@ -13,6 +13,18 @@ export default class ActivitySelect extends React.Component {
     e.preventDefault();
     this.props.dispatch(fetchActivities(this.props.latitude, this.props.longitude,times[0],times[times.length-1], e.target.value));
   }
+
+  deleteWhenClicked(e){
+    console.log('Delete fired');
+    console.log('E.target', e.target);
+
+    const activities  = this.props;
+    console.log('ACtivities', activities);
+    const titleOfActivityToDelete = e.target.id;
+    const filteredActivities = activities.filter((option) => option.name !== titleOfActivityToDelete);
+    console.log('FILTERED activites', filteredActivities);
+    this.props.dispatch(updateNewEventState({activityOptions: filteredActivities}));
+  }
   render(){
     let categoryFilters;
     if(this.props.categories.length > 0){
@@ -68,7 +80,10 @@ export default class ActivitySelect extends React.Component {
     let selectedActivitiesDisplay;
     if ( this.props.eventState.activityOptions.length > 0 ){
       console.log('selected activities', this.props.eventState.activityOptions);
-      selectedActivitiesDisplay = this.props.eventState.activityOptions.map((activity,index) => <li key={index}>{activity.title}</li>);
+      selectedActivitiesDisplay = this.props.eventState.activityOptions.map((activity,index) => {  
+      console.log('ACtivity', activity);
+        return  <li key={index} id={activity.title} onClick={e => this.deleteWhenClicked(e)}>{activity.title}</li> 
+      });
     }
     return(
       <div>
