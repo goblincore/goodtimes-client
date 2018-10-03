@@ -31,7 +31,7 @@ export class CreateEvent extends React.Component {
 
     this.setState({locationFeedback: 'Checking city...'});
     //Get Latitude and Longitude
-    return fetch(`https://dev.virtualearth.net/REST/v1/Locations?q=${state}%20${city}&includeNeighborhood=0&&key=${bingMapsKey}`)
+    return fetch(`https://dev.virtualearth.net/REST/v1/Locations?q=${city}%20${state}&includeNeighborhood=0&&key=${bingMapsKey}`)
       .then(res => res.json())
       .then(bingMapsResult => {
         let possibleResults = bingMapsResult.resourceSets[0].resources;

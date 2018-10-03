@@ -37,48 +37,11 @@ export default function PreviewEvent (props) {
 
 
  function onDraft () {
-  //console.log('Preview Event' ,props.eventState);
-   if(!props.eventState.draft){ 
-    const newEvent = {
-      userId: props.currentUser.id,
-      title: props.eventState.title,
-      draft: true,
-      description: props.eventState.description,
-      location: props.eventState.location,  //{latitude: ..., longitude: ...}
-      locationCity: props.eventState.locationCity,
-      scheduleOptions: props.eventState.scheduleOptions,
-      restaurantOptions: props.eventState.restaurantOptions,
-      activityOptions: props.eventState.activityOptions
-    };
-    return props.dispatch(postNewEvent(newEvent))
-      .then(() => {
-        props.dispatch(resetNewEventState());
-        localStorage.removeItem('eventDraft');
-        localStorage.removeItem('newEventPageCount');
-        props.goHome();
-      })
-      .catch(err => console.log('ERROR HANDLING HERE dispatch(changeErrorMessaeg(err.message))'));
-  } 
-  else {
-    const updatedDraft = { 
-      id: props.eventState.id,
-    userId: props.userId,
-      title: props.eventState.title,
-      draft: true,
-      description: props.eventState.description,
-      location: props.eventState.location,  //{latitude: ..., longitude: ...}
-      locationCity: props.eventState.locationCity,
-      scheduleOptions: props.eventState.scheduleOptions,
-      restaurantOptions: props.eventState.restaurantOptions,
-      activityOptions: props.eventState.activityOptions
-     }  
-     return props.dispatch(putUpdatedDraft(updatedDraft))
-     .then(() => props.goHome())
-     .catch(err => console.log('ERROR HANDLING HERE dispatch(changeErrorMessaeg(err.message))'));
-  
-     }
-
+   props.saveAsDraft();
+   props.goHome();
  }
+
+
   let timesDisplay, restaurantsDisplay, activitiesDisplay;
 
     timesDisplay = props.eventState.scheduleOptions.map((option, i) => { 
@@ -124,13 +87,10 @@ export default function PreviewEvent (props) {
         return (
   <div className="absolute-wrapper">
     <div className='preview-event'>
-      <div>
-        {/* <input type='image'/> */}
-        <button type='button' onClick={() => props.prevPage()}>
-          {'<-'} Back
-        </button>
 
-           <button type='button' onClick={() => onDraft()}>Save as Draft</button>
+      <div>
+        <button type='button' onClick={() => props.prevPage()}>{'<-'} Back</button>
+        <button type='button' onClick={() => onDraft()}>Save as Draft</button>
         <button type='button' onClick={() => onSubmit()}>Looks good!</button>
         <h1>Preview Event Form</h1>
       </div>
@@ -160,10 +120,6 @@ export default function PreviewEvent (props) {
         </form>     
       </div>
 
-      {/* <div>
-        <button type='button' onClick={() => onDraft()}>Save as Draft</button>
-        <button type='button' onClick={() => onSubmit()}>Looks good!</button>
-      </div> */}
     </div>
     </div>
   );
@@ -171,4 +127,3 @@ export default function PreviewEvent (props) {
 }
 
 
-//PROPS: <PreviewEvent nextPage={this.nextPage} dispatch={this.props.dispatch} prevPage={this.prevPage} eventState={this.props.newEvent}/>;

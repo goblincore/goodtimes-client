@@ -68,11 +68,9 @@ export default class DateSelectPage extends React.Component {
   }
 
   render(){
-    console.log("FROM PAGE 2: DATESELECTPAGE", this.props);
     //this.props.eventState.draft
     let {inputMoment, showSeconds, locale, size} = this.state;
 
-    console.log( (this.state.thisTime.format('llll') == this.state.inputMoment.format('llll') ? 'true' : 'false')); 
     return (
       <div className="container">
         <div className="width1100">
@@ -122,9 +120,12 @@ export default class DateSelectPage extends React.Component {
         <button type='button' onClick={() => this.props.prevPage()}>
           {'<-'} Back
         </button>
-         
+        <button type='button' 
+          onClick={() => this.props.saveAsDraft()}>
+          Save as Draft
+        </button>
         <button onClick={ () => this.handleNextPage()}>
-          Next Page
+          Next {'->'}
         </button>
       
       </div>

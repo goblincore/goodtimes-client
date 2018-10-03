@@ -83,11 +83,12 @@ export default class ActivitySelect extends React.Component {
 
         {activityOptions}
       
-        <button type='button' onClick={() => this.props.prevPage()}>
-          {'<-'} Back
-        </button>
-
-        <button type='button' onClick={()=>this.props.nextPage()}>Next Page</button>
+        <button type='button' onClick={() => this.props.prevPage()}>{'<-'} Back</button>
+        <button type='button' 
+            onClick={() => this.props.saveAsDraft()}>
+            Save as Draft
+          </button>
+        <button type='button' onClick={()=>this.props.nextPage()}>Next {'->'}</button>
       </div>
     );
   }
