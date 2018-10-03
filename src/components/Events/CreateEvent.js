@@ -107,6 +107,10 @@ export class CreateEvent extends React.Component {
 
   ////// RENDER BEGINS HERE ////////
   render(){
+
+    console.log('PAGE 1: CreateEVENT this.props:', this.props);
+
+   // console.log('PROPS in CREATE EVENT',this.props);
     let errorMessage = null;
     let locationMessage = null;
     if (this.props.eventState.errorMessage){
@@ -138,7 +142,7 @@ export class CreateEvent extends React.Component {
           </p>
         )
       }
-
+console.log('Create EVENT', this.props);
     return (
       <div>
       <h3>Let's get started!</h3>

@@ -68,6 +68,8 @@ export default class DateSelectPage extends React.Component {
   }
 
   render(){
+    console.log("FROM PAGE 2: DATESELECTPAGE", this.props);
+    //this.props.eventState.draft
     let {inputMoment, showSeconds, locale, size} = this.state;
 
     console.log( (this.state.thisTime.format('llll') == this.state.inputMoment.format('llll') ? 'true' : 'false')); 

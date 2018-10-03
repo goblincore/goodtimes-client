@@ -17,6 +17,7 @@ import NewEventMain from './components/Events/newEventMain';
 import GuestEventForm from './components/Events/GuestEventForm';
 
 
+
 //Used by React Router
 import createHistory from 'history/createBrowserHistory';
 
@@ -100,7 +101,7 @@ class App extends Component{
                     }}
 
                     leave={item => {
-                      if (item === 'home' || item === 'register' || item === 'login' || item === 'about'){
+                      if (item === 'home' || item === 'register' || item === 'login' || item === 'about' || item ==='edit-draft'){
                             return({ transform: 'translate(-80%,0%)', opacity: 0 })
                         } if(item === 'create-event'){
                           let el = document.querySelector(".createEventRoute");
@@ -134,6 +135,14 @@ class App extends Component{
                         <Route exact path="/dashboard" render={props => DashboardPage({ ...props, style })} />
                         <Route exact path="/create-event" render={props => CreateEventPage({ ...props, style })} />
                          <Route path="/guestevents/:eventId" render={props => GuestEventPage({ ...props, style })} />
+                         <Route exact path="/edit-draft" render={(props) => {
+                             console.log('APP JS props passes', this.props.location.state)
+                             return Edit_Draft_Page({...props,style})
+                        }}/>
+                         {/* <Route exact path="/edit-draft" render={(props) => {
+                             console.log('APP JS props passes', this.props.location.state)
+                             return <NewEventMain {...props} {...style} {...this.props.location.state} />
+                        }}/> */}
                         {/* <Route render={props => <Error404 {...props} style={style} />} />; */}
                     {/* //<GuestEventForm {...props} style={style}  */}
                     {/* <Route exact path="/guestevents/:eventId" component={GuestEventForm} />  */}
@@ -232,4 +241,15 @@ const GuestEventPage = ({...props, style}) => (
     </animated.div>
   
   )
+
+  const Edit_Draft_Page = ({...props, style}) => (
+    <animated.div className="mainRoute bg-about" style={{ ...style, background: '#fdfdfd' }}>
+     <div className="mainRouteItem" >
+     <NewEventMain/>
+   
+     </div>
+    </animated.div>
+  
+  )
+
 

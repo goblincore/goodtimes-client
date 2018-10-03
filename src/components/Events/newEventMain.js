@@ -14,8 +14,9 @@ export class NewEventMain extends React.Component {
     super(props);
 
     this.state = {
-      pageCount: 1,
+      pageCount: this.props.pageCount ? this.props.pageCount :  1
     };
+  
   }
 
 
@@ -40,7 +41,9 @@ export class NewEventMain extends React.Component {
 
 
   componentWillUnmount(){
+  
     localStorage.removeItem('newEventPageCount');
+
   }
 
   componentDidUpdate(){
@@ -74,6 +77,10 @@ export class NewEventMain extends React.Component {
  
   }
   render(){
+    
+    if(this.state.redirect){
+      return <Redirect to="/" />
+    }
     if(this.props.loggedIn){
       return(
        <div className="newEventWrapper">

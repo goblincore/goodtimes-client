@@ -7,6 +7,7 @@
     "jwt-decode": "^2.2.0",
     "lodash": "^4.17.11",
     "moment": "^2.22.2",
+    "node-sass": "^4.9.3",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
     "react-icons": "^2.2.7",
@@ -31,5 +32,6 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
+   
   }
 }
