@@ -14,7 +14,6 @@ import { CLIENT_BASE_URL } from '../../config';
 
   sendEmail(e){
     e.preventDefault();
-    
     const recipients = e.target.to.value.split(',');
     this.props.dispatch(sendEmail({
       to: recipients,
