@@ -7,10 +7,11 @@
 
    /* padding-top: 100px; */
    width: 400px;
-   flex-direction: column;
-   display: flex;
+   /* flex-direction: column; */
+   padding:0px 20px;
+   /* display: flex; */
    float: left;
-   justify-content: center;
+   /* justify-content: center; */
    text-align: left;
 
 }
@@ -30,7 +31,8 @@
     float:left;
   */
 
-  width: 500px;
+  max-width: 500px;
+  min-width:400px;
   display: flex;
   /* padding-top: 180px; */
   float: left;

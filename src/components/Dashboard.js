@@ -73,7 +73,7 @@ export class Dashboard extends Component {
                     </div>
                     <div id="dashboard_eventlist">
                      <ul className="block-li">
-                     <EventList userEvents={eventsToDisplay} dispatch={this.props.dispatch} drafts={this.state.display}/>
+                     <EventList loading={this.props.loading} userEvents={eventsToDisplay} dispatch={this.props.dispatch} events={this.state.display}/>
                      </ul>
                     </div>
                 </div>
@@ -89,7 +89,8 @@ export class Dashboard extends Component {
 const mapStateToProps = state => ({
   loggedIn: state.auth.currentUser !== null,
   currentUser: state.auth.currentUser,
-  userEvents:state.auth.userEvents
+  userEvents:state.auth.userEvents,
+  loading:state.auth.loading
 });
 
 export default withRouter(connect(mapStateToProps)(Dashboard));
