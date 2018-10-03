@@ -4,6 +4,15 @@ import EventItem from './EventItem';
 import DraftItem from './DraftItem';
 
 export function EventList(props) {
+
+  if(props)
+
+  if(props.loading){
+    <p>Loading...</p>
+  }
+
+ 
+
   if (props.drafts) {
     return (
       <div>
@@ -17,4 +26,7 @@ export function EventList(props) {
       </div>
     )
   }
+
+
+
 }
