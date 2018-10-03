@@ -16,8 +16,8 @@ export default class ActivitySelect extends React.Component {
 
   deleteWhenClicked(e){
     const { activityOptions }  = this.props.eventState;
-    const titleOfActivityToDelete = e.target.id;
-    const filteredActivities = activityOptions.filter((option) => option.title !== titleOfActivityToDelete);
+    const idOfActivityToDelete = e.target.id;
+    const filteredActivities = activityOptions.filter((option) => option._id !== idOfActivityToDelete);
   this.props.dispatch(updateNewEventState({activityOptions: filteredActivities}));
   }
   render(){
@@ -77,7 +77,7 @@ export default class ActivitySelect extends React.Component {
       console.log('selected activities', this.props.eventState.activityOptions);
       selectedActivitiesDisplay = this.props.eventState.activityOptions.map((activity,index) => {  
       console.log('ACtivity', activity);
-        return  <li key={index} id={activity.title} onClick={e => this.deleteWhenClicked(e)}>{activity.title}</li> 
+        return  <li key={index} id={activity._id} onClick={e => this.deleteWhenClicked(e)}>{activity.title}</li> 
       });
     }
     return(
