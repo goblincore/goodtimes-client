@@ -8,9 +8,6 @@ import { updateNewEventState, newEventErrorMessage } from '../../actions/New-Eve
 import EventBottomNav from './EventBottomNav';
 import CreateEventContainer from './CreateEventContainer';
 
-import throttle from 'lodash/throttle';
-
-
 
 export class NewEventMain extends React.Component {
   constructor(props){

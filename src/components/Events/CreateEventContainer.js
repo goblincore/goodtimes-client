@@ -47,6 +47,7 @@ export default function CreateEventContainer(props){
       component = <ActivitySelect
         dispatch={props.props.dispatch} 
         eventState={props.props.newEvent}
+        prevPage={props.prevPage} 
         nextPage={props.nextPage}
         categories={props.props.activities.categories}
         activities={props.props.activities.activities}
@@ -72,6 +73,7 @@ export default function CreateEventContainer(props){
       //successful submition page
       component = <SuccessfullyCreatedEvent 
         dispatch={props.props.dispatch} 
+        prevPage={props.prevPage} 
         eventState={props.props.newEvent}
         nextPage={props.nextPage}
       />;
