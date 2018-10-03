@@ -15,15 +15,10 @@ export default class ActivitySelect extends React.Component {
   }
 
   deleteWhenClicked(e){
-    console.log('Delete fired');
-    console.log('E.target', e.target);
-
-    const activities  = this.props;
-    console.log('ACtivities', activities);
+    const { activityOptions }  = this.props.eventState;
     const titleOfActivityToDelete = e.target.id;
-    const filteredActivities = activities.filter((option) => option.name !== titleOfActivityToDelete);
-    console.log('FILTERED activites', filteredActivities);
-    this.props.dispatch(updateNewEventState({activityOptions: filteredActivities}));
+    const filteredActivities = activityOptions.filter((option) => option.title !== titleOfActivityToDelete);
+  this.props.dispatch(updateNewEventState({activityOptions: filteredActivities}));
   }
   render(){
     let categoryFilters;
