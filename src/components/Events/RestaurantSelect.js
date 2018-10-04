@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { fetchRestaurants, fetchZomatoLocation } from '../../actions/RestaurantSelect';
-import { updateNewEventState } from '../../actions/New-Event';
+import { updateNewEventState, newEventErrorMessage } from '../../actions/New-Event';
 import '../styles/RestaurantSelect.css';
 
 
@@ -24,14 +24,24 @@ export default class RestaurantSelect extends React.Component {
 
   deleteWhenClicked(e){
     const { restaurantOptions } = this.props.eventState;
-    const idOfRestaurantToDelete = e.target.id;
+    const idOfRestaurantToDelete = e.target.dataset.zomatoid;
+    // If there is a restaurant list showing, make sure the restaurant unchecks on delete
+    if (this.props.restaurants.restaurants.find(restaurant => restaurant.restaurant.id === idOfRestaurantToDelete)) {
+      document.getElementById(idOfRestaurantToDelete).checked = false;
+    }
     const filteredRestaurants = restaurantOptions.filter(option => option.zomatoId !== idOfRestaurantToDelete);
     this.props.dispatch(updateNewEventState({restaurantOptions: filteredRestaurants}));
   }
 
   handleCheckBoxChange(e){
     if (e.target.checked === true) {
+      // Makes sure the restaurant was not already selected
+      if (this.props.eventState.restaurantOptions.find(restaurant => restaurant.zomatoId === e.target.id)) {
+        return this.props.dispatch(newEventErrorMessage('You already selected that restaurant.'));
+      }
+
       this.props.dispatch(updateNewEventState({
+        errorMessage: '',
         restaurantOptions: [...this.props.eventState.restaurantOptions, 
           {zomatoId: e.target.id, website: e.target.value, name: e.target.name}
         ]
@@ -39,7 +49,10 @@ export default class RestaurantSelect extends React.Component {
     }
     else {
       const tempArray =  this.props.eventState.restaurantOptions.filter(restaurant => restaurant.zomatoId !== e.target.id);
-      this.props.dispatch(updateNewEventState({restaurantOptions: tempArray}));
+      this.props.dispatch(updateNewEventState({
+        errorMessage: '',
+        restaurantOptions: tempArray
+      }));
     }
   }
 
@@ -57,16 +70,21 @@ export default class RestaurantSelect extends React.Component {
     }
 
 
-    let restaurantChoices = this.props.restaurants.restaurants.map((restaurant,index) => {
-      return (
+    let restaurantChoices = this.props.restaurants.restaurants.map( restaurant => {
+      let checked = false;
+      // If its already in the new event state
+      if (this.props.eventState.restaurantOptions.find(option => option.zomatoId === restaurant.restaurant.id)) {
+        checked = true;
+      }
 
-        <div className="restaurant-item" key={restaurant.restaurant.id}>
+      return (
+        <div className={`restaurant-item checked-${checked}`} key={restaurant.restaurant.id}>
 
           <input 
-            onChange={ e => this.handleCheckBoxChange(e)}
+            onChange={ e => this.handleCheckBoxChange(e)} defaultChecked={checked}
             id={restaurant.restaurant.id} name={restaurant.restaurant.name} value={restaurant.restaurant.url} type="checkbox" ></input>
           <img src={restaurant.restaurant.thumb==='' ? 'https://www.redbytes.in/wp-content/uploads/2018/09/zomato-logo-AD6823E433-seeklogo.com_.png' : restaurant.restaurant.thumb} alt="Thumbnail"></img>
-          <a href={restaurant.restaurant.url} target="#">{restaurant.restaurant.name}</a>
+          <a href={restaurant.restaurant.url} target="_blank">{restaurant.restaurant.name}</a>
           <p>{'$'.repeat(restaurant.restaurant.price_range)}</p>
           <p>Rating: {restaurant.restaurant.user_rating.aggregate_rating}</p>
 
@@ -78,7 +96,7 @@ export default class RestaurantSelect extends React.Component {
     let selectedRestaurantsDisplay;
     if ( this.props.eventState.restaurantOptions.length > 0 ){
       selectedRestaurantsDisplay = this.props.eventState.restaurantOptions.map(restaurant => 
-      <li key={restaurant.zomatoId} id={restaurant.zomatoId} onClick={(e) => this.deleteWhenClicked(e)}>{restaurant.name} </li>);
+      <li key={restaurant.zomatoId} data-zomatoid={restaurant.zomatoId} onClick={(e) => this.deleteWhenClicked(e)}>{restaurant.name} </li>);
     }
     
     return(
@@ -97,7 +115,7 @@ export default class RestaurantSelect extends React.Component {
           </form>
          
        
-         
+         <p>{this.props.eventState.errorMessage}</p>
          
           <ul>Restaurant Choices{selectedRestaurantsDisplay}</ul>
 
