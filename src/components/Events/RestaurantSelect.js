@@ -44,7 +44,7 @@ export default class RestaurantSelect extends React.Component {
     let restaurantChoices = this.props.restaurants.restaurants.map((restaurant,index) => {
       return (
 
-        <div className="restaurant-item" key={restaurant.restaurant.name}>
+        <div className="restaurant-item" key={restaurant.restaurant.id}>
 
           <input 
             onChange={(e)=>{
@@ -98,11 +98,12 @@ export default class RestaurantSelect extends React.Component {
          
           <ul>Restaurant Choices{selectedRestaurantsDisplay}</ul>
 
-          <button type='button' onClick={() => this.props.prevPage()}>
-            {'<-'} Back
+          <button type='button' onClick={() => this.props.prevPage()}>{'<-'} Back</button>
+          <button type='button' 
+            onClick={() => this.props.saveAsDraft()}>
+            Save as Draft
           </button>
-
-          <button type='button' onClick={()=>this.props.nextPage()}>Next Page</button>
+          <button type='button' onClick={()=>this.props.nextPage()}>Next {'->'}</button>
         </div>
 
         <div id="restaurant-list">
