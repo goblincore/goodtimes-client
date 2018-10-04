@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import {Link, Redirect, withRouter} from 'react-router-dom';
 import { MdEdit } from 'react-icons/lib/md';
-import { CLIENT_BASE_URL } from '../config';
 import './styles/Index.css';
 import { loadDraftIntoReduxState } from '../actions/Edit-Draft';
 
@@ -135,10 +134,7 @@ let activtyOptionsDisplay, restaurantOptionsDisplay;
          {restaurantOptionsDisplay}
 
          {activtyOptionsDisplay}
-          <div>
-            <p>Voting Link:</p>
-            <a href={`${CLIENT_BASE_URL}/guestevents/${this.props.event.id}`} target="_blank">{CLIENT_BASE_URL}/guestevents/{this.props.event.id}</a>
-          </div>
+         
         </li>
       )
     }  
