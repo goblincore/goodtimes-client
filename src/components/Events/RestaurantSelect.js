@@ -44,7 +44,7 @@ export default class RestaurantSelect extends React.Component {
     let restaurantChoices = this.props.restaurants.restaurants.map((restaurant,index) => {
       return (
 
-        <div className="restaurant-item" key={restaurant.restaurant.name}>
+        <div className="restaurant-item" key={restaurant.restaurant.id}>
 
           <input 
             onChange={(e)=>{
