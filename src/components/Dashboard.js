@@ -6,6 +6,7 @@ import './styles/Dashboard.css';
 import {Link, Redirect, withRouter} from 'react-router-dom';
 import { fetchUserEvents } from '../actions/Protected-Data';
 
+
 export class Dashboard extends Component {
   constructor(props){
     super(props);
@@ -27,7 +28,6 @@ export class Dashboard extends Component {
   componentWillUnmount(){
     clearInterval(this.interval);
   }
-
 
 
   displayEvents(){

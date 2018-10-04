@@ -2,19 +2,24 @@ import React from 'react';
 import { FaThumbsUp, FaToggleOff, FaToggleOn } from "react-icons/lib/fa";
 import { deleteEvent } from '../actions/New-Event';
 import './styles/EventItem.css';
+import DeleteWarning from './DeleteWarning';
 
 export default class EventItem extends React.Component{
   constructor(props){
     super(props);
     this.state = {
-      showDetails: false
-    };
+      showDetails: false,
   }
+}
 
-  toggleEventDetails(bool){
-    this.setState(
-      {showDetails: bool}
-    );
+toggleEventDetails=(bool)=>{
+  this.setState(
+    {showDetails: bool}
+  );
+}
+
+  deleteEvent =()=>{
+    this.props.dispatch(deleteEvent(this.props.event.id));
   }
 
   render(){
@@ -25,7 +30,7 @@ export default class EventItem extends React.Component{
         <li className='user-event'>
            <span>  
              <h2>{this.props.event.title}</h2>
-              <button className="floatRight noBorder" onClick={()=> this.toggleEventDetails(false)}>Hide Details <FaToggleOn/></button>
+              <button className="floatRight noBorder" onClick={()=>this.toggleEventDetails(false)}>Hide Details <FaToggleOn/></button>
            </span>
           <p>{this.props.event.description}</p>
         
@@ -78,14 +83,14 @@ export default class EventItem extends React.Component{
         <li className='user-event'>
          <span>  
             <h2>{this.props.event.title}</h2>    
-           <button className="floatRight noBorder" onClick={()=> this.toggleEventDetails(true)}>See Details <FaToggleOff/></button>
+           <button className="floatRight noBorder" onClick={()=>this.toggleEventDetails(true)}>See Details <FaToggleOff/></button>
         </span> 
     
           <p>{this.props.event.description}</p>
          {/* <p>View Poll Page</p>
           <p>Current Highest Votes: </p> */}
         
-          <button onClick={()=> this.props.dispatch(deleteEvent(this.props.event.id))}>Delete</button>
+          <DeleteWarning deleteEvent={this.deleteEvent}/>
         </li>
       );
     }    
