@@ -98,10 +98,12 @@ class GuestEventForm extends Component {
             <label> {option.date} </label> 
           </div>
         );});
-
+if(restaurantOptions.length > 0){ 
       restaurantsDisplay = restaurantOptions.map((option, i) => { 
         let link = <a href={option.website}>{option.name}</a>;
         return (
+          <div className="restaurant-options"> 
+          <h4>Choose food...</h4>
           <div key={i} className="option_container">
             <input 
               type="checkbox" 
@@ -109,12 +111,16 @@ class GuestEventForm extends Component {
               name="restaurant-option"
               value={option.zomatoId} />
             <label> {link} </label>
-          </div> );});   
-
+          </div>    
+        </div>);});   
+    }
+    if(activityOptions.length > 0){ 
       activitiesDisplay = activityOptions.map((option, i) => { 
         let link = <a href={option.link}>{option.title}</a>;
         let dates = <p>{option.start} - {option.end}</p>;
         return (
+          <div className="activity-options"> 
+              <h4>Choose activities...</h4>
           <div key={i} className="option_container">
             <input 
               type="checkbox" 
@@ -122,8 +128,9 @@ class GuestEventForm extends Component {
               name="activity-option"
               value={option.ebId} />
             <label> {link} {dates}</label>
+          </div>
           </div> );}); 
-
+    }
       return (
         <div className="guest-event-form-wrapper paddingTop bottom-offset">
           <h3>You're invited to:</h3>
@@ -136,14 +143,11 @@ class GuestEventForm extends Component {
               <h4>Choose times...</h4>
               {timesDisplay}
             </div>
-            <div className="restaurant-options"> 
-              <h4>Choose food...</h4>
-              {restaurantsDisplay}
-            </div>
-            <div className="activity-options"> 
-              <h4>Choose activies...</h4>
-              {activitiesDisplay}
-            </div>
+
+            {restaurantsDisplay}
+
+             {activitiesDisplay}
+            
             <br/>
             <br/>
             <button  type="submit" id="submit-votes">
