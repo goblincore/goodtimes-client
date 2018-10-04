@@ -98,12 +98,11 @@ class GuestEventForm extends Component {
             <label> {option.date} </label> 
           </div>
         );});
-if(restaurantOptions.length > 0){ 
-      restaurantsDisplay = restaurantOptions.map((option, i) => { 
+    if(restaurantOptions.length > 0){ 
+     
+     const restaurantsList = restaurantOptions.map((option, i) => { 
         let link = <a href={option.website}>{option.name}</a>;
         return (
-          <div className="restaurant-options"> 
-          <h4>Choose food...</h4>
           <div key={i} className="option_container">
             <input 
               type="checkbox" 
@@ -112,15 +111,22 @@ if(restaurantOptions.length > 0){
               value={option.zomatoId} />
             <label> {link} </label>
           </div>    
-        </div>);});   
-    }
+       );});  
+
+       restaurantsDisplay = 
+        <div className="restaurant-options"> 
+          <h4>Choose food...</h4>
+          {restaurantsList}
+          </div>
+  }
+      
     if(activityOptions.length > 0){ 
-      activitiesDisplay = activityOptions.map((option, i) => { 
+
+      const activitiesList =   activityOptions.map((option, i) => { 
         let link = <a href={option.link}>{option.title}</a>;
         let dates = <p>{option.start} - {option.end}</p>;
         return (
-          <div className="activity-options"> 
-              <h4>Choose activities...</h4>
+          
           <div key={i} className="option_container">
             <input 
               type="checkbox" 
@@ -129,7 +135,12 @@ if(restaurantOptions.length > 0){
               value={option.ebId} />
             <label> {link} {dates}</label>
           </div>
-          </div> );}); 
+         );}); 
+
+                activitiesDisplay = <div className="activity-options"> 
+                                       <h4>Choose activities...</h4>
+                                         {activitiesList}
+                                    </div>
     }
       return (
         <div className="guest-event-form-wrapper paddingTop bottom-offset">
@@ -137,7 +148,7 @@ if(restaurantOptions.length > 0){
           <h1>{title}</h1><br/>
           <h3>Vote to decide on a time and place.</h3>
             
-          <h3>{description}</h3>
+          <h4>{description}</h4>
           <form className="event-form-options" onSubmit={this.submitVotes}>
             <div className="time-options"> 
               <h4>Choose times...</h4>
