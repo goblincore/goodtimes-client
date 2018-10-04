@@ -26,7 +26,13 @@ export default class SelectActivity extends React.Component {
 
   handleCheckboxChange(e){
     if(e.target.checked === true){
+      // Make sure the activity is not already added to the New Event state
+      if(this.props.eventState.activityOptions.find(act => act.ebId === e.target.id)){
+        return this.props.dispatch(updateNewEventState({errorMessage: 'That activity is already selected.'}));
+      }
+
       this.props.dispatch(updateNewEventState({
+        errorMessage: '',
         activityOptions: [...this.props.eventState.activityOptions, {
           ebId: e.target.id, 
           link: e.target.value, 
@@ -39,7 +45,7 @@ export default class SelectActivity extends React.Component {
     }
     else {
       const tempArray = this.props.eventState.activityOptions.filter(activity => activity.ebId !== e.target.id);
-      this.props.dispatch(updateNewEventState({activityOptions: tempArray}));
+      this.props.dispatch(updateNewEventState({errorMessage: '', activityOptions: tempArray}));
     }
   }
    
@@ -101,8 +107,9 @@ export default class SelectActivity extends React.Component {
           <option>Choose a category...</option>
           {categoryFilters}
         </select>
-        
-        <ul>{activityOptions}</ul>
+        <ul>
+          {activityOptions}
+        </ul>
       </div>
     );
   }

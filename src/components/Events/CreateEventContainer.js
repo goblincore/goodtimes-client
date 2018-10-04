@@ -6,7 +6,7 @@ import moment from 'moment';
 import { CreateEvent } from './CreateEvent';
 import DateSelectPage from './DateSelectPage';
 import RestaurantSelect from './RestaurantSelect';
-import ActivitySelect from './ActivityPage';
+import ActivityPage from './ActivityPage';
 import PreviewEvent from './PreviewEvent';
 import SuccessfullyCreatedEvent from './SuccessfullyCreatedEvent';
 
@@ -78,7 +78,7 @@ export default function CreateEventContainer(props){
       break;
     case 4:
       //activity options
-      component = <ActivitySelect
+      component = <ActivityPage
         dispatch={props.dispatch} 
         eventState={props.newEvent}
         prevPage={props.prevPage} 

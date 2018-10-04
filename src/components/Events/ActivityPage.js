@@ -63,7 +63,14 @@ export default class ActivitySelect extends React.Component {
           <button 
             onClick={(e) => {
               const form = e.target.parentElement.firstChild;
+
+              //verify that the activity is not already in the New Event state
+              if (this.props.eventState.activityOptions.find(act => act.ebId === form.title.value)) {
+                return this.props.dispatch(updateNewEventState({errorMessage: 'You already created that activity option.'}));
+              }
+
               this.props.dispatch(updateNewEventState({
+                errorMessage: '',
                 activityOptions: [...this.props.eventState.activityOptions, {
                   ebId: form.title.value, description: form.description.value, title: form.title.value
                 }]
@@ -122,6 +129,7 @@ export default class ActivitySelect extends React.Component {
       <div>
         <h1>Let's do something!</h1>
         <p>You can choose from events in your area or create your own!</p>
+        <p>{this.props.eventState.errorMessage}</p>
         <button onClick={() => this.setState({display: 'choose'})}>Choose From List</button>
         <button onClick={() => this.setState({display: 'write'})}>Create My Own</button>
         <div>Event Choices{selectedActivitiesDisplay}</div>
