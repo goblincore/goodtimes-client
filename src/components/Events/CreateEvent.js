@@ -1,11 +1,12 @@
-
 import React from 'react';
-
 import '../styles/CreateEvent.css';
-import { updateNewEventState, newEventErrorMessage } from '../../actions/New-Event';
+
 import { bingMapsKey } from '../../config';
+
+import { updateNewEventState, newEventErrorMessage } from '../../actions/New-Event';
 import { resetRestaruantsReducer } from '../../actions/RestaurantSelect';
 import { resetActivitiesReducer } from '../../actions/Activities';
+
 
 export class CreateEvent extends React.Component {
   constructor(props){
@@ -29,14 +30,15 @@ export class CreateEvent extends React.Component {
     }
 
     this.setState({locationFeedback: 'Checking city...'});
-    //Get Latitude and Longitude
-    return fetch(`https://dev.virtualearth.net/REST/v1/Locations?q=${state}%20${city}&includeNeighborhood=0&&key=${bingMapsKey}`)
+    // Get Latitude and Longitude
+    return fetch(`https://dev.virtualearth.net/REST/v1/Locations?q=${city}%20${state}&includeNeighborhood=0&&key=${bingMapsKey}`)
       .then(res => res.json())
       .then(bingMapsResult => {
         let possibleResults = bingMapsResult.resourceSets[0].resources;
+        // Remove non-USA options
         possibleResults = possibleResults.filter(place => place.address.countryRegion === 'United States');
-        console.log('Possible Reslts: ', possibleResults);
         let verifiedCity = possibleResults.find(place => place.name.toLowerCase() === `${city}, ${state}`.toLowerCase())
+        // If there is an exact match for city and state
         if (verifiedCity) {
           return this.setState({
             locationFeedback: `Successfully found ${verifiedCity.name}.`,
@@ -44,7 +46,9 @@ export class CreateEvent extends React.Component {
           }, () => {
             this.props.dispatch(updateNewEventState({location: {latitude: verifiedCity.point.coordinates[0], longitude: verifiedCity.point.coordinates[1]}}));
           })
-        } else {
+        } 
+        // If no exact match, cycle through each option that provides a city and state
+        else {
           let optionCount = 0;
           possibleResults.forEach( (place, i) => {
             if (place.address.locality) {
@@ -83,16 +87,17 @@ export class CreateEvent extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    if (this.props.eventState.errorMessage) return;
-    if (this.state.locationFeedback.startsWith('Must provide')) return;
+    // Validate the status of the location
     if (this.state.locationFeedback === 'Checking city...') return;
+    else if (this.state.locationFeedback.startsWith('Must provide')) return this.props.dispatch(newEventErrorMessage('Choose a location to continue.'));
+    else if (this.state.locationFeedback.startsWith('Did you mean')) return this.props.dispatch(newEventErrorMessage('Confirm location to continue.'));
 
     const title = e.target.eventTitle.value.trim();
     const state = e.target.stateLocation.value;
     const city = e.target.cityLocation.value.trim();
     const description = e.target.eventDescription.value;
 
-    //Validate the required fields
+    // Validate the required fields
     const requiredInfo = [title, state, city];
     let requiredFields = ['title', 'state', 'city'];
     for(let i = 0; i < requiredFields.length; i++){
@@ -101,7 +106,7 @@ export class CreateEvent extends React.Component {
       }
     }
 
-    //If location changes, reset the restaurant and event options
+    // If location changes, reset the restaurant and event options
     if (this.state.initialLocation 
       && this.state.initialLocation.latitude === this.props.eventState.location.latitude
       && this.state.initialLocation.latitude === this.props.eventState.location.latitude ) {
@@ -132,9 +137,6 @@ export class CreateEvent extends React.Component {
 
   render(){
 
-    console.log('PAGE 1: CreateEVENT this.props:', this.props);
-
-   // console.log('PROPS in CREATE EVENT',this.props);
     let errorMessage = null;
     let locationMessage = null;
     if (this.props.eventState.errorMessage){
@@ -166,7 +168,7 @@ export class CreateEvent extends React.Component {
           </p>
         )
       }
-console.log('Create EVENT', this.props);
+
     return (
       <div>
       <h3>Let's get started!</h3>
@@ -191,7 +193,7 @@ console.log('Create EVENT', this.props);
           }}
         />
         <label htmlFor='stateLocation'>Location</label>
-        <select name="stateLocation" id="stateLocation" value={this.props.eventState.locationCity.state ? this.props.eventState.locationCity.state : 'AL'} 
+        <select name="stateLocation" id="stateLocation" value={this.props.eventState.locationCity.state ? this.props.eventState.locationCity.state : ''} 
           onChange={e => {
             let city = this.props.eventState.locationCity.city ? this.props.eventState.locationCity.city : '';
             this.props.dispatch(updateNewEventState({
@@ -200,6 +202,7 @@ console.log('Create EVENT', this.props);
             this.setState({locationOption: 1}, () => this.validateCity() );
           }}>
 
+          <option value="" disabled>Choose state</option>
           <option value="AL">Alabama</option>
           <option value="AK">Alaska</option>
           <option value="AZ">Arizona</option>
@@ -283,8 +286,21 @@ console.log('Create EVENT', this.props);
         <button type='button' onClick={() => this.props.prevPage()}>
           {'<-'} Back
         </button>
+        <button type='button' 
+          onClick={() => {
+            // Validate that title and location are filled out before saving
+            if (this.state.locationFeedback.startsWith('Must provide')) return this.props.dispatch(newEventErrorMessage('Must provide a location to save.'))
+            else if (this.state.locationFeedback === 'Checking city...') return;
+            else if (!this.props.eventState.title) return this.props.dispatch(newEventErrorMessage('Must provide a title to save.'));
+            else if (!this.props.eventState.locationCity.state || !this.props.eventState.locationCity.city) return this.props.dispatch(newEventErrorMessage('Must provide a city and state to save.'));
+            else if (this.state.locationFeedback.startsWith('Did you mean')) return this.props.dispatch(newEventErrorMessage('Confirm location to save.'));
+
+            this.props.saveAsDraft();
+          }}>
+          Save as Draft
+        </button>
         <button type='submit'>
-          Next Page
+          Next {'->'}
         </button>
       </form>
     </div>

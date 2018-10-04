@@ -6,7 +6,6 @@ export default function EventBottomNav (props) {
         let message;
         switch(props.pageNum){
             case 1:
-            console.log("STEP 1 unlocked");
                 message = 'Step 1 of 5: Get started! Title, location and description of your event';
                 break;
             case 2:

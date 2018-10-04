@@ -24,10 +24,8 @@ export const putUpdatedDraftSuccess = () => ({
 
 
 export const putUpdatedDraft = draftData => dispatch => {
-  console.log('FROM Edit-Draft Action: Draft DATA', draftData);
   dispatch(putUpdatedDraftRequest());
   const draftId = draftData.id;
-  console.log('draftData:',draftData );
   const token = localStorage.getItem('authToken');
   return fetch(`${API_BASE_URL}/api/events/${draftId}`, {
     method: 'PUT',

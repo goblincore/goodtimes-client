@@ -16,7 +16,6 @@ import { loadDraftIntoReduxState } from '../actions/Edit-Draft';
   }
   //LOADS DRAFT INTO 'newEvent' of Redux state and redirects page to edit
  addDraftToReduxState(updateObject, pageCount){
-     localStorage.removeItem('eventDraft');
       this.props.dispatch(loadDraftIntoReduxState(updateObject));
 
         this.props.history.push({
