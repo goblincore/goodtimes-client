@@ -1,7 +1,7 @@
 import React from 'react';
 import moment from 'moment';
 import DateList from './DateList';
-import {updateNewEventState} from '../../actions/New-Event';
+import {updateNewEventState, newEventErrorMessage} from '../../actions/New-Event';
 import './Calendar/less/calendar-time.css';
 
 // import 'react-datepicker/dist/react-datepicker.css';
@@ -32,6 +32,15 @@ export default class DateSelectPage extends React.Component {
       locale: 'en',
       size: 'small'
     };
+  }
+
+  // If redirected from ActivityPage component, redux state gets stored in local storage during the forced page-refresh
+  componentWillMount(){
+    if (localStorage.getItem('eventDraft')) {
+      this.props.dispatch(updateNewEventState(JSON.parse(localStorage.getItem('eventDraft'))));
+      localStorage.removeItem('eventDraft');
+      this.props.dispatch(newEventErrorMessage('You need to choose a date before searching activities.'))
+    }
   }
 
 
@@ -68,11 +77,9 @@ export default class DateSelectPage extends React.Component {
   }
 
   render(){
-    console.log("FROM PAGE 2: DATESELECTPAGE", this.props);
     //this.props.eventState.draft
     let {inputMoment, showSeconds, locale, size} = this.state;
 
-    console.log( (this.state.thisTime.format('llll') == this.state.inputMoment.format('llll') ? 'true' : 'false')); 
     return (
       <div className="container">
         <div className="width1100">
@@ -122,9 +129,12 @@ export default class DateSelectPage extends React.Component {
         <button type='button' onClick={() => this.props.prevPage()}>
           {'<-'} Back
         </button>
-         
+        <button type='button' 
+          onClick={() => this.props.saveAsDraft()}>
+          Save as Draft
+        </button>
         <button onClick={ () => this.handleNextPage()}>
-          Next Page
+          Next {'->'}
         </button>
       
       </div>

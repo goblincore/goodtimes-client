@@ -92,11 +92,12 @@ export default class RestaurantSelect extends React.Component {
          
           <ul>Restaurant Choices{selectedRestaurantsDisplay}</ul>
 
-          <button type='button' onClick={() => this.props.prevPage()}>
-            {'<-'} Back
+          <button type='button' onClick={() => this.props.prevPage()}>{'<-'} Back</button>
+          <button type='button' 
+            onClick={() => this.props.saveAsDraft()}>
+            Save as Draft
           </button>
-
-          <button type='button' onClick={()=>this.props.nextPage()}>Next Page</button>
+          <button type='button' onClick={()=>this.props.nextPage()}>Next {'->'}</button>
         </div>
 
         <div id="restaurant-list">

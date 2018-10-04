@@ -2,17 +2,17 @@ import React from 'react';
 import { connect } from 'react-redux';
 import {Redirect,withRouter} from 'react-router-dom';
 import { initialState } from '../../reducers/NewEvent';
+import { updateNewEventState, newEventErrorMessage, resetNewEventState } from '../../actions/New-Event';
 
-import { updateNewEventState, newEventErrorMessage } from '../../actions/New-Event';
-import { FaArrowCircleLeft, FaArrowCircleRight,} from "react-icons/lib/fa";
 import EventBottomNav from './EventBottomNav';
 import CreateEventContainer from './CreateEventContainer';
-import '../styles/NewEventMain.css';
+import { resetActivitiesReducer } from '../../actions/Activities';
+import { resetRestaruantsReducer } from '../../actions/RestaurantSelect';
+
 
 export class NewEventMain extends React.Component {
   constructor(props){
     super(props);
-    console.log('New Event Main props',props);
     this.state = {
       pageCount: (this.props.pageCount && this.props.pageCount > 0 ) ? this.props.pageCount :  1
     };
@@ -21,42 +21,11 @@ export class NewEventMain extends React.Component {
 
 
 
-
-  /* ------------ Persists the state of our New Event --------------------------*/
-  componentWillMount(){
-    try {
-      const eventDraft = localStorage.getItem('eventDraft');
-      if (eventDraft) {
-        this.props.dispatch(updateNewEventState(JSON.parse(eventDraft)));
-        const newEventPageCount = localStorage.getItem('newEventPageCount');
-        if (newEventPageCount) {
-          this.setState({pageCount: Number(newEventPageCount)});
-        }
-      }
-    }
-    catch (err) {
-      console.log(err);
-    }
-  }
-
-
   componentWillUnmount(){
-  
-    localStorage.removeItem('newEventPageCount');
-
+    this.props.dispatch(resetActivitiesReducer());
+    this.props.dispatch(resetRestaruantsReducer());
+    this.props.dispatch(resetNewEventState());
   }
-
-  componentDidUpdate(){
-      try {
-        localStorage.setItem('eventDraft', JSON.stringify(this.props.newEvent));
-        localStorage.setItem('newEventPageCount', this.state.pageCount);
-      }
-      catch (err) {
-        console.log(err);
-      }
-  }
-  /* ------------------------------------------------------------------------------*/
-
 
 
 
@@ -84,28 +53,31 @@ export class NewEventMain extends React.Component {
     if(this.props.loggedIn){
       return(
        <div className="newEventWrapper">
-            <div className="left-arrow">
+            {/* <div className="left-arrow">
              <FaArrowCircleLeft onClick={this.prevPage} className='big-icon' />
             </div>
 
 
             <div className="right-arrow">
             <FaArrowCircleRight onClick={this.nextPage} className='big-icon' />
-            </div>
+            </div> */}
        
          <CreateEventContainer 
             pageNum={this.state.pageCount} 
-            props={this.props} 
+            eventState={this.props.newEvent}
             nextPage={this.nextPage} 
             prevPage={this.prevPage} 
-            goHome={this.goHome}/>
+            goHome={this.goHome}
+            {...this.props} 
+            />
 
           <EventBottomNav 
             pageNum={this.state.pageCount} 
-            props={this.props} 
             nextPage={this.nextPage} 
             prevPage={this.prevPage}
-            goHome={this.goHome} />
+            goHome={this.goHome} 
+            {...this.props}
+            />
 
        </div>
       )

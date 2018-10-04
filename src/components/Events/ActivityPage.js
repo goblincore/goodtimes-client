@@ -1,7 +1,9 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom';
 import { fetchCategories, fetchActivities } from '../../actions/Activities';
 import moment from 'moment';
 import { updateNewEventState } from '../../actions/New-Event';
+
 import SelectActivity from './SelectActivity';
 import WriteActivity from './WriteActivity';
 
@@ -14,6 +16,11 @@ export default class ActivitySelect extends React.Component {
     };
   }
   componentDidMount(){
+    // If user hasn't selected any dates, they must redirect back to DateSelectPage
+    if (this.props.times.length <= 0) {
+      localStorage.setItem('eventDraft', JSON.stringify(this.props.eventState));
+      return window.location.reload();
+    }
     this.props.dispatch(fetchCategories());
 
   }
@@ -30,6 +37,15 @@ export default class ActivitySelect extends React.Component {
   this.props.dispatch(updateNewEventState({activityOptions: filteredActivities}));
   }
   render(){
+    //If user hasn't selected dates yet, they can't get events
+    if(this.props.times.length <= 0) {
+      return (
+        <Redirect to={{
+          pathname: '/edit-draft',
+          state: {pageCount: 2}
+        }} />
+      )
+    }
     
     let optionDisplay;
 
@@ -98,7 +114,10 @@ export default class ActivitySelect extends React.Component {
         <button type='button' onClick={() => this.props.prevPage()}>
           {'<-'} Back
         </button>
-
+        <button type='button' 
+            onClick={() => this.props.saveAsDraft()}>
+            Save as Draft
+          </button>
         <button type='button' onClick={()=>this.props.nextPage()}>Next Page</button>
       </div>
     );
