@@ -1,6 +1,5 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
-import { fetchCategories, fetchActivities } from '../../actions/Activities';
 import moment from 'moment';
 import { updateNewEventState } from '../../actions/New-Event';
 
@@ -15,32 +14,31 @@ export default class ActivitySelect extends React.Component {
       display: 'none'
     };
   }
+
   componentDidMount(){
     // If user hasn't selected any dates, they must redirect back to DateSelectPage
     if (this.props.times.length <= 0) {
       localStorage.setItem('eventDraft', JSON.stringify(this.props.eventState));
       return window.location.reload();
     }
-    this.props.dispatch(fetchCategories());
   }
 
 
   deleteWhenClicked(e){
     const { activityOptions }  = this.props.eventState;
-    const idOfActivityToDelete = e.target.id;
+    const idOfActivityToDelete = e.target.dataset.ebid;
+    if (document.getElementById(idOfActivityToDelete)) {
+      document.getElementById(idOfActivityToDelete).checked = false;
+    }
     const filteredActivities = activityOptions.filter((option) => option.ebId !== idOfActivityToDelete);
     this.props.dispatch(updateNewEventState({activityOptions: filteredActivities}));
   }
+
+
   render(){
     //If user hasn't selected dates yet, they can't get events
-    if(this.props.times.length <= 0) {
-      return (
-        <Redirect to={{
-          pathname: '/edit-draft',
-          state: {pageCount: 2}
-        }} />
-      );
-    }
+    if(this.props.times.length <= 0) return <Redirect to={{pathname: '/edit-draft', state: {pageCount: 2}}} />
+
     
     let optionDisplay;
 
@@ -48,33 +46,34 @@ export default class ActivitySelect extends React.Component {
       optionDisplay = <div></div>;
     }
     else if(this.state.display === 'write'){
-      optionDisplay =   
-      <div>
-        <WriteActivity 
-          dispatch={this.props.dispatch} 
-          eventState={this.props.eventState}
-          prevPage={this.props.prevPage} 
-          nextPage={this.props.nextPage}
-          categories={this.props.categories}
-          activities={this.props.activities}
-          loading={this.props.loading}
-          latitude={this.props.latitude}
-          longitude={this.props.longitude}
-          times={this.props.times}
-        />
-        <button 
-          onClick={(e) => {
-            const form = e.target.parentElement.firstChild;
-            this.props.dispatch(updateNewEventState({
-              activityOptions: [...this.props.eventState.activityOptions, {
-                ebId: form.title.value, description: form.description.value, title: form.title.value
-              }]
-            })
-            );
-            this.setState({display:'none'});
-          }}
-        >Save Event</button>
-      </div>;
+      optionDisplay = (
+        <div>
+          <WriteActivity 
+            dispatch={this.props.dispatch} 
+            eventState={this.props.eventState}
+            prevPage={this.props.prevPage} 
+            nextPage={this.props.nextPage}
+            categories={this.props.categories}
+            activities={this.props.activities}
+            loading={this.props.loading}
+            latitude={this.props.latitude}
+            longitude={this.props.longitude}
+            times={this.props.times}
+          />
+          <button 
+            onClick={(e) => {
+              const form = e.target.parentElement.firstChild;
+              this.props.dispatch(updateNewEventState({
+                activityOptions: [...this.props.eventState.activityOptions, {
+                  ebId: form.title.value, description: form.description.value, title: form.title.value
+                }]
+              })
+              );
+              this.setState({display:'none'});
+            }}
+          >Save Event</button>
+        </div>
+      )
     }
     else if(this.state.display === 'choose'){
       optionDisplay = <SelectActivity 
@@ -89,25 +88,28 @@ export default class ActivitySelect extends React.Component {
         longitude={this.props.longitude}
         times={this.props.times}/>;
     }
+
     let selectedActivitiesDisplay;
     if ( this.props.eventState.activityOptions.length > 0){
-      selectedActivitiesDisplay = this.props.eventState.activityOptions.map((activity,index) => {
+      selectedActivitiesDisplay = this.props.eventState.activityOptions.map( activity => {
         let linkDisplay;
         let descriptionDisplay;
+        // If theres an activity description
         if(!activity.description){
           descriptionDisplay = <p></p>;
-        } 
-        if(activity.description){
+        } else {
           descriptionDisplay =  <p>{activity.description.length > 50 ? `${activity.description.slice(0,50)}...` : activity.description}</p>;
         }
+
+        // If theres an activity link
         if(!activity.link){
           linkDisplay = <p></p>;
-        }
-        if(activity.link){
+        } else {
           linkDisplay = <a href={activity.link} target='_blank'>Go to event webpage.</a>;
         }
-        return (  <div key={index}>
-          <p id={activity.ebId}onClick={(e)=> this.deleteWhenClicked(e)}>{activity.title}</p>
+
+        return (  <div key={activity.ebId}>
+          <p data-ebid={activity.ebId} onClick={(e)=> this.deleteWhenClicked(e)}>{activity.title}</p>
           {descriptionDisplay}
           {linkDisplay}
         </div>

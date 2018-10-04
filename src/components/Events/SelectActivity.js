@@ -1,4 +1,6 @@
 import React from 'react';
+import '../styles/SelectActivity.css';
+
 import { fetchCategories, fetchActivities } from '../../actions/Activities';
 import { updateNewEventState } from '../../actions/New-Event';
 import moment from 'moment';
@@ -7,12 +9,17 @@ export default class SelectActivity extends React.Component {
   
   componentDidMount(){
     this.props.dispatch(fetchCategories());
-    
   }
+
   filterEvents(e){
-    const times = this.props.times.sort();
     e.preventDefault();
-    this.props.dispatch(fetchActivities(this.props.latitude, this.props.longitude,times[0],times[times.length-1], e.target.value));
+    const times = this.props.times.sort();
+
+    // Add five hours to the latest selected date, so user can see more event options
+    let fiveHoursAfter = Number(moment(times[times.length - 1], 'YYYY-MM-DDTHH:mm:ss').format('x')) + (1000 * 60 * 60 * 5); //convert to ms, add 5 hours
+    fiveHoursAfter = moment(fiveHoursAfter, 'x').format('YYYY-MM-DDTHH:mm:ss'); //convert back into formatted time
+
+    this.props.dispatch(fetchActivities(this.props.latitude, this.props.longitude,times[0], fiveHoursAfter, e.target.value));
   }
    
   render(){
