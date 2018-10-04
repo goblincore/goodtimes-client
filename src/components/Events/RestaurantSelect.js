@@ -17,7 +17,7 @@ export default class RestaurantSelect extends React.Component {
   }
 
   getCuisines(e){
-    const cuisineCode = e.target.name;
+    const cuisineCode = e.target.value;
     e.preventDefault();
     this.props.dispatch(fetchRestaurants(this.props.cityCode, cuisineCode));
   }
