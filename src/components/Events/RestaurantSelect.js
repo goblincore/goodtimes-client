@@ -21,12 +21,28 @@ export default class RestaurantSelect extends React.Component {
     const cuisineCode = e.target.value;
     this.props.dispatch(fetchRestaurants(this.props.cityCode, cuisineCode));
   }
+
   deleteWhenClicked(e){
     const { restaurantOptions } = this.props.eventState;
     const idOfRestaurantToDelete = e.target.id;
     const filteredRestaurants = restaurantOptions.filter(option => option.zomatoId !== idOfRestaurantToDelete);
     this.props.dispatch(updateNewEventState({restaurantOptions: filteredRestaurants}));
   }
+
+  handleCheckBoxChange(e){
+    if (e.target.checked === true) {
+      this.props.dispatch(updateNewEventState({
+        restaurantOptions: [...this.props.eventState.restaurantOptions, 
+          {zomatoId: e.target.id, website: e.target.value, name: e.target.name}
+        ]
+      }));
+    }
+    else {
+      const tempArray =  this.props.eventState.restaurantOptions.filter(restaurant => restaurant.zomatoId !== e.target.id);
+      this.props.dispatch(updateNewEventState({restaurantOptions: tempArray}));
+    }
+  }
+
   render(){
     let cuisineOptions;
     if(this.props.restaurants.cityCode === null){
@@ -47,20 +63,7 @@ export default class RestaurantSelect extends React.Component {
         <div className="restaurant-item" key={restaurant.restaurant.id}>
 
           <input 
-            onChange={(e)=>{
-              if (e.target.checked === true) {
-                this.props.dispatch(updateNewEventState({
-                  restaurantOptions: [...this.props.eventState.restaurantOptions, 
-                    {zomatoId: e.target.id, website: e.target.value, name: e.target.name}
-                  ]
-                }));
-              }
-              else {
-                const tempArray =  this.props.eventState.restaurantOptions.filter(restaurant => restaurant.zomatoId !== e.target.id);
-                this.props.dispatch(updateNewEventState({restaurantOptions: tempArray}));
-              }
-            }}
-
+            onChange={ e => this.handleCheckBoxChange(e)}
             id={restaurant.restaurant.id} name={restaurant.restaurant.name} value={restaurant.restaurant.url} type="checkbox" ></input>
           <img src={restaurant.restaurant.thumb==='' ? 'https://www.redbytes.in/wp-content/uploads/2018/09/zomato-logo-AD6823E433-seeklogo.com_.png' : restaurant.restaurant.thumb} alt="Thumbnail"></img>
           <a href={restaurant.restaurant.url} target="#">{restaurant.restaurant.name}</a>
