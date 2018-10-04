@@ -10,10 +10,11 @@ import moment from 'moment';
 
 export default function CreateEventContainer(props){
   let component;
+
   console.log('Create Event Props', props);
   switch (props.pageNum) {
   case 0:
-    return null;
+    return <Redirect to="/dashboard" />;
   case 1:
     //title, location, description
     component = <CreateEvent 

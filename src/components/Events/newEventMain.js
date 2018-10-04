@@ -4,17 +4,17 @@ import {Redirect,withRouter} from 'react-router-dom';
 import { initialState } from '../../reducers/NewEvent';
 
 import { updateNewEventState, newEventErrorMessage } from '../../actions/New-Event';
-
+import { FaArrowCircleLeft, FaArrowCircleRight,} from "react-icons/lib/fa";
 import EventBottomNav from './EventBottomNav';
 import CreateEventContainer from './CreateEventContainer';
-
+import '../styles/NewEventMain.css';
 
 export class NewEventMain extends React.Component {
   constructor(props){
     super(props);
     console.log('New Event Main props',props);
     this.state = {
-      pageCount: this.props.pageCount ? this.props.pageCount :  1
+      pageCount: (this.props.pageCount && this.props.pageCount > 0 ) ? this.props.pageCount :  1
     };
   
   }
@@ -84,6 +84,14 @@ export class NewEventMain extends React.Component {
     if(this.props.loggedIn){
       return(
        <div className="newEventWrapper">
+            <div className="left-arrow">
+             <FaArrowCircleLeft onClick={this.prevPage} className='big-icon' />
+            </div>
+
+
+            <div className="right-arrow">
+            <FaArrowCircleRight onClick={this.nextPage} className='big-icon' />
+            </div>
        
          <CreateEventContainer 
             pageNum={this.state.pageCount} 

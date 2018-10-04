@@ -1,5 +1,7 @@
 import React from 'react';
+import { FaThumbsUp, FaToggleOff, FaToggleOn } from "react-icons/lib/fa";
 import { deleteEvent } from '../actions/New-Event';
+import './styles/EventItem.css';
 
 export default class EventItem extends React.Component{
   constructor(props){
@@ -21,18 +23,21 @@ export default class EventItem extends React.Component{
     if(this.state.showDetails){
       return(
         <li className='user-event'>
-          <h2>{this.props.event.title}</h2>
+           <span>  
+             <h2>{this.props.event.title}</h2>
+              <button className="floatRight noBorder" onClick={()=> this.toggleEventDetails(false)}>Hide Details <FaToggleOn/></button>
+           </span>
           <p>{this.props.event.description}</p>
-          <button onClick={()=> this.toggleEventDetails(false)}>See Details</button>
+        
           <div className='date-options'>
-            <p>Date/Time options:</p>
+          <h4>Date/Time voting</h4>
             {
               this.props.event.scheduleOptions.map((date,i) =>{
                 console.log(date);
                 return(
                   <div key={i} className='date-vote'>
-                    <p>Date: {date.date}</p>
-                    <p>Votes: {date.votes}</p>
+                    <span className="dates-text"> {date.date}</span> <span className="votes-text floatRight"> <FaThumbsUp/> {date.votes} </span>
+                 
                   </div>
                 );
                 
@@ -40,26 +45,26 @@ export default class EventItem extends React.Component{
             }
           </div>
           <div className='date-options'>
-            <p>Restaurant options:</p>
+            <h4>Restaurant voting</h4>
             {
               this.props.event.restaurantOptions.map((food,i) =>{
                 return(
                   <div key={i} className='date-vote'>
-                    <a href={food.website} target="_blank">{food.name}</a>
-                    <p>Votes: {food.votes}</p>
+                     <span className="dates-text"><a title="Visit website" href={food.website} target="_blank">{food.name}</a></span>
+                     <span className="votes-text floatRight"> <FaThumbsUp/>  {food.votes}</span>
                   </div>
                 );
               })
             }
           </div>
           <div className='date-options'>
-            <p>Event options:</p>
+          <h4>Event voting</h4>
             {
               this.props.event.activityOptions.map((act,i) =>{
                 return(
                   <div key={i} className='date-vote'>
-                    <a href={act.link} target="_blank">{act.title}</a>
-                    <p>Votes: {act.votes}</p>
+                    <span className="dates-text"> <a href={act.link} target="_blank">{act.title}</a></span> 
+                    <span className="votes-text floatRight"><FaThumbsUp/> {act.votes}</span>
                   </div>
                 );
               })
@@ -71,9 +76,15 @@ export default class EventItem extends React.Component{
     else{
       return(
         <li className='user-event'>
-          <h2>{this.props.event.title}</h2>
+         <span>  
+            <h2>{this.props.event.title}</h2>    
+           <button className="floatRight noBorder" onClick={()=> this.toggleEventDetails(true)}>See Details <FaToggleOff/></button>
+        </span> 
+    
           <p>{this.props.event.description}</p>
-          <button onClick={()=> this.toggleEventDetails(true)}>See Details</button>
+         {/* <p>View Poll Page</p>
+          <p>Current Highest Votes: </p> */}
+        
           <button onClick={()=> this.props.dispatch(deleteEvent(this.props.event.id))}>Delete</button>
         </li>
       );

@@ -28,7 +28,7 @@ export class LandingPage extends Component {
  
             <div className="hero">
               <h1>Let the good times roll! </h1>
-              <hr></hr>
+             
               <h3>Easy event planning for groups and friends</h3>
                <Button to="/about">Learn More</Button>
             </div>

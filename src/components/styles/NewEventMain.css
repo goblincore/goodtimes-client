@@ -1,0 +1,15 @@
+.left-arrow{
+    position:fixed;
+    left:100px;
+    top:45%;
+}
+
+.right-arrow{
+    position:fixed;
+    right:100px;
+    top:45%;
+}
+
+.big-icon{
+    font-size:50px;
+}
