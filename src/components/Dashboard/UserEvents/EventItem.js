@@ -1,7 +1,7 @@
 import React from 'react';
 import { FaThumbsUp, FaToggleOff, FaToggleOn } from "react-icons/lib/fa";
 import '../../styles/EventItem.css';
-import DeleteWarning from '../../DeleteWarning';
+import DeleteWarning from '../DeleteWarning';
 import {deleteEvent} from '../../../actions/New-Event';
 import { CLIENT_BASE_URL } from '../../../config';
 
