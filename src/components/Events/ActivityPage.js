@@ -33,8 +33,8 @@ export default class ActivitySelect extends React.Component {
   deleteWhenClicked(e){
     const { activityOptions }  = this.props.eventState;
     const idOfActivityToDelete = e.target.id;
-    const filteredActivities = activityOptions.filter((option) => option._id !== idOfActivityToDelete);
-  this.props.dispatch(updateNewEventState({activityOptions: filteredActivities}));
+    const filteredActivities = activityOptions.filter((option) => option.ebId !== idOfActivityToDelete);
+    this.props.dispatch(updateNewEventState({activityOptions: filteredActivities}));
   }
   render(){
     //If user hasn't selected dates yet, they can't get events
@@ -44,7 +44,7 @@ export default class ActivitySelect extends React.Component {
           pathname: '/edit-draft',
           state: {pageCount: 2}
         }} />
-      )
+      );
     }
     
     let optionDisplay;
@@ -96,23 +96,29 @@ export default class ActivitySelect extends React.Component {
     }
     let selectedActivitiesDisplay;
     if ( this.props.eventState.activityOptions.length > 0){
-      selectedActivitiesDisplay = this.props.eventState.activityOptions.map((activity,index) => { 
-      if(!activity.description){  
+      selectedActivitiesDisplay = this.props.eventState.activityOptions.map((activity,index) => {
+        let linkDisplay;
+        let descriptionDisplay;
+        if(!activity.description){
+          descriptionDisplay = <p></p>;
+        } 
+        if(activity.description){
+          descriptionDisplay =  <p>{activity.description.length > 50 ? `${activity.description.slice(0,50)}...` : activity.description}</p>;
+        }
+        if(!activity.link){
+          linkDisplay = <p></p>;
+        }
+        if(activity.link){
+          linkDisplay = <a href={activity.link} target='_blank'>Go to event webpage.</a>;
+        }
         return (  <div key={index}>
-          <a href={activity.link} target='blank'>{activity.title}</a>
-         </div>
-     )
-           } else {
-
-            return (  <div key={index}>
-              <a href={activity.link} target='blank'>{activity.title}:</a>
-               <p>{activity.description.length > 50 ? `${activity.description.slice(0,50)}...` : activity.description}</p>
-           </div>
-)
-
-
-            }
-            });      
+          <p id={activity.ebId}onClick={(e)=> this.deleteWhenClicked(e)}>{activity.title}</p>
+          {descriptionDisplay}
+          {linkDisplay}
+        </div>
+        );
+      }
+      );      
     }
 
     return(
@@ -127,9 +133,9 @@ export default class ActivitySelect extends React.Component {
           {'<-'} Back
         </button>
         <button type='button' 
-            onClick={() => this.props.saveAsDraft()}>
+          onClick={() => this.props.saveAsDraft()}>
             Save as Draft
-          </button>
+        </button>
         <button type='button' onClick={()=>this.props.nextPage()}>Next Page</button>
       </div>
     );
