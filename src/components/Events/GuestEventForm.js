@@ -20,7 +20,7 @@ class GuestEventForm extends Component {
   componentDidMount(){
     //GET EVENT DATA
     const { eventId }= this.props.match.params;
-   console.log('GUEST EVENT MOUNT', this.props);
+    console.log('GUEST EVENT MOUNT', this.props);
     fetch(`${API_BASE_URL}/api/guestevents/${eventId}`, {
       method: 'GET',
     })
@@ -46,19 +46,19 @@ class GuestEventForm extends Component {
     const restaurantArr = [];
     restaurantId.forEach(restaurant => {
       restaurantArr.push(restaurant.value);
-    })
+    });
     
     const dateId = document.querySelectorAll('input[name="time-option"]:checked');
     const dateArr = [];
     dateId.forEach(date => {
       dateArr.push(date.value);
-    })
+    });
     
     const activityId = document.querySelectorAll('input[name="activity-option"]:checked');
     const activityArr = [];
     activityId.forEach(act => {
       activityArr.push(act.value);
-    })
+    });
 
     const eventId = this.state.guestEvent.id;
 
@@ -90,14 +90,14 @@ class GuestEventForm extends Component {
         return (
           <div key={i} className="option_container">
             <input 
-            type="checkbox"
-            id={"time-option"+i}
-            name="time-option"
-            value={option.id} />
+              type="checkbox"
+              id={'time-option'+i}
+              name="time-option"
+              value={option.id} />
   
             <label> {option.date} </label> 
-            </div>
-            );});
+          </div>
+        );});
 
       restaurantsDisplay = restaurantOptions.map((option, i) => { 
         let link = <a href={option.website}>{option.name}</a>;
@@ -105,23 +105,24 @@ class GuestEventForm extends Component {
           <div key={i} className="option_container">
             <input 
               type="checkbox" 
-              id={"restaurant-option"+i}
+              id={'restaurant-option'+i}
               name="restaurant-option"
               value={option.zomatoId} />
-              <label> {link} </label>
-            </div> );});   
+            <label> {link} </label>
+          </div> );});   
 
       activitiesDisplay = activityOptions.map((option, i) => { 
         let link = <a href={option.link}>{option.title}</a>;
+        let dates = <p>{option.start} - {option.end}</p>;
         return (
           <div key={i} className="option_container">
             <input 
               type="checkbox" 
-              id={"activity-option"+i}
+              id={'activity-option'+i}
               name="activity-option"
               value={option.ebId} />
-              <label> {link} </label>
-            </div> );});
+            <label> {link} {dates}</label>
+          </div> );}); 
 
       return (
         <div className="guest-event-form-wrapper paddingTop bottom-offset">
