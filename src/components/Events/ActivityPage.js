@@ -22,13 +22,8 @@ export default class ActivitySelect extends React.Component {
       return window.location.reload();
     }
     this.props.dispatch(fetchCategories());
+  }
 
-  }
-  filterEvents(e){
-    const times = this.props.times.sort();
-    e.preventDefault();
-    this.props.dispatch(fetchActivities(this.props.latitude, this.props.longitude,times[0],times[times.length-1], e.target.value));
-  }
 
   deleteWhenClicked(e){
     const { activityOptions }  = this.props.eventState;
