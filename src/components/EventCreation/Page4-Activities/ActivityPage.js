@@ -1,12 +1,7 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
-<<<<<<< HEAD:src/components/Events/ActivityPage.js
 import moment from 'moment';
-import { updateNewEventState } from '../../actions/New-Event';
-=======
-import { fetchCategories } from '../../../actions/Activities';
 import { updateNewEventState } from '../../../actions/New-Event';
->>>>>>> 0efc24f33f30f6e2547415d48dd22abc19a5aca0:src/components/EventCreation/Page4-Activities/ActivityPage.js
 
 import SelectActivity from './SelectActivity';
 import WriteActivity from './WriteActivity';
@@ -26,11 +21,6 @@ export default class ActivitySelect extends React.Component {
       localStorage.setItem('eventDraft', JSON.stringify(this.props.eventState));
       return window.location.reload();
     }
-<<<<<<< HEAD:src/components/Events/ActivityPage.js
-=======
-    this.props.dispatch(fetchCategories());
-
->>>>>>> 0efc24f33f30f6e2547415d48dd22abc19a5aca0:src/components/EventCreation/Page4-Activities/ActivityPage.js
   }
 
 

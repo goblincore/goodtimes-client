@@ -1,13 +1,8 @@
 import React from 'react';
-<<<<<<< HEAD:src/components/Events/SelectActivity.js
-import '../styles/SelectActivity.css';
+import '../../styles/SelectActivity.css';
 
-import { fetchCategories, fetchActivities } from '../../actions/Activities';
-import { updateNewEventState } from '../../actions/New-Event';
-=======
 import { fetchCategories, fetchActivities } from '../../../actions/Activities';
 import { updateNewEventState } from '../../../actions/New-Event';
->>>>>>> 0efc24f33f30f6e2547415d48dd22abc19a5aca0:src/components/EventCreation/Page4-Activities/SelectActivity.js
 import moment from 'moment';
 
 export default class SelectActivity extends React.Component {
@@ -64,7 +59,6 @@ export default class SelectActivity extends React.Component {
     }
 
     let activityOptions;
-<<<<<<< HEAD:src/components/Events/SelectActivity.js
 
     const events = this.props.activities;
     if (events.length > 0) {
@@ -99,49 +93,6 @@ export default class SelectActivity extends React.Component {
 
     } else {
       activityOptions = <p>No events in this category during the times you selected. Try a different category!</p>;
-=======
-    if(this.props.activities === undefined){
-      return <div></div>;
-    }
-    if(this.props.activities.activities !== undefined){
-      const events = this.props.activities.activities.events;
-      if(events.length >0){
-        activityOptions = events.map((activity, index) => {
-          const description= activity.description.text;
-          const start = moment(activity.start.local).format('llll');
-          const end = moment(activity.end.local).format('llll');
-          return (
-            <div key={index}>
-              <input 
-                id={activity.id}
-                value={activity.url}
-                name={activity.name.text}
-                onChange={(e) => {
-                  console.log('description=', description);
-                  if(e.target.checked === true){
-                    this.props.dispatch(updateNewEventState({
-                      activityOptions: [...this.props.eventState.activityOptions, {
-                        ebId: e.target.id, link: e.target.value, title: e.target.name, description: description, start: start, end: end
-                      }]
-                    }));
-                  }
-                  else {
-                    console.log('activity=',activity);
-                    const tempArray = this.props.eventState.activityOptions.filter(activity => activity.ebId !== e.target.id);
-                    this.props.dispatch(updateNewEventState({activityOptions: tempArray}));
-                  }
-                }}
-                type="checkbox"></input>
-              <a href={activity.url}>{activity.name.text}</a>
-              <p>Start: {moment(activity.start.local).format('llll')}</p>
-              <p>End: {moment(activity.end.local).format('llll')}</p>
-            </div>
-          );
-        });
-      }else{
-        activityOptions = <p>No events in this category during the times you selected. Try a different category!</p>;
-      }
->>>>>>> 0efc24f33f30f6e2547415d48dd22abc19a5aca0:src/components/EventCreation/Page4-Activities/SelectActivity.js
     }
 
     if(this.props.loading===true){
