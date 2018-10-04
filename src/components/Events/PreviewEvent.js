@@ -41,7 +41,7 @@ export default function PreviewEvent (props) {
     props.goHome();
   }
 
-
+//if no restaurants or activities to display, section will be left off the form
   let timesDisplay, restaurantsDisplay, activitiesDisplay;
 
   timesDisplay = props.eventState.scheduleOptions.map((option, i) => { 
@@ -56,10 +56,13 @@ export default function PreviewEvent (props) {
         <label> {option.date} </label> 
       </div>
     );});
-  
+  if(props.eventState.restaurantOptions.length > 0){ 
   restaurantsDisplay = props.eventState.restaurantOptions.map((option,i) => { 
     let link = <a href={option.website}>{option.name}</a>;
     return (
+
+      <div className="restaurant-options"> 
+      <h4>Choose food...</h4>
       <div key={i} className="option_container">
         <input 
           type="checkbox" 
@@ -67,12 +70,18 @@ export default function PreviewEvent (props) {
           name="restaurant-option"
           value={option.zomatoId} />
         <label> {link} </label>
-      </div> );}); 
-      
+      </div> 
+      </div>);}); 
+  }
+ 
+  if(props.eventState.activityOptions.length > 0){ 
   activitiesDisplay = props.eventState.activityOptions.map((option,i) => { 
     let link = <a href={option.link}>{option.title}</a>;
     let dates = <p>{option.start} - {option.end}</p>;
     return (
+
+      <div className="activity-options"> 
+      <h4>Choose activities...</h4>
       <div key={i} className="option_container">
         <input 
           type="checkbox" 
@@ -80,7 +89,9 @@ export default function PreviewEvent (props) {
           name="activity-option"
           value={option.ebId} />
         <label> {link} {dates}</label>
+      </div>
       </div> );}); 
+  } 
 
   if(props.eventState.loading){
     return ( <h1>Loading...</h1> );
@@ -108,14 +119,11 @@ export default function PreviewEvent (props) {
                 <h4>Choose times...</h4>
                 {timesDisplay}
               </div>
-              <div className="restaurant-options"> 
-                <h4>Choose food...</h4>
-                {restaurantsDisplay}
-              </div>
-              <div className="activity-options"> 
-                <h4>Choose activies...</h4>
-                {activitiesDisplay}
-              </div>
+             
+              {restaurantsDisplay}
+
+              {activitiesDisplay}
+             
               <br/>
               <br/>
             </form>     
