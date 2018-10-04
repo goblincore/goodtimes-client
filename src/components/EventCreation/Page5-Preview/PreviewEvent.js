@@ -41,7 +41,7 @@ export default function PreviewEvent (props) {
     props.goHome();
   }
 
-//if no restaurants or activities to display, section will be left off the form
+  //if no restaurants or activities to display, section will be left off the form
   let timesDisplay, restaurantsDisplay, activitiesDisplay;
 
   timesDisplay = props.eventState.scheduleOptions.map((option, i) => { 
@@ -57,40 +57,44 @@ export default function PreviewEvent (props) {
       </div>
     );});
   if(props.eventState.restaurantOptions.length > 0){ 
-  restaurantsDisplay = props.eventState.restaurantOptions.map((option,i) => { 
-    let link = <a href={option.website}>{option.name}</a>;
-    return (
+    const restaurantsList =  props.eventState.restaurantOptions.map((option,i) => { 
+      let link = <a href={option.website}>{option.name}</a>;
+      return (
+        <div key={i} className="option_container">
+          <input 
+            type="checkbox" 
+            id={'restaurant-option'+i}
+            name="restaurant-option"
+            value={option.zomatoId} />
+          <label> {link} </label>
+        </div> 
+      );}); 
 
-      <div className="restaurant-options"> 
+    restaurantsDisplay =  <div className="restaurant-options"> 
       <h4>Choose food...</h4>
-      <div key={i} className="option_container">
-        <input 
-          type="checkbox" 
-          id={'restaurant-option'+i}
-          name="restaurant-option"
-          value={option.zomatoId} />
-        <label> {link} </label>
-      </div> 
-      </div>);}); 
+      {restaurantsList}
+    </div>;
   }
  
   if(props.eventState.activityOptions.length > 0){ 
-  activitiesDisplay = props.eventState.activityOptions.map((option,i) => { 
-    let link = <a href={option.link}>{option.title}</a>;
-    let dates = <p>{option.start} - {option.end}</p>;
-    return (
+    const activitiesList = props.eventState.activityOptions.map((option,i) => { 
+      let link = <a href={option.link}>{option.title}</a>;
+      let dates = <p>{option.start} - {option.end}</p>;
+      return (
+        <div key={i} className="option_container">
+          <input 
+            type="checkbox" 
+            id={'activity-option'+i}
+            name="activity-option"
+            value={option.ebId} />
+          <label> {link} {dates}</label>
+        </div>
+      );}); 
 
-      <div className="activity-options"> 
+    activitiesDisplay = <div className="activity-options"> 
       <h4>Choose activities...</h4>
-      <div key={i} className="option_container">
-        <input 
-          type="checkbox" 
-          id={'activity-option'+i}
-          name="activity-option"
-          value={option.ebId} />
-        <label> {link} {dates}</label>
-      </div>
-      </div> );}); 
+      {activitiesList}
+    </div>;
   } 
 
   if(props.eventState.loading){
@@ -113,7 +117,8 @@ export default function PreviewEvent (props) {
             <h1>{props.eventState.title}</h1><br/>
             <h3>Vote to decide on a time and place.</h3>
             
-            <h3>Description</h3>
+            <h3>Description:</h3>
+            <h4>{props.eventState.description}</h4>
             <form className="event-form-options">
               <div className="time-options"> 
                 <h4>Choose times...</h4>
