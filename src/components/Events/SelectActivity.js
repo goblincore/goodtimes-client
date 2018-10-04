@@ -11,6 +11,7 @@ export default class SelectActivity extends React.Component {
     this.props.dispatch(fetchCategories());
   }
 
+
   filterEvents(e){
     e.preventDefault();
     const times = this.props.times.sort();
@@ -22,6 +23,7 @@ export default class SelectActivity extends React.Component {
     this.props.dispatch(fetchActivities(this.props.latitude, this.props.longitude,times[0], fiveHoursAfter, e.target.value));
   }
    
+
   render(){
     let categoryFilters;
     if(this.props.categories.length > 0){
@@ -29,6 +31,7 @@ export default class SelectActivity extends React.Component {
         return <option key={category.id} id={category.id} value={category.id}>{category.name}</option>;
       });
     }
+    
     let activityOptions;
     if(this.props.activities === undefined){
       console.log('no activities');

@@ -46,7 +46,7 @@ export default function reducer(state = initialState, action){
     console.log('activities action=', action);
     return Object.assign({}, state, {
       loading: false,
-      activities: action
+      activities: action.activities.events
     });
   } else if (action.type === RESET_ACTIVITIES_REDUCER) {
     return Object.assign({}, state, initialState);
