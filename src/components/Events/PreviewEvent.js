@@ -105,15 +105,15 @@ export default function PreviewEvent (props) {
             <h3>Description</h3>
             <form className="event-form-options">
               <div className="time-options"> 
-                <h4>Choose a Time:</h4>
+                <h4>Choose times...</h4>
                 {timesDisplay}
               </div>
               <div className="restaurant-options"> 
-                <h4>Choose a Place:</h4>
+                <h4>Choose food...</h4>
                 {restaurantsDisplay}
               </div>
               <div className="activity-options"> 
-                <h4>Choose a Place:</h4>
+                <h4>Choose activies...</h4>
                 {activitiesDisplay}
               </div>
               <br/>
