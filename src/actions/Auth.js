@@ -2,7 +2,7 @@ import {SubmissionError} from 'redux-form';
 
 import {API_BASE_URL} from '../config';
 import {normalizeResponseErrors} from './Utils';
-import { fetchProtectedData, fetchUserEvents } from './Protected-Data';
+import { fetchProtectedData } from './Protected-Data';
 
 
 export const AUTH_REQUEST = 'AUTH_REQUEST';
