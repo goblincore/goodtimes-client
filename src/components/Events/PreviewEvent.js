@@ -114,6 +114,7 @@ export default function PreviewEvent (props) {
             <h3>Vote to decide on a time and place.</h3>
             
             <h3>Description</h3>
+            <h6>{props.eventState.description}</h6>
             <form className="event-form-options">
               <div className="time-options"> 
                 <h4>Choose times...</h4>
