@@ -14,6 +14,10 @@
   }
   
 
+h1,h2,h3,h4{
+  font-family:'Graebenbach','Helvetica Neue',sans-serif;
+}
+
 
 label{
     font-size:16px;
@@ -38,6 +42,14 @@ label{
       padding-top:100px;
   }
 
+  a{
+    color:#575d98;
+    font-weight:bold;
+  }
+
+a:hover {
+   color:#a2a8de;
+  }
 
 input{
     width:100%;
@@ -178,3 +190,14 @@ align-items: center; */
   button{
     background-color:#fff;
   }
+
+  .floatRight{
+    float:right;
+  }
+
+  @media only screen and (max-width: 450px) {
+    html,body {
+      font-size:0.9em;
+    }
+}
+

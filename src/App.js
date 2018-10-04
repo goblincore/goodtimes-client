@@ -1,33 +1,24 @@
 import React, { Component } from 'react';
-import { Transition, config, animated } from 'react-spring'
+import { Transition, animated } from 'react-spring'
 import {connect} from 'react-redux';
-import { BrowserRouter, Router, withRouter, Switch, Route, Link, Redirect } from 'react-router-dom'
+import { Router, withRouter, Switch, Route, Redirect } from 'react-router-dom'
 
 import  {fetchProtectedData} from './actions/Protected-Data';
 
 //App components
-import LandingPage from './components/LandingPage';
-import RegistrationPage from './components/RegistrationPage';
-import HeaderBar from './components/HeaderBar.js';
-import LoginPage  from './components/LoginPage';
-import Error404 from './components/Error404';
-import AboutPage from './components/AboutPage';
-import Dashboard from './components/Dashboard';
-import NewEventMain from './components/Events/newEventMain';
-import GuestEventForm from './components/Events/GuestEventForm';
-
-
-
-//Used by React Router
+import LandingPage from './components/HomePage/LandingPage';
+import RegistrationPage from './components/HomePage/Register/RegistrationPage';
+import HeaderBar from './components/ReusableComponents/HeaderBar.js';
+import LoginPage  from './components/HomePage/LogIn/LoginPage';
+import AboutPage from './components/HomePage/About/AboutPage';
+import Dashboard from './components/Dashboard/Dashboard';
+import NewEventMain from './components/EventCreation/newEventMain';
+import GuestEventForm from './components/GuestVote/GuestEventForm';
 import createHistory from 'history/createBrowserHistory';
 
-//Main CSS Styles
 import './styles.css';
 
-
 const history = createHistory();
-
-
 
 class App extends Component{
     componentWillMount(){
@@ -167,11 +158,11 @@ const mapStateToProps = state => ({
   export default withRouter(connect(mapStateToProps)(App));
 
 
-const NavLink = props => (
-  <li className="navItem">
-    <Link {...props} style={{ cursor: 'pointer', color: 'inherit' }} />
-  </li>
-)
+// const NavLink = props => (
+//   <li className="navItem">
+//     <Link {...props} style={{ cursor: 'pointer', color: 'inherit' }} />
+//   </li>
+// )
 
 const HomePage = ({ style }) => (
   <animated.div className="mainRoute" style={{ ...style, background: `#fdfdfd` }}>

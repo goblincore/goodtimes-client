@@ -3,13 +3,20 @@
   border: dotted grey 1px;
   border-radius:6px;
   padding: 10px;
+  text-align: left;
+  padding:30px;
+  margin-bottom:15px;
 }
 
 .date-vote{
-  border: dotted grey 1px;
+  border-bottom: dashed #ccc 1px;
   padding-left:20px;
 }
 
 .event-list{
   text-align:left;
+}
+
+.user-event h2{
+  margin-top:0px;
 }
