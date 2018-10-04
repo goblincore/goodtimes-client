@@ -18,6 +18,7 @@ export default class ActivitySelect extends React.Component {
   componentDidMount(){
     // If user hasn't selected any dates, they must redirect back to DateSelectPage
     if (this.props.times.length <= 0) {
+      localStorage.setItem('eventDraft', JSON.stringify(this.props.eventState));
       return window.location.reload();
     }
     this.props.dispatch(fetchCategories());

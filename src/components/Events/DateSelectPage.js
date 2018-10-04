@@ -1,7 +1,7 @@
 import React from 'react';
 import moment from 'moment';
 import DateList from './DateList';
-import {updateNewEventState} from '../../actions/New-Event';
+import {updateNewEventState, newEventErrorMessage} from '../../actions/New-Event';
 import './Calendar/less/calendar-time.css';
 
 // import 'react-datepicker/dist/react-datepicker.css';
@@ -32,6 +32,15 @@ export default class DateSelectPage extends React.Component {
       locale: 'en',
       size: 'small'
     };
+  }
+
+  // If redirected from ActivityPage component, redux state gets stored in local storage during the forced page-refresh
+  componentWillMount(){
+    if (localStorage.getItem('eventDraft')) {
+      this.props.dispatch(updateNewEventState(JSON.parse(localStorage.getItem('eventDraft'))));
+      localStorage.removeItem('eventDraft');
+      this.props.dispatch(newEventErrorMessage('You need to choose a date before searching activities.'))
+    }
   }
 
 
