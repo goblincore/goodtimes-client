@@ -96,13 +96,26 @@ export default class RestaurantSelect extends React.Component {
     
     return(
       <div className="container text-left">
-        <h1>Let's go eat!</h1>
-        <p>Change the cuisine to see a list of restaurant options. 
-          Check off restaurants to add them to your list of options.
-           You can select multiple restaurants!</p>
+         <nav className='create-nav'>
+              <button type='button' onClick={() => this.props.prevPage()}>{'<-'} Back</button>
+              <button type='button' 
+                onClick={() => this.props.saveAsDraft()}>
+                Save as Draft
+              </button>
+              <button type='button' onClick={()=>this.props.nextPage()}>Next {'->'}</button>
+           </nav>
+        <div className="instructions">
+     
+            <h1>Let's go eat!</h1>
+            
+            <p>Change the cuisine to see a list of restaurant options. 
+              Check off restaurants to add them to your list of options.
+              You can select multiple restaurants!</p>
+        </div>
+     
         <div id="select-cuisine">
           <form id="select-cuisine-form">
-            <label>Select Cuisine</label>
+           <h3><label>Select Cuisine</label></h3> 
             <select onChange={e => this.getCuisines(e)}>
               <option>Select a cuisine...</option>
               {cuisineOptions}
@@ -110,19 +123,14 @@ export default class RestaurantSelect extends React.Component {
           </form>
          
        
-          <p>{this.props.eventState.errorMessage}</p>
-         
-          <ul>Restaurant Choices{selectedRestaurantsDisplay}</ul>
-
-          <button type='button' onClick={() => this.props.prevPage()}>{'<-'} Back</button>
-          <button type='button' 
-            onClick={() => this.props.saveAsDraft()}>
-            Save as Draft
-          </button>
-          <button type='button' onClick={()=>this.props.nextPage()}>Next {'->'}</button>
+         <div id="restaurant-choices" >
+            <h3>Selected Restaurant Choices</h3>
+            <ul>{selectedRestaurantsDisplay}</ul>
+          </div>
+       
         </div>
 
-        <div id="restaurant-list">
+        <div id="restaurant-list" className="bottom-offset">
           {restaurantChoices}
         </div>
       </div>

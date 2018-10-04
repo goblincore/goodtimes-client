@@ -5,8 +5,6 @@ import DraftItem from '../UserDrafts/DraftItem';
 
 export function EventList(props) {
 
-  if(props)
-
     if(props.loading){
       return <p>Loading...</p>;
     }

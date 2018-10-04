@@ -122,6 +122,7 @@ export class CreateEvent extends React.Component {
     this.props.nextPage();
   }
 
+
   render(){
 
     let errorMessage = null;
@@ -156,10 +157,35 @@ export class CreateEvent extends React.Component {
       }
     return (
       <div>
+          <nav className='create-nav'>
+              <button type='button' onClick={() => this.props.prevPage()}>{'<-'} Back</button>
+              <button type='button' 
+                  onClick={() => {
+                    // Validate that title and location are filled out before saving
+                    if (this.state.locationFeedback.startsWith('Must provide')) return this.props.dispatch(newEventErrorMessage('Must provide a location to save.'))
+                    else if (this.state.locationFeedback === 'Checking city...') return;
+                    else if (!this.props.eventState.title) return this.props.dispatch(newEventErrorMessage('Must provide a title to save.'));
+                    else if (!this.props.eventState.locationCity.state || !this.props.eventState.locationCity.city) return this.props.dispatch(newEventErrorMessage('Must provide a city and state to save.'));
+                    else if (this.state.locationFeedback.startsWith('Did you mean')) return this.props.dispatch(newEventErrorMessage('Confirm location to save.'));
+
+                    this.props.saveAsDraft();
+                  }}>
+                  Save as Draft
+               </button>
+              <button  type='submit' form='createform' value="Submit">
+          Next {'->'}
+        </button>
+           </nav>
+      <div className="instructions"> 
       <h3>Let's get started!</h3>
       <p>Create a title and select a location for your event. Don't forget to add a description!</p>
+        
+        </div>
+    
 
       <form
+        id="createform"
+        name="createform"
         className="event-form"
         onSubmit={e => this.handleSubmit(e)}
       >
@@ -268,25 +294,7 @@ export class CreateEvent extends React.Component {
           />
         </label>
               
-        <button type='button' onClick={() => this.props.prevPage()}>
-          {'<-'} Back
-        </button>
-        <button type='button' 
-          onClick={() => {
-            // Validate that title and location are filled out before saving
-            if (this.state.locationFeedback.startsWith('Must provide')) return this.props.dispatch(newEventErrorMessage('Must provide a location to save.'))
-            else if (this.state.locationFeedback === 'Checking city...') return;
-            else if (!this.props.eventState.title) return this.props.dispatch(newEventErrorMessage('Must provide a title to save.'));
-            else if (!this.props.eventState.locationCity.state || !this.props.eventState.locationCity.city) return this.props.dispatch(newEventErrorMessage('Must provide a city and state to save.'));
-            else if (this.state.locationFeedback.startsWith('Did you mean')) return this.props.dispatch(newEventErrorMessage('Confirm location to save.'));
-
-            this.props.saveAsDraft();
-          }}>
-          Save as Draft
-        </button>
-        <button type='submit'>
-          Next {'->'}
-        </button>
+      
       </form>
     </div>
   );

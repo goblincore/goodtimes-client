@@ -12,7 +12,7 @@ export class NewEventMain extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      pageCount: this.props.pageCount ? this.props.pageCount :  1
+      pageCount: (this.props.pageCount && this.props.pageCount > 0 ) ? this.props.pageCount :  1
     };
   
   }

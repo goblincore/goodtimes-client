@@ -1,7 +1,8 @@
 .event-form{
   max-width:350px;
-  margin:auto;
+  padding-left:25px;
   text-align:left;
+  float:left;
 
 }
 

@@ -1,6 +1,6 @@
 import { API_BASE_URL } from '../config';
 import { normalizeResponseErrors } from './Utils';
-
+import {fetchUserEvents} from './Protected-Data';
 
 export const SHOW_NEW_EVENT_STATE = 'SHOW_NEW_EVENT_STATE';
 export const showNewEventState = bool => ({
@@ -90,6 +90,7 @@ export const deleteEvent = (eventId) => dispatch => {
     }
   })
     .then(res => normalizeResponseErrors(res))
+    .then(()=>dispatch(fetchUserEvents()))
     // .then(res => res.json())
     .then(() => dispatch(deleteEventSuccess()))
     .catch(err => Promise.reject(err));
