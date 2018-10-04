@@ -22,42 +22,11 @@ export class NewEventMain extends React.Component {
 
 
 
-
-  /* ------------ Persists the state of our New Event --------------------------*/
-  // componentWillMount(){
-  //   try {
-  //     const eventDraft = localStorage.getItem('eventDraft');
-  //     if (eventDraft) {
-  //       this.props.dispatch(updateNewEventState(JSON.parse(eventDraft)));
-  //       const newEventPageCount = localStorage.getItem('newEventPageCount');
-  //       if (newEventPageCount) {
-  //         this.setState({pageCount: Number(newEventPageCount)});
-  //       }
-  //     }
-  //   }
-  //   catch (err) {
-  //     console.log(err);
-  //   }
-  // }
-
-
   componentWillUnmount(){
     this.props.dispatch(resetActivitiesReducer());
     this.props.dispatch(resetRestaruantsReducer());
     this.props.dispatch(resetNewEventState());
   }
-
-  // componentDidUpdate(){
-  //     try {
-  //       localStorage.setItem('eventDraft', JSON.stringify(this.props.newEvent));
-  //       localStorage.setItem('newEventPageCount', this.state.pageCount);
-  //     }
-  //     catch (err) {
-  //       console.log(err);
-  //     }
-  // }
-  /* ------------------------------------------------------------------------------*/
-
 
 
 

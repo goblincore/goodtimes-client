@@ -1,10 +1,18 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom';
 import { fetchCategories, fetchActivities } from '../../actions/Activities';
 import moment from 'moment';
 import { updateNewEventState } from '../../actions/New-Event';
+
+
+
 export default class ActivitySelect extends React.Component {
 
   componentDidMount(){
+    // If user hasn't selected any dates, they must redirect back to DateSelectPage
+    if (this.props.times.length <= 0) {
+      return window.location.reload();
+    }
     this.props.dispatch(fetchCategories());
 
   }
@@ -14,6 +22,16 @@ export default class ActivitySelect extends React.Component {
     this.props.dispatch(fetchActivities(this.props.latitude, this.props.longitude,times[0],times[times.length-1], e.target.value));
   }
   render(){
+    //If user hasn't selected dates yet, they can't get events
+    if(this.props.times.length <= 0) {
+      return (
+        <Redirect to={{
+          pathname: '/edit-draft',
+          state: {pageCount: 2}
+        }} />
+      )
+    }
+
     let categoryFilters;
     if(this.props.categories.length > 0){
       categoryFilters = this.props.categories.map(category => {
