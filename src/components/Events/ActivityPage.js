@@ -2,8 +2,17 @@ import React from 'react';
 import { fetchCategories, fetchActivities } from '../../actions/Activities';
 import moment from 'moment';
 import { updateNewEventState } from '../../actions/New-Event';
+import SelectActivity from './SelectActivity';
+import WriteActivity from './WriteActivity';
+
 export default class ActivitySelect extends React.Component {
 
+  constructor(props){
+    super(props);
+    this.state = {
+      display: 'none'
+    };
+  }
   componentDidMount(){
     this.props.dispatch(fetchCategories());
 
@@ -13,76 +22,79 @@ export default class ActivitySelect extends React.Component {
     e.preventDefault();
     this.props.dispatch(fetchActivities(this.props.latitude, this.props.longitude,times[0],times[times.length-1], e.target.value));
   }
+
+  deleteWhenClicked(e){
+    const { activityOptions }  = this.props.eventState;
+    const idOfActivityToDelete = e.target.id;
+    const filteredActivities = activityOptions.filter((option) => option._id !== idOfActivityToDelete);
+  this.props.dispatch(updateNewEventState({activityOptions: filteredActivities}));
+  }
   render(){
-    let categoryFilters;
-    if(this.props.categories.length > 0){
-      categoryFilters = this.props.categories.map(category => {
-        return <option key={category.id} id={category.id} value={category.id}>{category.name}</option>;
-      });
-    }
-    let activityOptions;
-    if(this.props.activities === undefined){
-      console.log('no activities');
-    }
-    if(this.props.activities.activities !== undefined){
-      const events = this.props.activities.activities.events;
-      if(events.length >0){
-        activityOptions = events.map((activity, index) => {
-          return (
-            <div key={index}>
-              <input 
-                id={activity.id}
-                value={activity.url}
-                name={activity.name.text}
-                onChange={(e) => {
-                  if(e.target.checked === true){
-                    this.props.dispatch(updateNewEventState({
-                      activityOptions: [...this.props.eventState.activityOptions, {
-                        ebId: e.target.id, link: e.target.value, title: e.target.name
-                      }]
-                    }));
-                  }
-                  else {
-                    console.log('activity id=',activity.id, 'e.target.id=', e.target.id);
-                    const tempArray = this.props.eventState.activityOptions.filter(activity => activity.ebId !== e.target.id);
-                    console.log('temp array=',tempArray);
-                    this.props.dispatch(updateNewEventState({activityOptions: tempArray}));
-                  }
-                }}
-                type="checkbox"></input>
-              <a href={activity.url}>{activity.name.text}</a>
-              <p>Start: {moment(activity.start.local).format('llll')}</p>
-              <p>End: {moment(activity.end.local).format('llll')}</p>
-            </div>
-          );
-        });
-      }else{
-        activityOptions = <p>No events in this category during the times you selected. Try a different category!</p>;
-      }
-    }
     
-    if(this.props.loading===true){
-      categoryFilters = <option>Loading categories...</option>;
-      activityOptions = <div>Loading event options...</div>;
+    let optionDisplay;
+
+    if(this.state.display === 'none'){
+      optionDisplay = <div></div>;
+    }
+    else if(this.state.display === 'write'){
+      optionDisplay =   
+      <div>
+        <WriteActivity 
+          dispatch={this.props.dispatch} 
+          eventState={this.props.eventState}
+          prevPage={this.props.prevPage} 
+          nextPage={this.props.nextPage}
+          categories={this.props.categories}
+          activities={this.props.activities}
+          loading={this.props.loading}
+          latitude={this.props.latitude}
+          longitude={this.props.longitude}
+          times={this.props.times}
+        />
+        <button 
+          onClick={(e) => {
+            const form = e.target.parentElement.firstChild;
+            this.props.dispatch(updateNewEventState({
+              activityOptions: [...this.props.eventState.activityOptions, {
+                ebId: form.title.value, link: '#', description: form.description.value, title: form.title.value
+              }]
+            })
+            );
+            this.setState({display:'none'});
+          }}
+        >Save Event</button>
+      </div>;
+    }
+    else if(this.state.display === 'choose'){
+      optionDisplay = <SelectActivity 
+        dispatch={this.props.dispatch} 
+        eventState={this.props.eventState}
+        prevPage={this.props.prevPage} 
+        nextPage={this.props.nextPage}
+        categories={this.props.categories}
+        activities={this.props.activities}
+        loading={this.props.loading}
+        latitude={this.props.latitude}
+        longitude={this.props.longitude}
+        times={this.props.times}/>;
     }
     let selectedActivitiesDisplay;
     if ( this.props.eventState.activityOptions.length > 0 ){
-      console.log('selected activities', this.props.eventState.activityOptions);
-      selectedActivitiesDisplay = this.props.eventState.activityOptions.map((activity,index) => <li key={index}>{activity.title}</li>);
+      selectedActivitiesDisplay = this.props.eventState.activityOptions.map((activity,index) => <div key={index}>
+        <a href={activity.link} target='blank'>{activity.title}:</a>
+        <p>{activity.description.length > 50 ? `${activity.description.slice(0,50)}...` : activity.description}</p>
+      </div>
+      );
     }
+
     return(
       <div>
-        <p>Change the category to see a list of events in your area during the times you selected. Check off events to add them to your list of activity options. You can select multiple events!</p>
-        <select onChange={(e) => {
-          activityOptions = this.filterEvents(e);
-        }}>
-          <option>Choose a category...</option>
-          {categoryFilters}
-        </select>
-        <ul>Event Choices{selectedActivitiesDisplay}</ul>
-
-        {activityOptions}
-      
+        <h1>Let's do something!</h1>
+        <p>You can choose from events in your area or create your own!</p>
+        <button onClick={() => this.setState({display: 'choose'})}>Choose From List</button>
+        <button onClick={() => this.setState({display: 'write'})}>Create My Own</button>
+        <div>Event Choices{selectedActivitiesDisplay}</div>
+        {optionDisplay}
         <button type='button' onClick={() => this.props.prevPage()}>
           {'<-'} Back
         </button>
