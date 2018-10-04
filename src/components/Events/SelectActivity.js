@@ -31,6 +31,8 @@ export default class SelectActivity extends React.Component {
       if(events.length >0){
         activityOptions = events.map((activity, index) => {
           const description= activity.description.text;
+          const start = moment(activity.start.local).format('llll');
+          const end = moment(activity.end.local).format('llll');
           return (
             <div key={index}>
               <input 
@@ -42,7 +44,7 @@ export default class SelectActivity extends React.Component {
                   if(e.target.checked === true){
                     this.props.dispatch(updateNewEventState({
                       activityOptions: [...this.props.eventState.activityOptions, {
-                        ebId: e.target.id, link: e.target.value, title: e.target.name, description: description
+                        ebId: e.target.id, link: e.target.value, title: e.target.name, description: description, start: start, end: end
                       }]
                     }));
                   }

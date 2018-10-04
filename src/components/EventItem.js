@@ -1,6 +1,6 @@
 import React from 'react';
 import { deleteEvent } from '../actions/New-Event';
-
+import { CLIENT_BASE_URL } from '../config';
 export default class EventItem extends React.Component{
   constructor(props){
     super(props);
@@ -64,6 +64,10 @@ export default class EventItem extends React.Component{
                 );
               })
             }
+          </div>
+          <div>
+            <p>Voting Link:</p>
+            <a href={`${CLIENT_BASE_URL}/guestevents/${this.props.event.id}`} target="_blank">{CLIENT_BASE_URL}/guestevents/{this.props.event.id}</a>
           </div>
         </li>
       );
