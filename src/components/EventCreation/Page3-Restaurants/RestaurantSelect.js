@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { fetchRestaurants, fetchZomatoLocation } from '../../../actions/RestaurantSelect';
-import { updateNewEventState } from '../../../actions/New-Event';
+import { updateNewEventState, newEventErrorMessage } from '../../../actions/New-Event';
 import '../../styles/RestaurantSelect.css';
 
 
