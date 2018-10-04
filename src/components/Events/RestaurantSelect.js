@@ -17,11 +17,16 @@ export default class RestaurantSelect extends React.Component {
   }
 
   getCuisines(e){
-    const cuisineCode = e.target.value;
+    const cuisineCode = e.target.name;
     e.preventDefault();
     this.props.dispatch(fetchRestaurants(this.props.cityCode, cuisineCode));
   }
-  
+  deleteWhenClicked(e){
+    const { restaurantOptions } = this.props.eventState;
+    const idOfRestaurantToDelete = e.target.id;
+    const filteredRestaurants = restaurantOptions.filter((option) => option._id !== idOfRestaurantToDelete);
+    this.props.dispatch(updateNewEventState({restaurantOptions: filteredRestaurants}));
+  }
   render(){
     let cuisineOptions;
     if(this.props.restaurants.cityCode === null){
@@ -69,7 +74,8 @@ export default class RestaurantSelect extends React.Component {
 
     let selectedRestaurantsDisplay;
     if ( this.props.eventState.restaurantOptions.length > 0 ){
-      selectedRestaurantsDisplay = this.props.eventState.restaurantOptions.map((restaurant,index) => <li key={index}>{restaurant.name}</li>);
+      selectedRestaurantsDisplay = this.props.eventState.restaurantOptions.map((restaurant,index) => 
+      <li key={index} id={restaurant._id} onClick={(e) => this.deleteWhenClicked(e)}>{restaurant.name} </li>);
     }
     
     return(

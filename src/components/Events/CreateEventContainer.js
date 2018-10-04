@@ -67,9 +67,9 @@ export default function CreateEventContainer(props){
     case 3:
       //food options
       component = <RestaurantSelect 
-      nextPage={props.nextPage} 
-      dispatch={props.dispatch} 
-      prevPage={props.prevPage} 
+      nextPage={props.nextPage}
+      dispatch={props.dispatch}
+      prevPage={props.prevPage}
       eventState={props.newEvent}
       restaurants={props.restaurants}
       cityCode={props.restaurants.cityCode}
@@ -118,10 +118,10 @@ export default function CreateEventContainer(props){
       return <Redirect to='/dashboard'/>;
     }
 
-    return (
-      <div className='new-event-form bottom-offset'>
-        {component}
-      </div>
-    );
+  return (
+    <div className='new-event-form bottom-offset'>
+      {component}
+    </div>
+  );
 
 }
