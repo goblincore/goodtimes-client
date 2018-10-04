@@ -44,3 +44,7 @@
     border-radius: 6px;
 
 }
+
+.restaurant-item.checked-true {
+  background-color: rgb(220, 255, 220);
+}
