@@ -72,7 +72,7 @@ export default class ActivitySelect extends React.Component {
             const form = e.target.parentElement.firstChild;
             this.props.dispatch(updateNewEventState({
               activityOptions: [...this.props.eventState.activityOptions, {
-                ebId: form.title.value, link: '#', description: form.description.value, title: form.title.value
+                ebId: form.title.value, description: form.description.value, title: form.title.value
               }]
             })
             );
