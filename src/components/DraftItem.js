@@ -1,5 +1,5 @@
 import React from 'react';
-import { connect, mapStateToProps } from 'react-redux';
+import { connect } from 'react-redux';
 import {Link, Redirect, withRouter} from 'react-router-dom';
 import { MdEdit } from 'react-icons/lib/md';
 import './styles/Index.css';
@@ -31,8 +31,74 @@ import { loadDraftIntoReduxState } from '../actions/Edit-Draft';
   }
 
 
-  render(){
-    
+  render(){ 
+//if event contains activity options or restaurant options, 
+//then display. otherwise, display 'add event/restaurant'
+let activtyOptionsDisplay, restaurantOptionsDisplay;
+    if(this.props.event.activityOptions.length > 0){
+      activtyOptionsDisplay = (
+        <div className='date-options'>
+        <p>Event options 
+             <MdEdit
+               className="edit-activity-options"
+               onClick={()=>this.addDraftToReduxState(this.props.event, 4)}/>
+        </p>
+          {this.props.event.activityOptions.map((act,i) =>{
+            return(
+              <div key={i} className='date-vote'>
+                <a href={act.link} target="_blank">{act.title}</a>
+                <p>Votes: {act.votes}</p>
+              </div>
+            );
+           })
+           }
+         </div>
+         )
+    } else {
+        activtyOptionsDisplay = (
+            <div className='date-options'>
+              <p>Add an Event
+                  <MdEdit
+                     className="edit-activity-options"
+                     onClick={()=>this.addDraftToReduxState(this.props.event, 4)}/>   
+              </p>
+            </div>
+        )
+    }
+
+    if(this.props.event.restaurantOptions.length > 0){ 
+          restaurantOptionsDisplay = (
+            <div className='date-options'>
+            <p>Restaurant options   
+                  <MdEdit
+                   className="edit-restaurant-options"
+                    onClick={()=>this.addDraftToReduxState(this.props.event, 3)}/> 
+                     </p>
+                
+            {this.props.event.restaurantOptions.map((food,i) =>{
+                return(
+                  <div key={i} className='date-vote'>
+                    <a href={food.website} target="_blank">{food.name}</a>
+                    <p>Votes: {food.votes}</p>
+                  </div>
+                );
+              })
+            }
+          </div>
+          )
+
+    } else {
+      restaurantOptionsDisplay = (
+        <div className='date-options'>
+            <p>Add Restaurant  
+                  <MdEdit
+                   className="edit-restaurant-options"
+                    onClick={()=>this.addDraftToReduxState(this.props.event, 3)}/> 
+                     </p>
+                </div>
+      )
+
+    }
     if(this.state.showDetails){
       return(
 
@@ -47,11 +113,12 @@ import { loadDraftIntoReduxState } from '../actions/Edit-Draft';
           <p>{this.props.event.description}</p>
           <button onClick={()=> this.toggleEventDetails(false)}>See Details</button>
           <div className='date-options'>
-            <p>Date/Time options:</p>
-                 <MdEdit
-                 className="edit-schedule-options"
-                onClick={()=>this.addDraftToReduxState(this.props.event, 2)}/>
-            
+            <p>Date/Time options 
+                  <MdEdit
+                    className="edit-schedule-options"
+                    onClick={()=>this.addDraftToReduxState(this.props.event, 2)}/>
+            </p>
+                 
             {this.props.event.scheduleOptions.map((date,i) =>{
                 console.log(date);
                 return(
@@ -64,22 +131,10 @@ import { loadDraftIntoReduxState } from '../actions/Edit-Draft';
               })
             }
           </div>
-          <div className='date-options'>
-            <p>Restaurant options:</p>
-                 <MdEdit
-                 className="edit-restaurant-options"
-                onClick={()=>this.addDraftToReduxState(this.props.event, 3)}/>
+         {restaurantOptionsDisplay}
 
-            {this.props.event.restaurantOptions.map((food,i) =>{
-                return(
-                  <div key={i} className='date-vote'>
-                    <a href={food.website} target="_blank">{food.name}</a>
-                    <p>Votes: {food.votes}</p>
-                  </div>
-                );
-              })
-            }
-          </div>
+         {activtyOptionsDisplay}
+         
         </li>
       )
     }  
