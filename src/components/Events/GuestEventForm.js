@@ -133,15 +133,15 @@ class GuestEventForm extends Component {
           <h3>{description}</h3>
           <form className="event-form-options" onSubmit={this.submitVotes}>
             <div className="time-options"> 
-              <h4>A good time to meet would be...</h4>
+              <h4>Choose times...</h4>
               {timesDisplay}
             </div>
             <div className="restaurant-options"> 
-              <h4>Let's go eat at...</h4>
+              <h4>Choose food...</h4>
               {restaurantsDisplay}
             </div>
             <div className="activity-options"> 
-              <h4>Let's go to this event...</h4>
+              <h4>Choose activies...</h4>
               {activitiesDisplay}
             </div>
             <br/>
