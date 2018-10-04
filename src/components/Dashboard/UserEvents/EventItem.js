@@ -28,14 +28,14 @@ export default class EventItem extends React.Component{
     if(this.state.showDetails){
       return(
         <li className='user-event'>
-           <span>  
-             <h2>{this.props.event.title}</h2>
-              <button className="floatRight noBorder" onClick={()=>this.toggleEventDetails(false)}>Hide Details <FaToggleOn/></button>
-           </span>
+          <span>  
+            <h2>{this.props.event.title}</h2>
+            <button className="floatRight noBorder" onClick={()=>this.toggleEventDetails(false)}>Hide Details <FaToggleOn/></button>
+          </span>
           <p>{this.props.event.description}</p>
         
           <div className='date-options'>
-          {this.props.event.scheduleOptions.length===0?'':<h4>Date/Time voting</h4>}
+            {this.props.event.scheduleOptions.length===0?'':<h4>Date/Time voting</h4>}
             {
               this.props.event.scheduleOptions.map((date,i) =>{
                 return(
@@ -47,6 +47,7 @@ export default class EventItem extends React.Component{
               })
             }
           </div>
+
           <div className='date-options'>
           {this.props.event.restaurantOptions.length===0?'':<h4>Restaurant voting</h4>}
             {
@@ -60,6 +61,7 @@ export default class EventItem extends React.Component{
               })
             }
           </div>
+
           <div className='date-options'>
           {this.props.event.activityOptions.length===0?'':<h4>Event voting</h4>}
             {
@@ -73,6 +75,7 @@ export default class EventItem extends React.Component{
               })
             }
           </div>
+
           <div>
             <p>Voting Link:</p>
             <a href={`${CLIENT_BASE_URL}/guestevents/${this.props.event.id}`} target="_blank">{CLIENT_BASE_URL}/guestevents/{this.props.event.id}</a>
@@ -85,11 +88,11 @@ export default class EventItem extends React.Component{
         <li className='user-event'>
          <span>  
             <h2>{this.props.event.title}</h2>    
-           <button className="floatRight noBorder" onClick={()=>this.toggleEventDetails(true)}>See Details <FaToggleOff/></button>
-        </span> 
+            <button className="floatRight noBorder" onClick={()=>this.toggleEventDetails(true)}>See Details <FaToggleOff/></button>
+          </span> 
     
           <p>{this.props.event.description}</p>
-         {/* <p>View Poll Page</p>
+          {/* <p>View Poll Page</p>
           <p>Current Highest Votes: </p> */}
         
           <DeleteWarning deleteEvent={this.deleteEvent}/>
