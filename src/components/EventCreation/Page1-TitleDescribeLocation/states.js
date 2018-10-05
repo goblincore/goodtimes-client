@@ -57,10 +57,9 @@ export default function States(props) {
   {value:'WY',name:'Wyoming'}
 ];
 
-  states.map(state =>{
+  return states.map((state, i) =>{
     return(
-        <option value={state.value}>{state.name}</option>
+      <option key={i} value={state.value}>{state.name}</option>
     ) 
-    
   })
 }

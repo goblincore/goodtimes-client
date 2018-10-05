@@ -4,7 +4,8 @@ import { bingMapsKey } from '../../../config';
 import { updateNewEventState, newEventErrorMessage } from '../../../actions/New-Event';
 import { resetRestaruantsReducer } from '../../../actions/RestaurantSelect';
 import { resetActivitiesReducer } from '../../../actions/Activities';
-import States from './states';
+import States from './States';
+import LocationMessage from './LocationMessage';
 
 
 export class CreateEvent extends React.Component {
@@ -123,6 +124,19 @@ export class CreateEvent extends React.Component {
     this.props.nextPage();
   }
 
+  // handleStateChange(){
+  //   console.log(this.state.locationFeedback)
+  //   this.setState({
+  //     locationFeedback: '',
+  //     locationOption: 1
+  //   })
+  // }
+
+  // handleYesDispatch(city, state){
+  //   this.props.dispatch(updateNewEventState({
+  //     locationCity: {city, state} 
+  //   }))
+  // }
 
   render(){
 
@@ -137,8 +151,12 @@ export class CreateEvent extends React.Component {
         this.state.locationFeedback.startsWith('Must provide') ||
         !this.state.locationFeedback) {
       locationMessage = <p>{this.state.locationFeedback}</p>
+      
     } 
     else {
+      // console.log(this.state.locationFeedback);
+      // locationMessage = <LocationMessage locationFeedback={this.state.locationFeedback} handleState={this.handleStateChange()} handleYesDispatch={(city, state)=>this.handleYesDispatch(city, state)} handleNoDispatch={this.handleIncorrectCity()} />  
+      
       locationMessage = (
         <p>
           {this.state.locationFeedback}
@@ -153,103 +171,101 @@ export class CreateEvent extends React.Component {
                 locationFeedback: '',
                 locationOption: 1
               })
-            }}>Yes</button>
+            }}
+          >Yes</button>
           <button type='button' onClick={() => this.handleIncorrectCity()}>No</button>
         </p>
       )
     }
     return (
       <div>
-          <nav className='create-nav'>
-              <button type='button' onClick={() => this.props.prevPage()}>{'<-'} Back</button>
-              <button type='button' 
-                  onClick={() => {
-                    // Validate that title and location are filled out before saving
-                    if (this.state.locationFeedback.startsWith('Must provide')) return this.props.dispatch(newEventErrorMessage('Must provide a location to save.'))
-                    else if (this.state.locationFeedback === 'Checking city...') return;
-                    else if (!this.props.eventState.title) return this.props.dispatch(newEventErrorMessage('Must provide a title to save.'));
-                    else if (!this.props.eventState.locationCity.state || !this.props.eventState.locationCity.city) return this.props.dispatch(newEventErrorMessage('Must provide a city and state to save.'));
-                    else if (this.state.locationFeedback.startsWith('Did you mean')) return this.props.dispatch(newEventErrorMessage('Confirm location to save.'));
+        <nav className='create-nav'>
+          <button type='button' onClick={() => this.props.prevPage()}>{'<-'} Back</button>
+          <button type='button' 
+            onClick={() => {
+              // Validate that title and location are filled out before saving
+              if (this.state.locationFeedback.startsWith('Must provide')) return this.props.dispatch(newEventErrorMessage('Must provide a location to save.'))
+              else if (this.state.locationFeedback === 'Checking city...') return;
+              else if (!this.props.eventState.title) return this.props.dispatch(newEventErrorMessage('Must provide a title to save.'));
+              else if (!this.props.eventState.locationCity.state || !this.props.eventState.locationCity.city) return this.props.dispatch(newEventErrorMessage('Must provide a city and state to save.'));
+              else if (this.state.locationFeedback.startsWith('Did you mean')) return this.props.dispatch(newEventErrorMessage('Confirm location to save.'));
 
-                    this.props.saveAsDraft();
-                  }}>
-                  Save as Draft
-               </button>
-              <button  type='submit' form='createform' value="Submit">
-          Next {'->'}
-        </button>
-           </nav>
-      <div className="instructions"> 
-      <h3>Let's get started!</h3>
-      <p>Create a title and select a location for your event. Don't forget to add a description!</p>
-        
+              this.props.saveAsDraft();
+            }}
+          >
+            Save as Draft
+          </button>
+          <button  type='submit' form='createform' value="Submit">
+            Next {'->'}
+          </button>
+        </nav>
+
+        <div className="instructions"> 
+          <h3>Let's get started!</h3>
+          <p>Create a title and select a location for your event. Don't forget to add a description!</p>
         </div>
     
+        <form
+          id="createform"
+          name="createform"
+          className="event-form"
+          onSubmit={e => this.handleSubmit(e)}
+        >
+          {errorMessage}
 
-      <form
-        id="createform"
-        name="createform"
-        className="event-form"
-        onSubmit={e => this.handleSubmit(e)}
-      >
-        {errorMessage}
-
-        <label htmlFor="eventTitle">Event Title</label>
-        <input
-          type="text"
-          id="eventTitle"
-          name="eventTitle"
-          placeholder="Get together"
-          value={this.props.eventState.title}
-          onChange={(e) => {
-            this.props.dispatch(updateNewEventState({title: e.target.value}));
-            this.props.dispatch(newEventErrorMessage(null));
-          }}
-        />
-        <label htmlFor='stateLocation'>Location</label>
-
-        <select name="stateLocation" id="stateLocation" value={this.props.eventState.locationCity.state ? this.props.eventState.locationCity.state : ''} 
-          onChange={e => {
-            let city = this.props.eventState.locationCity.city ? this.props.eventState.locationCity.city : '';
-            this.props.dispatch(updateNewEventState({
-              locationCity: {city, state: e.target.value}
-            }));
-            this.setState({locationOption: 1}, () => this.validateCity() );
-          }}>
-
-          <States />
-        </select>
-
-        <label htmlFor="cityLocation">City</label>
-        <input
-          type="text"
-          id="cityLocation"
-          name="cityLocation"
-          placeholder="Please enter a City"
-          value={this.props.eventState.locationCity.city ? this.props.eventState.locationCity.city : ''}
-          onChange={e => {
-            let state = this.props.eventState.locationCity.state ? this.props.eventState.locationCity.state : '';
-            this.props.dispatch(updateNewEventState({
-              locationCity: {city: e.target.value, state}
-            }));
-            this.setState({locationOption: 1}, () => this.props.dispatch(newEventErrorMessage(null)));
-          }}
-          onBlur={() => this.validateCity()}
-        />
-
-        {locationMessage}
-
-        <label htmlFor="eventDescription">
-                  Enter a short description for your event:
-          <textarea rows="4" cols="50" name="eventDescription" 
-            value={this.props.eventState.description} 
-            onChange={e => this.props.dispatch(updateNewEventState({description: e.target.value}))}
+          <label htmlFor="eventTitle">Event Title</label>
+          <input
+            type="text"
+            id="eventTitle"
+            name="eventTitle"
+            placeholder="Get together"
+            value={this.props.eventState.title}
+            onChange={(e) => {
+              this.props.dispatch(updateNewEventState({title: e.target.value}));
+              this.props.dispatch(newEventErrorMessage(null));
+            }}
           />
-        </label>
-              
-      
-      </form>
-    </div>
-  );
+          <label htmlFor='stateLocation'>Location</label>
+
+          <select name="stateLocation" id="stateLocation" value={this.props.eventState.locationCity.state ? this.props.eventState.locationCity.state : ''} 
+            onChange={e => {
+              let city = this.props.eventState.locationCity.city ? this.props.eventState.locationCity.city : '';
+              this.props.dispatch(updateNewEventState({
+                locationCity: {city, state: e.target.value}
+              }));
+              this.setState({locationOption: 1}, () => this.validateCity() );
+          }}>
+            <States />
+          </select>
+
+          <label htmlFor="cityLocation">City</label>
+          <input
+            type="text"
+            id="cityLocation"
+            name="cityLocation"
+            placeholder="Please enter a City"
+            value={this.props.eventState.locationCity.city ? this.props.eventState.locationCity.city : ''}
+            onChange={e => {
+              let state = this.props.eventState.locationCity.state ? this.props.eventState.locationCity.state : '';
+              this.props.dispatch(updateNewEventState({
+                locationCity: {city: e.target.value, state}
+              }));
+              this.setState({locationOption: 1}, () => this.props.dispatch(newEventErrorMessage(null)));
+            }}
+            onBlur={() => this.validateCity()}
+          />
+
+          {locationMessage}
+
+          <label htmlFor="eventDescription">
+                    Enter a short description for your event:
+            <textarea rows="4" cols="50" name="eventDescription" 
+              value={this.props.eventState.description} 
+              onChange={e => this.props.dispatch(updateNewEventState({description: e.target.value}))}
+            />
+          </label>
+        </form>
+      </div>
+    );
   }
 }
