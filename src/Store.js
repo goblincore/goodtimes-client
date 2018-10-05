@@ -5,7 +5,7 @@ import authReducer from './reducers/Auth';
 import newEventReducer from './reducers/NewEvent';
 import restaurantReducer from './reducers/RestaurantSelect';
 import activityReducer from './reducers/Activities';
-import { refreshAuthToken } from './actions/Auth';
+// import { refreshAuthToken } from './actions/Auth';
 
 const store = createStore(
   combineReducers({

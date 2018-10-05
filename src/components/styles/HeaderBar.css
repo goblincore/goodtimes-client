@@ -33,6 +33,21 @@ ul {
       transform:translateY(-10px);
   }
 
+
+  .header-nav a {
+  font-weight:normal;
+}
+
+
+  .background-color{
+    background:#fdfdfd;
+  }
+
+
+  .lightWeight{
+    font-weight:200;
+  }
+
   .header-logo{
     display:inline-block;
     float:left;
@@ -62,6 +77,13 @@ ul {
   .smily{
     margin-top: -2px;
     margin-right:4px;
+    animation: App-logo-spin infinite 10s linear;
+  }
+
+
+  @keyframes App-logo-spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
   }
 
   .navItem {

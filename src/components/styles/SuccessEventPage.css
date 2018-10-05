@@ -1,0 +1,9 @@
+.width100{
+    width:100%;
+}
+
+.event-link-to-share form{
+    max-width:400px;
+    margin:auto;
+    padding:10px;
+}
