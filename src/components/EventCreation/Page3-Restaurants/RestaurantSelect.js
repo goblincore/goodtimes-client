@@ -21,8 +21,8 @@ export default class RestaurantSelect extends React.Component {
    
     const { restaurantOptions } = this.props.eventState;
     const idOfRestaurantToDelete = e.target.dataset.yelpid;
-
-    if (this.props.restaurants.yelpRestaurants.find(restaurant => restaurant.yelpId === idOfRestaurantToDelete)) {
+    console.log(document.getElementById(idOfRestaurantToDelete).checked);
+    if (this.props.restaurants.yelpRestaurants.find(restaurant => restaurant.id === idOfRestaurantToDelete)) {
       document.getElementById(idOfRestaurantToDelete).checked = false;
     }
     const filteredRestaurants = restaurantOptions.filter(option => option.yelpId !== idOfRestaurantToDelete);
