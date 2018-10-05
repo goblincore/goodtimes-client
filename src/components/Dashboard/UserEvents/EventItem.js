@@ -5,6 +5,7 @@ import DeleteWarning from '../DeleteWarning';
 import {deleteEvent} from '../../../actions/New-Event';
 import { CLIENT_BASE_URL } from '../../../config';
 
+
 export default class EventItem extends React.Component{
   constructor(props){
     super(props);
