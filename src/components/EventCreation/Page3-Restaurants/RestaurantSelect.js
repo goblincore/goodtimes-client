@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { fetchRestaurants, fetchZomatoLocation } from '../../../actions/RestaurantSelect';
+import { fetchYelpCategories, fetchYelpRestaurants } from '../../../actions/RestaurantSelect';
 import { updateNewEventState, newEventErrorMessage } from '../../../actions/New-Event';
 import '../../styles/RestaurantSelect.css';
 
@@ -8,42 +8,41 @@ import '../../styles/RestaurantSelect.css';
 export default class RestaurantSelect extends React.Component {
 
   componentWillMount(){
-    this.props.dispatch(fetchZomatoLocation(this.props.eventState.location.latitude, this.props.eventState.location.longitude));
+    this.props.dispatch(fetchYelpCategories());
   }
 
-  getCuisines(e){
+  getYelpRestaurants(e){
     e.preventDefault();
-    const cuisineCode = e.target.value;
-    this.props.dispatch(fetchRestaurants(this.props.cityCode, cuisineCode));
+    const category = e.target.value; 
+    this.props.dispatch(fetchYelpRestaurants(category, this.props.eventState.location.latitude, this.props.eventState.location.longitude));
   }
 
-  deleteWhenClicked(e){
+  deleteYelpWhenClicked(e){
+   
     const { restaurantOptions } = this.props.eventState;
-    const idOfRestaurantToDelete = e.target.dataset.zomatoid;
-    // If there is a restaurant list showing, make sure the restaurant unchecks on delete
-    if (this.props.restaurants.restaurants.find(restaurant => restaurant.restaurant.id === idOfRestaurantToDelete)) {
+    const idOfRestaurantToDelete = e.target.dataset.yelpid;
+    if (this.props.restaurants.yelpRestaurants.find(restaurant => restaurant.id === idOfRestaurantToDelete)) {
       document.getElementById(idOfRestaurantToDelete).checked = false;
     }
-    const filteredRestaurants = restaurantOptions.filter(option => option.zomatoId !== idOfRestaurantToDelete);
+    const filteredRestaurants = restaurantOptions.filter(option => option.yelpId !== idOfRestaurantToDelete);
     this.props.dispatch(updateNewEventState({restaurantOptions: filteredRestaurants}));
   }
 
-  handleCheckBoxChange(e){
+  handleYelpCheckBoxChange(e){
     if (e.target.checked === true) {
-      // Makes sure the restaurant was not already selected
-      if (this.props.eventState.restaurantOptions.find(restaurant => restaurant.zomatoId === e.target.id)) {
+      if (this.props.eventState.restaurantOptions.find(restaurant => restaurant.yelpId === e.target.id)) {
         return this.props.dispatch(newEventErrorMessage('You already selected that restaurant.'));
       }
 
       this.props.dispatch(updateNewEventState({
         errorMessage: '',
         restaurantOptions: [...this.props.eventState.restaurantOptions, 
-          {zomatoId: e.target.id, website: e.target.value, name: e.target.name}
+          {yelpId: e.target.id, website: e.target.value, name: e.target.name}
         ]
       }));
     }
     else {
-      const tempArray =  this.props.eventState.restaurantOptions.filter(restaurant => restaurant.zomatoId !== e.target.id);
+      const tempArray =  this.props.eventState.restaurantOptions.filter(restaurant => restaurant.yelpId !== e.target.id);
       this.props.dispatch(updateNewEventState({
         errorMessage: '',
         restaurantOptions: tempArray
@@ -52,48 +51,55 @@ export default class RestaurantSelect extends React.Component {
   }
 
   render(){
-    let cuisineOptions;
-    if(this.props.restaurants.cityCode === null){
-      cuisineOptions = <option>Loading cuisine options...</option>;
 
-    } else {
-      cuisineOptions = this.props.restaurants.cuisines.map( (cuisine,index) => {
+    let yelpCategories;
+
+    if(this.props.restaurants.yelpCategories === null){
+      yelpCategories = <option>Loading category options...</option>;
+    }
+    else{
+      yelpCategories = this.props.restaurants.yelpCategories.map( (category, index )=> {
         return (
-          <option value={cuisine.cuisine.cuisine_id} key={index}>{cuisine.cuisine.cuisine_name}</option>
+          <option value={category.alias} key={index}>{category.title}</option>
         );
       });
     }
 
+    let yelpChoices;
 
-    let restaurantChoices = this.props.restaurants.restaurants.map( restaurant => {
-      let checked = false;
-      // If its already in the new event state
-      if (this.props.eventState.restaurantOptions.find(option => option.zomatoId === restaurant.restaurant.id)) {
-        checked = true;
-      }
-
-      return (
-        <div className={`restaurant-item checked-${checked}`} key={restaurant.restaurant.id}>
-
-          <input 
-            onChange={ e => this.handleCheckBoxChange(e)} defaultChecked={checked}
-            id={restaurant.restaurant.id} name={restaurant.restaurant.name} value={restaurant.restaurant.url} type="checkbox" ></input>
-          <img src={restaurant.restaurant.thumb==='' ? 'https://www.redbytes.in/wp-content/uploads/2018/09/zomato-logo-AD6823E433-seeklogo.com_.png' : restaurant.restaurant.thumb} alt="Thumbnail"></img>
-          <a href={restaurant.restaurant.url} target="_blank">{restaurant.restaurant.name}</a>
-          <p>{'$'.repeat(restaurant.restaurant.price_range)}</p>
-          <p>Rating: {restaurant.restaurant.user_rating.aggregate_rating}</p>
-
-        </div>
-      );
-    });
-    
-
-    let selectedRestaurantsDisplay;
-    if ( this.props.eventState.restaurantOptions.length > 0 ){
-      selectedRestaurantsDisplay = this.props.eventState.restaurantOptions.map(restaurant => 
-        <li key={restaurant.zomatoId} data-zomatoid={restaurant.zomatoId} onClick={(e) => this.deleteWhenClicked(e)}>{restaurant.name} </li>);
+    if(this.props.restaurants.yelpRestaurants.length > 0){
+      yelpChoices = this.props.restaurants.yelpRestaurants.map(restaurant => {
+        let checked = false;
+        if(this.props.eventState.restaurantOptions.find(option => option.yelpId === restaurant.id)){
+          checked = true;
+        }
+        return (
+          <div>
+            <input 
+              name={restaurant.name} 
+              id={restaurant.id} 
+              value={restaurant.url} 
+              type="checkbox" 
+              defaultChecked={checked}
+              onChange={e => this.handleYelpCheckBoxChange(e)}
+            ></input>
+            <img src={restaurant.image_url === '' ? 'https://divineeventslv.com/wp-content/uploads/2018/04/yelp-logo-27.png': restaurant.image_url} alt="thumbnail"></img>
+            <a href={restaurant.url} target="_blank">{restaurant.name}</a>
+            <p>{restaurant.price}</p>
+            <p>Rating: {restaurant.rating}</p>
+          </div>
+        );
+      });
+    }else{
+      yelpChoices = <p>Select a cuisine to view restaurants in your area!</p>;
     }
     
+    let yelpRestauransDisplay;
+
+    if(this.props.eventState.restaurantOptions.length > 0){
+      yelpRestauransDisplay = this.props.eventState.restaurantOptions.map(restaurant => {
+        return <li key={restaurant.yelpId} data-yelpid={restaurant.yelpId} onClick={(e) => this.deleteYelpWhenClicked(e)}>{restaurant.name} </li>;});
+    }
     return(
       <div className="container text-left">
         <div className="top-wrapper">
@@ -118,16 +124,16 @@ export default class RestaurantSelect extends React.Component {
             <div id="select-cuisine">
               <form id="select-cuisine-form">
               <h3><label>Select Cuisine</label></h3> 
-                <select onChange={e => this.getCuisines(e)}>
+                <select onChange={e => this.getYelpRestaurants(e)}>
                   <option>Select a cuisine...</option>
-                  {cuisineOptions}
+                  {yelpCategories}
                 </select>
               </form>
             
           
             <div id="restaurant-choices" >
                 <h3>Selected Restaurant Choices</h3>
-                <ul>{selectedRestaurantsDisplay}</ul>
+                <ul>{yelpRestauransDisplay}</ul>
               </div>
           
             </div>
@@ -135,7 +141,7 @@ export default class RestaurantSelect extends React.Component {
           </div>
 
         <div id="restaurant-list" className="bottom-offset">
-          {restaurantChoices}
+          {yelpChoices}
         </div>
       </div>
     );
