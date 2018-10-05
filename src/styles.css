@@ -126,6 +126,7 @@ align-items: center; */
 }
 
 .newEventRouteItem{
+
     /* width:100%;
     height:100%;
 
@@ -135,6 +136,8 @@ align-items: center; */
   
   .mainRouteItem {
     text-align: center;
+    width:100%;
+    
   }
   
   .subRoute {
@@ -201,6 +204,10 @@ align-items: center; */
   .border-right{
     border-right:1px dashed #ccc;
 
+}
+
+.border-left{
+  border-left:1px dashed #ccc;
 }
 
 .small-text{

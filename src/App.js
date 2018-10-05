@@ -225,7 +225,7 @@ const CreateEventPage = ({ style }) => (
 
 const GuestEventPage = ({...props, style}) => (
     <animated.div  style={{ ...style, background: '#fdfdfd' }}>
-     <div className="newEventRouteItem" >
+     <div className="mainRouteItem" >
      <GuestEventForm {...props}/>
    
      </div>

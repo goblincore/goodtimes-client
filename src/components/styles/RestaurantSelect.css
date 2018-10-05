@@ -20,7 +20,7 @@
 .new-event-form{
     padding-top:60px;
     margin:auto;
-    max-width:800px;
+   
 }
 
 #restaurant-list img {
@@ -68,13 +68,13 @@
 #restaurant-choices{
     font-size:14px;
     font-weight:bold;
-    min-height:100px;
+    min-height:140px;
 }
   
 
 @media only screen and (min-width: 800px) {
     .new-event-form {
-    width:800px !important;
+    
     }
   }
  

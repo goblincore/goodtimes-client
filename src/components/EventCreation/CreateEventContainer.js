@@ -157,7 +157,7 @@ render(){
     //successful submition page
     component = style =>{
     return(
-      <animated.div  style={{ ...style, background: '#247BA0',position:'absolute' }}>
+      <animated.div  style={{ ...style}}>
         <SuccessfullyCreatedEvent 
           dispatch={this.props.dispatch} 
           prevPage={this.props.prevPage} 
@@ -176,10 +176,10 @@ render(){
     <div className="new-event-form bottom-offset">
        <Transition
           native
-          config={config.slow}
-          from={{ opacity: 0, transform: 'translate3d(100%,0,0)' }}
-          enter={{ opacity: 1, transform: 'translate3d(0%,0,0)' }}
-          leave={{ opacity: 0, transform: 'translate3d(-100%,0,0)' }}>
+          config={config.fast}
+          from={{ opacity: 0 }}
+          enter={{ opacity: 1 }}
+          leave={{ opacity: 0 }}>
         {component}
       </Transition>
     </div>

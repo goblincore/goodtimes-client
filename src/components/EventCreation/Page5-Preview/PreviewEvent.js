@@ -121,26 +121,32 @@ export default function PreviewEvent (props) {
             </nav>
 
       
-          <div className="guest-event-form-wrapper">
+          <div className="guest-event-form-wrapper temp-adjust">
+          <div className="form-outline">
+            <div className="card">
             <h3>You're invited to:</h3>
             <h1>{props.eventState.title}</h1><br/>
             <h3>Vote to decide on a time and place.</h3>
             
             <h3>Description:</h3>
-            <h4>{props.eventState.description}</h4>
+            <p>{props.eventState.description}</p>
+            </div>
             <form className="event-form-options">
               <div className="time-options"> 
                 <h4>Choose times...</h4>
-                {timesDisplay}
+                 {timesDisplay}
               </div>
-             
-              {restaurantsDisplay}
+               <div className="restaurant-options">
+                 {restaurantsDisplay}
+              </div>
 
-              {activitiesDisplay}
-             
+              <div className="activities-option">
+                  {activitiesDisplay}
+              </div>
               <br/>
               <br/>
-            </form>     
+            </form>  
+            </div>   
           </div>
 
         </div>

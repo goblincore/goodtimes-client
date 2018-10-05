@@ -19,8 +19,16 @@
  .event-form-options{
      max-width:400px;
      margin:auto;
+     padding-bottom:50px;
  }
 
  .guest-event-form-wrapper{
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-top:60px;
+ }
+
+ .post-vote{
      text-align:center;
+     margin:auto;
  }
