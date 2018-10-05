@@ -12,116 +12,179 @@ import SuccessfullyCreatedEvent from './Page6-Share/SuccessfullyCreatedEvent';
 
 import { putUpdatedDraft } from '../../actions/Edit-Draft';
 import { postNewEvent } from '../../actions/New-Event';
+import { Transition, animated,config } from 'react-spring'
+import '../styles/CreateEventContainer.css';
 
+export default class CreateEventContainer extends React.Component{
 
-export default function CreateEventContainer(props){
-  function saveAsDraft(){
+  constructor(props){
+    super(props);
+    this.state={
+
+    };
+
+  }
+
+  saveAsDraft=()=>{
     const draft = {
-      userId: props.currentUser.id,
-      title: props.eventState.title,
+      userId: this.props.currentUser.id,
+      title: this.props.eventState.title,
       draft: true,
-      description: props.eventState.description,
-      location: props.eventState.location,  //{latitude: ..., longitude: ...}
-      locationCity: props.eventState.locationCity,
-      scheduleOptions: props.eventState.scheduleOptions,
-      restaurantOptions: props.eventState.restaurantOptions,
-      activityOptions: props.eventState.activityOptions,
-      id: props.eventState.id
+      description:this. props.eventState.description,
+      location: this.props.eventState.location,  //{latitude: ..., longitude: ...}
+      locationCity: this.props.eventState.locationCity,
+      scheduleOptions: this.props.eventState.scheduleOptions,
+      restaurantOptions: this.props.eventState.restaurantOptions,
+      activityOptions: this.props.eventState.activityOptions,
+      id: this.props.eventState.id
     };
 
     if (draft.id) {
-      return props.dispatch(putUpdatedDraft(draft))
-      .then(() => props.goHome());
+      return this.props.dispatch(putUpdatedDraft(draft))
+        .then(() => this.props.goHome());
     } else {
       delete draft.id;
-      return props.dispatch(postNewEvent(draft))
-      .then(() => props.goHome());
+      return this.props.dispatch(postNewEvent(draft))
+        .then(() => this.props.goHome());
     }
   }
+render(){
+
+
+
+  
 
     let component;
 
-    switch (props.pageNum) {
-    case 0:
-      return <Redirect to='/dashboard'/>
-    case 1:
-      //title, location, description
-      component = <CreateEvent 
-        nextPage={props.nextPage} 
-        dispatch={props.dispatch} 
-        prevPage={props.goHome} 
-        eventState={props.newEvent}
-        saveAsDraft={saveAsDraft}
-      />;
-      break;
-    case 2:
-      //date/time options
-      component = <DateSelectPage 
-        nextPage={props.nextPage}
-        dispatch={props.dispatch}
-        prevPage={props.prevPage} 
-        eventState={props.newEvent}
-        saveAsDraft={saveAsDraft}
-        />;
-      break;
-    case 3:
-      //food options
-      component = <RestaurantSelect 
-      nextPage={props.nextPage}
-      dispatch={props.dispatch}
-      prevPage={props.prevPage}
-      eventState={props.newEvent}
-      restaurants={props.restaurants}
-      cityCode={props.restaurants.cityCode}
-      saveAsDraft={saveAsDraft}
-      />;
-      break;
-    case 4:
-      //activity options
-      component = <ActivityPage
-        dispatch={props.dispatch} 
-        eventState={props.newEvent}
-        prevPage={props.prevPage} 
-        nextPage={props.nextPage}
-        categories={props.activities.categories}
-        activities={props.activities.activities}
-        loading={props.activities.loading}
-        latitude={props.newEvent.location.latitude}
-        longitude={props.newEvent.location.longitude}
-        saveAsDraft={saveAsDraft}
-        times={props.newEvent.scheduleOptions.map(time => 
-                moment(time.date, 'llll').format('YYYY-MM-DDTHH:mm:ss'))}
-      />;
-      break;
-    case 5:
-      //preview, confirm page
-      component = <PreviewEvent 
-        nextPage={props.nextPage}
-        goHome={props.goHome} 
-        dispatch={props.dispatch} 
-        prevPage={props.prevPage} 
-        eventState={props.newEvent}
-        currentUser={props.currentUser}
-        saveAsDraft={saveAsDraft}
-      />;
-      break;
-    case 6:
-      //successful submition page
-      component = <SuccessfullyCreatedEvent 
-        dispatch={props.dispatch} 
-        prevPage={props.prevPage} 
-        eventState={props.newEvent}
-        nextPage={props.nextPage}
-      />;
-      break;
-    case 7:
-      return <Redirect to='/dashboard'/>;
+  switch (this.props.pageNum) {
+  case 0:
+    return <Redirect to='/dashboard'/>;
+  case 1:
+    //title, location, description
+    component = style =>{ 
+      return(
+        <animated.div className="slides" style={{ ...style}}>
+          <CreateEvent 
+          nextPage={this.props.nextPage} 
+          dispatch={this.props.dispatch} 
+          prevPage={this.props.goHome} 
+          eventState={this.props.newEvent}
+          saveAsDraft={this.saveAsDraft}
+        />
+          </animated.div>
+      )
+    }
+    break;
+  case 2:
+
+  component = style =>{ 
+    //date/time options
+      return(
+        <animated.div className="slides" style={{ ...style  }}>
+          <DateSelectPage 
+            nextPage={this.props.nextPage}
+            dispatch={this.props.dispatch}
+            prevPage={this.props.prevPage} 
+            eventState={this.props.newEvent}
+            saveAsDraft={this.saveAsDraft}
+            />
+        </animated.div>
+       )
     }
 
+    break;
+  case 3:
+    //food options
+    component = style =>{ 
+      return(
+        <animated.div className="slides" style={{ ...style  }}>
+            <RestaurantSelect 
+            nextPage={this.props.nextPage}
+            dispatch={this.props.dispatch}
+            prevPage={this.props.prevPage}
+            eventState={this.props.newEvent}
+            restaurants={this.props.restaurants}
+            cityCode={this.props.restaurants.cityCode}
+            saveAsDraft={this.saveAsDraft} 
+            />
+        </animated.div>
+         )
+        }
+    break;
+  case 4:
+    //activity options
+
+    component = style =>{ 
+      return(
+        <animated.div className="slides" style={{ ...style  }}>
+        <ActivityPage
+            dispatch={this.props.dispatch} 
+            eventState={this.props.newEvent}
+            prevPage={this.props.prevPage} 
+            nextPage={this.props.nextPage}
+            categories={this.props.activities.categories}
+            activities={this.props.activities.activities}
+            loading={this.props.activities.loading}
+            latitude={this.props.newEvent.location.latitude}
+            longitude={this.props.newEvent.location.longitude}
+            saveAsDraft={this.saveAsDraft}
+            times={this.props.newEvent.scheduleOptions.map(time => 
+              moment(time.date, 'llll').format('YYYY-MM-DDTHH:mm:ss'))}
+          />
+          </animated.div>
+         )
+        }
+    break;
+  case 5:
+    //preview, confirm page
+    component = style =>{ 
+      return(
+        <animated.div className="slides" style={{ ...style  }}>
+         <PreviewEvent 
+            nextPage={this.props.nextPage}
+            goHome={this.props.goHome} 
+            dispatch={this.props.dispatch} 
+            prevPage={this.props.prevPage} 
+            eventState={this.props.newEvent}
+            currentUser={this.props.currentUser}
+            saveAsDraft={this.saveAsDraft}
+          />
+           </animated.div>
+         )
+        }
+    break;
+  case 6:
+    //successful submition page
+    component = style =>{
+    return(
+      <animated.div  style={{ ...style}}>
+        <SuccessfullyCreatedEvent 
+          dispatch={this.props.dispatch} 
+          prevPage={this.props.prevPage} 
+          eventState={this.props.newEvent}
+          nextPage={this.props.nextPage}
+        />
+      </animated.div>
+     )
+    }
+    break;
+  case 7:
+    return <Redirect to='/dashboard'/>
+  }
+
   return (
-    <div className='new-event-form bottom-offset'>
-      {component}
+    <div className="new-event-form bottom-offset">
+       <Transition
+          native
+          config={config.fast}
+          from={{ opacity: 0 }}
+          enter={{ opacity: 1 }}
+          leave={{ opacity: 0 }}>
+        {component}
+      </Transition>
     </div>
   );
+
+}
 
 }

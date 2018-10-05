@@ -4,8 +4,7 @@
 }
 
 .width1100{
-    max-width:900px;
-    margin:auto;
+
 }
 
 .date_list li{
@@ -27,10 +26,7 @@
    
   }
 
-.border-right{
-    border-right:1px dashed;
 
-}
 
 .selected-date-text{
     opacity:0.5;

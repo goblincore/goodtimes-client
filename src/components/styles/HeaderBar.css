@@ -33,6 +33,12 @@ ul {
       transform:translateY(-10px);
   }
 
+
+  .header-nav a {
+  font-weight:normal;
+}
+
+
   .background-color{
     background:#fdfdfd;
   }
