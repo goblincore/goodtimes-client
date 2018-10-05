@@ -96,21 +96,23 @@ export default class RestaurantSelect extends React.Component {
     
     return(
       <div className="container text-left">
-         <nav className='create-nav'>
-              <button type='button' onClick={() => this.props.prevPage()}>{'<-'} Back</button>
-              <button type='button' 
-                onClick={() => this.props.saveAsDraft()}>
-                Save as Draft
-              </button>
-              <button type='button' onClick={()=>this.props.nextPage()}>Next {'->'}</button>
-           </nav>
-        <div className="instructions">
-     
-            <h1>Let's go eat!</h1>
-            
-            <p>Change the cuisine to see a list of restaurant options. 
-              Check off restaurants to add them to your list of options.
-              You can select multiple restaurants!</p>
+        <div className="top-wrapper">
+          <nav className='create-nav'>
+                <button type='button' onClick={() => this.props.prevPage()}>{'<-'} Back</button>
+                <button type='button' 
+                  onClick={() => this.props.saveAsDraft()}>
+                  Save as Draft
+                </button>
+                <button type='button' onClick={()=>this.props.nextPage()}>Next {'->'}</button>
+            </nav>
+          <div className="instructions">
+      
+              <h1>Let's go eat!</h1>
+              
+              <p>Change the cuisine to see a list of restaurant options. 
+                Check off restaurants to add them to your list of options.
+                You can select multiple restaurants!</p>
+          </div>
         </div>
      
         <div id="select-cuisine">

@@ -78,58 +78,77 @@ render(){
     //date/time options
       return(
         <animated.div className="slides" style={{ ...style  }}>
-         <DateSelectPage 
-          nextPage={this.props.nextPage}
-          dispatch={this.props.dispatch}
-          prevPage={this.props.prevPage} 
-          eventState={this.props.newEvent}
-          saveAsDraft={this.saveAsDraft}
-           />;
-          </animated.div>
-      )
+          <DateSelectPage 
+            nextPage={this.props.nextPage}
+            dispatch={this.props.dispatch}
+            prevPage={this.props.prevPage} 
+            eventState={this.props.newEvent}
+            saveAsDraft={this.saveAsDraft}
+            />;
+        </animated.div>
+       )
     }
 
     break;
   case 3:
     //food options
-    component = <RestaurantSelect 
-      nextPage={this.props.nextPage}
-      dispatch={this.props.dispatch}
-      prevPage={this.props.prevPage}
-      eventState={this.props.newEvent}
-      restaurants={this.props.restaurants}
-      cityCode={this.props.restaurants.cityCode}
-      saveAsDraft={this.saveAsDraft}
-    />;
+    component = style =>{ 
+      return(
+        <animated.div className="slides" style={{ ...style  }}>
+            <RestaurantSelect 
+            nextPage={this.props.nextPage}
+            dispatch={this.props.dispatch}
+            prevPage={this.props.prevPage}
+            eventState={this.props.newEvent}
+            restaurants={this.props.restaurants}
+            cityCode={this.props.restaurants.cityCode}
+            saveAsDraft={this.saveAsDraft} 
+            />;
+        </animated.div>
+         )
+        }
     break;
   case 4:
     //activity options
-    component = <ActivitySelect
-      dispatch={this.props.dispatch} 
-      eventState={this.props.newEvent}
-      prevPage={this.props.prevPage} 
-      nextPage={this.props.nextPage}
-      categories={this.props.activities.categories}
-      activities={this.props.activities.activities}
-      loading={this.props.activities.loading}
-      latitude={this.props.newEvent.location.latitude}
-      longitude={this.props.newEvent.location.longitude}
-      saveAsDraft={this.saveAsDraft}
-      times={this.props.newEvent.scheduleOptions.map(time => 
-        moment(time.date, 'llll').format('YYYY-MM-DDTHH:mm:ss'))}
-    />;
+
+    component = style =>{ 
+      return(
+        <animated.div className="slides" style={{ ...style  }}>
+        <ActivitySelect
+            dispatch={this.props.dispatch} 
+            eventState={this.props.newEvent}
+            prevPage={this.props.prevPage} 
+            nextPage={this.props.nextPage}
+            categories={this.props.activities.categories}
+            activities={this.props.activities.activities}
+            loading={this.props.activities.loading}
+            latitude={this.props.newEvent.location.latitude}
+            longitude={this.props.newEvent.location.longitude}
+            saveAsDraft={this.saveAsDraft}
+            times={this.props.newEvent.scheduleOptions.map(time => 
+              moment(time.date, 'llll').format('YYYY-MM-DDTHH:mm:ss'))}
+          />;
+          </animated.div>
+         )
+        }
     break;
   case 5:
     //preview, confirm page
-    component = <PreviewEvent 
-      nextPage={this.props.nextPage}
-      goHome={this.props.goHome} 
-      dispatch={this.props.dispatch} 
-      prevPage={this.props.prevPage} 
-      eventState={this.props.newEvent}
-      currentUser={this.props.currentUser}
-      saveAsDraft={this.saveAsDraft}
-    />;
+    component = style =>{ 
+      return(
+        <animated.div className="slides" style={{ ...style  }}>
+         <PreviewEvent 
+            nextPage={this.props.nextPage}
+            goHome={this.props.goHome} 
+            dispatch={this.props.dispatch} 
+            prevPage={this.props.prevPage} 
+            eventState={this.props.newEvent}
+            currentUser={this.props.currentUser}
+            saveAsDraft={this.saveAsDraft}
+          />;
+           </animated.div>
+         )
+        }
     break;
   case 6:
     //successful submition page
