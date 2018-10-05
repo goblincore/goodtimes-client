@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Transition, animated } from 'react-spring'
+import { Transition, animated, config } from 'react-spring'
 import {connect} from 'react-redux';
 import { Router, withRouter, Switch, Route, Redirect } from 'react-router-dom'
 
@@ -30,6 +30,15 @@ class App extends Component{
       }
   
     render() {
+
+    //   const transition = {
+    //       config: config.slow,
+    //       from: { opacity: 0, transform: 'scale3d(0.5,0.5,0.5)' },
+    //       enter: { opacity: 1, transform: 'scale3d(1,1,1)' },
+    //       leave: { opacity: 0, transform: 'scale3d(0.5,0.5,0.5)' }
+    // }
+
+
         return (
      <Router history={history}>
             <Route
@@ -73,9 +82,9 @@ class App extends Component{
                           item === 'dashboard'  ||
                           item === 'about'){
                           // console.log('HOME OR REGISTER');
-                            return({ transform: 'translate(80%,0%)', opacity: 0})
+                            return({ transform: 'translate(80%,0)', opacity: 0})
                         } else  {
-                            return({ transform: 'translate(0%,100%)', opacity: 0 })
+                            return({ transform: 'translate(0,100%)', opacity: 0 })
                         }
                     }}
                     enter={item => {
@@ -92,15 +101,15 @@ class App extends Component{
 
                     leave={item => {
                       if (item === 'home' || item === 'register' || item === 'login' || item === 'about' || item ==='edit-draft'){
-                            return({ transform: 'translate(-80%,0%)', opacity: 0 })
+                            return({ transform: 'translate(-80%,0)', opacity: 0 })
                         } if(item === 'create-event'){
                           let el = document.querySelector(".createEventRoute");
                           if(el !== null) {
                             el.classList.remove('notransform');
-                            return({  transform: 'translate(-80%,0%)', opacity: 0, })
+                            return({  transform: 'translate(-80%,0)', opacity: 0, })
                           }
                         }else {
-                            return({  transform: 'translate(0%,-100%)', opacity: 0, })
+                            return({  transform: 'translate(0,-100%)', opacity: 0, })
                         }
                     }}
 
@@ -116,9 +125,15 @@ class App extends Component{
                       }
                       }}
                     >
+                    {/* <Transition  {...transition} keys={location.pathname.split('/').filter(a => a)[0]}> */}
                     {style => (
                         <Switch location={location}>
-                        <Route exact path="/home" render={props => HomePage({...props, style})} />
+                        <Route exact path="/home" render={ props =>{
+                          
+                           console.log('homepagerenderprops',style);
+                           return HomePage({...props, style})}
+
+                          } />
                         <Route exact path="/about" render={props => About_Page({ ...props, style })} />
                         <Route exact path="/login" render={props => Login_Page({ ...props, style })} />
                         <Route exact path="/register" render={props => RegisterPage({ ...props, style })} />
@@ -129,13 +144,9 @@ class App extends Component{
                             //  console.log('APP JS props passes', location.state)
                              return Edit_Draft_Page({...props,style,...location})
                         }}/>
-                         {/* <Route exact path="/edit-draft" render={(props) => {
-                             console.log('APP JS props passes', location);
-                             return <NewEventMain {...props} {...style} {...location.state} />
-                        }}/> */}
+                    
                         {/* <Route render={props => <Error404 {...props} style={style} />} />; */}
-                    {/* //<GuestEventForm {...props} style={style}  */}
-                    {/* <Route exact path="/guestevents/:eventId" component={GuestEventForm} />  */}
+         
                         </Switch>
                     )}
                     </Transition>
@@ -164,10 +175,11 @@ const mapStateToProps = state => ({
 //   </li>
 // )
 
-const HomePage = ({ style }) => (
+const HomePage = ({ style,...props }) => (
+  
   <animated.div className="mainRoute" style={{ ...style, background: `#fdfdfd` }}>
     <div className="mainRouteItem">
-   <LandingPage />
+     <LandingPage />  
     </div>
   </animated.div>
 );

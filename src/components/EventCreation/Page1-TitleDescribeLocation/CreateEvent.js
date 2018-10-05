@@ -156,7 +156,7 @@ export class CreateEvent extends React.Component {
         )
       }
     return (
-      <div>
+      <div className="absoluteposition">
           <nav className='create-nav'>
               <button type='button' onClick={() => this.props.prevPage()}>{'<-'} Back</button>
               <button type='button' 
