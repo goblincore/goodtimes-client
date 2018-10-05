@@ -79,7 +79,8 @@ export default class DateSelectPage extends React.Component {
     let {inputMoment, showSeconds, locale, size} = this.state;
 
     return (
-      <div className="container">
+
+      <div className="container absoluteposition">
         <div className="width1100">
         <nav className='create-nav'>
               <button type='button' onClick={() => this.props.prevPage()}>{'<-'} Back</button>
@@ -87,7 +88,7 @@ export default class DateSelectPage extends React.Component {
                 onClick={() => this.props.saveAsDraft()}>
                 Save as Draft
               </button>
-              <button type='button' onClick={()=>this.props.nextPage()}>Next {'->'}</button>
+              <button type='button' onClick={this.handleNextPage}>Next {'->'}</button>
            </nav>
 
             <div className="card border-right">

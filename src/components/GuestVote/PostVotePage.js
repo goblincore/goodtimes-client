@@ -10,7 +10,7 @@ export class PostVote extends React.Component {
     this.state = {
       redirect: false
     };
-    setTimeout(()=>this.setState({redirect:true}), 3000);
+    setTimeout(()=>this.setState({redirect:true}), 4000);
   }
 
   render(){
@@ -18,8 +18,8 @@ export class PostVote extends React.Component {
       return <Redirect to='/'/>;
     }
     return (    
-      <div className="container paddingTop">
-          Thanks for your input!
+      <div className="container paddingTop post-vote">
+         <h1> Thanks for your input!</h1>
           Your event coordinator will be in touch with the final plan!
       </div>
                     

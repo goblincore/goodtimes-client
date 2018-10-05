@@ -2,6 +2,7 @@ import React from 'react';
 import { Redirect } from 'react-router-dom';
 import moment from 'moment';
 import { updateNewEventState } from '../../../actions/New-Event';
+import '../../styles/ActivitySelect.css';
 
 import SelectActivity from './SelectActivity';
 import WriteActivity from './WriteActivity';
@@ -105,7 +106,7 @@ export default class ActivitySelect extends React.Component {
         if(!activity.description){
           descriptionDisplay = <p></p>;
         } else {
-          descriptionDisplay =  <p>{activity.description.length > 50 ? `${activity.description.slice(0,50)}...` : activity.description}</p>;
+          descriptionDisplay =  <p>{activity.description.length > 100 ? `${activity.description.slice(0,100)}...` : activity.description}</p>;
         }
 
         // If theres an activity link
@@ -115,7 +116,7 @@ export default class ActivitySelect extends React.Component {
           linkDisplay = <a href={activity.link} target='_blank'>Go to event webpage.</a>;
         }
 
-        return (  <div key={activity.ebId}>
+        return (  <div className="border-bottom" key={activity.ebId}>
           <p data-ebid={activity.ebId} onClick={(e)=> this.deleteWhenClicked(e)}>{activity.title}</p>
           {descriptionDisplay}
           {linkDisplay}
@@ -126,23 +127,44 @@ export default class ActivitySelect extends React.Component {
     }
 
     return(
+
       <div>
+          <nav className='create-nav'>
+                <button type='button' onClick={() => this.props.prevPage()}>{'<-'} Back</button>
+                <button type='button' 
+                  onClick={() => this.props.saveAsDraft()}>
+                  Save as Draft
+                </button>
+                <button type='button' onClick={()=>this.props.nextPage()}>Next {'->'}</button>
+            </nav>
+      <div className="card border-right">
         <h1>Let's do something!</h1>
-        <p>You can choose from events in your area or create your own!</p>
+        <p>Choose from events in your area that are happening during the times and dates you previously selected or
+           create your own custom event by clicking on the buttons.</p>
+      </div>
+
+
+      <div className="card border-right bottom-offset"> 
         <p>{this.props.eventState.errorMessage}</p>
         <button onClick={() => this.setState({display: 'choose'})}>Choose From List</button>
-        <button onClick={() => this.setState({display: 'write'})}>Create My Own</button>
-        <div>Event Choices{selectedActivitiesDisplay}</div>
-        {optionDisplay}
-        <button type='button' onClick={() => this.props.prevPage()}>
-          {'<-'} Back
-        </button>
-        <button type='button' 
-          onClick={() => this.props.saveAsDraft()}>
-            Save as Draft
-        </button>
-        <button type='button' onClick={()=>this.props.nextPage()}>Next Page</button>
+        <button onClick={() => this.setState({display: 'write'})}>Create My Own Activity</button>
+
+        <div className="activity-option">
+           {optionDisplay}
+        </div>
       </div>
+ 
+       <div id="user-event-list" className="card small-text">
+        <h4>Event Choices{selectedActivitiesDisplay}</h4>
+         
+        </div>  
+
+
+     
+   
+      </div>
+     
+   
     );
   }
 }

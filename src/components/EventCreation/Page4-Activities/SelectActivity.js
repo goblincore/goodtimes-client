@@ -73,7 +73,7 @@ export default class SelectActivity extends React.Component {
         const start = moment(activity.start.local).format('llll');
         const end = moment(activity.end.local).format('llll');
         return (
-          <li key={activity.id} className={`activity-item checked-${checked}`}>
+          <li key={activity.id} className={`activity-item border-bottom checked-${checked}`}>
             <input 
               data-start={start}
               data-end={end}
@@ -84,15 +84,15 @@ export default class SelectActivity extends React.Component {
               onChange={(e) => this.handleCheckboxChange(e)}
               type="checkbox"
               defaultChecked={checked}></input>
-            <a href={activity.url}>{activity.name.text}</a>
-            <p>Start: {moment(activity.start.local).format('llll')}</p>
-            <p>End: {moment(activity.end.local).format('llll')}</p>
+            <a href={activity.url} target="_blank">{activity.name.text}</a>
+            <p className="dates-text">Start: {moment(activity.start.local).format('llll')}</p>
+            <p className="dates-text">End: {moment(activity.end.local).format('llll')}</p>
           </li>
         );
       });
 
     } else {
-      activityOptions = <p>No events in this category during the times you selected. Try a different category!</p>;
+      activityOptions = <p >No events in this category during the times you selected. Try a different category!</p>;
     }
 
     if(this.props.loading===true){
@@ -101,7 +101,7 @@ export default class SelectActivity extends React.Component {
     }
   
     return(
-      <div>
+      <div className="category-select">
         <p>Change the category to see a list of events in your area during the times you selected. Check off events to add them to your list of activity options. You can select multiple events!</p>
         <select onChange={(e) => this.filterEvents(e)}>
           <option>Choose a category...</option>
