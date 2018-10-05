@@ -13,7 +13,7 @@ export default class RestaurantSelect extends React.Component {
 
   getYelpRestaurants(e){
     e.preventDefault();
-    const category = e.target.value; //get category alias from category
+    const category = e.target.value; 
     this.props.dispatch(fetchYelpRestaurants(category, this.props.eventState.location.latitude, this.props.eventState.location.longitude));
   }
 
@@ -21,7 +21,6 @@ export default class RestaurantSelect extends React.Component {
    
     const { restaurantOptions } = this.props.eventState;
     const idOfRestaurantToDelete = e.target.dataset.yelpid;
-    console.log(document.getElementById(idOfRestaurantToDelete).checked);
     if (this.props.restaurants.yelpRestaurants.find(restaurant => restaurant.id === idOfRestaurantToDelete)) {
       document.getElementById(idOfRestaurantToDelete).checked = false;
     }
@@ -31,7 +30,6 @@ export default class RestaurantSelect extends React.Component {
 
   handleYelpCheckBoxChange(e){
     if (e.target.checked === true) {
-      // Makes sure the restaurant was not already selected
       if (this.props.eventState.restaurantOptions.find(restaurant => restaurant.yelpId === e.target.id)) {
         return this.props.dispatch(newEventErrorMessage('You already selected that restaurant.'));
       }
@@ -72,7 +70,6 @@ export default class RestaurantSelect extends React.Component {
     if(this.props.restaurants.yelpRestaurants.length > 0){
       yelpChoices = this.props.restaurants.yelpRestaurants.map(restaurant => {
         let checked = false;
-        console.log('restaurant id=,',restaurant.id);
         if(this.props.eventState.restaurantOptions.find(option => option.yelpId === restaurant.id)){
           checked = true;
         }
@@ -94,7 +91,7 @@ export default class RestaurantSelect extends React.Component {
         );
       });
     }else{
-      yelpChoices = <div></div>;
+      yelpChoices = <p>Select a cuisine to view restaurants in your area!</p>;
     }
     
     let yelpRestauransDisplay;
@@ -126,7 +123,7 @@ export default class RestaurantSelect extends React.Component {
           <form id="select-cuisine-form">
             <h3><label>Select Cuisine</label></h3> 
             <select onChange={e=> this.getYelpRestaurants(e)}>
-              <option>Select a cuisine...</option>
+              <option value="">Select a cuisine...</option>
               {yelpCategories}
             </select>
           </form>
