@@ -113,24 +113,26 @@ export default class RestaurantSelect extends React.Component {
                 Check off restaurants to add them to your list of options.
                 You can select multiple restaurants!</p>
           </div>
-        </div>
-     
-        <div id="select-cuisine">
-          <form id="select-cuisine-form">
-           <h3><label>Select Cuisine</label></h3> 
-            <select onChange={e => this.getCuisines(e)}>
-              <option>Select a cuisine...</option>
-              {cuisineOptions}
-            </select>
-          </form>
-         
-       
-         <div id="restaurant-choices" >
-            <h3>Selected Restaurant Choices</h3>
-            <ul>{selectedRestaurantsDisplay}</ul>
+      
+        
+            <div id="select-cuisine">
+              <form id="select-cuisine-form">
+              <h3><label>Select Cuisine</label></h3> 
+                <select onChange={e => this.getCuisines(e)}>
+                  <option>Select a cuisine...</option>
+                  {cuisineOptions}
+                </select>
+              </form>
+            
+          
+            <div id="restaurant-choices" >
+                <h3>Selected Restaurant Choices</h3>
+                <ul>{selectedRestaurantsDisplay}</ul>
+              </div>
+          
+            </div>
+
           </div>
-       
-        </div>
 
         <div id="restaurant-list" className="bottom-offset">
           {restaurantChoices}

@@ -1,0 +1,18 @@
+#user-event-list{
+  width:unset;
+  max-width:320px;
+}
+
+@media only screen and (max-width: 1200px) and (min-width:450px) {
+    #user-event-list{
+        position:absolute;
+        left:50px;
+        top:240px;
+    }
+}
+
+@media only screen and (max-width: 450px) {
+    #user-event-list{
+       display:none;
+    }
+}

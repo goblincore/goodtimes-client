@@ -32,7 +32,7 @@ export class HeaderBar extends Component {
 
     if(this.props.loggedIn){
       return(
-        <section className="header-bar">
+        <section className="header-bar opaque-background">
           <div className="header-logo">
             <h3 title="GoodTimes"> <Link to="/dashboard"><MdSentimentSatisfied className="smily"/>goodtimes</Link></h3>
           </div>

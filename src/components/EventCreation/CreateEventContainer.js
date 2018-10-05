@@ -1,12 +1,15 @@
 import React from 'react';
+
 import { Redirect } from 'react-router-dom';
 import moment from 'moment';
+
 import { CreateEvent } from './Page1-TitleDescribeLocation/CreateEvent';
 import DateSelectPage from './Page2-DateTime/DateSelectPage';
 import RestaurantSelect from './Page3-Restaurants/RestaurantSelect';
-import ActivitySelect from './Page4-Activities/ActivityPage';
+import ActivityPage from './Page4-Activities/ActivityPage';
 import PreviewEvent from './Page5-Preview/PreviewEvent';
 import SuccessfullyCreatedEvent from './Page6-Share/SuccessfullyCreatedEvent';
+
 import { putUpdatedDraft } from '../../actions/Edit-Draft';
 import { postNewEvent } from '../../actions/New-Event';
 import { Transition, animated,config } from 'react-spring'
@@ -51,7 +54,7 @@ render(){
 
   
 
-  let component;
+    let component;
 
   switch (this.props.pageNum) {
   case 0:
@@ -67,7 +70,7 @@ render(){
           prevPage={this.props.goHome} 
           eventState={this.props.newEvent}
           saveAsDraft={this.saveAsDraft}
-        />;
+        />
           </animated.div>
       )
     }
@@ -84,7 +87,7 @@ render(){
             prevPage={this.props.prevPage} 
             eventState={this.props.newEvent}
             saveAsDraft={this.saveAsDraft}
-            />;
+            />
         </animated.div>
        )
     }
@@ -103,7 +106,7 @@ render(){
             restaurants={this.props.restaurants}
             cityCode={this.props.restaurants.cityCode}
             saveAsDraft={this.saveAsDraft} 
-            />;
+            />
         </animated.div>
          )
         }
@@ -114,7 +117,7 @@ render(){
     component = style =>{ 
       return(
         <animated.div className="slides" style={{ ...style  }}>
-        <ActivitySelect
+        <ActivityPage
             dispatch={this.props.dispatch} 
             eventState={this.props.newEvent}
             prevPage={this.props.prevPage} 
@@ -127,7 +130,7 @@ render(){
             saveAsDraft={this.saveAsDraft}
             times={this.props.newEvent.scheduleOptions.map(time => 
               moment(time.date, 'llll').format('YYYY-MM-DDTHH:mm:ss'))}
-          />;
+          />
           </animated.div>
          )
         }
@@ -145,7 +148,7 @@ render(){
             eventState={this.props.newEvent}
             currentUser={this.props.currentUser}
             saveAsDraft={this.saveAsDraft}
-          />;
+          />
            </animated.div>
          )
         }
@@ -166,7 +169,7 @@ render(){
     }
     break;
   case 7:
-    return <Redirect to='/dashboard'/>;
+    return <Redirect to='/dashboard'/>
   }
 
   return (
@@ -174,9 +177,9 @@ render(){
        <Transition
           native
           config={config.slow}
-          from={{ opacity: 0, transform: 'translate3d(0,0,0)' }}
+          from={{ opacity: 0, transform: 'translate3d(100%,0,0)' }}
           enter={{ opacity: 1, transform: 'translate3d(0%,0,0)' }}
-          leave={{ opacity: 0, transform: 'translate3d(0,0,0)' }}>
+          leave={{ opacity: 0, transform: 'translate3d(-100%,0,0)' }}>
         {component}
       </Transition>
     </div>

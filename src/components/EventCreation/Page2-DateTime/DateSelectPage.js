@@ -88,7 +88,7 @@ export default class DateSelectPage extends React.Component {
                 onClick={() => this.props.saveAsDraft()}>
                 Save as Draft
               </button>
-              <button type='button' onClick={()=>this.props.nextPage()}>Next {'->'}</button>
+              <button type='button' onClick={this.handleNextPage}>Next {'->'}</button>
            </nav>
 
             <div className="card border-right">

@@ -8,7 +8,7 @@
 #restaurant-list{
     text-align:left;
     float:left;
-    width:100%;
+     max-width:800px;
     text-align:left;
 
 }
@@ -68,6 +68,7 @@
 #restaurant-choices{
     font-size:14px;
     font-weight:bold;
+    min-height:100px;
 }
   
 

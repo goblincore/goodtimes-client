@@ -104,12 +104,21 @@ export default function PreviewEvent (props) {
       <div className="absolute-wrapper">
         <div className='preview-event'>
 
-          <div>
+          {/* <div>
             <button type='button' onClick={() => props.prevPage()}>{'<-'} Back</button>
             <button type='button' onClick={() => onDraft()}>Save as Draft</button>
             <button type='button' onClick={() => onSubmit()}>Looks good!</button>
             <h1>Preview Event Form</h1>
-          </div>
+          </div> */}
+
+           <nav className='create-nav'>
+                <button type='button' onClick={() => props.prevPage()}>{'<-'} Back</button>
+                <button type='button' 
+                  onClick={() => onDraft()}>
+                  Save as Draft
+                </button>
+                <button type='button' onClick={()=>onSubmit()}>Looks Good! {'->'}</button>
+            </nav>
 
       
           <div className="guest-event-form-wrapper">
