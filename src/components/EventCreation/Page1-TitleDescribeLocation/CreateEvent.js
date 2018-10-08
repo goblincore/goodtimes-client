@@ -1,6 +1,5 @@
 import React from 'react';
 import '../../styles/CreateEvent.css';
-import { bingMapsKey } from '../../../config';
 import { updateNewEventState, newEventErrorMessage } from '../../../actions/New-Event';
 import { resetRestaruantsReducer } from '../../../actions/RestaurantSelect';
 import { resetActivitiesReducer } from '../../../actions/Activities';

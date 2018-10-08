@@ -78,7 +78,7 @@ export default class DateSelectPage extends React.Component {
            <CreateNav saveAsDraft={this.handleSave} pageNum={this.props.pageNum} prevPage={this.props.prevPage} nextPage={this.props.nextPage} handleNextPage={this.handleNextPage} />
 
 
-            {/* <div className="card border-right bottom-offset">
+           {/* <div className="card border-right bottom-offset">
             <h2>Some good times for {this.props.eventState.title} are... </h2>
               <p>Select possible dates and times for your event by selecting a date fom the date tab and then a time from the time tab. You can add multiple dates and times!</p>
              
@@ -121,8 +121,9 @@ export default class DateSelectPage extends React.Component {
               </div>
 
 
-              <p className='error-message'>{this.props.eventState.errorMessage}</p>
+             
                <div className="full-width-button" >
+               <p className='error-message'>{this.props.eventState.errorMessage}</p>
                 <button  onClick={this.handleSave}>
                    <MdAddCircleOutline />
                         Add this time and date

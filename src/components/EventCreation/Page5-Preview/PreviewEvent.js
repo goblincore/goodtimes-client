@@ -48,6 +48,7 @@ export default function PreviewEvent (props) {
     return (
       <div key={i} className="option_container">
         <input 
+          disabled="true"
           type="checkbox" 
           id={'time-option'+i}
           name="time-option" 
@@ -62,6 +63,7 @@ export default function PreviewEvent (props) {
       return (
         <div key={i} className="option_container">
           <input 
+            disabled="true"
             type="checkbox" 
             id={'restaurant-option'+i}
             name="restaurant-option"
@@ -83,6 +85,7 @@ export default function PreviewEvent (props) {
       return (
         <div key={i} className="option_container">
           <input 
+            disabled="true"
             type="checkbox" 
             id={'activity-option'+i}
             name="activity-option"

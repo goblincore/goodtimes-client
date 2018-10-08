@@ -24,6 +24,15 @@ label{
     line-height:180%;
 
 }
+
+/* Targest all Redux form errors */
+.form-error {
+  color: red;
+  font-style: italic;
+  font-size: 14px;
+}
+
+
   html,body{
       height:100vh;
       font-family:'Akkurat Pro';
@@ -228,7 +237,7 @@ align-items: center; */
     margin-bottom:100px !important;
   }
 
-  .err-msg{
+  .error-message{
     color:red;
     font-weight:bold;
   }

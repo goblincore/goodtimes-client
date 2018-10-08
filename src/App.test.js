@@ -1,9 +1,21 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+
 import App from './App';
 
+import { shallow } from 'enzyme';
+
+// test('renders without crashing', () => {
+//   expect(true).toBeTruthy();
+// });
+
+// test('<App />', () => {
+//   const wrapper = render(<App />);
+//   wrapper.debug();
+// });
+
+
 it('renders without crashing', () => {
-  const div = document.createElement('div');
-  ReactDOM.render(<App />, div);
-  ReactDOM.unmountComponentAtNode(div);
+  shallow(<App />);
 });
+
+

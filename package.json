@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "classnames": "^2.2.6",
+    "expect": "^23.6.0",
     "jwt-decode": "^2.2.0",
     "lodash": "^4.17.11",
     "moment": "^2.22.2",
@@ -19,6 +20,7 @@
     "react-router-transition": "^1.2.1",
     "react-scripts": "1.1.5",
     "react-spring": "^5.8.0",
+    "react-testing-library": "^5.2.0",
     "react-transition-group": "^2.5.0",
     "rebass": "^3.0.0-9",
     "redux": "^4.0.0",
@@ -33,5 +35,9 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "compile:sass": "node-sass src/components/styles/sass/Main.scss src/components/styles/Index.css -w"
+  },
+  "devDependencies": {
+    "enzyme": "^3.7.0",
+    "enzyme-adapter-react-16": "^1.6.0"
   }
 }
