@@ -237,6 +237,11 @@ align-items: center; */
     margin-bottom:100px !important;
   }
 
+  .error-message{
+    color:red;
+    font-weight:bold;
+  }
+
   @media only screen and (max-width: 450px) {
     html,body {
       font-size:0.9em;

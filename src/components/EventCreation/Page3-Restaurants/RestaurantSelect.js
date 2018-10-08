@@ -3,7 +3,7 @@ import React from 'react';
 import { fetchYelpCategories, fetchYelpRestaurants, fetchAllYelpRestaurants } from '../../../actions/RestaurantSelect';
 import { updateNewEventState, newEventErrorMessage } from '../../../actions/New-Event';
 import '../../styles/RestaurantSelect.css';
-
+import CreateNav from '../CreateNav';
 
 export default class RestaurantSelect extends React.Component {
 
@@ -98,7 +98,7 @@ export default class RestaurantSelect extends React.Component {
         );
       });
     }else{
-      yelpChoices = <p>Select a cuisine to view restaurants in your area!</p>;
+      yelpChoices = <p>Enter a keyword to find restaurants in your area</p>;
     }
     
     let yelpRestauransDisplay;
@@ -110,7 +110,9 @@ export default class RestaurantSelect extends React.Component {
     return(
       <div className="container text-left">
         <div className="top-wrapper">
-          <nav className='create-nav'>
+
+           <CreateNav saveAsDraft={this.props.saveAsDraft} pageNum={this.props.pageNum} prevPage={this.props.prevPage} nextPage={this.props.nextPage} handleNextPage={this.props.nextPage} />
+          {/* <nav className='create-nav'>
             <button type='button' onClick={() => this.props.prevPage()}>{'<-'} Back</button>
             <button type='button' 
               onClick={() => this.props.saveAsDraft()}>
@@ -126,7 +128,7 @@ export default class RestaurantSelect extends React.Component {
                 Check off restaurants to add them to your list of options.
                 You can select multiple restaurants!</p>
           </div>
-      
+       */}
         
           <div id="select-cuisine">
             <form id="select-cuisine-form">
@@ -134,7 +136,7 @@ export default class RestaurantSelect extends React.Component {
               <input type="search" id="search"></input>
               <button onClick={e => {
                 this.searchYelpRestaurants(e);
-              }}>Search</button>
+              }}>Enter a Search Term</button>
               {/* <h3><label>Select Cuisine</label></h3> 
               <select onChange={e => this.getYelpRestaurants(e)}>
                 <option>Select a cuisine...</option>

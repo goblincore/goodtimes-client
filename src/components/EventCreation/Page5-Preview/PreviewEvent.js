@@ -2,11 +2,12 @@ import React from 'react';
 import { putUpdatedDraft } from '../../../actions/Edit-Draft';
 import { postNewEvent } from '../../../actions/New-Event';
 import '../../styles/PreviewEvent.css';
-
+import CreateNav from '../CreateNav';
 
 export default function PreviewEvent (props) {
 
-  function onSubmit() {
+  const onSubmit=()=> {
+ 
     const event = {
       userId: props.currentUser.id,
       title: props.eventState.title,
@@ -20,6 +21,7 @@ export default function PreviewEvent (props) {
     };
 
     if(!props.eventState.draft){ 
+     
       return props.dispatch(postNewEvent(event))
         .then(() => props.nextPage())
         .catch(err => console.log('ERROR HANDLING HERE dispatch(changeErrorMessaeg(err.message))'));
@@ -36,7 +38,7 @@ export default function PreviewEvent (props) {
  
 
 
-  function onDraft () {
+  const onDraft=()=> {
     props.saveAsDraft();
     props.goHome();
   }
@@ -48,6 +50,7 @@ export default function PreviewEvent (props) {
     return (
       <div key={i} className="option_container">
         <input 
+          disabled={true}
           type="checkbox" 
           id={'time-option'+i}
           name="time-option" 
@@ -62,6 +65,7 @@ export default function PreviewEvent (props) {
       return (
         <div key={i} className="option_container">
           <input 
+            disabled={true}
             type="checkbox" 
             id={'restaurant-option'+i}
             name="restaurant-option"
@@ -71,7 +75,7 @@ export default function PreviewEvent (props) {
       );}); 
 
     restaurantsDisplay =  <div className="restaurant-options"> 
-      <h4>Choose food...</h4>
+      <h2>Choose food...</h2>
       {restaurantsList}
     </div>;
   }
@@ -83,6 +87,7 @@ export default function PreviewEvent (props) {
       return (
         <div key={i} className="option_container">
           <input 
+            disabled={true}
             type="checkbox" 
             id={'activity-option'+i}
             name="activity-option"
@@ -92,7 +97,7 @@ export default function PreviewEvent (props) {
       );}); 
 
     activitiesDisplay = <div className="activity-options"> 
-      <h4>Choose activities...</h4>
+      <h2>Choose activities...</h2>
       {activitiesList}
     </div>;
   } 
@@ -104,24 +109,14 @@ export default function PreviewEvent (props) {
       <div className="absolute-wrapper">
         <div className='preview-event'>
 
-          {/* <div>
-            <button type='button' onClick={() => props.prevPage()}>{'<-'} Back</button>
-            <button type='button' onClick={() => onDraft()}>Save as Draft</button>
-            <button type='button' onClick={() => onSubmit()}>Looks good!</button>
-            <h1>Preview Event Form</h1>
-          </div> */}
 
-           <nav className='create-nav'>
-                <button type='button' onClick={() => props.prevPage()}>{'<-'} Back</button>
-                <button type='button' 
-                  onClick={() => onDraft()}>
-                  Save as Draft
-                </button>
-                <button type='button' onClick={()=>onSubmit()}>Looks Good! {'->'}</button>
-            </nav>
-
+            <CreateNav saveAsDraft={()=>onDraft()} pageNum={props.pageNum} prevPage={props.prevPage} nextPage={props.nextPage} handleNextPage={onSubmit} />
+         
       
           <div className="guest-event-form-wrapper temp-adjust">
+          <div>Below is a preview of your survey that you can check before you send it out. 
+            If everything looks good, hit the next button.
+             </div>
           <div className="form-outline">
             <div className="card">
             <h3>You're invited to:</h3>
@@ -133,7 +128,7 @@ export default function PreviewEvent (props) {
             </div>
             <form className="event-form-options">
               <div className="time-options"> 
-                <h4>Choose times...</h4>
+                <h2>Choose times...</h2>
                  {timesDisplay}
               </div>
                <div className="restaurant-options">
