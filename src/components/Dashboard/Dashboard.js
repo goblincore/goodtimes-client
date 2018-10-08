@@ -72,7 +72,7 @@ export class Dashboard extends Component {
 }
 
 
-const mapStateToProps = state => ({
+export const mapStateToProps = state => ({
   loggedIn: state.auth.currentUser !== null,
   currentUser: state.auth.currentUser,
   userEvents:state.auth.userEvents,
