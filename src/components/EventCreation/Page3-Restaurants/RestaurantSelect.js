@@ -1,5 +1,4 @@
 import React from 'react';
-import moment from 'moment';
 import { fetchYelpCategories, fetchYelpRestaurants, fetchAllYelpRestaurants } from '../../../actions/RestaurantSelect';
 import { updateNewEventState, newEventErrorMessage } from '../../../actions/New-Event';
 import '../../styles/RestaurantSelect.css';
@@ -12,10 +11,6 @@ export default class RestaurantSelect extends React.Component {
     this.props.dispatch(fetchAllYelpRestaurants(this.props.eventState.location.latitude, this.props.eventState.location.longitude));
   }
 
-  // getAllYelpRestaurants(e){
-  //   e.preventDefault();
-  //   this.props.dispatch(fetchYelpRestaurants(this.props.eventState.location.latitude, this.props.eventState.location.longitude));
-  // }
   searchYelpRestaurants(e){
     e.preventDefault();
     const searchBar = document.getElementById('search');
@@ -58,18 +53,6 @@ export default class RestaurantSelect extends React.Component {
   }
 
   render(){
-    // let yelpCategories;
-
-    // if(this.props.restaurants.yelpCategories === null){
-    //   yelpCategories = <option>Loading category options...</option>;
-    // }
-    // else{
-    //   yelpCategories = this.props.restaurants.yelpCategories.map( (category, index )=> {
-    //     return (
-    //       <option value={category.alias} key={index}>{category.title}</option>
-    //     );
-    //   });
-    // }
 
     let yelpChoices;
 
@@ -134,11 +117,7 @@ export default class RestaurantSelect extends React.Component {
               <button onClick={e => {
                 this.searchYelpRestaurants(e);
               }}>Search</button>
-              {/* <h3><label>Select Cuisine</label></h3> 
-              <select onChange={e => this.getYelpRestaurants(e)}>
-                <option>Select a cuisine...</option>
-                {yelpCategories}
-              </select> */}
+  
             </form>
             
           
