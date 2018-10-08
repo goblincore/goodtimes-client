@@ -14,8 +14,6 @@ export class RegistrationForm extends React.Component {
     super(props);
     this.randomId=uuidv4();
     this.usernameId=uuidv4();
-    // this.firstnameId=uuidv4();
-    // this.lastnameId=uuidv4();
     this.passwordId=uuidv4();
     this.emailAddressId=uuidv4();
     this.matchesPassword = matches(this.passwordId);
@@ -23,8 +21,6 @@ export class RegistrationForm extends React.Component {
   onSubmit(values) {
     const username = values[this.usernameId];
     const password = values[this.passwordId];
-    // const lastName = values[this.lastnameId];
-    // const firstName = values[this.firstnameId];
     const email = values[this.emailAddressId];
 
     const user = {username, password, email};

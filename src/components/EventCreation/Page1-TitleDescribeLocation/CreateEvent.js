@@ -158,6 +158,11 @@ export class CreateEvent extends React.Component {
     return (
       <div className="absoluteposition">
           <nav className='create-nav'>
+             <div className="instructions">
+              <h4>Step 1 of 5 : Title, Location, Description </h4>
+
+             
+             </div>
               <button type='button' onClick={() => this.props.prevPage()}>{'<-'} Back</button>
               <button type='button' 
                   onClick={() => {
@@ -172,15 +177,15 @@ export class CreateEvent extends React.Component {
                   }}>
                   Save as Draft
                </button>
-              <button  type='submit' form='createform' value="Submit">
-          Next {'->'}
-        </button>
+                 <button  type='submit' form='createform' value="Submit">
+                  Next {'->'}
+                </button>
            </nav>
-      <div className="instructions"> 
+      {/* <div className="instructions"> 
       <h3>Let's get started!</h3>
       <p>Create a title and select a location for your event. Don't forget to add a description!</p>
         
-        </div>
+        </div> */}
     
 
       <form

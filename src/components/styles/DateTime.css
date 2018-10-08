@@ -39,3 +39,15 @@
 .max-250{
     max-width:250px;
 }
+
+.full-width-button{
+    width:100%;
+    display:block;
+    float:left;
+    text-align:left;
+}
+
+.full-width-button button{
+    margin-left:200px;
+    margin-top:40px;
+}
