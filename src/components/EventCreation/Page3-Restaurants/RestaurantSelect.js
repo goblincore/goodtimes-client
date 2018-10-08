@@ -7,7 +7,6 @@ import '../../styles/RestaurantSelect.css';
 export default class RestaurantSelect extends React.Component {
 
   componentWillMount(){
-    this.props.dispatch(fetchYelpCategories());
     this.props.dispatch(fetchAllYelpRestaurants(this.props.eventState.location.latitude, this.props.eventState.location.longitude));
   }
 
@@ -15,8 +14,12 @@ export default class RestaurantSelect extends React.Component {
     e.preventDefault();
     const searchBar = document.getElementById('search');
     const term = searchBar.value;
-    console.log('searchbar=',searchBar,'term=',term);
-    this.props.dispatch(fetchYelpRestaurants(term, this.props.eventState.location.latitude, this.props.eventState.location.longitude));
+    if(term === ''){
+      this.props.dispatch(fetchAllYelpRestaurants(this.props.eventState.location.latitude, this.props.eventState.location.longitude));
+    }
+    else{
+      this.props.dispatch(fetchYelpRestaurants(term, this.props.eventState.location.latitude, this.props.eventState.location.longitude));
+    }
   }
   
   deleteYelpWhenClicked(e){
@@ -63,7 +66,7 @@ export default class RestaurantSelect extends React.Component {
           checked = true;
         }
         return (
-          <div>
+          <div key={restaurant.id}> 
             <input 
               name={restaurant.name} 
               id={restaurant.id} 
@@ -80,7 +83,7 @@ export default class RestaurantSelect extends React.Component {
         );
       });
     }else{
-      yelpChoices = <p>Select a cuisine to view restaurants in your area!</p>;
+      yelpChoices = <p>No restaurants matching your search term.  Try again!</p>;
     }
     
     let yelpRestauransDisplay;
