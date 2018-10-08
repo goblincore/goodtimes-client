@@ -124,59 +124,20 @@ export class CreateEvent extends React.Component {
     this.props.nextPage();
   }
 
-  // handleStateChange(){
-  //   console.log(this.state.locationFeedback)
-  //   this.setState({
-  //     locationFeedback: '',
-  //     locationOption: 1
-  //   })
-  // }
+  handleStateChange = (stateChange) => {
+    this.setState(
+      stateChange
+    )
+  }
 
-  // handleYesDispatch(city, state){
-  //   this.props.dispatch(updateNewEventState({
-  //     locationCity: {city, state} 
-  //   }))
-  // }
+  handleYesDispatch = (city, state) => {
+    this.props.dispatch(updateNewEventState({
+      locationCity: {city, state} 
+    }))
+  }
 
   render(){
 
-    let errorMessage = null;
-    let locationMessage = null;
-    
-    if (this.props.eventState.errorMessage){
-      errorMessage = <p className='error-message'>{this.props.eventState.errorMessage}</p>;
-    }
-    if ( this.state.locationFeedback === 'Checking city...' || 
-        this.state.locationFeedback.startsWith('Successfully found') ||
-        this.state.locationFeedback.startsWith('Must provide') ||
-        !this.state.locationFeedback) {
-      locationMessage = <p>{this.state.locationFeedback}</p>
-      
-    } 
-    else {
-      // console.log(this.state.locationFeedback);
-      // locationMessage = <LocationMessage locationFeedback={this.state.locationFeedback} handleState={this.handleStateChange()} handleYesDispatch={(city, state)=>this.handleYesDispatch(city, state)} handleNoDispatch={this.handleIncorrectCity()} />  
-      
-      locationMessage = (
-        <p>
-          {this.state.locationFeedback}
-          <button type='button' 
-            onClick={() => {
-              const city = this.state.locationFeedback.split(',')[0].split('mean')[1].trim();
-              const state = this.state.locationFeedback.split(',')[1].split('?')[0].trim();
-              this.props.dispatch(updateNewEventState({
-                locationCity: {city, state} 
-              }))
-              this.setState({
-                locationFeedback: '',
-                locationOption: 1
-              })
-            }}
-          >Yes</button>
-          <button type='button' onClick={() => this.handleIncorrectCity()}>No</button>
-        </p>
-      )
-    }
     return (
       <div>
         <nav className='create-nav'>
@@ -211,7 +172,7 @@ export class CreateEvent extends React.Component {
           className="event-form"
           onSubmit={e => this.handleSubmit(e)}
         >
-          {errorMessage}
+          <p className='error-message'>{this.props.eventState.errorMessage}</p>
 
           <label htmlFor="eventTitle">Event Title</label>
           <input
@@ -255,7 +216,12 @@ export class CreateEvent extends React.Component {
             onBlur={() => this.validateCity()}
           />
 
-          {locationMessage}
+          <LocationMessage 
+            locationFeedback={this.state.locationFeedback} 
+            setState={this.handleStateChange} 
+            handleYesDispatch={this.handleYesDispatch} 
+            handleNoDispatch={this.handleIncorrectCity} 
+          /> 
 
           <label htmlFor="eventDescription">
                     Enter a short description for your event:
