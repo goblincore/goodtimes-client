@@ -141,28 +141,41 @@ class GuestEventForm extends Component {
                                     </div>
     }
       return (
-        <div className="guest-event-form-wrapper paddingTop bottom-offset">
-          <h3>You're invited to:</h3>
-          <h1>{title}</h1><br/>
-          <h3>Vote to decide on a time and place.</h3>
-            
-          <h4>{description}</h4>
+        <div className="absolute-wrapper bottom-offset">
+           <div className='preview-event'>
+           <div className="guest-event-form-wrapper">
+             <div className="form-outline">
+             <div className="card">
+              <h3>You're invited to:</h3>
+              <h1>{title}</h1><br/>
+              <h3>Vote to decide on a time and place.</h3>
+              <h4>{description}</h4>
+             </div>
+
           <form className="event-form-options" onSubmit={this.submitVotes}>
             <div className="time-options"> 
               <h4>Choose times...</h4>
               {timesDisplay}
             </div>
+               <div className="restaurant-options">
+                 {restaurantsDisplay}
+              </div>
 
-            {restaurantsDisplay}
-
-             {activitiesDisplay}
+              <div className="activities-option">
+                  {activitiesDisplay}
+              </div>
             
             <br/>
             <br/>
             <button  type="submit" id="submit-votes">
                             Submit</button>
-          </form>     
+          </form>  
+          </div>   
+          </div>
+
         </div>
+     </div>
+
         
       );
     }

@@ -82,6 +82,7 @@ export class CreateEvent extends React.Component {
   render(){
 
     return (
+
       <div>
         <nav className='create-nav'>
           <button type='button' onClick={() => this.props.prevPage()}>{'<-'} Back</button>
@@ -107,6 +108,7 @@ export class CreateEvent extends React.Component {
         <div className="instructions"> 
           <h3>Let's get started!</h3>
           <p>Create a title and select a location for your event. Don't forget to add a description!</p>
+
         </div>
     
         <form

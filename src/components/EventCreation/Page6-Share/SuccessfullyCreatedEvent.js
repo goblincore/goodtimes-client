@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 import { CLIENT_BASE_URL } from '../../../config';
 import { resetNewEventState } from '../../../actions/New-Event';
 import EmailForm from './EmailForm';
+import '../../styles/SuccessEventPage.css';
 
 export default class SuccessfullyCreatedEvent extends React.Component {
 
