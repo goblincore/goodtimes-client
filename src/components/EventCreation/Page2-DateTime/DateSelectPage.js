@@ -91,25 +91,24 @@ export default class DateSelectPage extends React.Component {
               <button type='button' onClick={this.handleNextPage}>Next {'->'}</button>
            </nav>
 
-            <div className="card border-right">
+            <div className="card border-right bottom-offset">
             <h2>Some good times for {this.props.eventState.title} are... </h2>
               <p>Select possible dates and times for your event by selecting a date fom the date tab and then a time from the time tab. You can add multiple dates and times!</p>
-              <InputMoment
+             
+            </div>
+
+            <div className="card bottom-offset max-300">
+            <InputMoment
                 moment={inputMoment}
                 locale={locale}
                 showSeconds={showSeconds}
                 onChange={date => this.setState({inputMoment: date})}
               />
             </div>
-            {/* <input
-                className="output"
-                type="text"
-                value={inputMoment.format('llll')}
-                readOnly
-              /> */}
+           
 
              
-            <div className="card bottom-offset">
+            <div className="card bottom-offset max-250">
              <h3>Selected Date:</h3>
          
              <p className='selected-date-text'><strong>{ (this.state.inputMoment.format('llll') === this.state.thisTime.format('llll')) ? 'No time selected' : inputMoment.format('llll')}</strong></p>

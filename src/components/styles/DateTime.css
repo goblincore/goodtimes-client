@@ -31,3 +31,11 @@
 .selected-date-text{
     opacity:0.5;
 }
+
+.max-300{
+    max-width:300px;
+}
+
+.max-250{
+    max-width:250px;
+}
