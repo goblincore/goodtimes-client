@@ -1,6 +1,5 @@
 import React from 'react';
-
-import { fetchYelpCategories, fetchYelpRestaurants, fetchAllYelpRestaurants } from '../../../actions/RestaurantSelect';
+import { fetchYelpRestaurants, fetchAllYelpRestaurants } from '../../../actions/RestaurantSelect';
 import { updateNewEventState, newEventErrorMessage } from '../../../actions/New-Event';
 import '../../styles/RestaurantSelect.css';
 import CreateNav from '../CreateNav';
@@ -8,20 +7,19 @@ import CreateNav from '../CreateNav';
 export default class RestaurantSelect extends React.Component {
 
   componentWillMount(){
-    this.props.dispatch(fetchYelpCategories());
     this.props.dispatch(fetchAllYelpRestaurants(this.props.eventState.location.latitude, this.props.eventState.location.longitude));
   }
 
-  // getAllYelpRestaurants(e){
-  //   e.preventDefault();
-  //   this.props.dispatch(fetchYelpRestaurants(this.props.eventState.location.latitude, this.props.eventState.location.longitude));
-  // }
   searchYelpRestaurants(e){
     e.preventDefault();
     const searchBar = document.getElementById('search');
     const term = searchBar.value;
-    console.log('searchbar=',searchBar,'term=',term);
-    this.props.dispatch(fetchYelpRestaurants(term, this.props.eventState.location.latitude, this.props.eventState.location.longitude));
+    if(term === ''){
+      this.props.dispatch(fetchAllYelpRestaurants(this.props.eventState.location.latitude, this.props.eventState.location.longitude));
+    }
+    else{
+      this.props.dispatch(fetchYelpRestaurants(term, this.props.eventState.location.latitude, this.props.eventState.location.longitude));
+    }
   }
   
   deleteYelpWhenClicked(e){
@@ -59,19 +57,6 @@ export default class RestaurantSelect extends React.Component {
 
   render(){
 
-    // let yelpCategories;
-
-    // if(this.props.restaurants.yelpCategories === null){
-    //   yelpCategories = <option>Loading category options...</option>;
-    // }
-    // else{
-    //   yelpCategories = this.props.restaurants.yelpCategories.map( (category, index )=> {
-    //     return (
-    //       <option value={category.alias} key={index}>{category.title}</option>
-    //     );
-    //   });
-    // }
-
     let yelpChoices;
 
     if(this.props.restaurants.yelpRestaurants.length > 0){
@@ -81,7 +66,7 @@ export default class RestaurantSelect extends React.Component {
           checked = true;
         }
         return (
-          <div>
+          <div key={restaurant.id}> 
             <input 
               name={restaurant.name} 
               id={restaurant.id} 
@@ -98,7 +83,7 @@ export default class RestaurantSelect extends React.Component {
         );
       });
     }else{
-      yelpChoices = <p>Enter a keyword to find restaurants in your area</p>;
+      yelpChoices = <p>No restaurants matching your search term.  Try again!</p>;
     }
     
     let yelpRestauransDisplay;
@@ -136,12 +121,14 @@ export default class RestaurantSelect extends React.Component {
               <input type="search" id="search"></input>
               <button onClick={e => {
                 this.searchYelpRestaurants(e);
+
               }}>Enter a Search Term</button>
               {/* <h3><label>Select Cuisine</label></h3> 
               <select onChange={e => this.getYelpRestaurants(e)}>
                 <option>Select a cuisine...</option>
                 {yelpCategories}
               </select> */}
+
             </form>
             
           
