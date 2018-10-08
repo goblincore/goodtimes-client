@@ -131,7 +131,7 @@ class App extends Component{
                         <Switch location={location}>
                         <Route exact path="/home" render={ props =>{
                           
-                           console.log('homepagerenderprops',style);
+                          
                            return HomePage({...props, style})}
 
                           } />

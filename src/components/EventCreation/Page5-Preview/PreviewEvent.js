@@ -7,7 +7,7 @@ import CreateNav from '../CreateNav';
 export default function PreviewEvent (props) {
 
   const onSubmit=()=> {
-    console.log('save new event props',props,props.eventState.id);
+ 
     const event = {
       userId: props.currentUser.id,
       title: props.eventState.title,
@@ -21,7 +21,7 @@ export default function PreviewEvent (props) {
     };
 
     if(!props.eventState.draft){ 
-      console.log('save new event props',props,props.eventState.id);
+     
       return props.dispatch(postNewEvent(event))
         .then(() => props.nextPage())
         .catch(err => console.log('ERROR HANDLING HERE dispatch(changeErrorMessaeg(err.message))'));
@@ -108,13 +108,6 @@ export default function PreviewEvent (props) {
     return (
       <div className="absolute-wrapper">
         <div className='preview-event'>
-
-          {/* <div>
-            <button type='button' onClick={() => props.prevPage()}>{'<-'} Back</button>
-            <button type='button' onClick={() => onDraft()}>Save as Draft</button>
-            <button type='button' onClick={() => onSubmit()}>Looks good!</button>
-            <h1>Preview Event Form</h1>
-          </div> */}
 
 
             <CreateNav saveAsDraft={()=>onDraft()} pageNum={props.pageNum} prevPage={props.prevPage} nextPage={props.nextPage} handleNextPage={onSubmit} />
