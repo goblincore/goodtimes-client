@@ -7,6 +7,7 @@ import CreateNav from '../CreateNav';
 export default function PreviewEvent (props) {
 
   const onSubmit=()=> {
+    console.log('save new event props',props,props.eventState.id);
     const event = {
       userId: props.currentUser.id,
       title: props.eventState.title,
@@ -20,6 +21,7 @@ export default function PreviewEvent (props) {
     };
 
     if(!props.eventState.draft){ 
+      console.log('save new event props',props,props.eventState.id);
       return props.dispatch(postNewEvent(event))
         .then(() => props.nextPage())
         .catch(err => console.log('ERROR HANDLING HERE dispatch(changeErrorMessaeg(err.message))'));
@@ -48,7 +50,7 @@ export default function PreviewEvent (props) {
     return (
       <div key={i} className="option_container">
         <input 
-          disabled="true"
+          disabled={true}
           type="checkbox" 
           id={'time-option'+i}
           name="time-option" 
@@ -63,7 +65,7 @@ export default function PreviewEvent (props) {
       return (
         <div key={i} className="option_container">
           <input 
-            disabled="true"
+            disabled={true}
             type="checkbox" 
             id={'restaurant-option'+i}
             name="restaurant-option"
@@ -85,7 +87,7 @@ export default function PreviewEvent (props) {
       return (
         <div key={i} className="option_container">
           <input 
-            disabled="true"
+            disabled={true}
             type="checkbox" 
             id={'activity-option'+i}
             name="activity-option"
@@ -115,7 +117,7 @@ export default function PreviewEvent (props) {
           </div> */}
 
 
-            <CreateNav saveAsDraft={onDraft} handleSubmit={onSubmit} pageNum={props.pageNum} prevPage={props.prevPage} nextPage={props.nextPage} handleNextPage={props.nextPage} />
+            <CreateNav saveAsDraft={()=>onDraft()} handleSubmit={()=>onSubmit()} pageNum={props.pageNum} prevPage={props.prevPage} nextPage={props.nextPage} handleNextPage={onSubmit} />
            {/* <nav className='create-nav'>
                 <button type='button' onClick={() => props.prevPage()}>{'<-'} Back</button>
                 <button type='button' 
