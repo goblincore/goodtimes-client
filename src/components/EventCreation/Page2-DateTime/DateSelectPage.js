@@ -75,6 +75,7 @@ export default class DateSelectPage extends React.Component {
   }
 
   render(){
+    
     //this.props.eventState.draft
     let {inputMoment, showSeconds, locale, size} = this.state;
 

@@ -1,5 +1,5 @@
 import React from 'react';
-
+import moment from 'moment';
 import { fetchYelpCategories, fetchYelpRestaurants, fetchAllYelpRestaurants } from '../../../actions/RestaurantSelect';
 import { updateNewEventState, newEventErrorMessage } from '../../../actions/New-Event';
 import '../../styles/RestaurantSelect.css';
@@ -58,7 +58,6 @@ export default class RestaurantSelect extends React.Component {
   }
 
   render(){
-
     // let yelpCategories;
 
     // if(this.props.restaurants.yelpCategories === null){
