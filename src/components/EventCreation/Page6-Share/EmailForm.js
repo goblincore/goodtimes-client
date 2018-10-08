@@ -80,7 +80,12 @@ class EmailForm extends React.Component {
           <label htmlFor='subject'>Enter the subject of the e-mail.</label>
           <input placeholder="Let's hang out!" id="subject"></input>
           <label htmlFor='message'>Write the body of the e-mail.</label>
-          <textarea defaultValue={`Hi!  Let's get together. Please vote on when and where we should hang out here: ${CLIENT_BASE_URL}/guestevents/${this.props.eventState.id}`} id="message"></textarea>
+          <textarea defaultValue={`Hi! Let's get together.
+
+Please vote on when and where we should hang out here:
+ 
+${CLIENT_BASE_URL}/guestevents/${this.props.eventState.id}`} id="message">
+          </textarea>
           <button type="submit">Send</button>
         </form>
         {alertBox}
