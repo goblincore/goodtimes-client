@@ -4,6 +4,7 @@ import React from 'react';
 export default function States(props) {
   
   const states = [ 
+  {value:null, name: 'Select a State'},
   {value:'AL',name:'Alabama'},
   {value:'AK',name:'Alaska'},
   {value:'AZ',name:'Arizona'},
