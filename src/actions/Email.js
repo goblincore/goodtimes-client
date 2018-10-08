@@ -28,8 +28,6 @@ export const sendEmail = emailData => dispatch => {
   })
     .then(res => normalizeResponseErrors(res))
     .then(res => res.json())
-    .then(email => {dispatch(sendEmailSuccess(email));
-      return Promise.resolve();
-    })
-    .catch(err => Promise.reject(err));
+    .then(email => dispatch(sendEmailSuccess(email)))
+    .catch(err => dispatch(sendEmailError(err)));
 };

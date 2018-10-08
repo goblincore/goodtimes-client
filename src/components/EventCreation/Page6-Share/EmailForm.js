@@ -8,7 +8,8 @@ class EmailForm extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      sent: false
+      sent: false,
+      error: ''
     };
   }
 
@@ -24,32 +25,67 @@ class EmailForm extends React.Component {
     }));
     this.setState({sent:true});
   }
-
+  validateFields(e){
+    let warning;
+    if(e.target.to.value === ''){
+      warning = 'Add recipients.';
+    }
+    else if(e.target.subject.value === ''){
+      warning = 'Add subject.';
+    }
+    else if(e.target.message.value === ''){
+      warning = 'Add message to email body.';
+    }
+    else {
+      warning = '';
+    }
+    this.setState({error: warning});
+  }
   closeAlert(){
     this.setState({sent:false});
+    this.setState({error: ''});
   }
+
   render(){
     let alertBox;
-    if(this.state.sent===true){
+    if(this.props.loading === true){
+      alertBox = <h2>Sending...</h2>;
+    }
+    if(this.state.sent===true && this.state.error !== ''){
+      alertBox = <div>
+        <h2>Oh no!</h2>
+        <p>{this.state.error} Try again!</p>
+        <button onClick={()=>this.closeAlert()}>Close</button>
+      </div>;
+    }
+    if(this.state.sent===true && this.state.error === ''){
       alertBox = <div>
         <h2>Success!</h2>
         <p>E-mail sent! Check the dashboard periodically for voting results.</p>
         <button onClick={()=>this.closeAlert()}>Close</button>
       </div>;
     }
-    else if(this.state.sent===false){
+    else if(this.state.sent===false && this.state.error === ''){
       alertBox = <div></div>;
     }
     return (
       <div>
-        <form onSubmit={(e) => this.sendEmail(e)}>
+        <form onSubmit={(e) => {
+          this.validateFields(e);
+          this.sendEmail(e);
+        }}>
           
           <label htmlFor='to'>Enter recipients' e-mails separated by a comma.</label>
           <input placeholder="friend1@example.com, friend2@example.com, friend3@example.com" id="to"></input>
           <label htmlFor='subject'>Enter the subject of the e-mail.</label>
           <input placeholder="Let's hang out!" id="subject"></input>
           <label htmlFor='message'>Write the body of the e-mail.</label>
-          <textarea placeholder={`Hi!  Let's get together. Please vote on when and where we should hang out here: ${CLIENT_BASE_URL}/guestevents/${this.props.eventState.id}`} id="message"></textarea>
+          <textarea defaultValue={`Hi! Let's get together.
+
+Please vote on when and where we should hang out here:
+ 
+${CLIENT_BASE_URL}/guestevents/${this.props.eventState.id}`} id="message">
+          </textarea>
           <button type="submit">Send</button>
         </form>
         {alertBox}
@@ -59,6 +95,7 @@ class EmailForm extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  currentUser: state.auth.currentUser
+  currentUser: state.auth.currentUser,
+  loading: state.newEvent.loading
 });
 export default connect(mapStateToProps)(EmailForm);

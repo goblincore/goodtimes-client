@@ -45,9 +45,20 @@ export const fetchYelpRestaurantsError = (error) => ({
   error
 });
 
-export const fetchYelpRestaurants = (category, lat, lon) => (dispatch) => {
+export const fetchAllYelpRestaurants = (lat, lon) => (dispatch) => {
   dispatch(fetchYelpRestaurantsRequest());
-  return fetch(`${API_BASE_URL}/api/restaurants/search/food/${category}/${lat}/${lon}`,{
+  return fetch(`${API_BASE_URL}/api/restaurants/search/food/${lat}/${lon}`,{
+    method: 'GET'
+  })
+    .then(res => normalizeResponseErrors(res))
+    .then(res => res.json())
+    .then(restaurants => dispatch(fetchYelpRestaurantsSuccess(restaurants)))
+    .catch(err => dispatch(fetchYelpRestaurantsError(err)));
+};
+
+export const fetchYelpRestaurants = (term, lat, lon) => (dispatch) => {
+  dispatch(fetchYelpRestaurantsRequest());
+  return fetch(`${API_BASE_URL}/api/restaurants/search/food/${term}/${lat}/${lon}`,{
     method: 'GET'
   })
     .then(res => normalizeResponseErrors(res))
