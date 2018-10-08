@@ -1,8 +1,9 @@
 import React from 'react';
-import {Field, reduxForm, focus} from 'redux-form';
+import {Field, reduxForm} from 'redux-form';
 import {registerUser} from '../../../actions/Users';
 import Input from '../../ReusableComponents/Input';
 import {required, nonEmpty, matches, length, isTrimmed} from '../../../Validators';
+import { authError } from '../../../actions/Auth';
 const passwordLength = length({min: 10, max: 72});
 const uuidv4 = require('uuid/v4');
 
@@ -21,15 +22,26 @@ export class RegistrationForm extends React.Component {
     const password = values[this.passwordId];
     const email = values[this.emailAddressId];
 
+    if (!username) {
+      return this.props.dispatch(authError('Username is required.'));
+    } else if (!password) {
+      return this.props.dispatch(authError('Password is required.'));
+    } else if (!email) {
+      return this.props.dispatch(authError('Email is required.'));
+    }
+
     const user = {username, password, email};
-    return this.props
-      .dispatch(registerUser(user))
+    this.props.dispatch(authError(null));
+    return this.props.dispatch(registerUser(user))
   }
+
+  componentWillUnmount(){
+    this.props.dispatch(authError(null));
+  }
+
 
   render() {
 
-      
-            
     return (
       <form
         id={this.randomId}
@@ -38,13 +50,13 @@ export class RegistrationForm extends React.Component {
           this.onSubmit(values)
         )}>
 
-        <p>{this.props.errorMessage}</p>
-        
+        <p className='form-error'>{this.props.errorMessage}</p>
+
         <label htmlFor={this.usernameId}>Email</label>
         <Field
           component={Input}
           autofocus
-          type="text"
+          type="email"
           name={this.emailAddressId}
           validate={[required, nonEmpty, isTrimmed]}
         />
