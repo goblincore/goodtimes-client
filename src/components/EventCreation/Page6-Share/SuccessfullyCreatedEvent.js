@@ -39,6 +39,7 @@ export default class SuccessfullyCreatedEvent extends React.Component {
   }
 
   render(){
+    console.log('Success Event form created props',this.props);
     return (
       <div className="event-successfully-created">
 

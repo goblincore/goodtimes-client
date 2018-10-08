@@ -18,6 +18,7 @@ import createHistory from 'history/createBrowserHistory';
 
 import './styles.css';
 
+
 const history = createHistory();
 
 class App extends Component{
@@ -130,7 +131,7 @@ class App extends Component{
                         <Switch location={location}>
                         <Route exact path="/home" render={ props =>{
                           
-                           console.log('homepagerenderprops',style);
+                          
                            return HomePage({...props, style})}
 
                           } />

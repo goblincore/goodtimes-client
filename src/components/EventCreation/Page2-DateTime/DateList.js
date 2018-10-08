@@ -5,7 +5,7 @@ import { updateNewEventState } from '../../../actions/New-Event';
 export default function Datelist (props){
 
   if(props  === undefined ){
-    return null;   
+    return null; 
   }
 
   function deleteWhenClicked(event){
@@ -14,22 +14,32 @@ export default function Datelist (props){
     const filteredTimes = props.dateList.filter((date, index) => index !== indexToDelete);
     props.dispatch(updateNewEventState({scheduleOptions: filteredTimes}));
   }
-      
-  return (
-    <ul className="date_list" aria-live="polite">
-      {
-        props.dateList.map((date,index)=>{
-              
-          return (
-            <li className="date-list-item" 
-              key={index} 
-              onClick={e => deleteWhenClicked(e)}
-            >
-              {date.date}
-            </li>
-          );
-        })
-      } 
-    </ul>
-  );
+      if(props.dateList.length > 0){  
+      return (
+        <ul className="date_list" aria-live="polite">
+          
+          { 
+          
+            props.dateList.map((date,index)=>{
+                  
+              return (
+                <li className="date-list-item" 
+                  key={index} 
+                  onClick={e => deleteWhenClicked(e)}
+                >
+                  {date.date}
+                </li>
+              );
+            })
+          } 
+        </ul>
+      );
+    } else {
+
+      return (
+        <p>No time and dates added yet!</p>
+
+      )
+
+    }
 }
