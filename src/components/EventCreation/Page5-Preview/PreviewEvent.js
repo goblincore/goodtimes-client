@@ -117,16 +117,8 @@ export default function PreviewEvent (props) {
           </div> */}
 
 
-            <CreateNav saveAsDraft={()=>onDraft()} handleSubmit={()=>onSubmit()} pageNum={props.pageNum} prevPage={props.prevPage} nextPage={props.nextPage} handleNextPage={onSubmit} />
-           {/* <nav className='create-nav'>
-                <button type='button' onClick={() => props.prevPage()}>{'<-'} Back</button>
-                <button type='button' 
-                  onClick={() => onDraft()}>
-                  Save as Draft
-                </button>
-                <button type='button' onClick={()=>onSubmit()}>Looks Good! {'->'}</button>
-            </nav> */}
-
+            <CreateNav saveAsDraft={()=>onDraft()} pageNum={props.pageNum} prevPage={props.prevPage} nextPage={props.nextPage} handleNextPage={onSubmit} />
+         
       
           <div className="guest-event-form-wrapper temp-adjust">
           <div>Below is a preview of your survey that you can check before you send it out. 
