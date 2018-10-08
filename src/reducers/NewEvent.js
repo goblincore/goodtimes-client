@@ -59,7 +59,6 @@ export default function newEventReducer (state=initialState, action) {
     return Object.assign({}, state, action.updateObject); //example:  {restaurantOptions: [{zomatoId: '123'}]}
 
   } else if (action.type === POST_NEW_EVENT_SUCCESS) {
-console.log('New event Success');
     return Object.assign({}, state, {
       loading: false
     });
@@ -68,16 +67,14 @@ console.log('New event Success');
       loading: true
     });
   } else if (action.type === LOAD_DRAFT_INTO_REDUX_STATE) {
-    console.log('update action=',action.draftObject);
-    
     return Object.assign({}, state,  action.draftObject
-      ); 
-} else if (action.type === PUT_UPDATED_DRAFT_SUCCESS) {
+    ); 
+  } else if (action.type === PUT_UPDATED_DRAFT_SUCCESS) {
 
-  return Object.assign({}, state, {
-    loading: false
-  });
-}  else if (action.type === RESET_NEW_EVENT_STATE) {
+    return Object.assign({}, state, {
+      loading: false
+    });
+  }  else if (action.type === RESET_NEW_EVENT_STATE) {
     return Object.assign({}, state, initialState);
 
   } 
@@ -88,7 +85,6 @@ console.log('New event Success');
     });
   } 
   else if(action.type === SEND_EMAIL_REQUEST){
-    console.log(action);
     return Object.assign({}, state, {
       loading:true
     });
@@ -97,14 +93,14 @@ console.log('New event Success');
     console.log(action);
     return Object.assign({}, state, {
       loading: false,
-      errorMessage: action.error,
+      errorMessage: action.error.message,
     });
   }
   else if(action.type === SEND_EMAIL_SUCCESS){
-    console.log(action);
     return Object.assign({}, state, {
       loading: false,
-      email: action.email
+      email: action.email,
+      errorMessage: ''
     });
   }
   else if(action.type === DELETE_EVENT_REQUEST){

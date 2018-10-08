@@ -75,7 +75,7 @@ export default class DateSelectPage extends React.Component {
       <div className="container absoluteposition">
        
        
-           <CreateNav pageNum={this.props.pageNum} prevPage={this.props.prevPage} nextPage={this.props.nextPage} handleNextPage={this.handleNextPage} />
+           <CreateNav saveAsDraft={this.handleSave} pageNum={this.props.pageNum} prevPage={this.props.prevPage} nextPage={this.props.nextPage} handleNextPage={this.handleNextPage} />
 
 
             {/* <div className="card border-right bottom-offset">
