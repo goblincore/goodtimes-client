@@ -83,7 +83,7 @@ export default class RestaurantSelect extends React.Component {
         );
       });
     }else{
-      yelpChoices = <p>No restaurants matching your search term.  Try again!</p>;
+      yelpChoices = <p id="empty-search">No restaurants matching your search term.  Try again!</p>;
     }
     
     let yelpRestauransDisplay;
@@ -134,7 +134,7 @@ export default class RestaurantSelect extends React.Component {
           
             <div id="restaurant-choices" >
               <h3>Selected Restaurants</h3>
-              <ul>{yelpRestauransDisplay}</ul>
+              <ul id="restaurant-option-list">{yelpRestauransDisplay}</ul>
             </div>
           
           </div>
