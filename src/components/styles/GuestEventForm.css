@@ -1,4 +1,4 @@
-.time-options, .restaurant-options{
+.guest-options,.time-options, .restaurant-options{
 
     text-align:left;
 }
@@ -70,4 +70,25 @@
 
 .guest-event-form .option_container{
     max-width:800px;
+}
+
+.submit-container{
+    display: block;
+    width: 100%;
+    float: left;
+    padding-bottom: 50px;
+    padding-top:50px;
+}
+
+.submit-container button{
+    font-size:20px;
+    padding:10px;
+}
+
+.choice-border-bottom{
+    border-bottom:1px dashed #ddd;
+}
+
+.option_container p{
+    margin-left:80px;
 }

@@ -119,7 +119,7 @@ class GuestEventForm extends Component {
 
        restaurantsDisplay = 
         <div className="restaurant-options"> 
-          <h2>Choose a place you'd like to go eat...</h2>
+          <h2>Choose places you'd like to go eat...</h2>
           {restaurantsList}
           </div>
   }
@@ -164,11 +164,11 @@ class GuestEventForm extends Component {
              <h2>Vote to decide on a time and place!</h2>
           <form className="guest-event-form" onSubmit={this.submitVotes}>
         
-            <div className="guest-options"> 
+            <div className="guest-options choice-border-bottom"> 
               <h2>Choose times that work for you...</h2>
               {timesDisplay}
             </div>
-               <div className="guest-options">
+               <div className="guest-options choice-border-bottom">
                  {restaurantsDisplay}
               </div>
 
@@ -178,8 +178,11 @@ class GuestEventForm extends Component {
             
             <br/>
             <br/>
-            <button  type="submit" id="submit-votes">
-                            Submit</button>
+            <div className="submit-container">
+                  <button  type="submit" id="submit-votes">
+                    Submit Vote
+                  </button>
+            </div>
           </form>  
           </div>   
           </div>
