@@ -54,7 +54,6 @@ function setup() {
   const localStorage = jest.fn();
   const enzymeWrapper = mount(<DateList {...props} localStorage={localStorage}/>)
 
-
   return {
     props,
     enzymeWrapper
