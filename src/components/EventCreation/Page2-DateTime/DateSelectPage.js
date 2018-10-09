@@ -67,7 +67,9 @@ export default class DateSelectPage extends React.Component {
   }
 
   render(){
+
     console.log('props',)
+
     let {inputMoment, showSeconds, locale, size} = this.state;
 
     return (
