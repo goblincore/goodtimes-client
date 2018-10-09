@@ -116,7 +116,7 @@ export default class RestaurantSelect extends React.Component {
        */}
         
           <div id="select-cuisine">
-            <form id="select-cuisine-form">
+            <form id="select-cuisine-form" className="select-cuisine-form">
               <h3><label>Search</label></h3> 
               <input type="search" id="search"></input>
               <button onClick={e => {
