@@ -28,6 +28,17 @@
     #create-form{
         padding-bottom:60px;
     }
+
+    .instructions{
+        float:none;
+        width:100%;
+        text-align:center;
+        display:block;
+    }
+
+    .create-nav{
+        height:100px;
+    }
    
 }
    

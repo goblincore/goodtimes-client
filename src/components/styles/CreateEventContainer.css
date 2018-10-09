@@ -22,6 +22,8 @@
 @media only screen and (max-width: 450px) {
  .slides{
   padding:0px;
+  height:100%;
+
  }
 
 }
