@@ -21,7 +21,7 @@ export default function reducer(state = initialState, action) {
     } else if (action.type === AUTH_ERROR) {
         return Object.assign({}, state, {
             loading: false,
-            error: action.error
+            error: action.errorMessage
         });
     } else if (action.type === FETCH_USEREVENTS_SUCCESS) {
         return Object.assign({}, state, {

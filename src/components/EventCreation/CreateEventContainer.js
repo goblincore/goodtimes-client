@@ -65,6 +65,7 @@ render(){
       return(
         <animated.div className="slides" style={{ ...style}}>
           <CreateEvent 
+          pageNum={this.props.pageNum}
           nextPage={this.props.nextPage} 
           dispatch={this.props.dispatch} 
           prevPage={this.props.goHome} 
@@ -82,6 +83,7 @@ render(){
       return(
         <animated.div className="slides" style={{ ...style  }}>
           <DateSelectPage 
+            pageNum={this.props.pageNum}
             nextPage={this.props.nextPage}
             dispatch={this.props.dispatch}
             prevPage={this.props.prevPage} 
@@ -99,6 +101,7 @@ render(){
       return(
         <animated.div className="slides" style={{ ...style  }}>
             <RestaurantSelect 
+            pageNum={this.props.pageNum}
             nextPage={this.props.nextPage}
             dispatch={this.props.dispatch}
             prevPage={this.props.prevPage}
@@ -118,6 +121,7 @@ render(){
       return(
         <animated.div className="slides" style={{ ...style  }}>
         <ActivityPage
+            pageNum={this.props.pageNum}
             dispatch={this.props.dispatch} 
             eventState={this.props.newEvent}
             prevPage={this.props.prevPage} 
@@ -141,6 +145,7 @@ render(){
       return(
         <animated.div className="slides" style={{ ...style  }}>
          <PreviewEvent 
+            pageNum={this.props.pageNum}
             nextPage={this.props.nextPage}
             goHome={this.props.goHome} 
             dispatch={this.props.dispatch} 
@@ -159,6 +164,7 @@ render(){
     return(
       <animated.div  style={{ ...style}}>
         <SuccessfullyCreatedEvent 
+          pageNum={this.props.pageNum}
           dispatch={this.props.dispatch} 
           prevPage={this.props.prevPage} 
           eventState={this.props.newEvent}

@@ -3,7 +3,7 @@ import { Redirect } from 'react-router-dom';
 import moment from 'moment';
 import { updateNewEventState } from '../../../actions/New-Event';
 import '../../styles/ActivitySelect.css';
-
+import CreateNav from '../CreateNav';
 import SelectActivity from './SelectActivity';
 import WriteActivity from './WriteActivity';
 
@@ -77,7 +77,8 @@ export default class ActivitySelect extends React.Component {
                 }]
               })
               );
-              this.setState({display:'none'});
+              form.reset();
+              // this.setState({display:'none'});
             }}
           >Save Event</button>
         </div>
@@ -129,31 +130,26 @@ export default class ActivitySelect extends React.Component {
     return(
 
       <div>
-          <nav className='create-nav'>
-                <button type='button' onClick={() => this.props.prevPage()}>{'<-'} Back</button>
-                <button type='button' 
-                  onClick={() => this.props.saveAsDraft()}>
-                  Save as Draft
-                </button>
-                <button type='button' onClick={()=>this.props.nextPage()}>Next {'->'}</button>
-            </nav>
-      <div className="card border-right">
-        <h1>Let's do something!</h1>
-        <p>Choose from events in your area that are happening during the times and dates you previously selected or
-           create your own custom event by clicking on the buttons.</p>
-      </div>
 
+          <CreateNav saveAsDraft={this.props.saveAsDraft} pageNum={this.props.pageNum} prevPage={this.props.prevPage} nextPage={this.props.nextPage} handleNextPage={this.props.nextPage} />
+    
 
       <div className="card border-right bottom-offset"> 
         <p>{this.props.eventState.errorMessage}</p>
         <button onClick={() => this.setState({display: 'choose'})}>Choose From List</button>
         <button onClick={() => this.setState({display: 'write'})}>Create My Own Activity</button>
 
-        <div className="activity-option">
-           {optionDisplay}
-        </div>
+       
       </div>
- 
+    
+
+      <div className="card" >
+            <div className="activity-option">
+              {optionDisplay}
+            </div>
+      </div>
+
+
        <div id="user-event-list" className="card small-text">
         <h4>Event Choices{selectedActivitiesDisplay}</h4>
          
