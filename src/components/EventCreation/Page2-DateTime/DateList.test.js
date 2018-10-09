@@ -61,6 +61,7 @@ function setup() {
   }
 }
 
+
 describe('components', () => {
   describe('DateList', () => {
     it('should render self without crashing and list dates', () => {
