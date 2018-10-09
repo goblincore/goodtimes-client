@@ -18,3 +18,16 @@
     padding-left:20px;
     height:80px;
 }
+
+@media only screen and (max-width: 450px) {
+    .nav-buttons{
+      float:left;
+      margin-top:20px;
+    }
+
+    #create-form{
+        padding-bottom:60px;
+    }
+   
+}
+   
