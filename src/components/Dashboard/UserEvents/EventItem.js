@@ -80,7 +80,8 @@ export default class EventItem extends React.Component{
 
           <div>
             <h4>Voting Link:</h4>
-            <a href={`${CLIENT_BASE_URL}/guestevents/${this.props.event.id}`} target="_blank">{CLIENT_BASE_URL}/guestevents/{this.props.event.id}</a>
+            <a href={`${CLIENT_BASE_URL}/guestevents/${this.props.event.id}`} target="_blank">{this.props.event.shortUrl}</a>
+            {/* <a href={`${CLIENT_BASE_URL}/guestevents/${this.props.event.id}`} target="_blank">{CLIENT_BASE_URL}/guestevents/{this.props.event.id}</a> */}
           </div>
         </li>
       );
