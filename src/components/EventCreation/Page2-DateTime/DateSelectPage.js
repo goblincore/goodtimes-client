@@ -113,7 +113,7 @@ export default class DateSelectPage extends React.Component {
              </strong></p> */}
             
             
-             <h3>Added Time and Dates</h3>
+             <h3>Added Times and Dates</h3>
                  
               <div className="dateList">
                 <DateList dateList={this.props.eventState.scheduleOptions} dispatch={this.props.dispatch}/>
