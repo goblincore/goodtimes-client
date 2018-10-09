@@ -4,6 +4,7 @@ import { updateEventVotes } from '../../actions/Update-Event-Votes';
 import { connect } from 'react-redux';
 import PostVote from './PostVotePage';
 import '../styles/GuestEventForm.css';
+import '../styles/Input.css';
 
 class GuestEventForm extends Component {
   constructor(props){
@@ -87,13 +88,15 @@ class GuestEventForm extends Component {
       timesDisplay = scheduleOptions.map((option, i) => { 
         return (
           <div key={i} className="option_container">
+          <label className="input-container"> {option.date}
             <input 
               type="checkbox"
               id={'time-option'+i}
               name="time-option"
               value={option.id} />
-  
-            <label> {option.date} </label> 
+               <span class="checkmark"></span>
+          </label>
+           
           </div>
         );});
     if(restaurantOptions.length > 0){ 
@@ -102,18 +105,21 @@ class GuestEventForm extends Component {
         let link = <a href={option.website}>{option.name}</a>;
         return (
           <div key={i} className="option_container">
+            <label className="input-container"> 
+            {link}
             <input 
               type="checkbox" 
               id={'restaurant-option'+i}
               name="restaurant-option"
-              value={option.yelpId} />
-            <label> {link} </label>
-          </div>    
+               value={option.yelpId} />
+               <span class="checkmark"></span>
+                </label>
+             </div>    
        );});  
 
        restaurantsDisplay = 
         <div className="restaurant-options"> 
-          <h4>Choose food...</h4>
+          <h2>Choose a place you'd like to go eat...</h2>
           {restaurantsList}
           </div>
   }
@@ -126,17 +132,21 @@ class GuestEventForm extends Component {
         return (
           
           <div key={i} className="option_container">
+          <label className="input-container"> 
+          {link} 
             <input 
               type="checkbox" 
               id={'activity-option'+i}
               name="activity-option"
               value={option.ebId} />
-            <label> {link} {dates}</label>
+               <span class="checkmark"></span>
+            </label>
+            {dates}
           </div>
          );}); 
 
                 activitiesDisplay = <div className="activity-options"> 
-                                       <h4>Choose activities...</h4>
+                                       <h2>Choose activities you're interested in...</h2>
                                          {activitiesList}
                                     </div>
     }
@@ -145,23 +155,24 @@ class GuestEventForm extends Component {
            <div className='preview-event'>
            <div className="guest-event-form-wrapper">
              <div className="form-outline">
-             <div className="card">
-              <h3>You're invited to:</h3>
+             <header className="invite-header">
+              <h2>You're invited to:</h2>
               <h1>{title}</h1><br/>
-              <h3>Vote to decide on a time and place.</h3>
+             
               <h4>{description}</h4>
-             </div>
-
-          <form className="event-form-options" onSubmit={this.submitVotes}>
-            <div className="time-options"> 
-              <h4>Choose times...</h4>
+             </header>
+             <h2>Vote to decide on a time and place!</h2>
+          <form className="guest-event-form" onSubmit={this.submitVotes}>
+        
+            <div className="guest-options"> 
+              <h2>Choose times that work for you...</h2>
               {timesDisplay}
             </div>
-               <div className="restaurant-options">
+               <div className="guest-options">
                  {restaurantsDisplay}
               </div>
 
-              <div className="activities-option">
+              <div className="guest-options">
                   {activitiesDisplay}
               </div>
             

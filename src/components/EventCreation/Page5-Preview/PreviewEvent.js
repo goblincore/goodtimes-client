@@ -22,9 +22,7 @@ export default function PreviewEvent (props) {
     };
 
     if(!props.eventState.draft){ 
-      return props.dispatch(getBitly(`https://goodtimes-client.herokuapp.com/guestevents/${props.eventState.id}`))
-        .then(()=> event.shortUrl = props.eventState.shortUrl)
-        .then( ()=> props.dispatch(postNewEvent(event)))
+     return props.dispatch(postNewEvent(event))
         .then(() => props.nextPage())
         .catch(err => console.log('ERROR HANDLING HERE dispatch(changeErrorMessaeg(err.message))'));
 
