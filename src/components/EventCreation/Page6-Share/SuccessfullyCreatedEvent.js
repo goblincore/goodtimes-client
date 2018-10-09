@@ -25,8 +25,8 @@ export default class SuccessfullyCreatedEvent extends React.Component {
   }
 
   componentWillMount(){
-    // console.log('success event creation event');
-    // this.props.dispatch(getBitly(`https://goodtimes-client.herokuapp.com/guestevents/${this.props.eventState.id}`));
+    // console.log('success event creation event id on mount',this.props.eventState.id);
+    this.props.dispatch(getBitly('https://goodtimes-client.herokuapp.com/guestevents/', this.props.eventState.id));
   }
   
   
@@ -45,7 +45,7 @@ export default class SuccessfullyCreatedEvent extends React.Component {
   }
 
   render(){
-    console.log('Success Event form created props',this.props);
+    // console.log('Success Event form created props',this.props);
     // console.log('get bitly', this.props.dispatch(getBitly(`https://goodtimes-client.herokuapp.com/guestevents/${this.props.eventState.id}`)))
     // console.log('get bitly', this.props.dispatch(getBitly(`${CLIENT_BASE_URL}/guestevents/${this.props.eventState.id}`)))
     return (

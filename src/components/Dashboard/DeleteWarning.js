@@ -1,5 +1,7 @@
 import React from 'react';
 
+import Trash2 from 'react-feather/dist/icons/trash-2';
+
 export default class DeleteWarning extends React.Component {
 	constructor(props) {
 		super(props);
@@ -30,7 +32,7 @@ export default class DeleteWarning extends React.Component {
 		}
 		else {
 			return (
-				<button onClick={this.deleteprompt}>Delete</button>
+				<a onClick={this.deleteprompt}> <Trash2 size="18"/> Delete</a>
 			)
 		}
 	}

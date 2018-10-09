@@ -1,5 +1,6 @@
 import React from 'react';
 import { FaThumbsUp, FaToggleOff, FaToggleOn } from "react-icons/lib/fa";
+import { Calendar } from "react-feather";
 import '../../styles/EventItem.css';
 import DeleteWarning from '../DeleteWarning';
 import {deleteEvent} from '../../../actions/New-Event';
@@ -31,7 +32,7 @@ export default class EventItem extends React.Component{
         <li className='user-event'>
           <span>  
             <h2>{event.title}</h2>
-            <button className="floatRight noBorder" onClick={()=>this.toggleEventDetails(false)}>Hide Details <FaToggleOn/></button>
+            <button className="floatRight noBorder" onClick={()=>this.toggleEventDetails(false)}>Hide Details <FaToggleOn className="general-icon" /></button>
           </span>
           <p>{this.props.event.description}</p>
         
@@ -41,7 +42,7 @@ export default class EventItem extends React.Component{
               this.props.event.scheduleOptions.map((date,i) =>{
                 return(
                   <div key={i} className='date-vote'>
-                    <span className="dates-text"> {date.date}</span> <span className="votes-text floatRight"> <FaThumbsUp/> {date.votes} </span>
+                    <span className="dates-text"> {date.date}</span> <span className="votes-text floatRight"> <FaThumbsUp /> {date.votes} </span>
                   </div>
                 );
                 
@@ -78,7 +79,7 @@ export default class EventItem extends React.Component{
           </div>
 
           <div>
-            <p>Voting Link:</p>
+            <h4>Voting Link:</h4>
             <a href={`${CLIENT_BASE_URL}/guestevents/${this.props.event.id}`} target="_blank">{CLIENT_BASE_URL}/guestevents/{this.props.event.id}</a>
           </div>
         </li>
@@ -88,8 +89,8 @@ export default class EventItem extends React.Component{
       return(
         <li className='user-event'>
          <span>  
-            <h2>{this.props.event.title}</h2>    
-            <button className="floatRight noBorder" onClick={()=>this.toggleEventDetails(true)}>See Details <FaToggleOff/></button>
+           <Calendar /> <h2>{this.props.event.title}</h2>    
+            <button className="floatRight noBorder" onClick={()=>this.toggleEventDetails(true)}>See Details <FaToggleOff className="general-icon" /></button>
           </span> 
     
           <p>{this.props.event.description}</p>

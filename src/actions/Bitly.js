@@ -19,11 +19,13 @@ export const sendBitlyError = (error) => ({
   error
 });
 
-export const getBitly = url => dispatch => {
+export const getBitly = (url, eventId) => dispatch => {
   const token = localStorage.getItem('authToken');
-  const longUrl= url;
+  const longUrl= url+eventId;
+
+  console.log('incoming url get bitly',url);
   dispatch(sendBitlyRequest());
-  return fetch(`${BITLY_BASE_URL}?longUrl=${longUrl}`, {
+  return fetch(`${BITLY_BASE_URL}?longUrl=${longUrl}&eventId=${eventId}`, {
     method: 'GET',
     headers: {
       'Authorization': `Bearer ${token}`
