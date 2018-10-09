@@ -4,13 +4,16 @@ import { shallow } from 'enzyme';
 import { CreateEvent } from './CreateEvent';
 
 
+// const location = "/create-event";
+// render={location}
+const wrapper = shallow(<CreateEvent />);
+describe('CreateEvent', () => {
 
-// const wrapper = shallow(<CreateEvent />);
-// describe('CreateEvent', () => {
-//   it('renders without crashing', () => {
-//     expect(wrapper).to.have.length(1);
-//   });
-// });
+  it('renders without crashing', () => {
+    
+    expect(wrapper).to.have.length(1);
+  });
+});
 
 // it('renders without crashing', () => {
 //     shallow(<CreateEvent />);

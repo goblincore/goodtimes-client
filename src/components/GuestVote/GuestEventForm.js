@@ -111,9 +111,14 @@ class GuestEventForm extends Component {
               type="checkbox" 
               id={'restaurant-option'+i}
               name="restaurant-option"
+<<<<<<< HEAD
               value={option.zomatoId} />
                 <span class="checkmark"></span>
              </label>
+=======
+              value={option.yelpId} />
+            <label> {link} </label>
+>>>>>>> c9800d93f5e38afaf2ed081805e8764fad613fb3
           </div>    
        );});  
 
