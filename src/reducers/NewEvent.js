@@ -10,7 +10,7 @@ import {
   DELETE_EVENT_SUCCESS
 } from '../actions/New-Event';
 import { SEND_EMAIL_REQUEST, SEND_EMAIL_ERROR, SEND_EMAIL_SUCCESS } from '../actions/Email';
-
+import {SEND_BITLY_REUQEST,SEND_BITLY_SUCCESS} from '../actions/Bitly';
 import {
   LOAD_DRAFT_INTO_REDUX_STATE,
   PUT_UPDATED_DRAFT_REQUEST,
@@ -30,6 +30,7 @@ export const initialState = {
   restaurantOptions: [],
   activityOptions:[],
   id: null,
+  shortUrl:'',
   loading: false,
   inviteEmail: {
     to: '',
@@ -56,7 +57,7 @@ export default function newEventReducer (state=initialState, action) {
     });
   }
   else if (action.type === UPDATE_NEW_EVENT_STATE) {
-    return Object.assign({}, state, action.updateObject); //example:  {restaurantOptions: [{zomatoId: '123'}]}
+    return Object.assign({}, state, action.updateObject); 
 
   } else if (action.type === POST_NEW_EVENT_SUCCESS) {
     return Object.assign({}, state, {
@@ -117,6 +118,13 @@ export default function newEventReducer (state=initialState, action) {
   else if(action.type === DELETE_EVENT_SUCCESS){
     return Object.assign({}, state, {
       loading: false,
+      errorMessage: null
+    });
+  }
+  else if(action.type === SEND_BITLY_SUCCESS){
+    console.log('short url reducer',action);
+    return Object.assign({}, state, {
+      shortUrl: action.shortUrl,
       errorMessage: null
     });
   }

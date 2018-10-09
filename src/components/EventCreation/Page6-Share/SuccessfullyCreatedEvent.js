@@ -2,6 +2,7 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import { CLIENT_BASE_URL } from '../../../config';
 import { resetNewEventState } from '../../../actions/New-Event';
+import { getBitly } from '../../../actions/Bitly';
 import EmailForm from './EmailForm';
 import '../../styles/SuccessEventPage.css';
 
@@ -22,6 +23,11 @@ export default class SuccessfullyCreatedEvent extends React.Component {
     localStorage.removeItem('eventDraft');
     localStorage.removeItem('newEventPageCount');
   }
+
+  componentWillMount(){
+    // console.log('success event creation event id on mount',this.props.eventState.id);
+    this.props.dispatch(getBitly('https://goodtimes-client.herokuapp.com/guestevents/', this.props.eventState.id));
+  }
   
   
   handleCopy = () => {
@@ -39,6 +45,9 @@ export default class SuccessfullyCreatedEvent extends React.Component {
   }
 
   render(){
+    // console.log('Success Event form created props',this.props);
+    // console.log('get bitly', this.props.dispatch(getBitly(`https://goodtimes-client.herokuapp.com/guestevents/${this.props.eventState.id}`)))
+    // console.log('get bitly', this.props.dispatch(getBitly(`${CLIENT_BASE_URL}/guestevents/${this.props.eventState.id}`)))
     return (
       <div className="event-successfully-created">
 
@@ -46,6 +55,7 @@ export default class SuccessfullyCreatedEvent extends React.Component {
         <div className="event-link-to-share">
           <h3>Share this link with your friends:</h3>
           <p id="event-link">{CLIENT_BASE_URL}/guestevents/{this.props.eventState.id}</p>
+          <h2 id="short-link">{this.props.eventState.shortUrl}</h2>
           <button onClick={this.handleCopy}>Copy Link</button>  
         {this.state.copied ? <span style={{color: 'red'}}><p>Copied</p></span> : null}
         <p></p>

@@ -1,12 +1,12 @@
 import React from 'react';
 import '../../styles/CreateEvent.css';
-import { bingMapsKey } from '../../../config';
 import { updateNewEventState, newEventErrorMessage } from '../../../actions/New-Event';
 import { resetRestaruantsReducer } from '../../../actions/RestaurantSelect';
 import { resetActivitiesReducer } from '../../../actions/Activities';
 import States from './States';
 import LocationMessage from './LocationMessage';
 import {validateCity} from './Utils';
+import CreateNav from '../CreateNav';
 
 export class CreateEvent extends React.Component {
   constructor(props){
@@ -79,37 +79,53 @@ export class CreateEvent extends React.Component {
     }))
   }
 
+  handleSave = () =>{
+    // Validate that title and location are filled out before saving
+    if (this.state.locationFeedback.startsWith('Must provide')) return this.props.dispatch(newEventErrorMessage('Must provide a location to save.'))
+    else if (this.state.locationFeedback === 'Checking city...') return;
+    else if (!this.props.eventState.title) return this.props.dispatch(newEventErrorMessage('Must provide a title to save.'));
+    else if (!this.props.eventState.locationCity.state || !this.props.eventState.locationCity.city) return this.props.dispatch(newEventErrorMessage('Must provide a city and state to save.'));
+    else if (this.state.locationFeedback.startsWith('Did you mean')) return this.props.dispatch(newEventErrorMessage('Confirm location to save.'));
+
+    this.props.saveAsDraft();
+
+  }
+
   render(){
 
     return (
+      <div className="absoluteposition">
 
-      <div>
-        <nav className='create-nav'>
-          <button type='button' onClick={() => this.props.prevPage()}>{'<-'} Back</button>
-          <button type='button' 
-            onClick={() => {
-              // Validate that title and location are filled out before saving
-              if (this.state.locationFeedback.startsWith('Must provide')) return this.props.dispatch(newEventErrorMessage('Must provide a location to save.'))
-              else if (this.state.locationFeedback === 'Checking city...') return;
-              else if (!this.props.eventState.title) return this.props.dispatch(newEventErrorMessage('Must provide a title to save.'));
-              else if (!this.props.eventState.locationCity.state || !this.props.eventState.locationCity.city) return this.props.dispatch(newEventErrorMessage('Must provide a city and state to save.'));
-              else if (this.state.locationFeedback.startsWith('Did you mean')) return this.props.dispatch(newEventErrorMessage('Confirm location to save.'));
+        <CreateNav saveAsDraft={this.handleSave} pageNum={this.props.pageNum} prevPage={this.props.prevPage} nextPage={this.props.nextPage} handleNextPage={this.handleNextPage} />
+          {/* <nav className='create-nav'>
+             <div className="instructions">
+              <h4>Step 1 of 5 : Title, Location, Description </h4>
 
-              this.props.saveAsDraft();
-            }}
-          >
-            Save as Draft
-          </button>
-          <button  type='submit' form='createform' value="Submit">
-            Next {'->'}
-          </button>
-        </nav>
+             
+             </div>
+              <button type='button' onClick={() => this.props.prevPage()}>{'<-'} Back</button>
+              <button type='button' 
+                  onClick={() => {
+                    // Validate that title and location are filled out before saving
+                    if (this.state.locationFeedback.startsWith('Must provide')) return this.props.dispatch(newEventErrorMessage('Must provide a location to save.'))
+                    else if (this.state.locationFeedback === 'Checking city...') return;
+                    else if (!this.props.eventState.title) return this.props.dispatch(newEventErrorMessage('Must provide a title to save.'));
+                    else if (!this.props.eventState.locationCity.state || !this.props.eventState.locationCity.city) return this.props.dispatch(newEventErrorMessage('Must provide a city and state to save.'));
+                    else if (this.state.locationFeedback.startsWith('Did you mean')) return this.props.dispatch(newEventErrorMessage('Confirm location to save.'));
 
-        <div className="instructions"> 
-          <h3>Let's get started!</h3>
-          <p>Create a title and select a location for your event. Don't forget to add a description!</p>
-
-        </div>
+                    this.props.saveAsDraft();
+                  }}>
+                  Save as Draft
+               </button>
+                 <button  type='submit' form='createform' value="Submit">
+                  Next {'->'}
+                </button>
+           </nav> */}
+      {/* <div className="instructions"> 
+      <h3>Let's get started!</h3>
+      <p>Create a title and select a location for your event. Don't forget to add a description!</p>
+        
+        </div> */}
     
         <form
           id="createform"

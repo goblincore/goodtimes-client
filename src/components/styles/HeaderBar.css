@@ -71,6 +71,10 @@ ul {
         z-index: 1;
     }
 
+    .header-logo{
+      font-size:1.4em;
+    }
+
   }
 
 

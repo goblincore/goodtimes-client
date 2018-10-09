@@ -1,0 +1,44 @@
+.instructions h4{
+    margin:0px;
+    font-size:1.2em;
+}
+
+.instructions{
+    float:left;
+    padding:0px !important;
+}
+
+.nav-buttons{
+    float:right;
+}
+
+.create-nav{
+    padding-bottom:20px;
+    padding-right:30px;
+    padding-left:20px;
+    height:80px;
+}
+
+@media only screen and (max-width: 450px) {
+    .nav-buttons{
+      float:left;
+      margin-top:20px;
+    }
+
+    #create-form{
+        padding-bottom:60px;
+    }
+
+    .instructions{
+        float:none;
+        width:100%;
+        text-align:center;
+        display:block;
+    }
+
+    .create-nav{
+        height:100px;
+    }
+   
+}
+   

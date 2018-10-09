@@ -1,5 +1,5 @@
 .time-options, .restaurant-options{
-    max-width:300px;
+
     text-align:left;
 }
 
@@ -17,18 +17,57 @@
   }
 
  .event-form-options{
-     max-width:400px;
+    
      margin:auto;
      padding-bottom:50px;
  }
 
  .guest-event-form-wrapper{
-    padding-left: 50px;
-    padding-right: 50px;
-    padding-top:60px;
+  
+   
+    border-radius:6px;
  }
 
  .post-vote{
      text-align:center;
      margin:auto;
  }
+
+ .invite-header h1{
+     font-size:80px;
+     font-weight:400;
+     line-height:130%;
+
+ }
+
+.guest-event-form-wrapper{
+    background:#4347fd;
+    color:#fff;
+    max-width: 800px;
+    margin:auto;
+    margin-top:80px;
+}
+
+.guest-event-form-wrapper h1,h2,h3,h4{
+    font-weight:200;
+}
+
+.guest-event-form-wrapper label{
+    color:white;
+}
+
+.guest-event-form-wrapper a{
+    color:white;
+}
+
+.guest-event-form-wrapper a:hover{
+    color:#efc833;
+}
+
+.guest-event-form{
+    padding:40px;
+}
+
+.guest-event-form .option_container{
+    max-width:800px;
+}

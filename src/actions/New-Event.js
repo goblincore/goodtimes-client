@@ -53,7 +53,7 @@ export const postNewEvent = eventData => dispatch => {
     .then(res => normalizeResponseErrors(res))
     .then(res => res.json())
     .then(res => {
-      dispatch(updateNewEventState({id: res.id}));
+      return dispatch(updateNewEventState({id: res.id}));
     
     })
     .then(() => { 

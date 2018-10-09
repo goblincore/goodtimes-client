@@ -50,19 +50,14 @@
 }
 
 .instructions{
-    max-width: 340px;
+
     float: left;
     text-align:left;
-    padding: 25px;
+    /* padding: 25px; */
     display: inline-block;
-    border-right: 1px dashed #ccc;
+    /* border-right: 1px dashed #ccc; */
 }
 
-
-.create-nav{
-    padding-left: 25px;
-    text-align:left;
-}
 
 
 #restaurant-choices{

@@ -7,6 +7,23 @@
 .slides{
     position:absolute;
     width:100%;
-    padding-left:50px;
+    padding-left:60px;
     padding-right:50px;
+}
+
+
+.create-nav{
+   
+    padding-right:30px;
+    text-align:right;
+}
+
+
+@media only screen and (max-width: 450px) {
+ .slides{
+  padding:0px;
+  height:100%;
+
+ }
+
 }
