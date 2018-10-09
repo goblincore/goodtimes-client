@@ -52,3 +52,10 @@
 }
 
 
+@media only screen and (max-width: 450px) {
+  .dashboard-wrapper{
+        padding-top:50px;
+  }
+
+}
+

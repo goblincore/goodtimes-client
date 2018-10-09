@@ -57,7 +57,7 @@ export default function newEventReducer (state=initialState, action) {
     });
   }
   else if (action.type === UPDATE_NEW_EVENT_STATE) {
-    return Object.assign({}, state, action.updateObject); //example:  {restaurantOptions: [{zomatoId: '123'}]}
+    return Object.assign({}, state, action.updateObject); 
 
   } else if (action.type === POST_NEW_EVENT_SUCCESS) {
     return Object.assign({}, state, {
