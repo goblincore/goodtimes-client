@@ -20,6 +20,7 @@
     "react-router-transition": "^1.2.1",
     "react-scripts": "1.1.5",
     "react-spring": "^5.8.0",
+    "react-test-renderer": "^16.5.2",
     "react-testing-library": "^5.2.0",
     "react-transition-group": "^2.5.0",
     "rebass": "^3.0.0-9",
@@ -38,6 +39,7 @@
   },
   "devDependencies": {
     "enzyme": "^3.7.0",
-    "enzyme-adapter-react-16": "^1.6.0"
+    "enzyme-adapter-react-16": "^1.6.0",
+    "jest-localstorage-mock": "^2.2.0"
   }
 }
