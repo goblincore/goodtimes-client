@@ -12,7 +12,7 @@ import { CreateEvent } from './CreateEvent';
 //   });
 // });
 
-// it('renders without crashing', () => {
-//     shallow(<CreateEvent />);
-//   });
+it('renders without crashing', () => {
+    shallow(<CreateEvent />);
+  });
   
