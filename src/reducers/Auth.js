@@ -1,7 +1,4 @@
-import {
-    AUTH_REQUEST,
-    AUTH_ERROR
-} from '../actions/Auth';
+import { AUTH_REQUEST, AUTH_ERROR } from '../actions/Auth';
 import { FETCH_PROTECTED_DATA_ERROR, REQUEST_PROTECTED_DATA, CHANGE_CURRENT_USER, FETCH_USEREVENTS_SUCCESS} from '../actions/ProtectedData';
 
 const initialState = {
