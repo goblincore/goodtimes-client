@@ -69,7 +69,7 @@ export class HeaderBar extends Component {
     } else {
 
       return (
-        <section className="header-bar">
+        <section className="header-bar opaque-background">
           <div className="header-logo">
             <h3 title="Goodtimes" >  <Link style={textColor} to="/home"><MdSentimentSatisfied className="smily" />goodtimes</Link></h3>
           </div>
