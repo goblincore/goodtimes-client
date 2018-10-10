@@ -4,6 +4,7 @@ import  DateSelectPage  from  './DateSelectPage';
 import {shallow, mount} from 'enzyme';
 const renderer = require('react-test-renderer');
 
+
 function setup() {
   const props = {
    eventState: {
@@ -35,6 +36,7 @@ function setup() {
     enzymeWrapper
   }
 }
+
 
 describe('components', () => {
   describe('DateSelectPage', () => {

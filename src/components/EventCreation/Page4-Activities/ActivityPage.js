@@ -7,7 +7,9 @@ import CreateNav from '../CreateNav';
 import SelectActivity from './SelectActivity';
 import WriteActivity from './WriteActivity';
 
-export default class ActivitySelect extends React.Component {
+
+
+export  class ActivitySelect extends React.Component {
 
   constructor(props){
     super(props);
