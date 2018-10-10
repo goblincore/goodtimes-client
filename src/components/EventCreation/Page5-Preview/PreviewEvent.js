@@ -112,11 +112,12 @@ export default function PreviewEvent (props) {
 
           <CreateNav saveAsDraft={()=>onDraft()} pageNum={props.pageNum} prevPage={props.prevPage} nextPage={props.nextPage} handleNextPage={onSubmit} />
          
-      
-          <div className="guest-event-form-wrapper temp-adjust">
-            <div>Below is a preview of your survey that you can check before you send it out. 
+          <div id="preview-info-text">Below is a preview of your survey that you can check before you send it out. 
             If everything looks good, hit the next button.
-            </div>
+          </div>
+
+          <div className="guest-event-form-wrapper temp-adjust">
+          
             <div className="form-outline">
               <div className="card">
                 <h3>You're invited to:</h3>

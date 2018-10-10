@@ -7,3 +7,23 @@
     margin:auto;
     padding:10px;
 }
+
+.event-successfully-created button{
+    margin-top:20px;
+    margin-bottom:20px;
+}
+
+.event-email-form{
+    padding: 20px;
+    margin: 20px;
+    border: 1px dashed #ccc;
+    max-width: 400px;
+    margin: auto;
+    text-align: left;
+    /* font-size: 13px; */
+}
+
+.event-email-form label{
+    font-size:14px;
+    opacity:0.7;
+}

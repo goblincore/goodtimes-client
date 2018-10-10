@@ -2,7 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {Redirect} from 'react-router-dom';
 import '../styles/LandingPage.css';
+import '../styles/AppleEmoji32.css';
 import Button from '../ReusableComponents/Button';
+
+
 
 export class LandingPage extends Component {
   
@@ -19,7 +22,8 @@ export class LandingPage extends Component {
  
         <div className="hero">
           <h1>Let the good times roll! </h1>
-          <h3>Easy event planning for groups and friends</h3>
+          
+           <h3><span className="ap ap-spiral_calendar_pad"></span> Easy event planning for groups and friends</h3>
           <Button to="/about">Learn More</Button>
         </div>
           

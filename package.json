@@ -23,7 +23,6 @@
     "react-spring": "^5.8.0",
     "react-testing-library": "^5.2.0",
     "react-transition-group": "^2.5.0",
-    "rebass": "^3.0.0-9",
     "redux": "^4.0.0",
     "redux-form": "^7.4.2",
     "redux-thunk": "^2.3.0",

@@ -78,27 +78,38 @@ export default class DateSelectPage extends React.Component {
        
            <CreateNav saveAsDraft={this.handleSave} pageNum={this.props.pageNum} prevPage={this.props.prevPage} nextPage={this.props.nextPage} handleNextPage={this.handleNextPage} />
 
-            <div className="card max-300">
-            <DatePicker
-                moment={inputMoment}
-                locale={locale}
-                showSeconds={showSeconds}
-                onChange={date => this.setState({inputMoment: date})}
-              />
+
+         
+            <div className="card-container">
+                <div className="card max-300">
+                <DatePicker
+                    moment={inputMoment}
+                    locale={locale}
+                    showSeconds={showSeconds}
+                    onChange={date => this.setState({inputMoment: date})}
+                  />
+                </div>
+                <div className="card max-300">
+                <TimePicker
+                    moment={inputMoment}
+                    locale={locale}
+                    showSeconds={showSeconds}
+                    onChange={date => this.setState({inputMoment: date})}
+                  />
+                </div>
+
+                 <div className="full-width-button" >
+               <p className='error-message'>{this.props.eventState.errorMessage}</p>
+                <button  onClick={this.handleSave}>
+                   <MdAddCircleOutline />
+                        Add this time and date
+                 </button>
+               </div>
             </div>
-            <div className="card max-300">
-            <TimePicker
-                moment={inputMoment}
-                locale={locale}
-                showSeconds={showSeconds}
-                onChange={date => this.setState({inputMoment: date})}
-              />
-            </div>
-           
 
              
-            <div className="card max-250">
-            
+            <div id="added-date-list" className="card max-250">
+           
             
              <h3>Added Times and Dates</h3>
                  
@@ -109,13 +120,7 @@ export default class DateSelectPage extends React.Component {
 
 
              
-               <div className="full-width-button" >
-               <p className='error-message'>{this.props.eventState.errorMessage}</p>
-                <button  onClick={this.handleSave}>
-                   <MdAddCircleOutline />
-                        Add this time and date
-                 </button>
-               </div>
+              
       </div>
 
             
