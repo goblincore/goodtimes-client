@@ -1,6 +1,7 @@
 import React from 'react';
 import '../styles/CreateNav.css';
-
+import { ChevronsRight, ChevronsLeft } from "react-feather";
+import { FaAngleDoubleRight, FaAngleDoubleLeft } from "react-icons/lib/fa";
 
 export default function CreateNav(props) {
 
@@ -23,6 +24,11 @@ export default function CreateNav(props) {
     'Step 6 of 6 : Thank you!',
   ]
 
+  let iconAdjust={
+    fontSize: '18px',
+    transform: 'translateY(-1px)'
+  }
+
   return(
  
    
@@ -32,14 +38,14 @@ export default function CreateNav(props) {
              </div>
 
              <div className="nav-buttons">
-                <button type='button' onClick={() => props.prevPage()}>{'<-'} Previous Step</button>
+                <button type='button' onClick={() => props.prevPage()}> <FaAngleDoubleLeft style={iconAdjust} /> Previous</button>
                 <button type='button' 
                   onClick={() => props.saveAsDraft()}>
                   Save as Draft
                 </button>
                 {   props.pageNum === 1 ?
-                      <button  type='submit' form='createform' value="Submit">Next {'->'}</button> :
-                      <button type='button' onClick={props.handleNextPage}>Next {'->'}</button>
+                      <button  type='submit' form='createform' value="Submit">Next <FaAngleDoubleRight  style={iconAdjust}  /></button> :
+                      <button type='button' onClick={props.handleNextPage}>Next <FaAngleDoubleRight  style={iconAdjust} /></button>
                 }
                
               </div>

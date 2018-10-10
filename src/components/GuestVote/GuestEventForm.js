@@ -154,7 +154,7 @@ class GuestEventForm extends Component {
         <div className="absolute-wrapper bottom-offset">
            <div className='preview-event'>
            <div className="guest-event-form-wrapper">
-             <div className="form-outline">
+             <div className="form-outline top-offset">
              <header className="invite-header">
               <h2>You're invited to:</h2>
               <h1>{title}</h1><br/>

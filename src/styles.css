@@ -266,3 +266,12 @@ align-items: center; */
   color:#575e96;
 }
 
+
+.icon-adjust{
+  transform: translateY(2px);
+}
+
+input[type='checkbox'] { 
+
+  width:unset !important;
+ }

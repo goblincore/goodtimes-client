@@ -67,17 +67,11 @@ export default class RestaurantSelect extends React.Component {
         }
         return (
           <div className="restaurant-result-box" key={restaurant.id}> 
-             <label className="input-container"> 
-            <input 
-              name={restaurant.name} 
-              id={restaurant.id} 
-              value={restaurant.url} 
-              type="checkbox" 
-              defaultChecked={checked}
-              onChange={e => this.handleYelpCheckBoxChange(e)}
-            ></input>
-               <span class="checkmark"></span>
-              </label>
+             {/* <label className="input-container">  */}
+           
+           
+               {/* <span class="checkmark"></span>
+              </label> */}
               <div className="restaurant-info-box">
                
               <div className="restaurant-img-bg" 
@@ -88,6 +82,14 @@ export default class RestaurantSelect extends React.Component {
                </div>
 
                <div className="restaurant-text-info">
+               <input 
+              name={restaurant.name} 
+              id={restaurant.id} 
+              value={restaurant.url} 
+              type="checkbox" 
+              defaultChecked={checked}
+              onChange={e => this.handleYelpCheckBoxChange(e)}
+            ></input>
                 <a href={restaurant.url} target="_blank">{restaurant.name}</a>
                   <p>{restaurant.price}</p>
                   <p>Rating: {restaurant.rating}</p>
@@ -111,26 +113,7 @@ export default class RestaurantSelect extends React.Component {
         <div className="top-wrapper">
 
            <CreateNav saveAsDraft={this.props.saveAsDraft} pageNum={this.props.pageNum} prevPage={this.props.prevPage} nextPage={this.props.nextPage} handleNextPage={this.props.nextPage} />
-          {/* <nav className='create-nav'>
-            <button type='button' onClick={() => this.props.prevPage()}>{'<-'} Back</button>
-            <button type='button' 
-              onClick={() => this.props.saveAsDraft()}>
-                  Save as Draft
-            </button>
-            <button type='button' onClick={()=>this.props.nextPage()}>Next {'->'}</button>
-          </nav>
-          <div className="instructions">
-      
-            <h1>Let's go eat!</h1>
-              
-            <p>Change the cuisine to see a list of restaurant options. 
-                Check off restaurants to add them to your list of options.
-                You can select multiple restaurants!</p>
-          </div>
-       */}
-        
-     
-
+  
         </div>
         <div id="restaurant-select-main">
              <div id="select-cuisine">
@@ -141,12 +124,7 @@ export default class RestaurantSelect extends React.Component {
                 this.searchYelpRestaurants(e);
 
               }}>Search for restaurants</button>
-              {/* <h3><label>Select Cuisine</label></h3> 
-              <select onChange={e => this.getYelpRestaurants(e)}>
-                <option>Select a cuisine...</option>
-                {yelpCategories}
-              </select> */}
-
+            
             </form>
             
           
