@@ -21,7 +21,7 @@ export default function PreviewEvent (props) {
     };
 
     if(!props.eventState.draft){ 
-     return props.dispatch(postNewEvent(event))
+      return props.dispatch(postNewEvent(event))
         .then(() => props.nextPage())
         .catch(err => console.error('ERROR HANDLING HERE dispatch(changeErrorMessaeg(err.message))'));
 
