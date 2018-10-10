@@ -23,7 +23,8 @@ export default function EventBottomNav (props) {
     case 6:
         message='Send an email and invite your group to vote!';
         break;
-    
+    default:
+        break;
   }
         
   return (

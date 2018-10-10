@@ -20,7 +20,6 @@ class GuestEventForm extends Component {
   componentDidMount(){
     //GET EVENT DATA
     const { eventId }= this.props.match.params;
-    console.log('GUEST EVENT MOUNT', this.props);
     fetch(`${API_BASE_URL}/api/guestevents/${eventId}`, {
       method: 'GET',
     })

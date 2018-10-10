@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Transition, animated, config } from 'react-spring'
+import { Transition, animated } from 'react-spring'
 import {connect} from 'react-redux';
 import { Router, withRouter, Switch, Route, Redirect } from 'react-router-dom'
 
@@ -32,13 +32,6 @@ class App extends Component{
   
     render() {
 
-    //   const transition = {
-    //       config: config.slow,
-    //       from: { opacity: 0, transform: 'scale3d(0.5,0.5,0.5)' },
-    //       enter: { opacity: 1, transform: 'scale3d(1,1,1)' },
-    //       leave: { opacity: 0, transform: 'scale3d(0.5,0.5,0.5)' }
-    // }
-
 
         return (
      <Router history={history}>
@@ -51,7 +44,6 @@ class App extends Component{
                 <Transition
                     native
                     config={ item=> {
-                        // console.log('item config transition',item);
                         if (item === 'transform'){
                           return {
                             tension: 1, 
@@ -82,7 +74,6 @@ class App extends Component{
                           item === 'login'  || 
                           item === 'dashboard'  ||
                           item === 'about'){
-                          // console.log('HOME OR REGISTER');
                             return({ transform: 'translate(80%,0)', opacity: 0})
                         } else  {
                             return({ transform: 'translate(0,100%)', opacity: 0 })
@@ -116,13 +107,11 @@ class App extends Component{
 
                     onRest={(item, v) => {
                       if(item === 'create-event' || item === 'edit-draft'){
-                        // console.log('ONREST',item, v);
                         let el = document.querySelector(".createEventRoute");
                         if(el !== null) {
                           el.style.transform='';
                           el.classList.add('notransform');
                         }
-                        // console.log('ONREST el',el);
                       }
                       }}
                     >
@@ -142,7 +131,6 @@ class App extends Component{
                         <Route exact path="/create-event" render={props => CreateEventPage({ ...props, style })} />
                          <Route path="/guestevents/:eventId" render={props => GuestEventPage({ ...props, style })} />
                          <Route exact path="/edit-draft" render={(props) => {
-                            //  console.log('APP JS props passes', location.state)
                              return Edit_Draft_Page({...props,style,...location})
                         }}/>
                     

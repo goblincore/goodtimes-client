@@ -28,7 +28,6 @@ export class Dashboard extends Component {
   }
 
   render() {
-    console.log(this.props);
     let eventsToDisplay=[];
 
     if(this.props.userEvents !==null && this.props.userEvents.length >= 1){
@@ -39,6 +38,8 @@ export class Dashboard extends Component {
         break;
       case false:
         eventsToDisplay = this.props.userEvents.filter(event => event.draft === true);
+        break;
+      default:
         break;
       }
     }

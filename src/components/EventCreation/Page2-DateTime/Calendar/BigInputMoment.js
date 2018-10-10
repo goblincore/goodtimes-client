@@ -6,7 +6,6 @@ export default class extends React.Component {
 
   render() {
     let mom = this.props.moment;
-    console.log('moment props', this.props.moment);
 
     return (
       <div className="im-big-input-moment">

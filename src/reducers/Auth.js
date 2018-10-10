@@ -36,7 +36,6 @@ export default function reducer(state = initialState, action) {
         });
 
     } else if (action.type === CHANGE_CURRENT_USER) {
-        console.log('Hit reducer');
         return Object.assign({}, state, {
             loading: false,
             error: null,
