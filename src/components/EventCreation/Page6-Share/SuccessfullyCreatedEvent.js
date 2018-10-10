@@ -25,7 +25,6 @@ export default class SuccessfullyCreatedEvent extends React.Component {
   }
 
   componentWillMount(){
-    // console.log('success event creation event id on mount',this.props.eventState.id);
     this.props.dispatch(getBitly('https://goodtimes-client.herokuapp.com/guestevents/', this.props.eventState.id));
   }
   
@@ -54,12 +53,12 @@ export default class SuccessfullyCreatedEvent extends React.Component {
           <h3>Share this link with your friends:</h3>
           {/* <p id="event-link">{CLIENT_BASE_URL}/guestevents/{this.props.eventState.id}</p> */}
           <h2 id="short-link">{this.props.eventState.shortUrl}</h2>
-          <button onClick={this.handleCopy}>Copy Link</button>  
-        {this.state.copied ? <span style={{color: 'red'}}><p>Copied</p></span> : null}
+          <button id='copy' onClick={this.handleCopy}>Copy Link</button>  
+        {this.state.copied ? <span id='copied' style={{color: 'red'}}><p>Copied</p></span> : null}
         <p></p>
 
           <h3>Email an invite to your friends!</h3>
-          {this.state.email ? <button onClick={this.openEmail}>Close</button> : <button onClick={this.openEmail}>Create E-mail</button>}
+          {this.state.email ? <button id='close-form' onClick={this.openEmail}>Close</button> : <button id='open-form' onClick={this.openEmail}>Create E-mail</button>}
           {this.state.email ? <EmailForm eventState={this.props.eventState} dispatch={this.props.dispatch}/> : <div></div>}
           
           <Link to="/dashboard"> 

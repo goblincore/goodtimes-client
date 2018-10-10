@@ -35,7 +35,6 @@ export const fetchProtectedData = () => dispatch => {  //getting user data
         .then(res => normalizeResponseErrors(res))
         .then(res => res.json())
         .then((userData) => {
-          console.log('Fetching user data',userData);
           dispatch(fetchUserEvents());
           dispatch(changeCurrentUser(userData))
         })
@@ -66,7 +65,6 @@ export const fetchUserEvents=()=>dispatch=>{
         .then(res => normalizeResponseErrors(res))
         .then(res => res.json())
         .then((userData) => {
-          console.log('Fetched user events',userData);
           dispatch(fetchUserEventsSuccess(userData))
         })
         .catch(err => {

@@ -30,7 +30,7 @@ export default class CreateEventContainer extends React.Component{
       userId: this.props.currentUser.id,
       title: this.props.eventState.title,
       draft: true,
-      description:this. props.eventState.description,
+      description: this.props.eventState.description,
       location: this.props.eventState.location,  //{latitude: ..., longitude: ...}
       locationCity: this.props.eventState.locationCity,
       scheduleOptions: this.props.eventState.scheduleOptions,
@@ -174,7 +174,7 @@ render(){
      )
     }
     break;
-  case 7:
+  default:
     return <Redirect to='/dashboard'/>
   }
 

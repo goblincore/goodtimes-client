@@ -1,6 +1,5 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
-import moment from 'moment';
 import { updateNewEventState } from '../../../actions/New-Event';
 import '../../styles/ActivitySelect.css';
 import CreateNav from '../CreateNav';

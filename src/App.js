@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Transition, animated, config } from 'react-spring'
+import { Transition, animated } from 'react-spring'
 import {connect} from 'react-redux';
 import { Router, withRouter, Switch, Route, Redirect } from 'react-router-dom'
 
@@ -19,6 +19,7 @@ import createHistory from 'history/createBrowserHistory';
 import './styles.css';
 
 
+
 const history = createHistory();
 
 class App extends Component{
@@ -31,13 +32,6 @@ class App extends Component{
       }
   
     render() {
-
-    //   const transition = {
-    //       config: config.slow,
-    //       from: { opacity: 0, transform: 'scale3d(0.5,0.5,0.5)' },
-    //       enter: { opacity: 1, transform: 'scale3d(1,1,1)' },
-    //       leave: { opacity: 0, transform: 'scale3d(0.5,0.5,0.5)' }
-    // }
 
 
         return (
@@ -67,8 +61,6 @@ class App extends Component{
                             return {
                               tension: 1, 
                               friction: 6,
-                              // restSpeedThreshold: 1,
-                              // restDisplacementThreshold: 0.001,
                               overshootClamping: true,
                           }
                         }

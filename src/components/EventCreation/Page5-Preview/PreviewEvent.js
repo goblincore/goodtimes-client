@@ -1,5 +1,4 @@
 import React from 'react';
-import { getBitly } from '../../../actions/Bitly';
 import { putUpdatedDraft } from '../../../actions/Edit-Draft';
 import { postNewEvent } from '../../../actions/New-Event';
 import '../../styles/PreviewEvent.css';
@@ -24,14 +23,14 @@ export default function PreviewEvent (props) {
     if(!props.eventState.draft){ 
      return props.dispatch(postNewEvent(event))
         .then(() => props.nextPage())
-        .catch(err => console.log('ERROR HANDLING HERE dispatch(changeErrorMessaeg(err.message))'));
+        .catch(err => console.error('ERROR HANDLING HERE dispatch(changeErrorMessaeg(err.message))'));
 
     } else {
       //submit draft as new event - delete draft
       event.id = props.eventState.id;
       return props.dispatch(putUpdatedDraft(event))
         .then(() => props.nextPage())
-        .catch(err => console.log('ERROR HANDLING HERE dispatch(changeErrorMessaeg(err.message))'));
+        .catch(err => console.error('ERROR HANDLING HERE dispatch(changeErrorMessaeg(err.message))'));
   
     }
   };
@@ -74,7 +73,8 @@ export default function PreviewEvent (props) {
         </div> 
       );}); 
 
-    restaurantsDisplay =  <div className="restaurant-options"> 
+    restaurantsDisplay =  
+    <div className="restaurant-options"> 
       <h2>Choose food...</h2>
       {restaurantsList}
     </div>;

@@ -118,8 +118,9 @@ export class CreateEvent extends React.Component {
               this.props.dispatch(newEventErrorMessage(null));
             }}
           />
-          <label htmlFor='stateLocation'>Location</label>
 
+
+          <label htmlFor='stateLocation'>State</label>
           <select name="stateLocation" id="stateLocation" value={this.props.eventState.locationCity.state ? this.props.eventState.locationCity.state : ''} 
             onChange={e => {
               let city = this.props.eventState.locationCity.city ? this.props.eventState.locationCity.city : '';
@@ -130,6 +131,7 @@ export class CreateEvent extends React.Component {
           }}>
             <States />
           </select>
+
 
           <label htmlFor="cityLocation">City</label>
           <input
@@ -147,6 +149,8 @@ export class CreateEvent extends React.Component {
             }}
             onBlur={() => validateCity(this.handleStateChange, this.props.dispatch, this.state.locationOption)}
           />
+
+
 
           <LocationMessage 
             locationFeedback={this.state.locationFeedback} 

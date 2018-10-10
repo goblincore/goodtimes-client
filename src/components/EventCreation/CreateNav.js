@@ -22,7 +22,7 @@ export default function CreateNav(props) {
     'Step 4 of 5 : Choose Activity Options',
     'Step 5 of 6 : Preview Event Survey',
     'Step 6 of 6 : Thank you!',
-  ]
+  ];
 
   let iconAdjust={
     fontSize: '18px',
@@ -48,8 +48,8 @@ export default function CreateNav(props) {
                       <button type='button' onClick={props.handleNextPage}>Next <FaAngleDoubleRight  style={iconAdjust} /></button>
                 }
                
-              </div>
-           </nav>
+      </div>
+    </nav>
 
   );
 

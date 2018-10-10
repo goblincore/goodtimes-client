@@ -126,13 +126,10 @@ export default class RestaurantSelect extends React.Component {
               }}>Search for restaurants</button>
             
             </form>
-            
-          
             <div id="restaurant-choices" >
               <h3>Selected Restaurants</h3>
               <ul id="restaurant-option-list">{yelpRestauransDisplay}</ul>
             </div>
-          
           </div>
 
           <div id="restaurant-list" className="bottom-offset">
