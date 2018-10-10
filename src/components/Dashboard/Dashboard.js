@@ -47,15 +47,15 @@ export class Dashboard extends Component {
       return (
         <div className="dashboard-wrapper">
           <div id="dashboard_main">
-            <h2>Hey {this.props.currentUser.username}! <span class="ap ap-tada"></span></h2>
+            <h2>Hey {this.props.currentUser.username}! <span className="ap ap-tada"></span></h2>
             <p>Welcome to your dashboard. Here you can create new events or manage
                              events that you've already created. 
             </p>
             <button id="display-drafts" onClick={() => this.displayDrafts()}>Drafts</button>
             <button id="display-active-events" onClick={() => this.displayEvents()}>Active Events</button>
             <Link to="/create-event"><h3>Create New Event  <MdAddCircleOutline /></h3></Link>
-            <div id="event_boxes">
-            
+            <div className="doggy-img">
+              <img src="../../assets/dog1.png" alt="doggy image" />
             </div>      
           </div>
           <div id="dashboard_eventlist">

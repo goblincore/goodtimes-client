@@ -7,11 +7,11 @@ export default function CreateNav(props) {
 
   const emoji=[
     null,
-    <span class="ap ap-european_castle"></span>,
-    <span class="ap ap-spiral_calendar_pad"></span>,
-    <span class="ap ap-fries"></span>,
-    <span class="ap ap-dancers"></span>,
-    <span class="ap ap-mag_right"></span>,
+    <span className="ap ap-european_castle"></span>,
+    <span className="ap ap-spiral_calendar_pad"></span>,
+    <span className="ap ap-fries"></span>,
+    <span className="ap ap-dancers"></span>,
+    <span className="ap ap-mag_right"></span>,
   ];
 
   const pageSteps=[
