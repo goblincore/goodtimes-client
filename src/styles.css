@@ -12,6 +12,16 @@
 *, *:before, *:after {
     box-sizing: border-box;
   }
+
+  *, :after, :before {
+    -webkit-font-smoothing: inherit;
+    text-rendering: optimizeLegibility;
+    -webkit-font-feature-settings: "kern";
+    -moz-font-feature-settings: "kern";
+    -moz-font-feature-settings: "kern=1";
+    font-feature-settings: "kern" 1;
+    font-kerning: normal;
+  }
   
 
 h1,h2,h3,h4{
@@ -37,7 +47,7 @@ label{
       height:100vh;
       font-family:'Akkurat Pro';
       height: 100%; 
-      color:#575e96;
+      color:#fdfdfd;
       background-color:#fdfdfd;
   }
  
@@ -57,7 +67,7 @@ label{
   }
 
 a:hover {
-   color:#a2a8de;
+   color:yellow;
   }
 
 input{
