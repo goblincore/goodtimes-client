@@ -1,6 +1,5 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
-import {Redirect,Router} from 'react-router-dom';
 import {NewEventMain} from './newEventMain';
 import CreateEventContainer from './CreateEventContainer';
 import EventBottomNav from './EventBottomNav';
