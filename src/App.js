@@ -178,7 +178,7 @@ const mapStateToProps = state => ({
 
 const HomePage = ({ style,...props }) => (
   
-  <animated.div className="mainRoute" style={{ ...style, background: `#1f4bff` }}>
+  <animated.div className="mainRoute" style={{ ...style, background: `#fdfdfd` }}>
     <div className="mainRouteItem">
      <LandingPage />  
     </div>
@@ -186,7 +186,7 @@ const HomePage = ({ style,...props }) => (
 );
 
 const RegisterPage = ({ style }) => (
-    <animated.div className="mainRoute bg2" style={{ ...style, background: `#dcff60` }}>
+    <animated.div className="mainRoute bg2" style={{ ...style, background: `#fdfdfd` }}>
       <div className="mainRouteItem">
      <RegistrationPage />
       </div>
@@ -236,7 +236,7 @@ const GuestEventPage = ({...props, style}) => (
 
 
   const About_Page = ({...props, style}) => (
-    <animated.div className="mainRoute bg-about" style={{ ...style, background: '#fdfdfd' }}>
+    <animated.div className="mainRoute bg-about" style={{ ...style, background: '#f7543f' }}>
      <div className="mainRouteItem" >
      <AboutPage/>
    

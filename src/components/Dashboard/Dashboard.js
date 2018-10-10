@@ -47,7 +47,7 @@ export class Dashboard extends Component {
       return (
         <div className="dashboard-wrapper">
           <div id="dashboard_main">
-            <h2>Hey {this.props.currentUser.username}!</h2>
+            <h2>Hey {this.props.currentUser.username}! <span class="ap ap-tada"></span></h2>
             <p>Welcome to your dashboard. Here you can create new events or manage
                              events that you've already created. 
             </p>

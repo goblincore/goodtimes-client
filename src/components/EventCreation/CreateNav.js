@@ -3,9 +3,19 @@ import '../styles/CreateNav.css';
 
 
 export default function CreateNav(props) {
+
+  const emoji=[
+    null,
+    <span class="ap ap-european_castle"></span>,
+    <span class="ap ap-spiral_calendar_pad"></span>,
+    <span class="ap ap-fries"></span>,
+    <span class="ap ap-dancers"></span>,
+    <span class="ap ap-mag_right"></span>,
+  ];
+
   const pageSteps=[
      null,
-    'Step 1 of 5 : Enter Title, Location, Description',
+    'Step 1 of 5 : Enter Title, Location, Description' ,
     'Step 2 of 5 : Select Multiple Time & Date Options',
     'Step 3 of 5 : Choose Food Options',
     'Step 4 of 5 : Choose Activity Options',
@@ -18,7 +28,7 @@ export default function CreateNav(props) {
    
     <nav className='create-nav'>
              <div className="instructions">
-              <h4> {pageSteps[props.pageNum]}</h4> 
+              <h4> {pageSteps[props.pageNum]} {emoji[props.pageNum]} </h4> 
              </div>
 
              <div className="nav-buttons">

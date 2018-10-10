@@ -47,7 +47,7 @@ label{
       height:100vh;
       font-family:'Akkurat Pro';
       height: 100%; 
-      color:#fdfdfd;
+      color:#575d98;
       background-color:#fdfdfd;
   }
  
@@ -256,5 +256,13 @@ align-items: center; */
     html,body {
       font-size:0.9em;
     }
+}
+
+.white-text{
+  color:white;
+}
+
+.dark-text{
+  color:#575e96;
 }
 

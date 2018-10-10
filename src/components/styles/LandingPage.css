@@ -1,7 +1,7 @@
 .home-img{
     position: fixed;
     bottom: 0px;
-    max-width: 600px;
+    max-width: 650px;
     z-index: 0;
     left: 64%;
     transform: translateX(-50%);
@@ -30,7 +30,7 @@
     background:url('/assets/home.png');
     background-repeat: no-repeat;
     background-size: contain;
-    width: 600px;
+    width: 750px;
     z-index: 888;
     height: 700px;
     bottom: 0px;
@@ -45,7 +45,7 @@
     font-size:70px !important;
     position:relative;
     line-height:130%;
-    color:#fdfdfd;
+    color:#575e96;
     z-index:1;
     margin-bottom:0px;
     
