@@ -1,6 +1,6 @@
 import reducer from './NewEvent';
 import { showNewEventState, postNewEventRequest, updateNewEventState, postNewEventSuccess, resetNewEventState, newEventErrorMessage, deleteEventRequest, deleteEventError, deleteEventSuccess } from '../actions/New-Event';
-import { putUpdatedDraftRequest, loadDraftIntoReduxState, putUpdatedDraftSuccess } from '../actions/Edit-Draft';
+import { putUpdatedDraftRequest, loadDraftIntoReduxState, putUpdatedDraftSuccess } from '../actions/EditDraft';
 import { sendEmailRequest, sendEmailError, sendEmailSuccess } from '../actions/Email';
 import { sendBitlySuccess } from '../actions/Bitly';
 
