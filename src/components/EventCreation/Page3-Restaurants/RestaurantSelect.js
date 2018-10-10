@@ -95,52 +95,21 @@ export default class RestaurantSelect extends React.Component {
     return(
       <div className="container text-left">
         <div className="top-wrapper">
-
-           <CreateNav saveAsDraft={this.props.saveAsDraft} pageNum={this.props.pageNum} prevPage={this.props.prevPage} nextPage={this.props.nextPage} handleNextPage={this.props.nextPage} />
-          {/* <nav className='create-nav'>
-            <button type='button' onClick={() => this.props.prevPage()}>{'<-'} Back</button>
-            <button type='button' 
-              onClick={() => this.props.saveAsDraft()}>
-                  Save as Draft
-            </button>
-            <button type='button' onClick={()=>this.props.nextPage()}>Next {'->'}</button>
-          </nav>
-          <div className="instructions">
-      
-            <h1>Let's go eat!</h1>
-              
-            <p>Change the cuisine to see a list of restaurant options. 
-                Check off restaurants to add them to your list of options.
-                You can select multiple restaurants!</p>
-          </div>
-       */}
-        
+          <CreateNav saveAsDraft={this.props.saveAsDraft} pageNum={this.props.pageNum} prevPage={this.props.prevPage} nextPage={this.props.nextPage} handleNextPage={this.props.nextPage} />
           <div id="select-cuisine">
             <form id="select-cuisine-form" className="select-cuisine-form">
               <h3><label>Search</label></h3> 
               <input type="search" id="search"></input>
               <button onClick={e => {
                 this.searchYelpRestaurants(e);
-
               }}>Enter a Search Term</button>
-              {/* <h3><label>Select Cuisine</label></h3> 
-              <select onChange={e => this.getYelpRestaurants(e)}>
-                <option>Select a cuisine...</option>
-                {yelpCategories}
-              </select> */}
-
             </form>
-            
-          
             <div id="restaurant-choices" >
               <h3>Selected Restaurants</h3>
               <ul id="restaurant-option-list">{yelpRestauransDisplay}</ul>
             </div>
-          
           </div>
-
         </div>
-
         <div id="restaurant-list" className="bottom-offset">
           {yelpChoices}
         </div>

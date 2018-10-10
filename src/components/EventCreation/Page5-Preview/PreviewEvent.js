@@ -73,7 +73,8 @@ export default function PreviewEvent (props) {
         </div> 
       );}); 
 
-    restaurantsDisplay =  <div className="restaurant-options"> 
+    restaurantsDisplay =  
+    <div className="restaurant-options"> 
       <h2>Choose food...</h2>
       {restaurantsList}
     </div>;
