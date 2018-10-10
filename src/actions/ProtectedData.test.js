@@ -7,7 +7,7 @@ import {
   requestProtectedData,
   FETCH_USEREVENTS_SUCCESS,
   fetchUserEventsSuccess
-} from './Protected-Data';
+} from './ProtectedData';
 
 describe('changeCurrentUser', () => {
   it('should return the action', () => {

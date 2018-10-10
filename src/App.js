@@ -3,7 +3,7 @@ import { Transition, animated } from 'react-spring'
 import {connect} from 'react-redux';
 import { Router, withRouter, Switch, Route, Redirect } from 'react-router-dom'
 
-import  {fetchProtectedData} from './actions/Protected-Data';
+import  {fetchProtectedData} from './actions/ProtectedData';
 
 //App components
 import LandingPage from './components/HomePage/LandingPage';
