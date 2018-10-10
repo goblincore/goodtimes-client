@@ -74,6 +74,13 @@
 
 }
 
+@media only screen and (min-width: 451px) and (max-width: 1300px){
+    .home-img{
+        max-width:550px;
+    }
+
+}
+
 
 @media only screen and (min-width: 1400px) and (min-height:800px) {
     .hero{

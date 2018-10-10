@@ -40,3 +40,7 @@ select{
 .newEventWrapper{
   height:100%;
 }
+
+.event-form{
+  margin-bottom: 100px;
+}

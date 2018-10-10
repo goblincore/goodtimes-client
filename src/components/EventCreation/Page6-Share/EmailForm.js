@@ -69,7 +69,7 @@ class EmailForm extends React.Component {
       alertBox = <div></div>;
     }
     return (
-      <div>
+      <div className="event-email-form">
         <form onSubmit={(e) => {
           this.validateFields(e);
           this.sendEmail(e);
@@ -82,9 +82,9 @@ class EmailForm extends React.Component {
           <label htmlFor='message'>Write the body of the e-mail.</label>
           <textarea defaultValue={`Hi! Let's get together.
 
-Please vote on when and where we should hang out here:
+              Please vote on when and where we should hang out here:
  
-${CLIENT_BASE_URL}/guestevents/${this.props.eventState.id}`} id="message">
+              ${this.props.eventState.shortUrl}`} id="message">
           </textarea>
           <button type="submit">Send</button>
         </form>

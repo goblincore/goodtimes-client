@@ -33,7 +33,7 @@ export default class SuccessfullyCreatedEvent extends React.Component {
   handleCopy = () => {
     var inp = document.createElement('input');
     document.body.appendChild(inp);
-    inp.value =document.querySelector('#event-link').textContent;
+    inp.value =document.querySelector('#short-link').textContent;
     inp.select();
     document.execCommand('copy',false);
     inp.remove();
@@ -45,16 +45,14 @@ export default class SuccessfullyCreatedEvent extends React.Component {
   }
 
   render(){
-    // console.log('Success Event form created props',this.props);
-    // console.log('get bitly', this.props.dispatch(getBitly(`https://goodtimes-client.herokuapp.com/guestevents/${this.props.eventState.id}`)))
-    // console.log('get bitly', this.props.dispatch(getBitly(`${CLIENT_BASE_URL}/guestevents/${this.props.eventState.id}`)))
+  
     return (
       <div className="event-successfully-created">
 
         <h2>Nice! Your event has been created successfully.</h2>
         <div className="event-link-to-share">
           <h3>Share this link with your friends:</h3>
-          <p id="event-link">{CLIENT_BASE_URL}/guestevents/{this.props.eventState.id}</p>
+          {/* <p id="event-link">{CLIENT_BASE_URL}/guestevents/{this.props.eventState.id}</p> */}
           <h2 id="short-link">{this.props.eventState.shortUrl}</h2>
           <button onClick={this.handleCopy}>Copy Link</button>  
         {this.state.copied ? <span style={{color: 'red'}}><p>Copied</p></span> : null}
