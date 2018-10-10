@@ -22,15 +22,15 @@ export class HeaderBar extends Component {
     let textColor;
     let currentPath=this.props.history.location.pathname;
 
-    if(currentPath==="/home"){
+    if(currentPath==='/home'){
       textColor={
-        color:"#575d98"
-      }
+        color:'#575d98'
+      };
     } 
-    else if(currentPath==="/register"){
+    else if(currentPath==='/register'){
       textColor={
-        color:"#575d98"
-      }
+        color:'#575d98'
+      };
     }
 
     let signUpButton, logInButton, aboutButton;
