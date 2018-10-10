@@ -6,7 +6,7 @@ import CreateNav from '../CreateNav';
 import './Calendar/less/calendar-time.css';
 import {MdAddCircleOutline} from 'react-icons/lib/md';
 import '../../styles/DateTime.css';
-import { InputMoment, DatePicker, TimePicker  } from './Calendar';
+import { DatePicker, TimePicker  } from './Calendar';
 
 
 
@@ -16,13 +16,14 @@ export default class DateSelectPage extends React.Component {
     super(props);
       
     this.state = {
-      inputMoment: moment(),
+      inputMoment: moment(moment(moment() + 60*1000*30).add('30', 'm').format('HH'), 'HH'), //Round time up to closest hour
       thisTime: moment(),
       showSeconds: false,
       locale: 'en',
       size: 'small'
     };
   }
+
 
   // If redirected from ActivityPage component, redux state gets stored in local storage during the forced page-refresh
   componentWillMount(){
@@ -68,9 +69,7 @@ export default class DateSelectPage extends React.Component {
 
   render(){
 
-    console.log('props',)
-
-    let {inputMoment, showSeconds, locale, size} = this.state;
+    let {inputMoment, showSeconds, locale} = this.state;
 
     return (
 
@@ -80,40 +79,37 @@ export default class DateSelectPage extends React.Component {
            <CreateNav saveAsDraft={this.handleSave} pageNum={this.props.pageNum} prevPage={this.props.prevPage} nextPage={this.props.nextPage} handleNextPage={this.handleNextPage} />
 
 
-           {/* <div className="card border-right bottom-offset">
-            <h2>Some good times for {this.props.eventState.title} are... </h2>
-              <p>Select possible dates and times for your event by selecting a date fom the date tab and then a time from the time tab. You can add multiple dates and times!</p>
-             
-            </div> */}
-
-            <div className="card max-300">
-            <DatePicker
-                moment={inputMoment}
-                locale={locale}
-                showSeconds={showSeconds}
-                onChange={date => this.setState({inputMoment: date})}
-              />
-            </div>
-            <div className="card max-300">
-            <TimePicker
-                moment={inputMoment}
-                locale={locale}
-                showSeconds={showSeconds}
-                onChange={date => this.setState({inputMoment: date})}
-              />
-            </div>
-           
-
-             
-            <div className="card max-250">
-             {/* <h3>Selected Date:</h3> */}
          
-             {/* <p className='selected-date-text'>
-             <strong>{ (this.state.inputMoment.format('llll') === this.state.thisTime.format('llll')) ? 'No time selected' : inputMoment.format('llll')}
+            <div className="card-container">
+                <div className="card max-300">
+                <DatePicker
+                    moment={inputMoment}
+                    locale={locale}
+                    showSeconds={showSeconds}
+                    onChange={date => this.setState({inputMoment: date})}
+                  />
+                </div>
+                <div className="card max-300">
+                <TimePicker
+                    moment={inputMoment}
+                    locale={locale}
+                    showSeconds={showSeconds}
+                    onChange={date => this.setState({inputMoment: date})}
+                  />
+                </div>
+
+                 <div className="full-width-button" >
+               <p className='error-message'>{this.props.eventState.errorMessage}</p>
+                <button  onClick={this.handleSave}>
+                   <MdAddCircleOutline />
+                        Add this time and date
+                 </button>
+               </div>
+            </div>
+
              
-             
-             </strong></p> */}
-            
+            <div id="added-date-list" className="card max-250">
+           
             
              <h3>Added Times and Dates</h3>
                  
@@ -124,13 +120,7 @@ export default class DateSelectPage extends React.Component {
 
 
              
-               <div className="full-width-button" >
-               <p className='error-message'>{this.props.eventState.errorMessage}</p>
-                <button  onClick={this.handleSave}>
-                   <MdAddCircleOutline />
-                        Add this time and date
-                 </button>
-               </div>
+              
       </div>
 
             

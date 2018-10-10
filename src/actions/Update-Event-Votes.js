@@ -14,6 +14,7 @@ export const updateEventVotes = ( selectionObject, eventId) => dispatch => {
     })
     .then(res => normalizeResponseErrors(res))
     .then(res => res.json())
+    .then(() => Promise.resolve())
     .catch(err => Promise.reject(err))
   }
 

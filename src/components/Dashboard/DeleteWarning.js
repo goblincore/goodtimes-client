@@ -17,7 +17,6 @@ export default class DeleteWarning extends React.Component {
 	}
 
 	deleteEvent = () => {
-		console.log('Delete event click');
 		this.props.deleteEvent();
 	}
 

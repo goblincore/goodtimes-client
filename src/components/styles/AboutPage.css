@@ -46,3 +46,17 @@ background-size:cover !important;
        background:white !important;
     }
 }
+
+@media only screen and (max-width: 500px) {
+  .boxItem{
+    width: 80px;
+    text-align: center;
+    float: left;
+    display: inline-block;
+    margin-right:20px;
+    font-size:12px;
+
+  }
+
+
+}

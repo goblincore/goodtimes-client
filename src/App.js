@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Transition, animated, config } from 'react-spring'
+import { Transition, animated } from 'react-spring'
 import {connect} from 'react-redux';
 import { Router, withRouter, Switch, Route, Redirect } from 'react-router-dom'
 
@@ -19,6 +19,7 @@ import createHistory from 'history/createBrowserHistory';
 import './styles.css';
 
 
+
 const history = createHistory();
 
 class App extends Component{
@@ -32,13 +33,6 @@ class App extends Component{
   
     render() {
 
-    //   const transition = {
-    //       config: config.slow,
-    //       from: { opacity: 0, transform: 'scale3d(0.5,0.5,0.5)' },
-    //       enter: { opacity: 1, transform: 'scale3d(1,1,1)' },
-    //       leave: { opacity: 0, transform: 'scale3d(0.5,0.5,0.5)' }
-    // }
-
 
         return (
      <Router history={history}>
@@ -51,7 +45,7 @@ class App extends Component{
                 <Transition
                     native
                     config={ item=> {
-                        // console.log('item config transition',item);
+                     
                         if (item === 'transform'){
                           return {
                             tension: 1, 
@@ -67,8 +61,6 @@ class App extends Component{
                             return {
                               tension: 1, 
                               friction: 6,
-                              // restSpeedThreshold: 1,
-                              // restDisplacementThreshold: 0.001,
                               overshootClamping: true,
                           }
                         }
@@ -82,7 +74,7 @@ class App extends Component{
                           item === 'login'  || 
                           item === 'dashboard'  ||
                           item === 'about'){
-                          // console.log('HOME OR REGISTER');
+                       
                             return({ transform: 'translate(80%,0)', opacity: 0})
                         } else  {
                             return({ transform: 'translate(0,100%)', opacity: 0 })
@@ -116,7 +108,7 @@ class App extends Component{
 
                     onRest={(item, v) => {
                       if(item === 'create-event' || item === 'edit-draft'){
-                        // console.log('ONREST',item, v);
+                      
                         let el = document.querySelector(".createEventRoute");
                         if(el !== null) {
                           el.style.transform='';
@@ -146,7 +138,7 @@ class App extends Component{
                              return Edit_Draft_Page({...props,style,...location})
                         }}/>
                     
-                        {/* <Route render={props => <Error404 {...props} style={style} />} />; */}
+                      
          
                         </Switch>
                     )}
@@ -236,7 +228,7 @@ const GuestEventPage = ({...props, style}) => (
 
 
   const About_Page = ({...props, style}) => (
-    <animated.div className="mainRoute bg-about" style={{ ...style, background: '#fdfdfd' }}>
+    <animated.div className="mainRoute bg-about" style={{ ...style, background: '#f7543f' }}>
      <div className="mainRouteItem" >
      <AboutPage/>
    

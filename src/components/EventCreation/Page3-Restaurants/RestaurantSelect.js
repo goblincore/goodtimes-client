@@ -66,8 +66,23 @@ export default class RestaurantSelect extends React.Component {
           checked = true;
         }
         return (
-          <div key={restaurant.id}> 
-            <input 
+          <div className="restaurant-result-box" key={restaurant.id}> 
+             {/* <label className="input-container">  */}
+           
+           
+               {/* <span class="checkmark"></span>
+              </label> */}
+              <div className="restaurant-info-box">
+               
+              <div className="restaurant-img-bg" 
+                  style={
+                    {background:`url(${restaurant.image_url === '' ? 'https://divineeventslv.com/wp-content/uploads/2018/04/yelp-logo-27.png': restaurant.image_url} )`
+                  , backgroundSize:'cover'}}>
+                    {/* <img src={restaurant.image_url === '' ? 'https://divineeventslv.com/wp-content/uploads/2018/04/yelp-logo-27.png': restaurant.image_url} alt="thumbnail"></img> */}
+               </div>
+
+               <div className="restaurant-text-info">
+               <input 
               name={restaurant.name} 
               id={restaurant.id} 
               value={restaurant.url} 
@@ -75,15 +90,16 @@ export default class RestaurantSelect extends React.Component {
               defaultChecked={checked}
               onChange={e => this.handleYelpCheckBoxChange(e)}
             ></input>
-            <img src={restaurant.image_url === '' ? 'https://divineeventslv.com/wp-content/uploads/2018/04/yelp-logo-27.png': restaurant.image_url} alt="thumbnail"></img>
-            <a href={restaurant.url} target="_blank">{restaurant.name}</a>
-            <p>{restaurant.price}</p>
-            <p>Rating: {restaurant.rating}</p>
+                <a href={restaurant.url} target="_blank">{restaurant.name}</a>
+                  <p>{restaurant.price}</p>
+                  <p>Rating: {restaurant.rating}</p>
+                </div>
+            </div>
           </div>
         );
       });
     }else{
-      yelpChoices = <p id="empty-search">No restaurants matching your search term.  Try again!</p>;
+      yelpChoices = <h4 id="empty-search">Your Restaurant search results will appear here. Try again!</h4>;
     }
     
     let yelpRestauransDisplay;
@@ -97,53 +113,30 @@ export default class RestaurantSelect extends React.Component {
         <div className="top-wrapper">
 
            <CreateNav saveAsDraft={this.props.saveAsDraft} pageNum={this.props.pageNum} prevPage={this.props.prevPage} nextPage={this.props.nextPage} handleNextPage={this.props.nextPage} />
-          {/* <nav className='create-nav'>
-            <button type='button' onClick={() => this.props.prevPage()}>{'<-'} Back</button>
-            <button type='button' 
-              onClick={() => this.props.saveAsDraft()}>
-                  Save as Draft
-            </button>
-            <button type='button' onClick={()=>this.props.nextPage()}>Next {'->'}</button>
-          </nav>
-          <div className="instructions">
-      
-            <h1>Let's go eat!</h1>
-              
-            <p>Change the cuisine to see a list of restaurant options. 
-                Check off restaurants to add them to your list of options.
-                You can select multiple restaurants!</p>
-          </div>
-       */}
-        
-          <div id="select-cuisine">
+  
+        </div>
+        <div id="restaurant-select-main">
+             <div id="select-cuisine">
             <form id="select-cuisine-form" className="select-cuisine-form">
-              <h3><label>Search</label></h3> 
+              <h3><label>Enter your search term below</label></h3> 
               <input type="search" id="search"></input>
               <button onClick={e => {
                 this.searchYelpRestaurants(e);
 
-              }}>Enter a Search Term</button>
-              {/* <h3><label>Select Cuisine</label></h3> 
-              <select onChange={e => this.getYelpRestaurants(e)}>
-                <option>Select a cuisine...</option>
-                {yelpCategories}
-              </select> */}
-
-            </form>
+              }}>Search for restaurants</button>
             
-          
+            </form>
             <div id="restaurant-choices" >
               <h3>Selected Restaurants</h3>
               <ul id="restaurant-option-list">{yelpRestauransDisplay}</ul>
             </div>
-          
           </div>
 
+          <div id="restaurant-list" className="bottom-offset">
+            {yelpChoices}
+          </div>
         </div>
 
-        <div id="restaurant-list" className="bottom-offset">
-          {yelpChoices}
-        </div>
       </div>
     );
   }

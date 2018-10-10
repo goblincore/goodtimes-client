@@ -8,22 +8,37 @@ function setup() {
   const props = {
     eventState: {
       location:{
-        latitude: jest.fn(),
-        longitude: jest.fn()
+        latitude: 39.7392, longitude: -104.9903
       },
-      restaurantOptions: jest.fn(),
-      scheduleOptions: jest.fn(),
+      restaurantOptions: [
+        {
+          yelpId: 'jx5kzkP_9zwh9BW0WVPAWw',
+          website: 'https://www.yelp.com/biz/osteria-marco-denver?adjust_creative=eMUfDEmLylrpi34N26CFaw&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=eMUfDEmLylrpi34N26CFaw',
+          name: 'Osteria Marco',
+          vote: 0
+        },
+        {
+          yelpId: 'V4K--8TIaM3iNxy85nELVw',
+          website: 'https://www.yelp.com/biz/sliceworks-denver?adjust_creative=eMUfDEmLylrpi34N26CFaw&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=eMUfDEmLylrpi34N26CFaw',
+          name: 'Sliceworks',
+          vote: 0
+        }
+      ],
     },
     restaurants: {
-      yelpRestaurants: jest.fn()
-    },
-    newEvent: 
-     {
-       restaurants: {
-         yelpRestaurants: jest.fn()
-       }
-     },
-
+      yelpRestaurants:[
+        {
+          yelpId: 'jx5kzkP_9zwh9BW0WVPAWw',
+          website: 'https://www.yelp.com/biz/osteria-marco-denver?adjust_creative=eMUfDEmLylrpi34N26CFaw&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=eMUfDEmLylrpi34N26CFaw',
+          name: 'Osteria Marco',
+          vote: 0
+        },
+        {
+          yelpId: 'V4K--8TIaM3iNxy85nELVw',
+          website: 'https://www.yelp.com/biz/sliceworks-denver?adjust_creative=eMUfDEmLylrpi34N26CFaw&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=eMUfDEmLylrpi34N26CFaw',
+          name: 'Sliceworks',
+          vote: 0
+        }]},
     dispatch: jest.fn()
   };
   const localStorage = jest.fn();

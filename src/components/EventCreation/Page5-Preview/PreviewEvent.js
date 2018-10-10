@@ -24,14 +24,14 @@ export default function PreviewEvent (props) {
     if(!props.eventState.draft){ 
      return props.dispatch(postNewEvent(event))
         .then(() => props.nextPage())
-        .catch(err => console.log('ERROR HANDLING HERE dispatch(changeErrorMessaeg(err.message))'));
+        .catch(err => console.error('ERROR HANDLING HERE dispatch(changeErrorMessaeg(err.message))'));
 
     } else {
       //submit draft as new event - delete draft
       event.id = props.eventState.id;
       return props.dispatch(putUpdatedDraft(event))
         .then(() => props.nextPage())
-        .catch(err => console.log('ERROR HANDLING HERE dispatch(changeErrorMessaeg(err.message))'));
+        .catch(err => console.error('ERROR HANDLING HERE dispatch(changeErrorMessaeg(err.message))'));
   
     }
   };
@@ -74,7 +74,8 @@ export default function PreviewEvent (props) {
         </div> 
       );}); 
 
-    restaurantsDisplay =  <div className="restaurant-options"> 
+    restaurantsDisplay =  
+    <div className="restaurant-options"> 
       <h2>Choose food...</h2>
       {restaurantsList}
     </div>;
@@ -112,11 +113,12 @@ export default function PreviewEvent (props) {
 
           <CreateNav saveAsDraft={()=>onDraft()} pageNum={props.pageNum} prevPage={props.prevPage} nextPage={props.nextPage} handleNextPage={onSubmit} />
          
-      
-          <div className="guest-event-form-wrapper temp-adjust">
-            <div>Below is a preview of your survey that you can check before you send it out. 
+          <div id="preview-info-text">Below is a preview of your survey that you can check before you send it out. 
             If everything looks good, hit the next button.
-            </div>
+          </div>
+
+          <div className="guest-event-form-wrapper temp-adjust">
+          
             <div className="form-outline">
               <div className="card">
                 <h3>You're invited to:</h3>

@@ -18,17 +18,37 @@ export class HeaderBar extends Component {
   }
 
   render(){
-               
+    
+    let textColor;
+    let currentPath=this.props.history.location.pathname;
+
+    if(currentPath==="/home"){
+      textColor={
+        color:"#575d98"
+      }
+    } 
+    else if(currentPath==="/register"){
+      textColor={
+        color:"#575d98"
+      }
+    }
+
     let signUpButton, logInButton, aboutButton;
     aboutButton=(
-      <Button location={this.props.history.location} to="/about" className="signup"  >About</Button>
+      <Button textColor={textColor} location={this.props.history.location} to="/about" className="signup"  >About</Button>
     );
     signUpButton =(
-      <Button location={this.props.history.location} to="/register" className="signup"  >Sign Up</Button>
+      <Button textColor={textColor} location={this.props.history.location} to="/register" className="signup"  >Sign Up</Button>
     );
     logInButton =(
-      <Button location={this.props.history.location} to="/login" className="login" >Log In</Button>
+      <Button textColor={textColor} location={this.props.history.location} to="/login" className="login" >Log In</Button>
     );
+
+
+   
+
+
+   
 
     if(this.props.loggedIn){
       return(
@@ -37,7 +57,7 @@ export class HeaderBar extends Component {
             <h3 title="GoodTimes"> <Link to="/dashboard"><MdSentimentSatisfied className="smily"/>goodtimes</Link></h3>
           </div>
     
-          <div className="header-nav">    
+          <div className="header-nav" >    
             <button className="logout" onClick={() => this.logOut()}>Log out</button>
           </div>
                     
@@ -48,12 +68,12 @@ export class HeaderBar extends Component {
     } else {
 
       return (
-        <section className="header-bar">
+        <section className="header-bar opaque-background">
           <div className="header-logo">
-            <h3 title="Goodtimes">  <Link to="/home"><MdSentimentSatisfied className="smily"/>goodtimes</Link></h3>
+            <h3 title="Goodtimes" >  <Link style={textColor} to="/home"><MdSentimentSatisfied className="smily" />goodtimes</Link></h3>
           </div>
 
-          <div className="header-nav">
+          <div className="header-nav" style={textColor}>
             {aboutButton}
             {signUpButton}
             {logInButton}
