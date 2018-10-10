@@ -3,7 +3,7 @@ import { connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
 import { FaEdit } from 'react-icons/lib/fa';
 import '../../styles/Index.css';
-import { loadDraftIntoReduxState } from '../../../actions/Edit-Draft';
+import { loadDraftIntoReduxState } from '../../../actions/EditDraft';
 
 
 class DraftItem extends React.Component{

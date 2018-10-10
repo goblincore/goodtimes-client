@@ -10,7 +10,7 @@ import { ActivitySelect } from './Page4-Activities/ActivityPage';
 import PreviewEvent from './Page5-Preview/PreviewEvent';
 import SuccessfullyCreatedEvent from './Page6-Share/SuccessfullyCreatedEvent';
 
-import { putUpdatedDraft } from '../../actions/Edit-Draft';
+import { putUpdatedDraft } from '../../actions/EditDraft';
 import { postNewEvent } from '../../actions/New-Event';
 import { Transition, animated,config } from 'react-spring'
 import '../styles/CreateEventContainer.css';

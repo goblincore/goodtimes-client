@@ -1,8 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { sendEmail } from '../../../actions/Email';
-import { CLIENT_BASE_URL } from '../../../config';
-
 
 export class EmailForm extends React.Component {
   constructor(props){
@@ -41,10 +39,6 @@ export class EmailForm extends React.Component {
     }
     this.setState({error: warning});
   }
-  closeAlert(){
-    this.setState({sent:false});
-    this.setState({error: ''});
-  }
 
   render(){
     let alertBox;
@@ -53,23 +47,21 @@ export class EmailForm extends React.Component {
     }
     if(this.state.sent===true && this.state.error !== ''){
       alertBox = <div id='alert-box'>
-        <h2>Oh no!</h2>
-        <p>{this.state.error} Try again!</p>
-        <button onClick={()=>this.closeAlert()}>Close</button>
+        <h2 className='form-error'>Oh no!</h2>
+        <p className='form-error'>{this.state.error} Try again!</p>
       </div>;
     }
     if(this.state.sent===true && this.state.error === ''){
       alertBox = <div id='alert-box'>
         <h2>Success!</h2>
         <p>E-mail sent! Check the dashboard periodically for voting results.</p>
-        <button onClick={()=>this.closeAlert()}>Close</button>
       </div>;
     }
     else if(this.state.sent===false && this.state.error === ''){
       alertBox = <div id='alert-box'></div>;
     }
     return (
-      <div>
+      <div className="event-email-form">
         <form onSubmit={(e) => {
           this.validateFields(e);
           this.sendEmail(e);
@@ -82,11 +74,12 @@ export class EmailForm extends React.Component {
           <label htmlFor='message'>Write the body of the e-mail.</label>
           <textarea defaultValue={`Hi! Let's get together.
 
-Please vote on when and where we should hang out here:
+              Please vote on when and where we should hang out here:
  
-${CLIENT_BASE_URL}/guestevents/${this.props.eventState.id}`} id="message">
+              ${this.props.eventState.shortUrl}`} id="message">
           </textarea>
           <button type="submit">Send</button>
+          <button type='reset' id='close-form' onClick={() => this.props.openEmail()}>Close</button>        
         </form>
         {alertBox}
       </div>

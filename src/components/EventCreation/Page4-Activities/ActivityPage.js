@@ -13,7 +13,7 @@ export  class ActivitySelect extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      display: 'none'
+      display: 'choose'
     };
   }
 

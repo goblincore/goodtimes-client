@@ -1,13 +1,10 @@
 import React from 'react';
-//import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { Dashboard, mapStateToProps } from './Dashboard';
-import {shallow, mount} from 'enzyme';
+import {Dashboard} from './Dashboard';
+import {shallow} from 'enzyme';
 
 
 
 describe('<Dashboard />', () => {
-  ///define dummy data
   let props;
 
   beforeEach(() => {

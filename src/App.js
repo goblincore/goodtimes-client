@@ -19,6 +19,7 @@ import createHistory from 'history/createBrowserHistory';
 import './styles.css';
 
 
+
 const history = createHistory();
 
 class App extends Component{
@@ -44,6 +45,7 @@ class App extends Component{
                 <Transition
                     native
                     config={ item=> {
+                     
                         if (item === 'transform'){
                           return {
                             tension: 1, 
@@ -59,8 +61,6 @@ class App extends Component{
                             return {
                               tension: 1, 
                               friction: 6,
-                              // restSpeedThreshold: 1,
-                              // restDisplacementThreshold: 0.001,
                               overshootClamping: true,
                           }
                         }
@@ -74,6 +74,7 @@ class App extends Component{
                           item === 'login'  || 
                           item === 'dashboard'  ||
                           item === 'about'){
+                       
                             return({ transform: 'translate(80%,0)', opacity: 0})
                         } else  {
                             return({ transform: 'translate(0,100%)', opacity: 0 })
@@ -107,11 +108,13 @@ class App extends Component{
 
                     onRest={(item, v) => {
                       if(item === 'create-event' || item === 'edit-draft'){
+                      
                         let el = document.querySelector(".createEventRoute");
                         if(el !== null) {
                           el.style.transform='';
                           el.classList.add('notransform');
                         }
+                        // console.log('ONREST el',el);
                       }
                       }}
                     >
@@ -131,10 +134,11 @@ class App extends Component{
                         <Route exact path="/create-event" render={props => CreateEventPage({ ...props, style })} />
                          <Route path="/guestevents/:eventId" render={props => GuestEventPage({ ...props, style })} />
                          <Route exact path="/edit-draft" render={(props) => {
+                            //  console.log('APP JS props passes', location.state)
                              return Edit_Draft_Page({...props,style,...location})
                         }}/>
                     
-                        {/* <Route render={props => <Error404 {...props} style={style} />} />; */}
+                      
          
                         </Switch>
                     )}
@@ -224,7 +228,7 @@ const GuestEventPage = ({...props, style}) => (
 
 
   const About_Page = ({...props, style}) => (
-    <animated.div className="mainRoute bg-about" style={{ ...style, background: '#fdfdfd' }}>
+    <animated.div className="mainRoute bg-about" style={{ ...style, background: '#f7543f' }}>
      <div className="mainRouteItem" >
      <AboutPage/>
    

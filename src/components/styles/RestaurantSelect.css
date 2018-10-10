@@ -1,14 +1,15 @@
 #select-cuisine{
-    max-width: 500px;
+    max-width: 260px;
     padding: 25px;
     text-align: left;
     float: left;
+    margin-right:20px;
 }
 
 #restaurant-list{
     text-align:left;
-    float:left;
-     max-width:800px;
+    overflow:hidden;
+     max-width:1500px;
     text-align:left;
 
 }
@@ -23,12 +24,7 @@
    
 }
 
-#restaurant-list img {
-  max-width: 100px;
-  float:right;
- 
-  border-radius:6px;
-}
+
 
 .text-left{
     text-align:left !important;
@@ -76,4 +72,73 @@
 
 .restaurant-item.checked-true {
   background-color: rgb(220, 255, 220);
+}
+
+
+.restaurant-img-bg{
+    height:200px;
+    width:300px;
+}
+
+.restaurant-result-box{
+   border:1px dashed #ccc;
+   border-radius:6px;
+   margin:10px;
+   float:left;
+   width:300px;
+   height:356px;
+}
+
+/* .restaurant-result-box .checkmark{
+    position: absolute;
+    top: 0px;
+    left: -40px;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+} */
+
+.restaurant-result-box .checkmark {
+    position: absolute;
+    top: 325px;
+    left: 230px;
+    height: 20px;
+    width: 20px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    background-color: #f7f7f7;
+}
+
+.restaurant-text-info{
+    padding:12px;
+}
+
+@media only screen and (max-width: 450px) {
+
+    .restaurant-resultbox{
+        float:left;
+    }
+
+    #restaurant-list{
+        float:left;
+        width:100%;
+    }
+
+    #restaurant-choices{
+        display:none;
+    }
+
+    #select-cuisine{
+        max-width:100%;
+    }
+
+    .restaurant-result-box{
+        width:100%;
+        margin-left:0px;
+    }
+
+    .restaurant-img-bg{
+        width:100%;
+    }
+
 }

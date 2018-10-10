@@ -9,7 +9,7 @@ ul {
   
  
   button{
-    border: 1px solid #666666;
+    border: 1px solid rgb(255, 255, 255);
   
   }
   
@@ -52,7 +52,7 @@ ul {
     display:inline-block;
     float:left;
     transform:translateY(-10px);
-    color:#575d98;
+    color:#ffffff;
     text-decoration:none;
   }
 

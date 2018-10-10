@@ -1,4 +1,4 @@
-.time-options, .restaurant-options{
+.guest-options,.time-options, .restaurant-options{
 
     text-align:left;
 }
@@ -45,7 +45,7 @@
     color:#fff;
     max-width: 800px;
     margin:auto;
-    margin-top:80px;
+   
 }
 
 .guest-event-form-wrapper h1,h2,h3,h4{
@@ -70,4 +70,52 @@
 
 .guest-event-form .option_container{
     max-width:800px;
+}
+
+.submit-container{
+    display: block;
+    width: 100%;
+    float: left;
+    padding-bottom: 50px;
+    padding-top:50px;
+}
+
+.submit-container button{
+    font-size:20px;
+    padding:10px;
+}
+
+.choice-border-bottom{
+    border-bottom:1px dashed #ddd;
+}
+
+.option_container p{
+    margin-left:80px;
+}
+
+.top-offset{
+    margin-top:80px;
+}
+
+@media only screen and (max-width: 500px) {
+ .input-container{
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 16px !important;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    margin-left:0 !important;
+  
+ }
+
+ .option_container p {
+    margin-left: 30px;
+}
+
+
 }

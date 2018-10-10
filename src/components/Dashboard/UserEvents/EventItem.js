@@ -1,6 +1,7 @@
 import React from 'react';
 import { FaThumbsUp, FaToggleOff, FaToggleOn } from "react-icons/lib/fa";
 import { Calendar } from "react-feather";
+
 import '../../styles/EventItem.css';
 import DeleteWarning from '../DeleteWarning';
 import {deleteEvent} from '../../../actions/New-Event';
@@ -31,7 +32,7 @@ export default class EventItem extends React.Component{
       return(
         <li className='user-event'>
           <span>  
-            <h2>{event.title}</h2>
+          <Calendar className="icon-adjust"/> <h2>{event.title}</h2>
             <button className="floatRight noBorder" onClick={()=>this.toggleEventDetails(false)}>Hide Details <FaToggleOn className="general-icon" /></button>
           </span>
           <p>{this.props.event.description}</p>
@@ -90,7 +91,7 @@ export default class EventItem extends React.Component{
       return(
         <li className='user-event'>
          <span>  
-           <Calendar /> <h2>{this.props.event.title}</h2>    
+           <Calendar  className="icon-adjust" /> <h2>{this.props.event.title}</h2>    
             <button className="floatRight noBorder" onClick={()=>this.toggleEventDetails(true)}>See Details <FaToggleOff className="general-icon" /></button>
           </span> 
     

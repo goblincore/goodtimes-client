@@ -1,7 +1,7 @@
 .home-img{
     position: fixed;
     bottom: 0px;
-    max-width: 600px;
+    max-width: 650px;
     z-index: 0;
     left: 64%;
     transform: translateX(-50%);
@@ -19,6 +19,7 @@
 
 .hero h3{
     font-weight:normal;
+    margin:0px;
 }
 
 .hero .button_wrapper{
@@ -30,7 +31,7 @@
     background:url('/assets/home.png');
     background-repeat: no-repeat;
     background-size: contain;
-    width: 600px;
+    width: 750px;
     z-index: 888;
     height: 700px;
     bottom: 0px;
@@ -70,6 +71,13 @@
         transform:translateX(2%);
     }
 
+
+}
+
+@media only screen and (min-width: 451px) and (max-width: 1300px){
+    .home-img{
+        max-width:550px;
+    }
 
 }
 

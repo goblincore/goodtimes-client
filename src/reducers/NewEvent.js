@@ -10,13 +10,13 @@ import {
   DELETE_EVENT_SUCCESS
 } from '../actions/New-Event';
 import { SEND_EMAIL_REQUEST, SEND_EMAIL_ERROR, SEND_EMAIL_SUCCESS } from '../actions/Email';
-import { SEND_BITLY_SUCCESS } from '../actions/Bitly';
+import { SEND_BITLY_SUCCESS, SEND_BITLY_ERROR } from '../actions/Bitly';
 import {
   LOAD_DRAFT_INTO_REDUX_STATE,
   PUT_UPDATED_DRAFT_REQUEST,
   PUT_UPDATED_DRAFT_SUCCESS
 
-} from '../actions/Edit-Draft';
+} from '../actions/EditDraft';
 
 export const initialState = {
   showNewEvent: false,
@@ -124,6 +124,12 @@ export default function newEventReducer (state=initialState, action) {
     return Object.assign({}, state, {
       shortUrl: action.shortUrl,
       errorMessage: null
+    });
+  }
+  else if(action.type === SEND_BITLY_ERROR){
+    return Object.assign({}, state, {
+      loading: false,
+      errorMessage: action.error.message
     });
   }
   else {
