@@ -137,7 +137,7 @@ export  class ActivitySelect extends React.Component {
 
       <div className="card border-right bottom-offset"> 
         <p>{this.props.eventState.errorMessage}</p>
-        <button onClick={() => this.setState({display: 'choose'})}>Choose From List</button>
+        <button className="choose-from-list" onClick={() => this.setState({display: 'choose'})}>Choose From List</button>
         <button onClick={() => this.setState({display: 'write'})}>Create My Own Activity</button>
 
        

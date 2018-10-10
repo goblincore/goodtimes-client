@@ -1,12 +1,21 @@
 import React from 'react';
 //import TestUtils from 'react-dom/test-utils';
 import ShallowRenderer from 'react-test-renderer/shallow'; 
-import expect from 'expect';
+//import expect from 'expect';
 import {shallow, mount} from 'enzyme';
 import  { ActivitySelect } from './ActivityPage';
+import CreateNav from '../CreateNav';
+
+
+// nextPage: {
+//   pageNum: 4
+// },
+// prevPage: {},
 
 function setup() {
     const props = {
+      prevPage: jest.fn(),
+      nextPage: jest.fn(),
        times: ["2018-10-30T11:30:00",
 "2018-10-30T15:30:00",
 "2018-10-09T21:30:00"],
@@ -69,10 +78,6 @@ function setup() {
 
 describe('ActivityPage', () => {
 
-
-
-
-
     it('should render without crashing', () => {
       const { enzymeWrapper } = setup();
      
@@ -89,12 +94,14 @@ describe('ActivityPage', () => {
 //   <span className="heading">Title</span>,
 //   <Subcomponent foo="bar" />
     });
-    it('always renders a `CreateNav`', () => {
+    it(`displays event options when 'Choose From List' clicked`, () => {
       const {props} = setup();
       const { enzymeWrapper } = setup();
-      const chooseEventButton = enzymeWrapper.find('button').at(0);
+      const chooseEventButton = enzymeWrapper.find('button').at(5);
+      console.log(chooseEventButton);
       chooseEventButton.simulate('click');
-  expect(enzymeWrapper.state()).choose.toEqual(true);
+      console.log(enzymeWrapper.state());
+  expect(enzymeWrapper.state().display).toEqual('choose');
     });
     
 

@@ -4,9 +4,9 @@ import { Redirect } from 'react-router-dom';
 import moment from 'moment';
 
 import { CreateEvent } from './Page1-TitleDescribeLocation/CreateEvent';
-import DateSelectPage from './Page2-DateTime/DateSelectPage';
+import  DateSelectPage  from './Page2-DateTime/DateSelectPage';
 import RestaurantSelect from './Page3-Restaurants/RestaurantSelect';
-import { ActivityPage } from './Page4-Activities/ActivityPage';
+import { ActivitySelect } from './Page4-Activities/ActivityPage';
 import PreviewEvent from './Page5-Preview/PreviewEvent';
 import SuccessfullyCreatedEvent from './Page6-Share/SuccessfullyCreatedEvent';
 
@@ -120,7 +120,7 @@ render(){
     component = style =>{ 
       return(
         <animated.div className="slides" style={{ ...style  }}>
-        <ActivityPage
+        <ActivitySelect
             pageNum={this.props.pageNum}
             dispatch={this.props.dispatch} 
             eventState={this.props.newEvent}
