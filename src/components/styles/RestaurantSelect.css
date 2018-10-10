@@ -85,15 +85,28 @@
    border-radius:6px;
    margin:10px;
    float:left;
+   width:300px;
+   height:356px;
 }
 
-.restaurant-result-box .checkmark{
+/* .restaurant-result-box .checkmark{
     position: absolute;
     top: 0px;
     left: -40px;
     height: 25px;
     width: 25px;
     background-color: #eee;
+} */
+
+.restaurant-result-box .checkmark {
+    position: absolute;
+    top: 325px;
+    left: 230px;
+    height: 20px;
+    width: 20px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    background-color: #f7f7f7;
 }
 
 .restaurant-text-info{
@@ -108,6 +121,24 @@
 
     #restaurant-list{
         float:left;
+        width:100%;
+    }
+
+    #restaurant-choices{
+        display:none;
+    }
+
+    #select-cuisine{
+        max-width:100%;
+    }
+
+    .restaurant-result-box{
+        width:100%;
+        margin-left:0px;
+    }
+
+    .restaurant-img-bg{
+        width:100%;
     }
 
 }

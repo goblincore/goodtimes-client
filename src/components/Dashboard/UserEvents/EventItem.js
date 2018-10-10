@@ -31,7 +31,7 @@ export default class EventItem extends React.Component{
       return(
         <li className='user-event'>
           <span>  
-            <h2>{event.title}</h2>
+          <Calendar /> <h2>{event.title}</h2>
             <button className="floatRight noBorder" onClick={()=>this.toggleEventDetails(false)}>Hide Details <FaToggleOn className="general-icon" /></button>
           </span>
           <p>{this.props.event.description}</p>
