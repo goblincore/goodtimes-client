@@ -28,7 +28,7 @@ export class Dashboard extends Component {
   }
 
   render() {
-    console.log(this.props);
+    // console.log(this.props);
     let eventsToDisplay=[];
 
     if(this.props.userEvents !==null && this.props.userEvents.length >= 1){
