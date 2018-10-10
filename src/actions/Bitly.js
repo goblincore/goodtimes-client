@@ -1,6 +1,5 @@
 import {normalizeResponseErrors} from './Utils';
 import { BITLY_BASE_URL } from '../config';
-import { BITLY_API_KEY} from '../config'
 
 
 export const SEND_BITLY__REQUEST = 'SEND_BITLY_REQUEST';
@@ -23,7 +22,6 @@ export const getBitly = (url, eventId) => dispatch => {
   const token = localStorage.getItem('authToken');
   const longUrl= url+eventId;
 
-  console.log('incoming url get bitly',url);
   dispatch(sendBitlyRequest());
   return fetch(`${BITLY_BASE_URL}?longUrl=${longUrl}&eventId=${eventId}`, {
     method: 'GET',

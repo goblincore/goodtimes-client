@@ -1,5 +1,5 @@
 import { bingMapsKey } from '../../../config';
-import { updateNewEventState, newEventErrorMessage } from '../../../actions/New-Event';
+import { updateNewEventState } from '../../../actions/New-Event';
 
 export function validateCity(setState, dispatch, locationOption){
   const city = document.getElementsByName('cityLocation')[0].value.trim();
@@ -58,5 +58,5 @@ export function validateCity(setState, dispatch, locationOption){
           }
         }
       })
-      .catch(err => console.log(err));
+      .catch(err => console.error(err));
 }
