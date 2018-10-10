@@ -1,6 +1,5 @@
 import React from 'react';
 import '../styles/CreateNav.css';
-import { ChevronsRight, ChevronsLeft } from "react-feather";
 import { FaAngleDoubleRight, FaAngleDoubleLeft } from "react-icons/lib/fa";
 
 export default function CreateNav(props) {

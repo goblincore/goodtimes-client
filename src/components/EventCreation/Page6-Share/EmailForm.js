@@ -1,8 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { sendEmail } from '../../../actions/Email';
-import { CLIENT_BASE_URL } from '../../../config';
-
 
 export class EmailForm extends React.Component {
   constructor(props){

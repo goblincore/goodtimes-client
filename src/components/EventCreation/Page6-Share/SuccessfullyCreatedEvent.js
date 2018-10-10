@@ -1,6 +1,5 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import { CLIENT_BASE_URL } from '../../../config';
 import { resetNewEventState } from '../../../actions/New-Event';
 import { getBitly } from '../../../actions/Bitly';
 import EmailForm from './EmailForm';

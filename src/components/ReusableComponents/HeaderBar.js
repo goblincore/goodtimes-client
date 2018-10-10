@@ -19,7 +19,6 @@ export class HeaderBar extends Component {
 
   render(){
     
-    let bgColor;
     let textColor;
     let currentPath=this.props.history.location.pathname;
 
@@ -49,7 +48,7 @@ export class HeaderBar extends Component {
    
 
 
-    console.log('history location',this.props.history.location.pathname);
+   
 
     if(this.props.loggedIn){
       return(

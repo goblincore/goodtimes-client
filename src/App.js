@@ -45,7 +45,7 @@ class App extends Component{
                 <Transition
                     native
                     config={ item=> {
-                        // console.log('item config transition',item);
+                     
                         if (item === 'transform'){
                           return {
                             tension: 1, 
@@ -74,7 +74,7 @@ class App extends Component{
                           item === 'login'  || 
                           item === 'dashboard'  ||
                           item === 'about'){
-                          // console.log('HOME OR REGISTER');
+                       
                             return({ transform: 'translate(80%,0)', opacity: 0})
                         } else  {
                             return({ transform: 'translate(0,100%)', opacity: 0 })
@@ -108,7 +108,7 @@ class App extends Component{
 
                     onRest={(item, v) => {
                       if(item === 'create-event' || item === 'edit-draft'){
-                        // console.log('ONREST',item, v);
+                      
                         let el = document.querySelector(".createEventRoute");
                         if(el !== null) {
                           el.style.transform='';
@@ -138,7 +138,7 @@ class App extends Component{
                              return Edit_Draft_Page({...props,style,...location})
                         }}/>
                     
-                        {/* <Route render={props => <Error404 {...props} style={style} />} />; */}
+                      
          
                         </Switch>
                     )}

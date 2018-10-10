@@ -56,7 +56,7 @@ export class Dashboard extends Component {
             <button id="display-active-events" onClick={() => this.displayEvents()}>Active Events</button>
             <Link to="/create-event"><h3>Create New Event  <MdAddCircleOutline /></h3></Link>
             <div className="doggy-img">
-              <img src="../../assets/dog1.png" alt="doggy image" />
+              <img src="../../assets/dog1.png" alt="doggy" />
             </div>      
           </div>
           <div id="dashboard_eventlist">
