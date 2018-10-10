@@ -36,9 +36,8 @@ class GuestEventForm extends Component {
   submitVotes(event){
     event.preventDefault();
 
-    if(!document.querySelector('input[name="restaurant-option"]:checked') ||
-    !document.querySelector('input[name="time-option"]:checked') ){
-      return;
+    if (!document.querySelector('input[name="time-option"]:checked')) {
+      return this.setState({errorMessage: 'Must vote on a time option.'})
     }
     const restaurantId = document.querySelectorAll('input[name="restaurant-option"]:checked');
     
@@ -66,8 +65,9 @@ class GuestEventForm extends Component {
       restaurantSelection: restaurantArr,
       activitySelection: activityArr
     };
-    this.props.dispatch(updateEventVotes(selectionObject, eventId));
-    this.setState({submitted:true});
+    return this.props.dispatch(updateEventVotes(selectionObject, eventId))
+      .then(() => this.setState({submitted: true}))
+      .catch(err => this.setState({errorMessage: err.message}))
   }
   
     
@@ -93,7 +93,7 @@ class GuestEventForm extends Component {
               id={'time-option'+i}
               name="time-option"
               value={option.id} />
-               <span class="checkmark"></span>
+               <span className="checkmark"></span>
           </label>
            
           </div>
@@ -111,7 +111,7 @@ class GuestEventForm extends Component {
               id={'restaurant-option'+i}
               name="restaurant-option"
                value={option.yelpId} />
-               <span class="checkmark"></span>
+               <span className="checkmark"></span>
                 </label>
              </div>    
        );});  
@@ -127,7 +127,8 @@ class GuestEventForm extends Component {
 
       const activitiesList =   activityOptions.map((option, i) => { 
         let link = <a href={option.link}>{option.title}</a>;
-        let dates = <p>{option.start} - {option.end}</p>;
+        let dates = option.start && option.end ? <p>{option.start} - {option.end}</p> : null;
+
         return (
           
           <div key={i} className="option_container">
@@ -138,16 +139,16 @@ class GuestEventForm extends Component {
               id={'activity-option'+i}
               name="activity-option"
               value={option.ebId} />
-               <span class="checkmark"></span>
+               <span className="checkmark"></span>
             </label>
             {dates}
           </div>
          );}); 
 
-                activitiesDisplay = <div className="activity-options"> 
-                                       <h2>Choose activities you're interested in...</h2>
-                                         {activitiesList}
-                                    </div>
+    activitiesDisplay = <div className="activity-options"> 
+                            <h2>Choose activities you're interested in...</h2>
+                              {activitiesList}
+                        </div>
     }
       return (
         <div className="absolute-wrapper bottom-offset">
@@ -176,9 +177,9 @@ class GuestEventForm extends Component {
               </div>
             
             <br/>
+            {this.state.errorMessage}
             <br/>
-            <button  type="submit" id="submit-votes">
-                            Submit</button>
+            <button  type="submit" id="submit-votes">Submit</button>
           </form>  
           </div>   
           </div>
