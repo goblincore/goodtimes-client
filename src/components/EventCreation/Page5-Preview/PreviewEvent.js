@@ -1,6 +1,6 @@
 import React from 'react';
 import { getBitly } from '../../../actions/Bitly';
-import { putUpdatedDraft } from '../../../actions/Edit-Draft';
+import { putUpdatedDraft } from '../../../actions/EditDraft';
 import { postNewEvent } from '../../../actions/New-Event';
 import '../../styles/PreviewEvent.css';
 import CreateNav from '../CreateNav';
