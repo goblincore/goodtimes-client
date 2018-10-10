@@ -4,7 +4,7 @@ import { sendEmail } from '../../../actions/Email';
 import { CLIENT_BASE_URL } from '../../../config';
 
 
-class EmailForm extends React.Component {
+export class EmailForm extends React.Component {
   constructor(props){
     super(props);
     this.state = {
@@ -49,24 +49,24 @@ class EmailForm extends React.Component {
   render(){
     let alertBox;
     if(this.props.loading === true){
-      alertBox = <h2>Sending...</h2>;
+      alertBox = <div id='alert-box'><h2>Sending...</h2></div>;
     }
     if(this.state.sent===true && this.state.error !== ''){
-      alertBox = <div>
+      alertBox = <div id='alert-box'>
         <h2>Oh no!</h2>
         <p>{this.state.error} Try again!</p>
         <button onClick={()=>this.closeAlert()}>Close</button>
       </div>;
     }
     if(this.state.sent===true && this.state.error === ''){
-      alertBox = <div>
+      alertBox = <div id='alert-box'>
         <h2>Success!</h2>
         <p>E-mail sent! Check the dashboard periodically for voting results.</p>
         <button onClick={()=>this.closeAlert()}>Close</button>
       </div>;
     }
     else if(this.state.sent===false && this.state.error === ''){
-      alertBox = <div></div>;
+      alertBox = <div id='alert-box'></div>;
     }
     return (
       <div>

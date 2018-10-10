@@ -97,35 +97,6 @@ export class CreateEvent extends React.Component {
       <div className="absoluteposition">
 
         <CreateNav saveAsDraft={this.handleSave} pageNum={this.props.pageNum} prevPage={this.props.prevPage} nextPage={this.props.nextPage} handleNextPage={this.handleNextPage} />
-          {/* <nav className='create-nav'>
-             <div className="instructions">
-              <h4>Step 1 of 5 : Title, Location, Description </h4>
-
-             
-             </div>
-              <button type='button' onClick={() => this.props.prevPage()}>{'<-'} Back</button>
-              <button type='button' 
-                  onClick={() => {
-                    // Validate that title and location are filled out before saving
-                    if (this.state.locationFeedback.startsWith('Must provide')) return this.props.dispatch(newEventErrorMessage('Must provide a location to save.'))
-                    else if (this.state.locationFeedback === 'Checking city...') return;
-                    else if (!this.props.eventState.title) return this.props.dispatch(newEventErrorMessage('Must provide a title to save.'));
-                    else if (!this.props.eventState.locationCity.state || !this.props.eventState.locationCity.city) return this.props.dispatch(newEventErrorMessage('Must provide a city and state to save.'));
-                    else if (this.state.locationFeedback.startsWith('Did you mean')) return this.props.dispatch(newEventErrorMessage('Confirm location to save.'));
-
-                    this.props.saveAsDraft();
-                  }}>
-                  Save as Draft
-               </button>
-                 <button  type='submit' form='createform' value="Submit">
-                  Next {'->'}
-                </button>
-           </nav> */}
-      {/* <div className="instructions"> 
-      <h3>Let's get started!</h3>
-      <p>Create a title and select a location for your event. Don't forget to add a description!</p>
-        
-        </div> */}
     
         <form
           id="createform"
@@ -147,8 +118,9 @@ export class CreateEvent extends React.Component {
               this.props.dispatch(newEventErrorMessage(null));
             }}
           />
-          <label htmlFor='stateLocation'>Location</label>
 
+
+          <label htmlFor='stateLocation'>State</label>
           <select name="stateLocation" id="stateLocation" value={this.props.eventState.locationCity.state ? this.props.eventState.locationCity.state : ''} 
             onChange={e => {
               let city = this.props.eventState.locationCity.city ? this.props.eventState.locationCity.city : '';
@@ -159,6 +131,7 @@ export class CreateEvent extends React.Component {
           }}>
             <States />
           </select>
+
 
           <label htmlFor="cityLocation">City</label>
           <input
@@ -176,6 +149,8 @@ export class CreateEvent extends React.Component {
             }}
             onBlur={() => validateCity(this.handleStateChange, this.props.dispatch, this.state.locationOption)}
           />
+
+
 
           <LocationMessage 
             locationFeedback={this.state.locationFeedback} 

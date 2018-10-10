@@ -25,7 +25,6 @@ export default function reducer(state = initialState, action){
     });
   }
   else if(action.type === FETCH_CATEGORIES_SUCCESS){
-    console.log('categories action=',action);
     return Object.assign({}, state, {
       loading: false,
       categories: action.categories.categories
@@ -43,7 +42,6 @@ export default function reducer(state = initialState, action){
     });
   }
   else if(action.type === FETCH_ACTIVITIES_SUCCESS){
-    console.log('activities action=', action);
     return Object.assign({}, state, {
       loading: false,
       activities: action.activities.events

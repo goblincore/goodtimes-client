@@ -1,18 +1,18 @@
 import React from 'react';
-//import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { Dashboard, mapStateToProps } from './Dashboard';
+import { EventList } from './EventList'
 import {shallow, mount} from 'enzyme';
 
 
 
-describe('<Dashboard />', () => {
+describe('<EventList />', () => {
   ///define dummy data
   let props;
 
   beforeEach(() => {
     const dispatch = jest.fn();
-    const userEvents = [
+    let loading = false;
+    let events = false;
+    let userEvents = [
       {
       "_id": "111111111111111111111111",
       "userId": "000000000000000000000001",
@@ -117,18 +117,11 @@ describe('<Dashboard />', () => {
       ]
     }
   ];
-    props = {dispatch, userEvents};
+    props = {dispatch, userEvents, loading, events};
   });
 
   it('renders without crashing', () => {
-    const wrapper = shallow(<Dashboard {...props} />);
+    const wrapper = shallow(<EventList {...props} />);
   });
 
 });
-
-
-
-
-
-
-
