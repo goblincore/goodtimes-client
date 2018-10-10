@@ -2,7 +2,7 @@ import React from 'react';
 import CreateNav from '../CreateNav';
 import { shallow, mount } from 'enzyme';
 import { CreateEvent } from './CreateEvent';
-import States from './states';
+import States from './States';
 import LocationMessage from './LocationMessage';
 
 

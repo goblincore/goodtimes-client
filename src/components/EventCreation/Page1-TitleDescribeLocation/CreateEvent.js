@@ -3,7 +3,7 @@ import '../../styles/CreateEvent.css';
 import { updateNewEventState, newEventErrorMessage } from '../../../actions/New-Event';
 import { resetRestaruantsReducer } from '../../../actions/RestaurantSelect';
 import { resetActivitiesReducer } from '../../../actions/Activities';
-import States from './states';
+import States from './States';
 import LocationMessage from './LocationMessage';
 import {validateCity} from './Utils';
 import CreateNav from '../CreateNav';

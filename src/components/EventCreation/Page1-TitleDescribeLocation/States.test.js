@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
-import States from './states';
+import States from './States';
 
 function setup(){
   const props = {
