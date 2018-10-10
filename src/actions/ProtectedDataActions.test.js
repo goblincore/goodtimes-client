@@ -25,9 +25,8 @@ describe('fetchProtectedDataError', () => {
 });
 describe('requestProtectedData', () => {
   it('should return the action', () => {
-    const action = requestProtectedData('loading..');
+    const action = requestProtectedData();
     expect(action.type).toEqual(REQUEST_PROTECTED_DATA);
-    expect(action.loading).toEqual('loading..');
   });
 });
 describe('fetchUserEventsSuccess', () => {

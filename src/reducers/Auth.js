@@ -28,8 +28,7 @@ export default function reducer(state = initialState, action) {
 
     } else if (action.type === REQUEST_PROTECTED_DATA) {
         return Object.assign({}, state, {
-            loading: true,
-            error: action.error
+            loading: true
         });
 
     } else if (action.type === CHANGE_CURRENT_USER) {
