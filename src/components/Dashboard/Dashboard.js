@@ -68,7 +68,7 @@ export class Dashboard extends Component {
       );
     }
     else {
-      return <Redirect to='/home' />;
+      return <Redirect to='/' />
     }
   }
 }

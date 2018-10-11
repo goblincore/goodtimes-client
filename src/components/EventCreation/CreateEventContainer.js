@@ -50,11 +50,7 @@ export default class CreateEventContainer extends React.Component{
   }
 render(){
 
-
-
-  
-
-    let component;
+ let component;
 
   switch (this.props.pageNum) {
   case 0:
@@ -182,10 +178,32 @@ render(){
     <div className="new-event-form bottom-offset">
        <Transition
           native
-          config={config.fast}
-          from={{ opacity: 0 }}
-          enter={{ opacity: 1 }}
-          leave={{ opacity: 0 }}>
+          config={ item=> {
+                     
+            if (item === 'transform'){
+              return {
+                tension: 1, 
+                friction: 8,
+
+                restSpeedThreshold: 1,
+                restDisplacementThreshold: 0.001,
+                overshootClamping: true,
+                }
+            }
+            else{
+           
+                return {
+                  tension: 1, 
+                  friction: 6,
+                  overshootClamping: true,
+              }
+            }
+          }
+           
+          }
+          from={{ opacity: 0,  transform: 'translate(80%,0)' }}
+          enter={{ opacity: 1,  transform: 'translate(0,0)'}}
+          leave={{ opacity: 0,  transform: 'translate(-100%,0)'}}>
         {component}
       </Transition>
     </div>

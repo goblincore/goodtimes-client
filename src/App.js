@@ -39,7 +39,7 @@ class App extends Component{
             <Route
             render={({ location, ...rest }) => (
                 <div className="fill">
-                <Route exact path="/" render={() => <Redirect to="/home" />} />
+              
                 <HeaderBar history={history}/>
                 <div className="content">
                 <Transition
@@ -69,40 +69,31 @@ class App extends Component{
                       }
                     keys={location.pathname.split('/').filter(a => a)[0]}
                     from={item => {
-                      if (item === 'home' ||
-                          item === 'register' || 
-                          item === 'login'  || 
-                          item === 'dashboard'  ||
-                          item === 'about'){
+                     
                        
                             return({ transform: 'translate(80%,0)', opacity: 0})
-                        } else  {
-                            return({ transform: 'translate(0,100%)', opacity: 0 })
-                        }
+                        
                     }}
                     enter={item => {
-                      if (item === 'home' ||
-                          item === 'register' || 
-                          item === 'login'  || 
-                          item === 'dashboard'  ||
-                          item === 'about'){
+                   
+                 
                             return({ transform: 'translate(0,0)', opacity: 1  })
-                        } else {
-                            return({  transform: 'translate(0,0)',opacity: 1 })
-                        }
+                       
                     }}
 
                     leave={item => {
-                      if (item === 'home' || item === 'register' || item === 'login' || item === 'about' || item ==='edit-draft'){
-                            return({ transform: 'translate(-80%,0)', opacity: 0 })
-                        } if(item === 'create-event'){
+
+                     
+                         
+                         
+                          if(item === 'create-event'){
                           let el = document.querySelector(".createEventRoute");
                           if(el !== null) {
                             el.classList.remove('notransform');
                             return({  transform: 'translate(-80%,0)', opacity: 0, })
                           }
                         }else {
-                            return({  transform: 'translate(0,-100%)', opacity: 0, })
+                          return({ transform: 'translate(-80%,0)', opacity: 0 })
                         }
                     }}
 
@@ -121,12 +112,8 @@ class App extends Component{
                     {/* <Transition  {...transition} keys={location.pathname.split('/').filter(a => a)[0]}> */}
                     {style => (
                         <Switch location={location}>
-                        <Route exact path="/home" render={ props =>{
-                          
-                          
-                           return HomePage({...props, style})}
-
-                          } />
+                     
+                        <Route exact path="/" render={props => HomePage({ ...props, style })}/>
                         <Route exact path="/about" render={props => About_Page({ ...props, style })} />
                         <Route exact path="/login" render={props => Login_Page({ ...props, style })} />
                         <Route exact path="/register" render={props => RegisterPage({ ...props, style })} />
@@ -136,7 +123,20 @@ class App extends Component{
                          <Route exact path="/edit-draft" render={(props) => {
                             //  console.log('APP JS props passes', location.state)
                              return Edit_Draft_Page({...props,style,...location})
-                        }}/>
+                        }}/> 
+                     
+                        <Route
+                          render={() => {
+                            // console.log("location.pathname: " + location.pathname);
+                            // console.log(
+                            //   "window.location.pathname: " + window.location.pathname
+                            // );
+                            if (location.pathname === window.location.pathname) {
+                              return <Redirect to="/" />;
+                            }
+                            return null;
+                          }}
+                        />
                     
                       
          
