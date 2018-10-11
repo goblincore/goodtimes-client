@@ -1,6 +1,6 @@
 import React from 'react';
 import '../styles/CreateNav.css';
-import { FaAngleDoubleRight, FaAngleDoubleLeft } from "react-icons/lib/fa";
+import { FaAngleDoubleRight, FaAngleDoubleLeft } from 'react-icons/lib/fa';
 
 export default function CreateNav(props) {
 
@@ -14,7 +14,7 @@ export default function CreateNav(props) {
   ];
 
   const pageSteps=[
-     null,
+    null,
     'Step 1 of 5 : Enter Title, Location, Description' ,
     'Step 2 of 5 : Select Multiple Time & Date Options',
     'Step 3 of 5 : Choose Food Options',
@@ -26,26 +26,26 @@ export default function CreateNav(props) {
   let iconAdjust={
     fontSize: '13px',
     transform: 'translateY(-1px)'
-  }
+  };
 
   return(
  
    
     <nav className='create-nav'>
-             <div className="instructions">
-              <h4> {pageSteps[props.pageNum]} {emoji[props.pageNum]} </h4> 
-             </div>
+      <div className="instructions">
+        <h4> {pageSteps[props.pageNum]} {emoji[props.pageNum]} </h4> 
+      </div>
 
-             <div className="nav-buttons">
-                <button type='button' onClick={() => props.prevPage()}> <FaAngleDoubleLeft style={iconAdjust} /> Previous</button>
-                <button type='button' 
-                  onClick={() => props.saveAsDraft()}>
+      <div className="nav-buttons">
+        <button type='button' onClick={() => props.prevPage()}> <FaAngleDoubleLeft style={iconAdjust} /> Previous</button>
+        <button type='button' 
+          onClick={() => props.saveAsDraft()}>
                   Save as Draft
-                </button>
-                {   props.pageNum === 1 ?
-                      <button  type='submit' form='createform' value="Submit">Next <FaAngleDoubleRight  style={iconAdjust}  /></button> :
-                      <button type='button' onClick={props.handleNextPage}>Next <FaAngleDoubleRight  style={iconAdjust} /></button>
-                }
+        </button>
+        {   props.pageNum === 1 ?
+          <button  type='submit' form='createform' value="Submit">Next <FaAngleDoubleRight  style={iconAdjust}  /></button> :
+          <button type='button' onClick={props.handleNextPage}>Next <FaAngleDoubleRight  style={iconAdjust} /></button>
+        }
                
       </div>
     </nav>

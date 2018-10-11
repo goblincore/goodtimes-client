@@ -19,8 +19,10 @@ export class PostVote extends React.Component {
     }
     return (    
       <div className="container paddingTop post-vote">
+
          <div><MdSentimentSatisfied className="smily huge-icon" /></div>
          <h1> Thanks for your input!</h1>
+
           Your event coordinator will be in touch with the final plan!
        
       </div>
