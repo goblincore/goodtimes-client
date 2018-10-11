@@ -53,6 +53,7 @@ export default class SelectActivity extends React.Component {
   render(){
     let categoryFilters;
     if(this.props.categories.length > 0){
+      console.log('Cat', this.props.categories);
       categoryFilters = this.props.categories.map(category => {
         return <option key={category.id} id={category.id} value={category.id}>{category.name}</option>;
       });

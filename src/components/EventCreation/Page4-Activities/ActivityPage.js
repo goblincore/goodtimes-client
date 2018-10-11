@@ -8,7 +8,7 @@ import WriteActivity from './WriteActivity';
 
 
 
-export  class ActivitySelect extends React.Component {
+export  class ActivityPage extends React.Component {
 
   constructor(props){
     super(props);

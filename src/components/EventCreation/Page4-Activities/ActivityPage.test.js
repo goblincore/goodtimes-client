@@ -3,7 +3,7 @@ import React from 'react';
 import ShallowRenderer from 'react-test-renderer/shallow'; 
 //import expect from 'expect';
 import {shallow, mount} from 'enzyme';
-import  { ActivitySelect } from './ActivityPage';
+import  { ActivityPage } from './ActivityPage';
 import CreateNav from '../CreateNav';
 
 
@@ -14,6 +14,11 @@ import CreateNav from '../CreateNav';
 
 function setup() {
     const props = {
+      activities: ['laundry party', 'mow my lawn as a gift', 'midnight fiesta'],
+      latitude: 39.9526, 
+      longitude: -75.1652,
+      loading: false,
+      categories: ['italian', 'concert', 'waterslide park'],
       prevPage: jest.fn(),
       nextPage: jest.fn(),
        times: ["2018-10-30T11:30:00",
@@ -26,6 +31,7 @@ function setup() {
       },
       restaurantOptions: jest.fn(),
       scheduleOptions: jest.fn(),
+      
       activityOptions: [
         {
           "ebId": "41090701394",
@@ -48,6 +54,7 @@ function setup() {
         }
       ],
      },
+
      restaurants: {
        yelpRestaurants: jest.fn()
      },
@@ -62,7 +69,7 @@ function setup() {
     }
   
     
-    const enzymeWrapper = mount(<ActivitySelect {...props} />)
+    const enzymeWrapper = mount(<ActivityPage {...props} />)
   
     return {
       props,
@@ -71,9 +78,6 @@ function setup() {
   }
   
 
-// times = ["2018-10-30T11:30:00",
-// "2018-10-30T15:30:00",
-// "2018-10-09T21:30:00"]
 
 
 describe('ActivityPage', () => {
@@ -98,6 +102,7 @@ describe('ActivityPage', () => {
       const {props} = setup();
       const { enzymeWrapper } = setup();
       const chooseEventButton = enzymeWrapper.find('button').at(5);
+
       console.log(chooseEventButton);
       chooseEventButton.simulate('click');
       console.log(enzymeWrapper.state());
