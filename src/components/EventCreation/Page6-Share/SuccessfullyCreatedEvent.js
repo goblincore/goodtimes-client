@@ -46,15 +46,18 @@ export default class SuccessfullyCreatedEvent extends React.Component {
   
     return (
       <div className="event-successfully-created">
+        <div className="card">
+              <h2>Nice! Your event has been created successfully.</h2>
+              <div className="event-link-to-share">
+                <h3>Share this link with your friends:</h3>
+                {/* <p id="event-link">{CLIENT_BASE_URL}/guestevents/{this.props.eventState.id}</p> */}
+                <h2 id="short-link">{this.props.eventState.shortUrl}</h2>
+                <button id='copy' onClick={this.handleCopy}>Copy Link</button>  
+              {this.state.copied ? <span id='copied' style={{color: 'red'}}><p>Copied</p></span> : null}
+            </div>
+        </div>
 
-        <h2>Nice! Your event has been created successfully.</h2>
-        <div className="event-link-to-share">
-          <h3>Share this link with your friends:</h3>
-          {/* <p id="event-link">{CLIENT_BASE_URL}/guestevents/{this.props.eventState.id}</p> */}
-          <h2 id="short-link">{this.props.eventState.shortUrl}</h2>
-          <button id='copy' onClick={this.handleCopy}>Copy Link</button>  
-        {this.state.copied ? <span id='copied' style={{color: 'red'}}><p>Copied</p></span> : null}
-        <p></p>
+          <div className="card">
 
           <h3>Email an invite to your friends!</h3>
           {this.state.email ? null : <button id='open-form' onClick={this.openEmail}>Create E-mail</button>}
@@ -65,7 +68,8 @@ export default class SuccessfullyCreatedEvent extends React.Component {
                 Back to Dashboard
             </button>
           </Link>
-        </div>
+          </div>
+        
       </div>
     );
   } 

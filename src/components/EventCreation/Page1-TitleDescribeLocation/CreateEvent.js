@@ -95,7 +95,7 @@ export class CreateEvent extends React.Component {
 
     return (
       <div className="absoluteposition">
-
+         
         <CreateNav saveAsDraft={this.handleSave} pageNum={this.props.pageNum} prevPage={this.props.prevPage} nextPage={this.props.nextPage} handleNextPage={this.handleNextPage} />
     
         <form
