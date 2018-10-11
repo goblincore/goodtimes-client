@@ -19,7 +19,7 @@ export class PostVote extends React.Component {
     }
     return (    
       <div className="container paddingTop post-vote">
-         <h1> Thanks for your input!</h1>
+        <h1> Thanks for your input!</h1>
           Your event coordinator will be in touch with the final plan!
       </div>
                     
