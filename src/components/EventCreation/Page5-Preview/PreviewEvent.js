@@ -1,5 +1,6 @@
 import React from 'react';
-import { putUpdatedDraft } from '../../../actions/Edit-Draft';
+import { getBitly } from '../../../actions/Bitly';
+import { putUpdatedDraft } from '../../../actions/EditDraft';
 import { postNewEvent } from '../../../actions/New-Event';
 import '../../styles/PreviewEvent.css';
 import CreateNav from '../CreateNav';
@@ -21,7 +22,7 @@ export default function PreviewEvent (props) {
     };
 
     if(!props.eventState.draft){ 
-     return props.dispatch(postNewEvent(event))
+      return props.dispatch(postNewEvent(event))
         .then(() => props.nextPage())
         .catch(err => console.error('ERROR HANDLING HERE dispatch(changeErrorMessaeg(err.message))'));
 

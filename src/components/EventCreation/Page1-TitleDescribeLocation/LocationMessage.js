@@ -7,7 +7,7 @@ export default function LocationMessage(props) {
       props.locationFeedback.startsWith('Successfully found') ||
       props.locationFeedback.startsWith('Must provide') ||
       !props.locationFeedback) {
-    return <p>{props.locationFeedback}</p>
+    return <p id='feedback'>{props.locationFeedback}</p>;
     
   } 
   else {
@@ -26,6 +26,7 @@ export default function LocationMessage(props) {
           <button type='button' onClick={() => props.handleNoDispatch()}>No</button>
        
         </div>
+
     );
   } 
 }

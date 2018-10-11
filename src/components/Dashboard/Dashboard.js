@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import {MdAddCircleOutline} from 'react-icons/lib/md';
 import '../styles/Dashboard.css';
 import {Link, Redirect, withRouter} from 'react-router-dom';
-import { fetchUserEvents } from '../../actions/Protected-Data';
+import { fetchUserEvents } from '../../actions/ProtectedData';
 
 
 export class Dashboard extends Component {
@@ -28,6 +28,7 @@ export class Dashboard extends Component {
   }
 
   render() {
+    // console.log(this.props);
     let eventsToDisplay=[];
 
     if(this.props.userEvents !==null && this.props.userEvents.length >= 1){

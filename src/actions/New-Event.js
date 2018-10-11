@@ -1,6 +1,6 @@
 import { API_BASE_URL } from '../config';
 import { normalizeResponseErrors } from './Utils';
-import {fetchUserEvents} from './Protected-Data';
+import {fetchUserEvents} from './ProtectedData';
 
 export const SHOW_NEW_EVENT_STATE = 'SHOW_NEW_EVENT_STATE';
 export const showNewEventState = bool => ({
@@ -28,12 +28,12 @@ export const newEventErrorMessage = message => ({
 });
 
 export const POST_NEW_EVENT_REQUEST = 'POST_NEW_EVENT_REQUEST';
-export const postNewEventRequest = message => ({
+export const postNewEventRequest = () => ({
   type: POST_NEW_EVENT_REQUEST,
   
 });
 export const POST_NEW_EVENT_SUCCESS = 'POST_NEW_EVENT_SUCCESS';
-export const postNewEventSuccess = message => ({
+export const postNewEventSuccess = () => ({
   type: POST_NEW_EVENT_SUCCESS,
   
 });

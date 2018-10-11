@@ -16,7 +16,7 @@ import {
   PUT_UPDATED_DRAFT_REQUEST,
   PUT_UPDATED_DRAFT_SUCCESS
 
-} from '../actions/Edit-Draft';
+} from '../actions/EditDraft';
 
 export const initialState = {
   showNewEvent: false,
