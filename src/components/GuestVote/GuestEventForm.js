@@ -103,7 +103,7 @@ export class GuestEventForm extends Component {
         const restaurantsList = restaurantOptions.map((option, i) => { 
           let link = <a href={option.website}>{option.name}</a>;
           return (
-            <div key={i} className="option_container">
+            <div key={i} id='food-option' className="option_container">
               <label className="input-container"> 
                 {link}
                 <input 
@@ -131,7 +131,7 @@ export class GuestEventForm extends Component {
 
           return (
           
-            <div key={i} className="option_container">
+            <div key={i} id='activity-choice' className="option_container">
               <label className="input-container"> 
                 {link} 
                 <input 
@@ -157,9 +157,9 @@ export class GuestEventForm extends Component {
               <div className="form-outline top-offset">
                 <header className="invite-header">
                   <h2>You're invited to:</h2>
-                  <h1>{title}</h1><br/>
+                  <h1 id='event-title'>{title}</h1><br/>
              
-                  <h4>{description}</h4>
+                  <h4 id='event-description'>{description}</h4>
                 </header>
                 <h2>Vote to decide on a time and place!</h2>
                 <form className="guest-event-form" onSubmit={this.submitVotes}>

@@ -21,7 +21,7 @@ import './styles.css';
 
 const history = createHistory();
 
-class App extends Component{
+export class App extends Component{
     componentWillMount(){
         if(localStorage.getItem('authToken')){
            this.props.dispatch(fetchProtectedData());

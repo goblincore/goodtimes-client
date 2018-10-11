@@ -57,7 +57,7 @@ export default class EventItem extends React.Component{
               this.props.event.restaurantOptions.map((food,i) =>{
                 return(
                   <div key={i} className='date-vote'>
-                     <span className="dates-text"><a title="Visit website" href={food.website} target="_blank">{food.name}</a></span>
+                     <span className="dates-text"><a title="Visit website" href={food.website} target="_blank">{food.name.length > 40 ? `${food.name.slice(0,40)}...` : food.name}</a></span>
                      <span className="votes-text floatRight"> <FaThumbsUp/>  {food.votes}</span>
                   </div>
                 );
@@ -71,7 +71,7 @@ export default class EventItem extends React.Component{
               this.props.event.activityOptions.map((act,i) =>{
                 return(
                   <div key={i} className='date-vote'>
-                    <span className="dates-text"> <a href={act.link} target="_blank">{act.title}</a></span> 
+                    <span className="dates-text"> <a href={act.link} target="_blank">{act.title.length > 40 ? `${act.title.slice(0,40)}...` : act.title}</a></span> 
                     <span className="votes-text floatRight"><FaThumbsUp/> {act.votes}</span>
                   </div>
                 );
