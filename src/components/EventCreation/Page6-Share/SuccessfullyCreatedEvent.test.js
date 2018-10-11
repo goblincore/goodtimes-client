@@ -32,10 +32,9 @@ describe('success page', () => {
   it('should have a button that says Create Email if form not displayed', () => {
     const {props} = setup();
     const { enzymeWrapper } = setup();
+    enzymeWrapper.setState({email: false})
     const createButton = enzymeWrapper.find('#open-form');
-    if(props.email === false){
-      expect(createButton.length).toEqual(1);
-    }
+    expect(createButton.length).toEqual(1);
   });
   it('should have a button that says close if form displayed', () => {
     const {props} = setup();
