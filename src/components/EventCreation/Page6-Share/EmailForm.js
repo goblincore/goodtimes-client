@@ -10,7 +10,28 @@ export class EmailForm extends React.Component {
       error: ''
       
     };
+
+ 
   }
+
+  emailHTML=(e)=>{
+    return `
+    <h1>Hey! You've been invited :D</h1>
+    <p style="font-size:16px;line-height:180%">
+      ${e.target.message.value}
+    </p>
+    <img src="https://media.giphy.com/media/fx5e8vTQDs1Mc/giphy.gif">
+    <hr>
+    <p style="font-size:14px;line-height:180%;font-weight:bold;">
+    Brought to you by <a href="https://goodtimes-client.herokuapp.com">goodtimes</p>
+    
+    
+    </p>
+  `
+  }
+
+
+
 
   sendEmail(e){
     e.preventDefault();
@@ -20,7 +41,7 @@ export class EmailForm extends React.Component {
       from: this.props.currentUser.email,
       subject: e.target.subject.value,
       text: e.target.message.value,
-      html: `<p>${e.target.message.value}</p>`
+      html: this.emailHTML(e)
     }));
     this.setState({sent:true});
   }
