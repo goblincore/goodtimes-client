@@ -5,33 +5,33 @@ import {shallow, mount} from 'enzyme';
 
 function setup() {
   const props = {
-   eventState: {
-    location:{
-      latitude: jest.fn(),
-      longitude: jest.fn()
+    eventState: {
+      location:{
+        latitude: jest.fn(),
+        longitude: jest.fn()
+      },
+      restaurantOptions: jest.fn(),
+      scheduleOptions: jest.fn(),
     },
-    restaurantOptions: jest.fn(),
-    scheduleOptions: jest.fn(),
-   },
-   restaurants: {
-     yelpRestaurants: jest.fn()
-   },
+    restaurants: {
+      yelpRestaurants: jest.fn()
+    },
     newEvent: 
      {
-      restaurants: {
-        yelpRestaurants: jest.fn()
-      }
-    },
+       restaurants: {
+         yelpRestaurants: jest.fn()
+       }
+     },
 
     dispatch: jest.fn()
-  }
+  };
   const localStorage = jest.fn();
-  const enzymeWrapper = mount(<DateSelectPage {...props} localStorage={localStorage}/>)
+  const enzymeWrapper = mount(<DateSelectPage {...props} localStorage={localStorage}/>);
 
   return {
     props,
     enzymeWrapper
-  }
+  };
 }
 
 describe('components', () => {
@@ -40,6 +40,6 @@ describe('components', () => {
       const { enzymeWrapper } = setup();
      
       expect(enzymeWrapper.find('DateList').exists()).toBe(false);
-    })
-  })
-})
+    });
+  });
+});
