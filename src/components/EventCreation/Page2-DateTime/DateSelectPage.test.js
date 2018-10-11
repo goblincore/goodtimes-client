@@ -45,9 +45,6 @@ describe('components', () => {
      
       expect(enzymeWrapper.find('DateList').exists()).toBe(false);
     })
-        // it('matches the snapshot', () => {
-        //     const tree = renderer.create(<DateSelectPage />).toJSON()
-        //     expect(tree).toMathSnapshot()
-        // })
+      
   })
 })
