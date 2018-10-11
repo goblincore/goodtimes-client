@@ -69,8 +69,7 @@ describe('components', () => {
       enzymeWrapper.find('.date-list-item').forEach((node) => {
         expect(node.hasClass('date-list-item')).to.equal(true);
       });
-      //expect(enzymeWrapper.find('#date-list-item')).to.have.lengthOf(3);
-      //expect(enzymeWrapper.find('p').text()).toEqual('No time and dates added yet!');
+    
     })
   })
 })

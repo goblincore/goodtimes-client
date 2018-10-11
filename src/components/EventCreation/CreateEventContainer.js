@@ -116,7 +116,7 @@ render(){
     component = style =>{ 
       return(
         <animated.div className="slides" style={{ ...style  }}>
-        <ActivitySelect
+        <ActivityPage
             pageNum={this.props.pageNum}
             dispatch={this.props.dispatch} 
             eventState={this.props.newEvent}

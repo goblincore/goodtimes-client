@@ -14,11 +14,33 @@ import CreateNav from '../CreateNav';
 
 function setup() {
     const props = {
-      activities: ['laundry party', 'mow my lawn as a gift', 'midnight fiesta'],
+      activities: [{ url: 'google.com', name:'weekend at bernies', description:'laundry party',start: {
+        local:
+        "2018-10-11T18:00:00"
+      }, end: {
+        local:
+        "2018-11-11T18:00:00"
+      }}, 
+      { url: 'google.com', name:'weekend at bernies', description:'mow my lawn as a gift' ,start: {
+        local:
+        "2018-10-11T18:00:00"
+      }, end: {
+        local:
+        "2018-11-11T18:00:00"
+      }}, 
+      { url: 'google.com', name:'weekend at bernies', description: 'midnight fiesta' ,start: {
+        local:
+        "2018-10-11T18:00:00"
+      }, end: {
+        local:
+        "2018-11-11T18:00:00"
+      }}],
       latitude: 39.9526, 
       longitude: -75.1652,
       loading: false,
-      categories: ['italian', 'concert', 'waterslide park'],
+      categories: [{name:'italian', id: "111111111111111111111112"}, 
+      {name: 'concert', id: "111111111111111111111114"}, 
+      {name:'waterslide park', id: "111111111111111111111113"}],
       prevPage: jest.fn(),
       nextPage: jest.fn(),
        times: ["2018-10-30T11:30:00",
@@ -86,34 +108,20 @@ describe('ActivityPage', () => {
       const { enzymeWrapper } = setup();
      
       expect(enzymeWrapper.find('h4').exists()).toBe(true);
-
-
-        // const renderer = new ShallowRenderer();
-        // renderer.render( <ActivitySelect />);
-        // const output =  renderer.getRenderOutput();
-        // console.log(output);
-
-//         expect(result.type).toBe('div');
-// expect(result.props.children).toEqual([
-//   <span className="heading">Title</span>,
-//   <Subcomponent foo="bar" />
     });
     it(`displays event options when 'Choose From List' clicked`, () => {
       const {props} = setup();
       const { enzymeWrapper } = setup();
-      const chooseEventButton = enzymeWrapper.find('button').at(5);
-
-      console.log(chooseEventButton);
+      const chooseEventButton = enzymeWrapper.find('button').at(3);
       chooseEventButton.simulate('click');
-      console.log(enzymeWrapper.state());
   expect(enzymeWrapper.state().display).toEqual('choose');
     });
-    
-
 
     it('always renders a `CreateNav`', () => {
       const {props} = setup();
       const { enzymeWrapper } = setup();
       expect(enzymeWrapper.find(CreateNav).length).toBe(1);
     });
+
+   
 });
