@@ -12,8 +12,9 @@ function setup(){
     locationFeedback: '',
     eventState: {
       location:{
-        latitude: 39.7392, longitude: -104.9903, errorMessage:'',
+        latitude: 39.7392, longitude: -104.9903,
       },
+      errorMessage:'',
       locationCity: {
         city: 'Denver', state: 'CO'}
       ,

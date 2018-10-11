@@ -1,9 +1,9 @@
 import reducer from './Auth';
 import {authRequest, authError} from '../actions/Auth';
 import { fetchProtectedDataError,
-   requestProtectedData, 
-   changeCurrentUser, 
-   fetchUserEventsSuccess} from '../actions/ProtectedData';
+  requestProtectedData, 
+  changeCurrentUser, 
+  fetchUserEventsSuccess} from '../actions/ProtectedData';
 
 
 describe('AuthReducer', () => {
@@ -20,7 +20,7 @@ describe('AuthReducer', () => {
       loading: true,
       error: null
     };
-    const error = 'test error'
+    const error = 'test error';
     const state = reducer(oldState, authError(error));
     expect(state.loading).toEqual(false);
     expect(state.error).toEqual('test error');
@@ -47,7 +47,7 @@ describe('AuthReducer', () => {
       loading: true,
       error: null
     };
-    const error = 'test error'
+    const error = 'test error';
     const state = reducer(oldState, fetchProtectedDataError(error));
     expect(state.loading).toEqual(false);
     expect(state.error).toEqual('test error');
