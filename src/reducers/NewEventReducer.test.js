@@ -17,7 +17,7 @@ describe('newEventReducer', () => {
       loading: false
     };
     const state = reducer(oldState, postNewEventRequest());
-    expect(state.loading).toEqual(true);
+    expect(state.loading).toEqual(false);
   });
   it('should handle update new event state action', () => {
     const oldState = {
@@ -32,14 +32,14 @@ describe('newEventReducer', () => {
       loading: true
     };
     const state = reducer(oldState, postNewEventSuccess());
-    expect(state.loading).toEqual(false);
+    expect(state.loading).toEqual(false); //fixes transition glitch
   });
   it('should handle put updated draft request action', () => {
     const oldState = {
       loading:false
     };
     const state = reducer(oldState, putUpdatedDraftRequest());
-    expect(state.loading).toEqual(true);
+    expect(state.loading).toEqual(false); //fixes transition glitch
   });
   it('should handle load draft into state action', () => {
     const oldState = {
