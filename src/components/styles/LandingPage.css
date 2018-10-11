@@ -10,7 +10,7 @@
 
 .hero{
     position:absolute;
-    left:100px;
+    left:80px;
     max-width:400px;
     text-align:left;
     top:15%;
@@ -86,12 +86,12 @@
     .hero{
         top:6%;
         margin:auto;
-        max-width:100%;
+        max-width:600px;
         
     }
 
     .hero h1{
-        font-size:120px !important;
+        font-size:100px !important;
         text-align:left;
         line-height:120%;
     }

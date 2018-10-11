@@ -12,7 +12,12 @@ export function EventList(props) {
 
   if (props.events) {
     if(props.userEvents.length < 1){
-      return <p><strong>No Events Found! Why don't you create one?</strong></p>;
+      return(
+        <div>
+        <p><strong>No Events Found! Why don't you create one?</strong></p>
+        <img  className="dashboard-plant" src="../../assets/plant.png" alt="plant life" />
+        </div>
+        )
     } 
     else{
       return (
@@ -25,7 +30,12 @@ export function EventList(props) {
   } 
   else{
     if(props.userEvents.length < 1){
-      return <p><strong>No Drafts Found! </strong></p>;
+      return (
+          <div>
+             <p><strong>No Drafts Found! </strong></p>
+             <img className="dashboard-plant" src="../../assets/plant.png" alt="plant life" />
+        </div>
+      )
     } 
     else{
       return (

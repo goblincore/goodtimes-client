@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Transition, animated } from 'react-spring'
 import {connect} from 'react-redux';
-import { Router, withRouter, Switch, Route, Redirect } from 'react-router-dom'
+import {withRouter, Switch, Route, Redirect } from 'react-router-dom'
 
 import  {fetchProtectedData} from './actions/Protected-Data';
 
@@ -35,7 +35,7 @@ class App extends Component{
 
 
         return (
-     <Router history={history}>
+    
             <Route
             render={({ location, ...rest }) => (
                 <div className="fill">
@@ -147,7 +147,7 @@ class App extends Component{
                 </div>
             )}
             />
-        </Router>
+      
         )
     }
    }
