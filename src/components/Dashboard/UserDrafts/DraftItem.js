@@ -3,8 +3,11 @@ import { connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
 import { FaEdit } from 'react-icons/lib/fa';
 import '../../styles/Index.css';
+import {deleteEvent} from '../../../actions/New-Event';
 import { loadDraftIntoReduxState } from '../../../actions/EditDraft';
-
+import DeleteWarning from '../DeleteWarning';
+import { Calendar } from "react-feather";
+import { FaToggleOff, FaToggleOn } from "react-icons/lib/fa";
 
 class DraftItem extends React.Component{
   constructor(props){
@@ -29,6 +32,10 @@ class DraftItem extends React.Component{
     this.setState(
       {showDetails: bool}
     );
+  }
+
+  deleteEvent =()=>{
+    this.props.dispatch(deleteEvent(this.props.event.id));
   }
 
 
@@ -106,13 +113,16 @@ class DraftItem extends React.Component{
     if(this.state.showDetails){
       return(
         <li className='user-event'>
-          <h2>{event.title}</h2>
+          <span>
+           <Calendar className="icon-adjust"/> <h2>{event.title}</h2>
           <FaEdit
             className="edit-icon"
             onClick={()=>this.addDraftToReduxState(event, 1)}
           />
+           <button className="floatRight noBorder" onClick={()=> this.toggleEventDetails(false)}>Hide Details <FaToggleOn className="general-icon" /></button>
+          </span>
           <p>{event.description}</p>
-          <button onClick={()=> this.toggleEventDetails(false)}>See Details</button>
+         
 
           <div className='date-options'>
             <h4>Date/Time options 
@@ -126,7 +136,7 @@ class DraftItem extends React.Component{
               return(
                 <div key={i} className='date-vote'>
                   <span className="dates-text">{date.date}</span>
-                  <span className="votes-text floatRight">Votes: {date.votes}</span>
+                 
                 </div>
               );  
             })}
@@ -141,13 +151,17 @@ class DraftItem extends React.Component{
     else{
       return(
         <li className='user-event'>  
-          <h2>{this.props.event.title}</h2>
+          <span>
+              <Calendar  className="icon-adjust" /> <h2>{this.props.event.title}</h2>
+              <button className="floatRight noBorder" onClick={()=> this.toggleEventDetails(true)}>See Details  <FaToggleOff className="general-icon" /></button>
+          </span>
           <FaEdit
             className="edit-icon"
             onClick={()=>this.addDraftToReduxState(this.props.event, 1)} 
           />
           <p>{this.props.event.description}</p>
-          <button onClick={()=> this.toggleEventDetails(true)}>See Details</button>
+          <DeleteWarning deleteEvent={this.deleteEvent}/>
+          
         </li>
       );
     }    

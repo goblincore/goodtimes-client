@@ -135,7 +135,7 @@ export  class ActivityPage extends React.Component {
           <CreateNav saveAsDraft={this.props.saveAsDraft} pageNum={this.props.pageNum} prevPage={this.props.prevPage} nextPage={this.props.nextPage} handleNextPage={this.props.nextPage} />
     
 
-      <div className="card border-right bottom-offset"> 
+      <div className="card border-right"> 
         <p>{this.props.eventState.errorMessage}</p>
         <button className="choose-from-list" onClick={() => this.setState({display: 'choose'})}>Choose From List</button>
         <button onClick={() => this.setState({display: 'write'})}>Create My Own Activity</button>

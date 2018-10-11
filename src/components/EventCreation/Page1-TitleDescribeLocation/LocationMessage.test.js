@@ -2,7 +2,6 @@ import React from 'react';
 import { shallow, mount } from 'enzyme';
 import LocationMessage from './LocationMessage';
 
-
 function setup(){
   const props = {
     locationOptions: 1,

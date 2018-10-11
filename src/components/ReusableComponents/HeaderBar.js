@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import {Link} from 'react-router-dom';
-import {changeCurrentUser} from '../../actions/Protected-Data';
+import {changeCurrentUser} from '../../actions/ProtectedData';
 import {MdSentimentSatisfied} from 'react-icons/lib/md';
 import Button from './Button';
 import '../styles/HeaderBar.css';
@@ -15,6 +15,7 @@ export class HeaderBar extends Component {
   logOut() {
     localStorage.removeItem('authToken');
     this.props.dispatch(changeCurrentUser(null));
+
   }
 
   render(){
@@ -33,22 +34,7 @@ export class HeaderBar extends Component {
       }
     }
 
-    let signUpButton, logInButton, aboutButton;
-    aboutButton=(
-      <Button textColor={textColor} location={this.props.history.location} to="/about" className="signup"  >About</Button>
-    );
-    signUpButton =(
-      <Button textColor={textColor} location={this.props.history.location} to="/register" className="signup"  >Sign Up</Button>
-    );
-    logInButton =(
-      <Button textColor={textColor} location={this.props.history.location} to="/login" className="login" >Log In</Button>
-    );
-
-
-   
-
-
-   
+    let { aboutButton, signUpButton, logInButton } = this.newMethod(textColor);
 
     if(this.props.loggedIn){
       return(
@@ -70,7 +56,7 @@ export class HeaderBar extends Component {
       return (
         <section className="header-bar opaque-background">
           <div className="header-logo">
-            <h3 title="Goodtimes" >  <Link style={textColor} to="/home"><MdSentimentSatisfied className="smily" />goodtimes</Link></h3>
+            <h3 title="Goodtimes" >  <Link style={textColor} to="/"><MdSentimentSatisfied className="smily" />goodtimes</Link></h3>
           </div>
 
           <div className="header-nav" style={textColor}>
@@ -82,6 +68,14 @@ export class HeaderBar extends Component {
         </section>
       );
     }
+  }
+
+  newMethod(textColor) {
+    let signUpButton, logInButton, aboutButton;
+    aboutButton = (<Button textColor={textColor} location={this.props.history.location} to="/about" className="signup">About</Button>);
+    signUpButton = (<Button textColor={textColor} location={this.props.history.location} to="/register" className="signup">Sign Up</Button>);
+    logInButton = (<Button textColor={textColor} location={this.props.history.location} to="/login" className="login">Log In</Button>);
+    return { aboutButton, signUpButton, logInButton };
   }
 }
 

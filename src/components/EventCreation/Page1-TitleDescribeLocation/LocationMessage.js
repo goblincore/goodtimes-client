@@ -12,17 +12,21 @@ export default function LocationMessage(props) {
   } 
   else {
     return(
-      <p>
-        {props.locationFeedback}
-        <button type='button' 
-          onClick={() => {
-            const city = props.locationFeedback.split(',')[0].split('mean')[1].trim();
-            const state = props.locationFeedback.split(',')[1].split('?')[0].trim();
-            props.handleYesDispatch(city, state);
-            props.setState({locationOption: 1, locationFeedback: ''});
-          }}>Yes</button>
-        <button type='button' onClick={() => props.handleNoDispatch()}>No</button>
-      </p>
+      <div>
+           <p>
+          {props.locationFeedback}
+          </p>
+          <button type='button' 
+            onClick={() => {
+              const city = props.locationFeedback.split(',')[0].split('mean')[1].trim();
+              const state = props.locationFeedback.split(',')[1].split('?')[0].trim();
+              props.handleYesDispatch(city, state);
+              props.setState({locationOption: 1, locationFeedback: ''});
+            }}>Yes</button>
+          <button type='button' onClick={() => props.handleNoDispatch()}>No</button>
+       
+        </div>
+
     );
   } 
 }

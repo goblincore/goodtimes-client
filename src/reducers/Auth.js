@@ -1,8 +1,5 @@
-import {
-    AUTH_REQUEST,
-    AUTH_ERROR
-} from '../actions/Auth';
-import { FETCH_PROTECTED_DATA_ERROR, REQUEST_PROTECTED_DATA, CHANGE_CURRENT_USER, FETCH_USEREVENTS_SUCCESS} from '../actions/Protected-Data';
+import { AUTH_REQUEST, AUTH_ERROR } from '../actions/Auth';
+import { FETCH_PROTECTED_DATA_ERROR, REQUEST_PROTECTED_DATA, CHANGE_CURRENT_USER, FETCH_USEREVENTS_SUCCESS} from '../actions/ProtectedData';
 
 const initialState = {
     currentUser: null,
@@ -31,8 +28,7 @@ export default function reducer(state = initialState, action) {
 
     } else if (action.type === REQUEST_PROTECTED_DATA) {
         return Object.assign({}, state, {
-            loading: true,
-            error: action.error
+            loading: true
         });
 
     } else if (action.type === CHANGE_CURRENT_USER) {
