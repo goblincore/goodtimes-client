@@ -72,11 +72,8 @@ export class EmailForm extends React.Component {
           <label htmlFor='subject'>Enter the subject of the e-mail.</label>
           <input placeholder="Let's hang out!" id="subject"></input>
           <label htmlFor='message'>Write the body of the e-mail.</label>
-          <textarea defaultValue={`Hi! Let's get together.
-
-              Please vote on when and where we should hang out here:
- 
-              ${this.props.eventState.shortUrl}`} id="message">
+          <textarea
+           defaultValue={`Hey! It's your friend Chadwick. Let's get together. Please vote on when and where we should hang out here: ${this.props.shortUrl}`} id="message">
           </textarea>
           <button type="submit">Send</button>
           <button type='reset' id='close-form' onClick={() => this.props.openEmail()}>Close</button>        
@@ -88,6 +85,7 @@ export class EmailForm extends React.Component {
 }
 
 const mapStateToProps = state => ({
+  shortUrl: state.newEvent.shortUrl,
   currentUser: state.auth.currentUser,
   loading: state.newEvent.loading
 });

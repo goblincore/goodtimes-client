@@ -1,7 +1,3 @@
-.absoluteposition{
-    /* position:absolute; */
-   
-}
 
 
 .slides{
@@ -11,6 +7,10 @@
     padding-right:50px;
 }
 
+.absoluteposition{
+    overflow:hidden;   
+  }
+  
 
 .create-nav{
    

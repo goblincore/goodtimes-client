@@ -90,14 +90,13 @@ export default class EventItem extends React.Component{
     else{
       return(
         <li className='user-event'>
-         <span>  
-           <Calendar  className="icon-adjust" /> <h2>{this.props.event.title}</h2>    
+           <span>  
+             <Calendar  className="icon-adjust" /> <h2>{this.props.event.title}</h2>    
             <button className="floatRight noBorder" onClick={()=>this.toggleEventDetails(true)}>See Details <FaToggleOff className="general-icon" /></button>
           </span> 
     
           <p>{this.props.event.description}</p>
-          {/* <p>View Poll Page</p>
-          <p>Current Highest Votes: </p> */}
+         
         
           <DeleteWarning deleteEvent={this.deleteEvent}/>
         </li>

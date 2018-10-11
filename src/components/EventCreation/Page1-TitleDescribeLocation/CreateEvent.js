@@ -95,7 +95,7 @@ export class CreateEvent extends React.Component {
 
     return (
       <div className="absoluteposition">
-
+         
         <CreateNav saveAsDraft={this.handleSave} pageNum={this.props.pageNum} prevPage={this.props.prevPage} nextPage={this.props.nextPage} handleNextPage={this.handleNextPage} />
     
         <form
@@ -111,7 +111,7 @@ export class CreateEvent extends React.Component {
             type="text"
             id="eventTitle"
             name="eventTitle"
-            placeholder="Get together"
+            placeholder="Big Night Out"
             value={this.props.eventState.title}
             onChange={(e) => {
               this.props.dispatch(updateNewEventState({title: e.target.value}));
@@ -162,6 +162,7 @@ export class CreateEvent extends React.Component {
           <label htmlFor="eventDescription">
                     Enter a short description for your event:
             <textarea rows="4" cols="50" name="eventDescription" 
+              placeholder="Hey! I'm thinking of having a night out soon; meet at my house and head out..."
               value={this.props.eventState.description} 
               onChange={e => this.props.dispatch(updateNewEventState({description: e.target.value}))}
             />
