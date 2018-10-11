@@ -1,6 +1,6 @@
 .user-event{
   display: inline-block;
-  border: dotted grey 1px;
+  border: dashed 1px #ccc;
   border-radius:6px;
   padding: 10px;
   text-align: left;

@@ -7,23 +7,23 @@ const renderer = require('react-test-renderer');
 
 function setup() {
   const props = {
-   eventState: {
-    location:{
-      latitude: jest.fn(),
-      longitude: jest.fn()
+    eventState: {
+      location:{
+        latitude: jest.fn(),
+        longitude: jest.fn()
+      },
+      restaurantOptions: jest.fn(),
+      scheduleOptions: jest.fn(),
     },
-    restaurantOptions: jest.fn(),
-    scheduleOptions: jest.fn(),
-   },
-   restaurants: {
-     yelpRestaurants: jest.fn()
-   },
+    restaurants: {
+      yelpRestaurants: jest.fn()
+    },
     newEvent: 
      {
-      restaurants: {
-        yelpRestaurants: jest.fn()
-      }
-    },
+       restaurants: {
+         yelpRestaurants: jest.fn()
+       }
+     },
 
     dispatch: jest.fn()
   }
@@ -34,7 +34,7 @@ function setup() {
   return {
     props,
     enzymeWrapper
-  }
+  };
 }
 
 
@@ -44,10 +44,7 @@ describe('components', () => {
       const { enzymeWrapper } = setup();
      
       expect(enzymeWrapper.find('DateList').exists()).toBe(false);
-    })
-        // it('matches the snapshot', () => {
-        //     const tree = renderer.create(<DateSelectPage />).toJSON()
-        //     expect(tree).toMathSnapshot()
-        // })
-  })
-})
+
+    });
+  });
+});

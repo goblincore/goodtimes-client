@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-
+import {MdSentimentSatisfied} from 'react-icons/lib/md';
 
 export class PostVote extends React.Component {
   constructor(props){
@@ -19,8 +19,12 @@ export class PostVote extends React.Component {
     }
     return (    
       <div className="container paddingTop post-vote">
-        <h1> Thanks for your input!</h1>
+
+         <div><MdSentimentSatisfied className="smily huge-icon" /></div>
+         <h1> Thanks for your input!</h1>
+
           Your event coordinator will be in touch with the final plan!
+       
       </div>
                     
     );

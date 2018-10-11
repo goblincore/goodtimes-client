@@ -8,9 +8,9 @@ describe('error 404', () => {
   it('should render a container div', () =>{
     const divs = enzymeWrapper.find('div');
     expect(divs.length).toBeGreaterThan(0);
-  })
+  });
   it('should say the right message', () => {
     const message = enzymeWrapper.find('h1');
     expect(message.text()).toEqual('Oops...Page not found');
-  })
-})
+  });
+});
