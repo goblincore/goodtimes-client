@@ -8,6 +8,7 @@ export class EmailForm extends React.Component {
     this.state = {
       sent: false,
       error: ''
+      
     };
   }
 
@@ -40,7 +41,18 @@ export class EmailForm extends React.Component {
     this.setState({error: warning});
   }
 
+  componentDidUpdate(){
+    
+   
+  }
+
+  componentDidMount(){
+    console.log('email form mounted, props',this.props);
+     
+  }
+
   render(){
+    
     let alertBox;
     if(this.props.loading === true){
       alertBox = <div id='alert-box'><h2>Sending...</h2></div>;
@@ -72,9 +84,11 @@ export class EmailForm extends React.Component {
           <label htmlFor='subject'>Enter the subject of the e-mail.</label>
           <input placeholder="Let's hang out!" id="subject"></input>
           <label htmlFor='message'>Write the body of the e-mail.</label>
+          {this.props.shortUrl &&
           <textarea
-           defaultValue={`Hey! It's your friend Chadwick. Let's get together. Please vote on when and where we should hang out here: ${this.props.shortUrl}`} id="message">
+           defaultValue={`Hey! It's your friend Chadwick. Let's get together. Please vote on when and where we should hang out here: ${this.props.shortUrl}`} id="message"> 
           </textarea>
+          }
           <button type="submit">Send</button>
           <button type='reset' id='close-form' onClick={() => this.props.openEmail()}>Close</button>        
         </form>
