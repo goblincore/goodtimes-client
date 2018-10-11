@@ -11,6 +11,12 @@
 
 }
 
+#dashboard_main h2{
+    font-size:36px;
+    line-height:130%;
+    margin-top:0px;
+}
+
 #dashboard_main p{
  
     line-height:180%;
@@ -58,6 +64,11 @@
 
   .doggy-img{
       display:none;
+  }
+
+  #dashboard_eventlist{
+    width:100%;
+    min-width:unset;
   }
   
 

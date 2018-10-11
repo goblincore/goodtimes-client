@@ -25,6 +25,10 @@
       margin-top:20px;
     }
 
+    .nav-buttons button{
+        margin-right:1px;
+    }
+
     #create-form{
         padding-bottom:60px;
     }
@@ -37,8 +41,11 @@
     }
 
     .create-nav{
-        height:100px;
+        height:unset;
+        overflow:hidden;
     }
+
+
    
 }
    

@@ -12,8 +12,10 @@ export default function LocationMessage(props) {
   } 
   else {
     return(
-        <p>
+      <div>
+           <p>
           {props.locationFeedback}
+          </p>
           <button type='button' 
             onClick={() => {
               const city = props.locationFeedback.split(',')[0].split('mean')[1].trim();
@@ -22,7 +24,8 @@ export default function LocationMessage(props) {
               props.setState({locationOption: 1, locationFeedback: ''});
             }}>Yes</button>
           <button type='button' onClick={() => props.handleNoDispatch()}>No</button>
-        </p>
+       
+        </div>
     );
   } 
 }

@@ -53,7 +53,7 @@ export default function newEventReducer (state=initialState, action) {
   else if (action.type === POST_NEW_EVENT_REQUEST) {
 
     return Object.assign({}, state, {
-      loading: true
+      loading: false
     });
   }
   else if (action.type === UPDATE_NEW_EVENT_STATE) {

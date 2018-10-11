@@ -101,8 +101,8 @@ export default class DateSelectPage extends React.Component {
                  <div className="full-width-button" >
                <p className='error-message'>{this.props.eventState.errorMessage}</p>
                 <button  onClick={this.handleSave}>
-                   <MdAddCircleOutline />
-                        Add this time and date
+                  
+                        Add this time and date  <MdAddCircleOutline />
                  </button>
                </div>
             </div>
