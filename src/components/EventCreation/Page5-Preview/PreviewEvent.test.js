@@ -1,5 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import  PreviewEvent  from  './PreviewEvent';
 import {shallow, mount} from 'enzyme';
 import CreateNav from '../CreateNav';

@@ -4,10 +4,10 @@ import {withRouter} from 'react-router-dom';
 import { FaEdit } from 'react-icons/lib/fa';
 import '../../styles/Index.css';
 import {deleteEvent} from '../../../actions/New-Event';
-import { loadDraftIntoReduxState } from '../../../actions/Edit-Draft';
+import { loadDraftIntoReduxState } from '../../../actions/EditDraft';
 import DeleteWarning from '../DeleteWarning';
 import { Calendar } from "react-feather";
-import { FaThumbsUp, FaToggleOff, FaToggleOn } from "react-icons/lib/fa";
+import { FaToggleOff, FaToggleOn } from "react-icons/lib/fa";
 
 class DraftItem extends React.Component{
   constructor(props){

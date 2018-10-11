@@ -3,7 +3,7 @@ import { Transition, animated } from 'react-spring'
 import {connect} from 'react-redux';
 import {withRouter, Switch, Route, Redirect } from 'react-router-dom'
 
-import  {fetchProtectedData} from './actions/Protected-Data';
+import  {fetchProtectedData} from './actions/ProtectedData';
 
 //App components
 import LandingPage from './components/HomePage/LandingPage';
@@ -12,10 +12,9 @@ import HeaderBar from './components/ReusableComponents/HeaderBar.js';
 import LoginPage  from './components/HomePage/LogIn/LoginPage';
 import AboutPage from './components/HomePage/About/AboutPage';
 import Dashboard from './components/Dashboard/Dashboard';
-import NewEventMain from './components/EventCreation/newEventMain';
+import NewEventMain from './components/EventCreation/NewEventMain';
 import GuestEventForm from './components/GuestVote/GuestEventForm';
 import createHistory from 'history/createBrowserHistory';
-
 import './styles.css';
 
 
@@ -105,11 +104,11 @@ class App extends Component{
                           el.style.transform='';
                           el.classList.add('notransform');
                         }
-                        // console.log('ONREST el',el);
+                     
                       }
                       }}
                     >
-                    {/* <Transition  {...transition} keys={location.pathname.split('/').filter(a => a)[0]}> */}
+                
                     {style => (
                         <Switch location={location}>
                      

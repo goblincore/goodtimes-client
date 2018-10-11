@@ -16,7 +16,7 @@ import {
   PUT_UPDATED_DRAFT_REQUEST,
   PUT_UPDATED_DRAFT_SUCCESS
 
-} from '../actions/Edit-Draft';
+} from '../actions/EditDraft';
 
 export const initialState = {
   showNewEvent: false,
@@ -65,7 +65,7 @@ export default function newEventReducer (state=initialState, action) {
     });
   }  else if (action.type === PUT_UPDATED_DRAFT_REQUEST) {
     return Object.assign({}, state, {
-      loading: true
+      loading: false
     });
   } else if (action.type === LOAD_DRAFT_INTO_REDUX_STATE) {
     return Object.assign({}, state,  action.draftObject

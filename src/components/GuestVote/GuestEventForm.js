@@ -177,9 +177,9 @@ class GuestEventForm extends Component {
               </div>
             
             <br/>
-            {this.state.errorMessage}
             <br/>
             <div className="submit-container">
+                <p>{this.state.errorMessage}</p>
                   <button  type="submit" id="submit-votes">
                     Submit Vote
                   </button>
