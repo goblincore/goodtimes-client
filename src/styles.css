@@ -270,3 +270,8 @@ input[type='checkbox'] {
  .delete-icon:hover{
    opacity:1;
  }
+
+
+ .huge-icon{
+   font-size:150px;
+ }

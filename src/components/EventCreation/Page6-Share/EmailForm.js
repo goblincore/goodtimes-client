@@ -41,15 +41,6 @@ export class EmailForm extends React.Component {
     this.setState({error: warning});
   }
 
-  componentDidUpdate(){
-    
-   
-  }
-
-  componentDidMount(){
-    console.log('email form mounted, props',this.props);
-     
-  }
 
   render(){
     
