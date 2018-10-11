@@ -31,7 +31,7 @@ export default class DeleteWarning extends React.Component {
 		}
 		else {
 			return (
-				<a onClick={this.deleteprompt}> <Trash2 size="18"/> Delete</a>
+				<a onClick={this.deleteprompt}> <Trash2 size="18" className="icon-adjust" /> Delete</a>
 			)
 		}
 	}

@@ -1,6 +1,6 @@
 import { API_BASE_URL } from '../config';
 import { normalizeResponseErrors } from './Utils';
-import {fetchUserEvents} from './Protected-Data';
+import {fetchUserEvents} from './ProtectedData';
 
 export const SHOW_NEW_EVENT_STATE = 'SHOW_NEW_EVENT_STATE';
 export const showNewEventState = bool => ({

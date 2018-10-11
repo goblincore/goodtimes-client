@@ -53,7 +53,7 @@ export default function newEventReducer (state=initialState, action) {
   else if (action.type === POST_NEW_EVENT_REQUEST) {
 
     return Object.assign({}, state, {
-      loading: true
+      loading: false
     });
   }
   else if (action.type === UPDATE_NEW_EVENT_STATE) {
@@ -65,7 +65,7 @@ export default function newEventReducer (state=initialState, action) {
     });
   }  else if (action.type === PUT_UPDATED_DRAFT_REQUEST) {
     return Object.assign({}, state, {
-      loading: true
+      loading: false
     });
   } else if (action.type === LOAD_DRAFT_INTO_REDUX_STATE) {
     return Object.assign({}, state,  action.draftObject

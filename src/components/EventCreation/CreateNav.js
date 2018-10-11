@@ -24,7 +24,7 @@ export default function CreateNav(props) {
   ];
 
   let iconAdjust={
-    fontSize: '18px',
+    fontSize: '13px',
     transform: 'translateY(-1px)'
   };
 
