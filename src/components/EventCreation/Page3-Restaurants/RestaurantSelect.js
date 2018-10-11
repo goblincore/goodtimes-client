@@ -3,6 +3,7 @@ import { fetchYelpRestaurants, fetchAllYelpRestaurants } from '../../../actions/
 import { updateNewEventState, newEventErrorMessage } from '../../../actions/New-Event';
 import '../../styles/RestaurantSelect.css';
 import CreateNav from '../CreateNav';
+import { MdHighlightOff } from "react-icons/lib/md";
 
 export default class RestaurantSelect extends React.Component {
 
@@ -102,8 +103,9 @@ export default class RestaurantSelect extends React.Component {
 
     if(this.props.eventState.restaurantOptions.length > 0){
       yelpRestauransDisplay = this.props.eventState.restaurantOptions.map(restaurant => {
-        return <li key={restaurant.yelpId} data-yelpid={restaurant.yelpId} onClick={(e) => this.deleteYelpWhenClicked(e)}>{restaurant.name} </li>;});
-    }
+        return <li key={restaurant.yelpId} >{restaurant.name.length > 20 ? `${restaurant.name.slice(0,20)}...` : restaurant.name}  <MdHighlightOff className="icon-adjust delete-icon" data-yelpid={restaurant.yelpId} onClick={(e) => this.deleteYelpWhenClicked(e)}/>   </li>;});
+    }   
+
     return(
       <div className="container text-left">
         <div className="top-wrapper">
