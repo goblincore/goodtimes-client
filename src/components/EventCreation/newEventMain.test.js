@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
-import {NewEventMain} from './newEventMain';
+import {NewEventMain} from './NewEventMain';
 import CreateEventContainer from './CreateEventContainer';
 import EventBottomNav from './EventBottomNav';
 
