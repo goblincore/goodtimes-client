@@ -1,6 +1,6 @@
 import React from 'react';
 import EventItem from './EventItem'
-import {shallow, mount} from 'enzyme';
+import {shallow} from 'enzyme';
 import {userEvents} from '../../../data/test-data'
 
 

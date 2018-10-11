@@ -1,6 +1,6 @@
 import React from 'react';
 import DraftItem from './DraftItem'
-import {shallow, mount} from 'enzyme';
+import {shallow} from 'enzyme';
 import {userEvents} from '../../../data/test-data'
 
 

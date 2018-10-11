@@ -1,6 +1,6 @@
 import React from 'react';
 import DeleteWarning from './DeleteWarning'
-import {shallow, mount} from 'enzyme';
+import {shallow} from 'enzyme';
 
 
 
