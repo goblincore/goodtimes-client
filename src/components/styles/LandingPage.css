@@ -55,20 +55,28 @@
 
 @media only screen and (max-width: 450px) {
     .hero{
-        left:25px;
-        top:20px;
+       text-align:center;
+        width: 100%;
+        background: white;
+        left:0px;
+        top:0px;
+    }
+
+    .hero h3{
+        display:none;
     }
 
     .hero h1{
-        font-size:50px !important;
-        text-align:left;
+        font-size:30px !important;
+        text-align:center;
         line-height:120%;
+        margin-top:32% !important;
     }
 
     .home-img{
-        width:75%;
-        left:25%;
-        transform:translateX(2%);
+        width: 275%;
+        left: -25%;
+        transform: translateX(2%);
     }
 
 

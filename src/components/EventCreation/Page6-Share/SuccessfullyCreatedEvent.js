@@ -12,7 +12,7 @@ export default class SuccessfullyCreatedEvent extends React.Component {
     this.state={
       value:'',
       copied:false,
-      email:false
+      email:true
     };
   }
 
@@ -55,6 +55,10 @@ export default class SuccessfullyCreatedEvent extends React.Component {
                 <button id='copy' onClick={this.handleCopy}>Copy Link</button>  
               {this.state.copied ? <span id='copied' style={{color: 'red'}}><p>Copied</p></span> : null}
             </div>
+            <div className="doggy-img">
+              <img src="../../assets/dog2.png" alt="doggy" />
+            </div> 
+             
         </div>
 
           <div className="card">

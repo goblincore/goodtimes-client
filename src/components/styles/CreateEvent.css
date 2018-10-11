@@ -44,3 +44,40 @@ select{
 .event-form{
   margin-bottom: 100px;
 }
+
+@media only screen and (max-width: 500px) {
+  .create-nav {
+    width: 100%;
+    text-align: center;
+    padding-bottom: 0px; 
+    padding-right: 0px; 
+    padding-left: 0px;
+    height:unset;
+  }
+
+  .instructions {
+    float: none;
+    width: 100%;
+    text-align: center;
+    display: block;
+ 
+ }
+
+  .event-form {
+    max-width: 350px;
+    padding-left: 0px;
+    padding:20px;
+    text-align: left;
+    float: left;
+  }
+
+    .card-container{
+      width:100%;
+    }
+
+    .card{
+      width:100% !important;
+    }
+
+}
+ 
