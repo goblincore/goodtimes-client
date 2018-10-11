@@ -1,4 +1,4 @@
-# Goodtimes
+# Goodtimes [![Build Status](https://travis-ci.org/thinkful-ei22/its_a_date_client.svg?branch=development)](https://travis-ci.org/thinkful-ei22/its_a_date_client)
 
 ### *Let the Goodtimes roll!*
 

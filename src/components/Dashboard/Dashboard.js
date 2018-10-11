@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import {MdAddCircleOutline} from 'react-icons/lib/md';
 import '../styles/Dashboard.css';
 import {Link, Redirect, withRouter} from 'react-router-dom';
-import { fetchUserEvents } from '../../actions/Protected-Data';
+import { fetchUserEvents } from '../../actions/ProtectedData';
 
 
 export class Dashboard extends Component {
@@ -15,27 +15,23 @@ export class Dashboard extends Component {
     };
   }
 
-  // Get most recent event state whenever Dashboard renders
-  // and once every 15 seconds
   componentWillMount(){
     this.props.dispatch(fetchUserEvents());
-   
   }
-
-
- 
 
   displayEvents(){
     this.setState({display:true});
   }
+
   displayDrafts(){
     this.setState({display:false});
   }
-  render() {
-    // console.log('THis.props.user events', this.props.userEvents);
-    let eventsToDisplay=[];
-    if(this.props.userEvents !==null && this.props.userEvents.length >= 1){
 
+  render() {
+    // console.log(this.props);
+    let eventsToDisplay=[];
+
+    if(this.props.userEvents !==null && this.props.userEvents.length >= 1){
       switch(this.state.display){
       //true = display active events, false = display drafts
       case true:
@@ -44,27 +40,25 @@ export class Dashboard extends Component {
       case false:
         eventsToDisplay = this.props.userEvents.filter(event => event.draft === true);
         break;
+      default:
+        break;
       }
     }
-    // console.log('EVENTS to display',eventsToDisplay);
+
     if(this.props.loggedIn){
       return (
         <div className="dashboard-wrapper">
-         
           <div id="dashboard_main">
-            <h2>Hey {this.props.currentUser.username}!</h2>
-
+            <h2>Hey {this.props.currentUser.username}! <span className="ap ap-tada"></span></h2>
             <p>Welcome to your dashboard. Here you can create new events or manage
                              events that you've already created. 
             </p>
             <button id="display-drafts" onClick={() => this.displayDrafts()}>Drafts</button>
             <button id="display-active-events" onClick={() => this.displayEvents()}>Active Events</button>
             <Link to="/create-event"><h3>Create New Event  <MdAddCircleOutline /></h3></Link>
-            <div id="event_boxes">
-            
-            </div>
-
-                    
+            <div className="doggy-img">
+              <img src="../../assets/dog1.png" alt="doggy" />
+            </div>      
           </div>
           <div id="dashboard_eventlist">
             <ul className="block-li">
@@ -75,13 +69,13 @@ export class Dashboard extends Component {
       );
     }
     else {
-      return <Redirect to='/home' />;
+      return <Redirect to='/' />
     }
   }
 }
 
 
-const mapStateToProps = state => ({
+export const mapStateToProps = state => ({
   loggedIn: state.auth.currentUser !== null,
   currentUser: state.auth.currentUser,
   userEvents:state.auth.userEvents,

@@ -1,10 +1,13 @@
 import React from 'react';
 import { connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
-import { MdEdit } from 'react-icons/lib/md';
+import { FaEdit } from 'react-icons/lib/fa';
 import '../../styles/Index.css';
-import { loadDraftIntoReduxState } from '../../../actions/Edit-Draft';
-
+import {deleteEvent} from '../../../actions/New-Event';
+import { loadDraftIntoReduxState } from '../../../actions/EditDraft';
+import DeleteWarning from '../DeleteWarning';
+import { Calendar } from "react-feather";
+import { FaToggleOff, FaToggleOn } from "react-icons/lib/fa";
 
 class DraftItem extends React.Component{
   constructor(props){
@@ -13,8 +16,8 @@ class DraftItem extends React.Component{
       showDetails: false
     
     };
-    
   }
+  
   //LOADS DRAFT INTO 'newEvent' of Redux state and redirects page to edit
   addDraftToReduxState(updateObject, pageCount){
     this.props.dispatch(loadDraftIntoReduxState(updateObject));
@@ -31,109 +34,115 @@ class DraftItem extends React.Component{
     );
   }
 
+  deleteEvent =()=>{
+    this.props.dispatch(deleteEvent(this.props.event.id));
+  }
+
 
   render(){ 
-    //if event contains activity options or restaurant options, 
-    //then display. otherwise, display 'add event/restaurant'
     let activtyOptionsDisplay, restaurantOptionsDisplay;
-    if(this.props.event.activityOptions.length > 0){
+    const {event} = this.props
+
+    if(event.activityOptions.length > 0){
       activtyOptionsDisplay = (
         <div className='date-options'>
           <p>Event options 
-            <MdEdit
-              className="edit-activity-options"
-              onClick={()=>this.addDraftToReduxState(this.props.event, 4)}/>
+            <FaEdit
+             className="edit-icon"
+              onClick={()=>this.addDraftToReduxState(this.props.event, 4)}
+            />
           </p>
-          {this.props.event.activityOptions.map((act,i) =>{
+          {event.activityOptions.map((act,i) =>{
             return(
               <div key={i} className='date-vote'>
                 <a href={act.link} target="_blank">{act.title}</a>
-                <p>Votes: {act.votes}</p>
+              
               </div>
             );
-          })
-          }
+          })}
         </div>
       );
-    } else {
+    } 
+    else {
       activtyOptionsDisplay = (
         <div className='date-options'>
-          <p>Add an Event
-            <MdEdit
-              className="edit-activity-options"
-              onClick={()=>this.addDraftToReduxState(this.props.event, 4)}/>   
-          </p>
+          <h4>Add an Event
+            <FaEdit
+               className="edit-icon"
+              onClick={()=>this.addDraftToReduxState(event, 4)}
+            />   
+          </h4>
         </div>
       );
     }
 
-    if(this.props.event.restaurantOptions.length > 0){ 
+    if(event.restaurantOptions.length > 0){ 
       restaurantOptionsDisplay = (
         <div className='date-options'>
-          <p>Restaurant options   
-            <MdEdit
-              className="edit-restaurant-options"
-              onClick={()=>this.addDraftToReduxState(this.props.event, 3)}/> 
-          </p>
+          <h4>Restaurant options   
+            <FaEdit
+               className="edit-icon"
+              onClick={()=>this.addDraftToReduxState(event, 3)}
+            /> 
+          </h4>
                 
-          {this.props.event.restaurantOptions.map((food,i) =>{
+          {event.restaurantOptions.map((food,i) =>{
             return(
               <div key={i} className='date-vote'>
-                <a href={food.website} target="_blank">{food.name}</a>
-                <p>Votes: {food.votes}</p>
+                <span className="dates-text"><a href={food.website} target="_blank">{food.name}</a></span> 
+               
               </div>
             );
-          })
-          }
+          })}
         </div>
       );
 
-    } else {
+    } 
+    else {
       restaurantOptionsDisplay = (
         <div className='date-options'>
-          <p>Add Restaurant  
-            <MdEdit
-              className="edit-restaurant-options"
-              onClick={()=>this.addDraftToReduxState(this.props.event, 3)}/> 
-          </p>
+          <h4>Add Restaurant  
+            <FaEdit
+               className="edit-icon"
+              onClick={()=>this.addDraftToReduxState(event, 3)}/> 
+          </h4>
         </div>
       );
-
     }
+
     if(this.state.showDetails){
       return(
-
         <li className='user-event'>
-          <h2>{this.props.event.title}</h2>
-     
-          <MdEdit
-            className="edit-event-info"
-            onClick={()=>this.addDraftToReduxState(this.props.event, 1)}
+          <span>
+           <Calendar className="icon-adjust"/> <h2>{event.title}</h2>
+          <FaEdit
+            className="edit-icon"
+            onClick={()=>this.addDraftToReduxState(event, 1)}
           />
-    
-          <p>{this.props.event.description}</p>
-          <button onClick={()=> this.toggleEventDetails(false)}>See Details</button>
+           <button className="floatRight noBorder" onClick={()=> this.toggleEventDetails(false)}>Hide Details <FaToggleOn className="general-icon" /></button>
+          </span>
+          <p>{event.description}</p>
+         
+
           <div className='date-options'>
-            <p>Date/Time options 
-              <MdEdit
-                className="edit-schedule-options"
-                onClick={()=>this.addDraftToReduxState(this.props.event, 2)}/>
-            </p>
+            <h4>Date/Time options 
+              <FaEdit
+                className="edit-icon"
+                onClick={()=>this.addDraftToReduxState(event, 2)}
+              />
+            </h4>
                  
-            {this.props.event.scheduleOptions.map((date,i) =>{
-              console.log(date);
+            {event.scheduleOptions.map((date,i) =>{
               return(
                 <div key={i} className='date-vote'>
-                  <p>Date: {date.date}</p>
-                  <p>Votes: {date.votes}</p>
+                  <span className="dates-text">{date.date}</span>
+                 
                 </div>
-              );
-                
-            })
-            }
+              );  
+            })}
           </div>
-          {restaurantOptionsDisplay}
 
+          {restaurantOptionsDisplay}
           {activtyOptionsDisplay}
          
         </li>
@@ -141,14 +150,18 @@ class DraftItem extends React.Component{
     }  
     else{
       return(
-        <li className='user-event'>
-            
-          <h2>{this.props.event.title}</h2>
-          <MdEdit
-            className="edit-event-info"
-            onClick={()=>this.addDraftToReduxState(this.props.event, 1)} />
+        <li className='user-event'>  
+          <span>
+              <Calendar  className="icon-adjust" /> <h2>{this.props.event.title}</h2>
+              <button className="floatRight noBorder" onClick={()=> this.toggleEventDetails(true)}>See Details  <FaToggleOff className="general-icon" /></button>
+          </span>
+          <FaEdit
+            className="edit-icon"
+            onClick={()=>this.addDraftToReduxState(this.props.event, 1)} 
+          />
           <p>{this.props.event.description}</p>
-          <button onClick={()=> this.toggleEventDetails(true)}>See Details</button>
+          <DeleteWarning deleteEvent={this.deleteEvent}/>
+          
         </li>
       );
     }    

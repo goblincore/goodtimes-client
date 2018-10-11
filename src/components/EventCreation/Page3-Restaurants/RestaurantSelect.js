@@ -1,22 +1,28 @@
 import React from 'react';
-
-import { fetchYelpCategories, fetchYelpRestaurants } from '../../../actions/RestaurantSelect';
+import { fetchYelpRestaurants, fetchAllYelpRestaurants } from '../../../actions/RestaurantSelect';
 import { updateNewEventState, newEventErrorMessage } from '../../../actions/New-Event';
 import '../../styles/RestaurantSelect.css';
-
+import CreateNav from '../CreateNav';
+import { MdHighlightOff } from "react-icons/lib/md";
 
 export default class RestaurantSelect extends React.Component {
 
   componentWillMount(){
-    this.props.dispatch(fetchYelpCategories());
+    this.props.dispatch(fetchAllYelpRestaurants(this.props.eventState.location.latitude, this.props.eventState.location.longitude));
   }
 
-  getYelpRestaurants(e){
+  searchYelpRestaurants(e){
     e.preventDefault();
-    const category = e.target.value; 
-    this.props.dispatch(fetchYelpRestaurants(category, this.props.eventState.location.latitude, this.props.eventState.location.longitude));
+    const searchBar = document.getElementById('search');
+    const term = searchBar.value;
+    if(term === ''){
+      this.props.dispatch(fetchAllYelpRestaurants(this.props.eventState.location.latitude, this.props.eventState.location.longitude));
+    }
+    else{
+      this.props.dispatch(fetchYelpRestaurants(term, this.props.eventState.location.latitude, this.props.eventState.location.longitude));
+    }
   }
-
+  
   deleteYelpWhenClicked(e){
    
     const { restaurantOptions } = this.props.eventState;
@@ -52,19 +58,6 @@ export default class RestaurantSelect extends React.Component {
 
   render(){
 
-    let yelpCategories;
-
-    if(this.props.restaurants.yelpCategories === null){
-      yelpCategories = <option>Loading category options...</option>;
-    }
-    else{
-      yelpCategories = this.props.restaurants.yelpCategories.map( (category, index )=> {
-        return (
-          <option value={category.alias} key={index}>{category.title}</option>
-        );
-      });
-    }
-
     let yelpChoices;
 
     if(this.props.restaurants.yelpRestaurants.length > 0){
@@ -74,8 +67,19 @@ export default class RestaurantSelect extends React.Component {
           checked = true;
         }
         return (
-          <div>
-            <input 
+          <div className="restaurant-result-box" key={restaurant.id}> 
+   
+              <div className="restaurant-info-box">
+               
+              <div className="restaurant-img-bg" 
+                  style={
+                    {background:`url(${restaurant.image_url === '' ? 'https://divineeventslv.com/wp-content/uploads/2018/04/yelp-logo-27.png': restaurant.image_url} )`
+                  , backgroundSize:'cover'}}>
+                
+               </div>
+
+               <div className="restaurant-text-info">
+               <input 
               name={restaurant.name} 
               id={restaurant.id} 
               value={restaurant.url} 
@@ -83,66 +87,54 @@ export default class RestaurantSelect extends React.Component {
               defaultChecked={checked}
               onChange={e => this.handleYelpCheckBoxChange(e)}
             ></input>
-            <img src={restaurant.image_url === '' ? 'https://divineeventslv.com/wp-content/uploads/2018/04/yelp-logo-27.png': restaurant.image_url} alt="thumbnail"></img>
-            <a href={restaurant.url} target="_blank">{restaurant.name}</a>
-            <p>{restaurant.price}</p>
-            <p>Rating: {restaurant.rating}</p>
+                <a href={restaurant.url} target="_blank">{restaurant.name}</a>
+                  <p>{restaurant.price}</p>
+                  <p>Rating: {restaurant.rating}</p>
+                </div>
+            </div>
           </div>
         );
       });
     }else{
-      yelpChoices = <p>Select a cuisine to view restaurants in your area!</p>;
+      yelpChoices = <h4 id="empty-search">Your Restaurant search results will appear here. Try again!</h4>;
     }
     
     let yelpRestauransDisplay;
 
     if(this.props.eventState.restaurantOptions.length > 0){
       yelpRestauransDisplay = this.props.eventState.restaurantOptions.map(restaurant => {
-        return <li key={restaurant.yelpId} data-yelpid={restaurant.yelpId} onClick={(e) => this.deleteYelpWhenClicked(e)}>{restaurant.name} </li>;});
-    }
+        return <li key={restaurant.yelpId} >{restaurant.name.length > 20 ? `${restaurant.name.slice(0,20)}...` : restaurant.name}  <MdHighlightOff className="icon-adjust delete-icon" data-yelpid={restaurant.yelpId} onClick={(e) => this.deleteYelpWhenClicked(e)}/>   </li>;});
+    }   
+
     return(
       <div className="container text-left">
         <div className="top-wrapper">
-          <nav className='create-nav'>
-                <button type='button' onClick={() => this.props.prevPage()}>{'<-'} Back</button>
-                <button type='button' 
-                  onClick={() => this.props.saveAsDraft()}>
-                  Save as Draft
-                </button>
-                <button type='button' onClick={()=>this.props.nextPage()}>Next {'->'}</button>
-            </nav>
-          <div className="instructions">
-      
-              <h1>Let's go eat!</h1>
-              
-              <p>Change the cuisine to see a list of restaurant options. 
-                Check off restaurants to add them to your list of options.
-                You can select multiple restaurants!</p>
-          </div>
-      
-        
-            <div id="select-cuisine">
-              <form id="select-cuisine-form">
-              <h3><label>Select Cuisine</label></h3> 
-                <select onChange={e => this.getYelpRestaurants(e)}>
-                  <option>Select a cuisine...</option>
-                  {yelpCategories}
-                </select>
-              </form>
-            
-          
-            <div id="restaurant-choices" >
-                <h3>Selected Restaurant Choices</h3>
-                <ul>{yelpRestauransDisplay}</ul>
-              </div>
-          
-            </div>
 
-          </div>
-
-        <div id="restaurant-list" className="bottom-offset">
-          {yelpChoices}
+           <CreateNav saveAsDraft={this.props.saveAsDraft} pageNum={this.props.pageNum} prevPage={this.props.prevPage} nextPage={this.props.nextPage} handleNextPage={this.props.nextPage} />
+  
         </div>
+        <div id="restaurant-select-main">
+             <div id="select-cuisine">
+            <form id="select-cuisine-form" className="select-cuisine-form">
+              <h3><label>Enter your search term below</label></h3> 
+              <input type="search" id="search"></input>
+              <button onClick={e => {
+                this.searchYelpRestaurants(e);
+
+              }}>Search for restaurants</button>
+            
+            </form>
+            <div id="restaurant-choices" >
+              <h3>Selected Restaurants</h3>
+              <ul id="restaurant-option-list">{yelpRestauransDisplay}</ul>
+            </div>
+          </div>
+
+          <div id="restaurant-list" className="bottom-offset">
+            {yelpChoices}
+          </div>
+        </div>
+
       </div>
     );
   }

@@ -1,3 +1,13 @@
 .edit-event-info, .edit-restaurant-options,
 .edit-schedule-options, .edit-activity-options {
   float: none; }
+
+.edit-icon{
+  font-size: 23px;
+    margin-left: 10px;
+    margin-bottom: 7px;
+}
+
+.small-font{
+  font-size:12px;
+}

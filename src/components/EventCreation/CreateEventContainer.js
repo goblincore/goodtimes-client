@@ -4,15 +4,15 @@ import { Redirect } from 'react-router-dom';
 import moment from 'moment';
 
 import { CreateEvent } from './Page1-TitleDescribeLocation/CreateEvent';
-import DateSelectPage from './Page2-DateTime/DateSelectPage';
+import  DateSelectPage  from './Page2-DateTime/DateSelectPage';
 import RestaurantSelect from './Page3-Restaurants/RestaurantSelect';
-import ActivityPage from './Page4-Activities/ActivityPage';
+import { ActivityPage } from './Page4-Activities/ActivityPage';
 import PreviewEvent from './Page5-Preview/PreviewEvent';
 import SuccessfullyCreatedEvent from './Page6-Share/SuccessfullyCreatedEvent';
 
-import { putUpdatedDraft } from '../../actions/Edit-Draft';
+import { putUpdatedDraft } from '../../actions/EditDraft';
 import { postNewEvent } from '../../actions/New-Event';
-import { Transition, animated,config } from 'react-spring'
+import { Transition, animated} from 'react-spring'
 import '../styles/CreateEventContainer.css';
 
 export default class CreateEventContainer extends React.Component{
@@ -30,7 +30,7 @@ export default class CreateEventContainer extends React.Component{
       userId: this.props.currentUser.id,
       title: this.props.eventState.title,
       draft: true,
-      description:this. props.eventState.description,
+      description: this.props.eventState.description,
       location: this.props.eventState.location,  //{latitude: ..., longitude: ...}
       locationCity: this.props.eventState.locationCity,
       scheduleOptions: this.props.eventState.scheduleOptions,
@@ -50,11 +50,7 @@ export default class CreateEventContainer extends React.Component{
   }
 render(){
 
-
-
-  
-
-    let component;
+ let component;
 
   switch (this.props.pageNum) {
   case 0:
@@ -65,6 +61,7 @@ render(){
       return(
         <animated.div className="slides" style={{ ...style}}>
           <CreateEvent 
+          pageNum={this.props.pageNum}
           nextPage={this.props.nextPage} 
           dispatch={this.props.dispatch} 
           prevPage={this.props.goHome} 
@@ -82,6 +79,7 @@ render(){
       return(
         <animated.div className="slides" style={{ ...style  }}>
           <DateSelectPage 
+            pageNum={this.props.pageNum}
             nextPage={this.props.nextPage}
             dispatch={this.props.dispatch}
             prevPage={this.props.prevPage} 
@@ -99,6 +97,7 @@ render(){
       return(
         <animated.div className="slides" style={{ ...style  }}>
             <RestaurantSelect 
+            pageNum={this.props.pageNum}
             nextPage={this.props.nextPage}
             dispatch={this.props.dispatch}
             prevPage={this.props.prevPage}
@@ -118,6 +117,7 @@ render(){
       return(
         <animated.div className="slides" style={{ ...style  }}>
         <ActivityPage
+            pageNum={this.props.pageNum}
             dispatch={this.props.dispatch} 
             eventState={this.props.newEvent}
             prevPage={this.props.prevPage} 
@@ -141,6 +141,7 @@ render(){
       return(
         <animated.div className="slides" style={{ ...style  }}>
          <PreviewEvent 
+            pageNum={this.props.pageNum}
             nextPage={this.props.nextPage}
             goHome={this.props.goHome} 
             dispatch={this.props.dispatch} 
@@ -159,6 +160,7 @@ render(){
     return(
       <animated.div  style={{ ...style}}>
         <SuccessfullyCreatedEvent 
+          pageNum={this.props.pageNum}
           dispatch={this.props.dispatch} 
           prevPage={this.props.prevPage} 
           eventState={this.props.newEvent}
@@ -168,7 +170,7 @@ render(){
      )
     }
     break;
-  case 7:
+  default:
     return <Redirect to='/dashboard'/>
   }
 
@@ -176,10 +178,32 @@ render(){
     <div className="new-event-form bottom-offset">
        <Transition
           native
-          config={config.fast}
-          from={{ opacity: 0 }}
-          enter={{ opacity: 1 }}
-          leave={{ opacity: 0 }}>
+          config={ item=> {
+                     
+            if (item === 'transform'){
+              return {
+                tension: 1, 
+                friction: 8,
+
+                restSpeedThreshold: 1,
+                restDisplacementThreshold: 0.001,
+                overshootClamping: true,
+                }
+            }
+            else{
+           
+                return {
+                  tension: 1, 
+                  friction: 6,
+                  overshootClamping: true,
+              }
+            }
+          }
+           
+          }
+          from={{ opacity: 0,  transform: 'translate(80%,0)' }}
+          enter={{ opacity: 1,  transform: 'translate(0,0)'}}
+          leave={{ opacity: 0,  transform: 'translate(-100%,0)'}}>
         {component}
       </Transition>
     </div>

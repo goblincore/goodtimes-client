@@ -7,5 +7,6 @@ body {
 
 input, select, label, textarea {
   display:block;
+  color:#777;
 }
 

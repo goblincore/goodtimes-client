@@ -10,13 +10,13 @@ import {
   DELETE_EVENT_SUCCESS
 } from '../actions/New-Event';
 import { SEND_EMAIL_REQUEST, SEND_EMAIL_ERROR, SEND_EMAIL_SUCCESS } from '../actions/Email';
-
+import { SEND_BITLY_SUCCESS, SEND_BITLY_ERROR } from '../actions/Bitly';
 import {
   LOAD_DRAFT_INTO_REDUX_STATE,
   PUT_UPDATED_DRAFT_REQUEST,
   PUT_UPDATED_DRAFT_SUCCESS
 
-} from '../actions/Edit-Draft';
+} from '../actions/EditDraft';
 
 export const initialState = {
   showNewEvent: false,
@@ -30,6 +30,7 @@ export const initialState = {
   restaurantOptions: [],
   activityOptions:[],
   id: null,
+  shortUrl:'',
   loading: false,
   inviteEmail: {
     to: '',
@@ -52,32 +53,29 @@ export default function newEventReducer (state=initialState, action) {
   else if (action.type === POST_NEW_EVENT_REQUEST) {
 
     return Object.assign({}, state, {
-      loading: true
+      loading: false
     });
   }
   else if (action.type === UPDATE_NEW_EVENT_STATE) {
-    return Object.assign({}, state, action.updateObject); //example:  {restaurantOptions: [{zomatoId: '123'}]}
+    return Object.assign({}, state, action.updateObject); 
 
   } else if (action.type === POST_NEW_EVENT_SUCCESS) {
-console.log('New event Success');
     return Object.assign({}, state, {
       loading: false
     });
   }  else if (action.type === PUT_UPDATED_DRAFT_REQUEST) {
     return Object.assign({}, state, {
-      loading: true
+      loading: false
     });
   } else if (action.type === LOAD_DRAFT_INTO_REDUX_STATE) {
-    console.log('update action=',action.draftObject);
-    
     return Object.assign({}, state,  action.draftObject
-      ); 
-} else if (action.type === PUT_UPDATED_DRAFT_SUCCESS) {
+    ); 
+  } else if (action.type === PUT_UPDATED_DRAFT_SUCCESS) {
 
-  return Object.assign({}, state, {
-    loading: false
-  });
-}  else if (action.type === RESET_NEW_EVENT_STATE) {
+    return Object.assign({}, state, {
+      loading: false
+    });
+  }  else if (action.type === RESET_NEW_EVENT_STATE) {
     return Object.assign({}, state, initialState);
 
   } 
@@ -88,23 +86,21 @@ console.log('New event Success');
     });
   } 
   else if(action.type === SEND_EMAIL_REQUEST){
-    console.log(action);
     return Object.assign({}, state, {
       loading:true
     });
   }
   else if(action.type === SEND_EMAIL_ERROR){
-    console.log(action);
     return Object.assign({}, state, {
       loading: false,
-      errorMessage: action.error,
+      errorMessage: action.error.message,
     });
   }
   else if(action.type === SEND_EMAIL_SUCCESS){
-    console.log(action);
     return Object.assign({}, state, {
       loading: false,
-      email: action.email
+      email: action.email,
+      errorMessage: ''
     });
   }
   else if(action.type === DELETE_EVENT_REQUEST){
@@ -122,6 +118,18 @@ console.log('New event Success');
     return Object.assign({}, state, {
       loading: false,
       errorMessage: null
+    });
+  }
+  else if(action.type === SEND_BITLY_SUCCESS){
+    return Object.assign({}, state, {
+      shortUrl: action.shortUrl,
+      errorMessage: null
+    });
+  }
+  else if(action.type === SEND_BITLY_ERROR){
+    return Object.assign({}, state, {
+      loading: false,
+      errorMessage: action.error.message
     });
   }
   else {

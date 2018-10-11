@@ -1,6 +1,6 @@
 import { API_BASE_URL } from '../config';
 import { normalizeResponseErrors } from './Utils';
-import {fetchUserEvents} from './Protected-Data';
+import {fetchUserEvents} from './ProtectedData';
 
 export const SHOW_NEW_EVENT_STATE = 'SHOW_NEW_EVENT_STATE';
 export const showNewEventState = bool => ({
@@ -28,18 +28,17 @@ export const newEventErrorMessage = message => ({
 });
 
 export const POST_NEW_EVENT_REQUEST = 'POST_NEW_EVENT_REQUEST';
-export const postNewEventRequest = message => ({
+export const postNewEventRequest = () => ({
   type: POST_NEW_EVENT_REQUEST,
   
 });
 export const POST_NEW_EVENT_SUCCESS = 'POST_NEW_EVENT_SUCCESS';
-export const postNewEventSuccess = message => ({
+export const postNewEventSuccess = () => ({
   type: POST_NEW_EVENT_SUCCESS,
   
 });
 
 export const postNewEvent = eventData => dispatch => {
-  console.log('EVENT DATA', eventData);
   dispatch(postNewEventRequest());
   const token = localStorage.getItem('authToken');
   return fetch(`${API_BASE_URL}/api/events`, {
@@ -53,7 +52,7 @@ export const postNewEvent = eventData => dispatch => {
     .then(res => normalizeResponseErrors(res))
     .then(res => res.json())
     .then(res => {
-      dispatch(updateNewEventState({id: res.id}));
+      return dispatch(updateNewEventState({id: res.id}));
     
     })
     .then(() => { 
@@ -78,6 +77,7 @@ export const DELETE_EVENT_SUCCESS = 'DELETE_EVENT_SUCCESS';
 export const deleteEventSuccess = () => ({
   type: DELETE_EVENT_SUCCESS
 });
+
 
 export const deleteEvent = (eventId) => dispatch => {
   dispatch(deleteEventRequest());

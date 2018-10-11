@@ -1,9 +1,4 @@
 #dashboard_main{
-    /* width:400px;
-    display:inline-block;
-    float:left;
-    text-align:left;
-   */
 
    /* padding-top: 100px; */
    width: 400px;
@@ -14,6 +9,12 @@
    /* justify-content: center; */
    text-align: left;
 
+}
+
+#dashboard_main h2{
+    font-size:36px;
+    line-height:130%;
+    margin-top:0px;
 }
 
 #dashboard_main p{
@@ -31,8 +32,7 @@
     float:left;
   */
 
-  max-width: 500px;
-  min-width:400px;
+  width: 500px;
   display: flex;
   /* padding-top: 180px; */
   float: left;
@@ -51,4 +51,25 @@
 
 }
 
+.doggy-img img{
+    width:150px;
+}
+
+
+@media only screen and (max-width: 500px) {
+  .dashboard-wrapper{
+        padding-top:50px;
+  }
+
+  .doggy-img{
+      display:none;
+  }
+
+  #dashboard_eventlist{
+    width:100%;
+    min-width:unset;
+  }
+  
+
+}
 

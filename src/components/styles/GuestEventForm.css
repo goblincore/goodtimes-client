@@ -1,5 +1,5 @@
-.time-options, .restaurant-options{
-    max-width:300px;
+.guest-options,.time-options, .restaurant-options{
+
     text-align:left;
 }
 
@@ -17,18 +17,105 @@
   }
 
  .event-form-options{
-     max-width:400px;
+    
      margin:auto;
      padding-bottom:50px;
  }
 
  .guest-event-form-wrapper{
-    padding-left: 50px;
-    padding-right: 50px;
-    padding-top:60px;
+  
+   
+    border-radius:6px;
  }
 
  .post-vote{
      text-align:center;
      margin:auto;
  }
+
+ .invite-header h1{
+     font-size:80px;
+     font-weight:400;
+     line-height:130%;
+
+ }
+
+.guest-event-form-wrapper{
+    background:#4347fd;
+    color:#fff;
+    max-width: 800px;
+    margin:auto;
+   
+}
+
+.guest-event-form-wrapper h1,h2,h3,h4{
+    font-weight:200;
+}
+
+.guest-event-form-wrapper label{
+    color:white;
+}
+
+.guest-event-form-wrapper a{
+    color:white;
+}
+
+.guest-event-form-wrapper a:hover{
+    color:#efc833;
+}
+
+.guest-event-form{
+    padding:40px;
+}
+
+.guest-event-form .option_container{
+    max-width:800px;
+}
+
+.submit-container{
+    display: block;
+    width: 100%;
+    float: left;
+    padding-bottom: 50px;
+    padding-top:50px;
+}
+
+.submit-container button{
+    font-size:20px;
+    padding:10px;
+}
+
+.choice-border-bottom{
+    border-bottom:1px dashed #ddd;
+}
+
+.option_container p{
+    margin-left:80px;
+}
+
+.top-offset{
+    margin-top:80px;
+}
+
+@media only screen and (max-width: 500px) {
+ .input-container{
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 16px !important;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    margin-left:0 !important;
+  
+ }
+
+ .option_container p {
+    margin-left: 30px;
+}
+
+
+}

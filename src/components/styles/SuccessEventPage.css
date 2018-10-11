@@ -7,3 +7,43 @@
     margin:auto;
     padding:10px;
 }
+
+.event-successfully-created button{
+    margin-top:20px;
+    margin-bottom:20px;
+}
+
+.event-email-form{
+    padding: 20px;
+    margin: 20px;
+    border: 1px dashed #ccc;
+    max-width: 400px;
+    margin: auto;
+    text-align: left;
+    /* font-size: 13px; */
+}
+
+.event-email-form label{
+    font-size:14px;
+    opacity:0.7;
+}
+
+.event-successfully-created{
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    max-width: 810px;
+    margin: auto;
+}
+
+.event-email-form textarea{
+    width: 100%;
+    resize: none;
+    margin-top: 10px;
+    padding: 10px;
+    font-size: 14px;
+    color: #666;
+    line-height: 150%;
+    height: 100px;
+    border-radius: 6px;
+}

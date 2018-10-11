@@ -5,13 +5,13 @@ import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import {Provider} from 'react-redux';
 import store from './Store';
-import {BrowserRouter as Router} from 'react-router-dom';
-
-
+import { Router} from 'react-router-dom';
+import createHistory from 'history/createBrowserHistory';
+const history = createHistory();
 ReactDOM.render(
 
     <Provider store={store}>
-            <Router>
+             <Router history={history}>
                     <App />
             </Router>
 

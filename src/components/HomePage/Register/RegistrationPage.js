@@ -8,7 +8,7 @@ export function RegistrationPage(props) {
   if (props.loggedIn) {
     return <Redirect to="/dashboard" />;
   }
-  return (    
+  return (
        
     <div className="container">
       <div className="form-container">
@@ -16,7 +16,7 @@ export function RegistrationPage(props) {
           <h1>Join Goodtimes</h1>
           <p>Create an account, create events, invite your friends and more!</p>
        
-        <RegistrationForm />
+        <RegistrationForm errorMessage={props.errorMessage}/>
       </div>
     </div>
         
@@ -24,7 +24,8 @@ export function RegistrationPage(props) {
 }
 
 const mapStateToProps = state => ({
-  loggedIn: state.auth.currentUser !== null
+  loggedIn: state.auth.currentUser !== null,
+  errorMessage: state.auth.error
 });
 
 export default connect(mapStateToProps)(RegistrationPage);

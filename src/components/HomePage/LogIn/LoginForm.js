@@ -19,22 +19,13 @@ export class LoginForm extends React.Component {
     return this.props.dispatch(login(values[this.usernameId], values[this.passwordId]));
   }
 
-  componentWillUnMount(){
-    console.log('unmounting');
-       
-  }
-  componentWillMount(){
-    console.log('mounting login form');
-
-  }
-
   render() {    
     let error;
     if (this.props.error) {
       error = (
-        <div className="form-error" aria-live="polite">
+        <p className="form-error" aria-live="polite">
           {this.props.error}
-        </div>
+        </p>
       );
     }
     return (
@@ -44,7 +35,9 @@ export class LoginForm extends React.Component {
         onSubmit={this.props.handleSubmit(values =>
           this.onSubmit(values)
         )}>
+
         {error}
+
         <label htmlFor={this.randomId}>Username</label>
         <Field
           component={Input}
@@ -54,6 +47,7 @@ export class LoginForm extends React.Component {
           id={this.usernameId}
           validate={[required, nonEmpty]}
         />
+
         <label htmlFor={this.randomId}>Password</label>
         <Field
           component={Input}
@@ -62,11 +56,13 @@ export class LoginForm extends React.Component {
           id={this.passwordId}
           validate={[required, nonEmpty]}
         />
+
         <div className='align-right'>
           <button disabled={this.props.pristine || this.props.submitting}>
                         Log in
           </button>
         </div>
+
       </form>
     );
   }
@@ -74,5 +70,7 @@ export class LoginForm extends React.Component {
 
 export default reduxForm({
   form: 'login',
-  onSubmitFail: (errors, dispatch) => dispatch(focus('login', 'username'))
+  onSubmitFail: (errors, dispatch) => {
+    dispatch(focus('login', Object.keys(errors)[0]))
+  }
 })(LoginForm);

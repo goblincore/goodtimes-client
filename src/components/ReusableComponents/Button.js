@@ -7,7 +7,7 @@ export default function Button(props) {
   return(
    
     <div className="button_wrapper button">
-      <NavLink exact to={props.to} className='normal'  activeClassName="activeLink" > {props.children} </NavLink>
+      <NavLink exact to={props.to} className="normal" style={props.textColor}  activeClassName="activeLink" > {props.children} </NavLink>
     </div>
 
   );

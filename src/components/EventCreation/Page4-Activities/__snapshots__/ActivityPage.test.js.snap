@@ -1,0 +1,333 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ActivityPage renders as expected 1`] = `
+<div>
+  <nav
+    className="create-nav"
+  >
+    <div
+      className="instructions"
+    >
+      <h4>
+         
+         
+         
+      </h4>
+    </div>
+    <div
+      className="nav-buttons"
+    >
+      <button
+        onClick={[Function]}
+        type="button"
+      >
+         
+        <svg
+          fill="currentColor"
+          height="1em"
+          preserveAspectRatio="xMidYMid meet"
+          style={
+            Object {
+              "color": undefined,
+              "fontSize": "13px",
+              "transform": "translateY(-1px)",
+              "verticalAlign": "middle",
+            }
+          }
+          viewBox="0 0 40 40"
+          width="1em"
+        >
+          <g>
+            <path
+              d="m22 30.7q0 0.3-0.2 0.5l-1.1 1.1q-0.3 0.3-0.6 0.3t-0.5-0.3l-10.4-10.4q-0.2-0.2-0.2-0.5t0.2-0.5l10.4-10.4q0.3-0.2 0.5-0.2t0.6 0.2l1.1 1.1q0.2 0.3 0.2 0.5t-0.2 0.6l-8.8 8.7 8.8 8.8q0.2 0.2 0.2 0.5z m8.6 0q0 0.3-0.3 0.5l-1.1 1.1q-0.2 0.3-0.5 0.3t-0.5-0.3l-10.4-10.4q-0.2-0.2-0.2-0.5t0.2-0.5l10.4-10.4q0.2-0.2 0.5-0.2t0.5 0.2l1.1 1.1q0.3 0.3 0.3 0.5t-0.3 0.6l-8.7 8.7 8.7 8.8q0.3 0.2 0.3 0.5z"
+            />
+          </g>
+        </svg>
+         Previous
+      </button>
+      <button
+        onClick={[Function]}
+        type="button"
+      >
+        Save as Draft
+      </button>
+      <button
+        onClick={[Function]}
+        type="button"
+      >
+        Next 
+        <svg
+          fill="currentColor"
+          height="1em"
+          preserveAspectRatio="xMidYMid meet"
+          style={
+            Object {
+              "color": undefined,
+              "fontSize": "13px",
+              "transform": "translateY(-1px)",
+              "verticalAlign": "middle",
+            }
+          }
+          viewBox="0 0 40 40"
+          width="1em"
+        >
+          <g>
+            <path
+              d="m22.3 21.4q0 0.3-0.2 0.5l-10.4 10.4q-0.3 0.3-0.6 0.3t-0.5-0.3l-1.1-1.1q-0.2-0.2-0.2-0.5t0.2-0.5l8.8-8.8-8.8-8.7q-0.2-0.3-0.2-0.6t0.2-0.5l1.1-1.1q0.3-0.2 0.5-0.2t0.6 0.2l10.4 10.4q0.2 0.2 0.2 0.5z m8.6 0q0 0.3-0.3 0.5l-10.4 10.4q-0.2 0.3-0.5 0.3t-0.5-0.3l-1.1-1.1q-0.2-0.2-0.2-0.5t0.2-0.5l8.8-8.8-8.8-8.7q-0.2-0.3-0.2-0.6t0.2-0.5l1.1-1.1q0.2-0.2 0.5-0.2t0.5 0.2l10.4 10.4q0.3 0.2 0.3 0.5z"
+            />
+          </g>
+        </svg>
+      </button>
+    </div>
+  </nav>
+  <div
+    className="card border-right"
+  >
+    <p />
+    <button
+      className="choose-from-list"
+      onClick={[Function]}
+    >
+      Choose From List
+    </button>
+    <button
+      onClick={[Function]}
+    >
+      Create My Own Activity
+    </button>
+  </div>
+  <div
+    className="card"
+  >
+    <div
+      className="activity-option"
+    >
+      <div
+        className="category-select"
+      >
+        <p>
+          Change the category to see a list of events in your area during the times you selected. Check off events to add them to your list of activity options. You can select multiple events!
+        </p>
+        <select
+          onChange={[Function]}
+        >
+          <option
+            id="choose-a-category"
+          >
+            Choose a category...
+          </option>
+          <option
+            id="111111111111111111111112"
+            value="111111111111111111111112"
+          >
+            italian
+          </option>
+          <option
+            id="111111111111111111111114"
+            value="111111111111111111111114"
+          >
+            concert
+          </option>
+          <option
+            id="111111111111111111111113"
+            value="111111111111111111111113"
+          >
+            waterslide park
+          </option>
+        </select>
+        <ul>
+          <li
+            className="activity-item border-bottom checked-false"
+          >
+            <input
+              data-description={undefined}
+              data-end="Sun, Nov 11, 2018 6:00 PM"
+              data-start="Thu, Oct 11, 2018 6:00 PM"
+              defaultChecked={false}
+              id={undefined}
+              name={undefined}
+              onChange={[Function]}
+              type="checkbox"
+              value="google.com"
+            />
+            <a
+              href="google.com"
+              target="_blank"
+            />
+            <p
+              className="dates-text"
+            >
+              Start: 
+              Thu, Oct 11, 2018 6:00 PM
+            </p>
+            <p
+              className="dates-text"
+            >
+              End: 
+              Sun, Nov 11, 2018 6:00 PM
+            </p>
+          </li>
+          <li
+            className="activity-item border-bottom checked-false"
+          >
+            <input
+              data-description={undefined}
+              data-end="Sun, Nov 11, 2018 6:00 PM"
+              data-start="Thu, Oct 11, 2018 6:00 PM"
+              defaultChecked={false}
+              id={undefined}
+              name={undefined}
+              onChange={[Function]}
+              type="checkbox"
+              value="google.com"
+            />
+            <a
+              href="google.com"
+              target="_blank"
+            />
+            <p
+              className="dates-text"
+            >
+              Start: 
+              Thu, Oct 11, 2018 6:00 PM
+            </p>
+            <p
+              className="dates-text"
+            >
+              End: 
+              Sun, Nov 11, 2018 6:00 PM
+            </p>
+          </li>
+          <li
+            className="activity-item border-bottom checked-false"
+          >
+            <input
+              data-description={undefined}
+              data-end="Sun, Nov 11, 2018 6:00 PM"
+              data-start="Thu, Oct 11, 2018 6:00 PM"
+              defaultChecked={false}
+              id={undefined}
+              name={undefined}
+              onChange={[Function]}
+              type="checkbox"
+              value="google.com"
+            />
+            <a
+              href="google.com"
+              target="_blank"
+            />
+            <p
+              className="dates-text"
+            >
+              Start: 
+              Thu, Oct 11, 2018 6:00 PM
+            </p>
+            <p
+              className="dates-text"
+            >
+              End: 
+              Sun, Nov 11, 2018 6:00 PM
+            </p>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div
+    className="card small-text"
+    id="user-event-list"
+  >
+    <h4>
+      Event Choices
+      <div
+        className="border-bottom"
+      >
+        <p
+          data-ebid="41090701394"
+        >
+          Kids CrossFit - Ages 4 to 17!
+            
+        </p>
+        <p>
+          get swole!
+        </p>
+        <span>
+          <a
+            href="https://www.eventbrite.com/e/kids-crossfit-ages-4-to-17-tickets-41090701394?aff=ebapi"
+            target="_blank"
+          >
+            Go to event webpage.
+          </a>
+          <svg
+            className="icon-adjust delete-icon"
+            data-ebid="41090701394"
+            fill="currentColor"
+            height="1em"
+            onClick={[Function]}
+            preserveAspectRatio="xMidYMid meet"
+            style={
+              Object {
+                "color": undefined,
+                "verticalAlign": "middle",
+              }
+            }
+            viewBox="0 0 40 40"
+            width="1em"
+          >
+            <g>
+              <path
+                d="m20 33.4c7.3 0 13.4-6.1 13.4-13.4s-6.1-13.4-13.4-13.4-13.4 6.1-13.4 13.4 6.1 13.4 13.4 13.4z m0-30c9.2 0 16.6 7.4 16.6 16.6s-7.4 16.6-16.6 16.6-16.6-7.4-16.6-16.6 7.4-16.6 16.6-16.6z m4.3 10l2.3 2.3-4.3 4.3 4.3 4.3-2.3 2.3-4.3-4.3-4.3 4.3-2.3-2.3 4.3-4.3-4.3-4.3 2.3-2.3 4.3 4.3z"
+              />
+            </g>
+          </svg>
+           
+        </span>
+      </div>
+      <div
+        className="border-bottom"
+      >
+        <p
+          data-ebid="49111123693"
+        >
+          Open Mat Jiu Jitsu - ALL Levels
+            
+        </p>
+        <p>
+          Hi - ya!
+        </p>
+        <span>
+          <a
+            href="https://www.eventbrite.com/e/open-mat-jiu-jitsu-all-levels-tickets-49111123693?aff=ebapi"
+            target="_blank"
+          >
+            Go to event webpage.
+          </a>
+          <svg
+            className="icon-adjust delete-icon"
+            data-ebid="49111123693"
+            fill="currentColor"
+            height="1em"
+            onClick={[Function]}
+            preserveAspectRatio="xMidYMid meet"
+            style={
+              Object {
+                "color": undefined,
+                "verticalAlign": "middle",
+              }
+            }
+            viewBox="0 0 40 40"
+            width="1em"
+          >
+            <g>
+              <path
+                d="m20 33.4c7.3 0 13.4-6.1 13.4-13.4s-6.1-13.4-13.4-13.4-13.4 6.1-13.4 13.4 6.1 13.4 13.4 13.4z m0-30c9.2 0 16.6 7.4 16.6 16.6s-7.4 16.6-16.6 16.6-16.6-7.4-16.6-16.6 7.4-16.6 16.6-16.6z m4.3 10l2.3 2.3-4.3 4.3 4.3 4.3-2.3 2.3-4.3-4.3-4.3 4.3-2.3-2.3 4.3-4.3-4.3-4.3 2.3-2.3 4.3 4.3z"
+              />
+            </g>
+          </svg>
+           
+        </span>
+      </div>
+    </h4>
+  </div>
+</div>
+`;
