@@ -32,8 +32,7 @@
     float:left;
   */
 
-  max-width: 500px;
-  min-width:400px;
+  width: 500px;
   display: flex;
   /* padding-top: 180px; */
   float: left;

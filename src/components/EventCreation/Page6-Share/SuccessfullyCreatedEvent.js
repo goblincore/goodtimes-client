@@ -65,7 +65,7 @@ export default class SuccessfullyCreatedEvent extends React.Component {
 
           <h3>Email an invite to your friends!</h3>
           {this.state.email ? null : <button id='open-form' onClick={this.openEmail}>Create E-mail</button>}
-          {this.state.email ? <EmailForm eventState={this.props.eventState} dispatch={this.props.dispatch} openEmail={this.openEmail}/> : <div></div>}
+          {this.state.email ? <EmailForm shortUrl={this.props.eventState.shortUrl} dispatch={this.props.dispatch} openEmail={this.openEmail}/> : <div></div>}
           
           <Link to="/dashboard"> 
             <button id="back-to-dashboard">
