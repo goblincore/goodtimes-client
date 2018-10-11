@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import {Link} from 'react-router-dom';
-import {changeCurrentUser} from '../../actions/Protected-Data';
+import {changeCurrentUser} from '../../actions/ProtectedData';
 import {MdSentimentSatisfied} from 'react-icons/lib/md';
 import Button from './Button';
 import '../styles/HeaderBar.css';
