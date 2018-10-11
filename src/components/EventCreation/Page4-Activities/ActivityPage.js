@@ -7,7 +7,9 @@ import SelectActivity from './SelectActivity';
 import WriteActivity from './WriteActivity';
 import { MdHighlightOff } from "react-icons/lib/md";
 
-export default class ActivitySelect extends React.Component {
+
+
+export  class ActivityPage extends React.Component {
 
   constructor(props){
     super(props);
@@ -138,7 +140,7 @@ export default class ActivitySelect extends React.Component {
 
       <div className="card border-right"> 
         <p>{this.props.eventState.errorMessage}</p>
-        <button onClick={() => this.setState({display: 'choose'})}>Choose From List</button>
+        <button className="choose-from-list" onClick={() => this.setState({display: 'choose'})}>Choose From List</button>
         <button onClick={() => this.setState({display: 'write'})}>Create My Own Activity</button>
 
        

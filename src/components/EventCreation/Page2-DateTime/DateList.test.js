@@ -28,7 +28,6 @@ votes:
 ];
 
 
-
 function setup() {
   const props = {
       dateList: dateList,
@@ -61,12 +60,16 @@ function setup() {
   }
 }
 
-// describe('components', () => {
-//   describe('DateList', () => {
-//     it('should render self without crashing and list dates', () => {
-//       const { enzymeWrapper } = setup();
-//       expect(enzymeWrapper.find('#date-list-item')).to.have.lengthOf(3);
-//       //expect(enzymeWrapper.find('p').text()).toEqual('No time and dates added yet!');
-//     })
-//   })
-// })
+
+describe('components', () => {
+  describe('DateList', () => {
+    it('should render self without crashing and list dates', () => {
+      const { enzymeWrapper } = setup();
+
+      enzymeWrapper.find('.date-list-item').forEach((node) => {
+        expect(node.hasClass('date-list-item')).to.equal(true);
+      });
+    
+    })
+  })
+})

@@ -51,8 +51,10 @@ export default class SelectActivity extends React.Component {
    
 
   render(){
+    console.log('selAct props', this.props)
     let categoryFilters;
     if(this.props.categories.length > 0){
+      console.log('Cat', this.props.categories);
       categoryFilters = this.props.categories.map(category => {
         return <option key={category.id} id={category.id} value={category.id}>{category.name}</option>;
       });
@@ -104,7 +106,7 @@ export default class SelectActivity extends React.Component {
       <div className="category-select">
         <p>Change the category to see a list of events in your area during the times you selected. Check off events to add them to your list of activity options. You can select multiple events!</p>
         <select onChange={(e) => this.filterEvents(e)}>
-          <option>Choose a category...</option>
+          <option id="choose-a-category">Choose a category...</option>
           {categoryFilters}
         </select>
         <ul>

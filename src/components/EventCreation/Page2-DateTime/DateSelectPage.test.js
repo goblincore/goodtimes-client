@@ -2,6 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import  DateSelectPage  from  './DateSelectPage';
 import {shallow, mount} from 'enzyme';
+const renderer = require('react-test-renderer');
+
 
 function setup() {
   const props = {
@@ -24,9 +26,10 @@ function setup() {
      },
 
     dispatch: jest.fn()
-  };
-  const localStorage = jest.fn();
-  const enzymeWrapper = mount(<DateSelectPage {...props} localStorage={localStorage}/>);
+  }
+
+  
+  const enzymeWrapper = mount(<DateSelectPage {...props} />)
 
   return {
     props,
@@ -34,12 +37,14 @@ function setup() {
   };
 }
 
+
 describe('components', () => {
   describe('DateSelectPage', () => {
     it('should render self and not Datelist if there are no dates to populate', () => {
       const { enzymeWrapper } = setup();
      
       expect(enzymeWrapper.find('DateList').exists()).toBe(false);
+
     });
   });
 });
