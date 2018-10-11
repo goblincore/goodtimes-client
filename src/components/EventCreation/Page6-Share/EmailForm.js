@@ -8,8 +8,30 @@ export class EmailForm extends React.Component {
     this.state = {
       sent: false,
       error: ''
+      
     };
+
+ 
   }
+
+  emailHTML=(e)=>{
+    return `
+    <h1>Hey! You've been invited :D</h1>
+    <p style="font-size:16px;line-height:180%">
+      ${e.target.message.value}
+    </p>
+    <img src="https://media.giphy.com/media/fx5e8vTQDs1Mc/giphy.gif">
+    <hr>
+    <p style="font-size:14px;line-height:180%;font-weight:bold;">
+    Brought to you by <a href="https://goodtimes-client.herokuapp.com">goodtimes</p>
+    
+    
+    </p>
+  `
+  }
+
+
+
 
   sendEmail(e){
     e.preventDefault();
@@ -19,7 +41,7 @@ export class EmailForm extends React.Component {
       from: this.props.currentUser.email,
       subject: e.target.subject.value,
       text: e.target.message.value,
-      html: `<p>${e.target.message.value}</p>`
+      html: this.emailHTML(e)
     }));
     this.setState({sent:true});
   }
@@ -40,7 +62,9 @@ export class EmailForm extends React.Component {
     this.setState({error: warning});
   }
 
+
   render(){
+    
     let alertBox;
     if(this.props.loading === true){
       alertBox = <div id='alert-box'><h2>Sending...</h2></div>;
@@ -72,9 +96,11 @@ export class EmailForm extends React.Component {
           <label htmlFor='subject'>Enter the subject of the e-mail.</label>
           <input placeholder="Let's hang out!" id="subject"></input>
           <label htmlFor='message'>Write the body of the e-mail.</label>
+          {this.props.shortUrl &&
           <textarea
-           defaultValue={`Hey! It's your friend Chadwick. Let's get together. Please vote on when and where we should hang out here: ${this.props.shortUrl}`} id="message">
+           defaultValue={`Hey! It's your friend Chadwick. Let's get together. Please vote on when and where we should hang out here: ${this.props.shortUrl}`} id="message"> 
           </textarea>
+          }
           <button type="submit">Send</button>
           <button type='reset' id='close-form' onClick={() => this.props.openEmail()}>Close</button>        
         </form>

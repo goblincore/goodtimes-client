@@ -56,7 +56,7 @@ class DraftItem extends React.Component{
             return(
               <div key={i} className='date-vote'>
                 <a href={act.link} target="_blank">{act.title}</a>
-                <p>Votes: {act.votes}</p>
+              
               </div>
             );
           })}
@@ -90,7 +90,7 @@ class DraftItem extends React.Component{
             return(
               <div key={i} className='date-vote'>
                 <span className="dates-text"><a href={food.website} target="_blank">{food.name}</a></span> 
-                <span className="votes-text floatRight">Votes: {food.votes}</span>
+               
               </div>
             );
           })}

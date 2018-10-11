@@ -259,3 +259,19 @@ input[type='checkbox'] {
 
   width:unset !important;
  }
+
+
+ .delete-icon{
+   font-size:20px;
+   float:right;
+   opacity:0.6;
+ }
+
+ .delete-icon:hover{
+   opacity:1;
+ }
+
+
+ .huge-icon{
+   font-size:150px;
+ }
