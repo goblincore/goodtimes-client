@@ -30,7 +30,28 @@ votes:
 
 function setup() {
   const props = {
-      dateList: dateList,
+      dateList: [ 
+
+        {date: "Tue, Oct 30, 2018 11:30 AM",
+        id: "5bb63b5bca7fba0a6ef3f847",
+        votes: 0
+        },
+        { 
+        date:
+        "Tue, Oct 30, 2018 3:30 PM",
+        id:
+        "5bb63b5bca7fba0a6ef3f846",
+        votes:
+        0},
+        {
+        date:
+        "Tue, Oct 9, 2018 9:30 PM",
+        id:
+        "5bb63b5bca7fba0a6ef3f845",
+        votes:
+        0
+        }
+        ],
    eventState: {
     location:{
       latitude: jest.fn(),
@@ -52,7 +73,7 @@ function setup() {
     dispatch: jest.fn()
   }
   const localStorage = jest.fn();
-  const enzymeWrapper = mount(<DateList {...props} localStorage={localStorage}/>)
+  const enzymeWrapper = mount(<DateList {...props} />)
 
   return {
     props,
@@ -61,14 +82,14 @@ function setup() {
 }
 
 
+
 describe('components', () => {
   describe('DateList', () => {
     it('should render self without crashing and list dates', () => {
-      const { enzymeWrapper } = setup();
+      const { enzymeWrapper, props } = setup();
 
-      enzymeWrapper.find('.date-list-item').forEach((node) => {
-        expect(node.hasClass('date-list-item')).to.equal(true);
-      });
+      const selectedDates = enzymeWrapper.find('.date_list').children();
+      expect(selectedDates.length).toEqual(props.dateList.length);
     
     })
   })
