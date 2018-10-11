@@ -39,6 +39,7 @@ export default function reducer(state = initialState, action) {
         })
 
     } else if (action.type === FETCH_PROTECTED_DATA_ERROR) {
+        console.log('fetch protected data',action);
         return Object.assign({}, state, {
             loading: false,
             error: action.error
