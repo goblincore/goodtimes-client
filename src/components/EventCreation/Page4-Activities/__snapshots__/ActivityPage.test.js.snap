@@ -244,38 +244,88 @@ exports[`ActivityPage renders as expected 1`] = `
       >
         <p
           data-ebid="41090701394"
-          onClick={[Function]}
         >
           Kids CrossFit - Ages 4 to 17!
+            
         </p>
         <p>
           get swole!
         </p>
-        <a
-          href="https://www.eventbrite.com/e/kids-crossfit-ages-4-to-17-tickets-41090701394?aff=ebapi"
-          target="_blank"
-        >
-          Go to event webpage.
-        </a>
+        <span>
+          <a
+            href="https://www.eventbrite.com/e/kids-crossfit-ages-4-to-17-tickets-41090701394?aff=ebapi"
+            target="_blank"
+          >
+            Go to event webpage.
+          </a>
+          <svg
+            className="icon-adjust delete-icon"
+            data-ebid="41090701394"
+            fill="currentColor"
+            height="1em"
+            onClick={[Function]}
+            preserveAspectRatio="xMidYMid meet"
+            style={
+              Object {
+                "color": undefined,
+                "verticalAlign": "middle",
+              }
+            }
+            viewBox="0 0 40 40"
+            width="1em"
+          >
+            <g>
+              <path
+                d="m20 33.4c7.3 0 13.4-6.1 13.4-13.4s-6.1-13.4-13.4-13.4-13.4 6.1-13.4 13.4 6.1 13.4 13.4 13.4z m0-30c9.2 0 16.6 7.4 16.6 16.6s-7.4 16.6-16.6 16.6-16.6-7.4-16.6-16.6 7.4-16.6 16.6-16.6z m4.3 10l2.3 2.3-4.3 4.3 4.3 4.3-2.3 2.3-4.3-4.3-4.3 4.3-2.3-2.3 4.3-4.3-4.3-4.3 2.3-2.3 4.3 4.3z"
+              />
+            </g>
+          </svg>
+           
+        </span>
       </div>
       <div
         className="border-bottom"
       >
         <p
           data-ebid="49111123693"
-          onClick={[Function]}
         >
           Open Mat Jiu Jitsu - ALL Levels
+            
         </p>
         <p>
           Hi - ya!
         </p>
-        <a
-          href="https://www.eventbrite.com/e/open-mat-jiu-jitsu-all-levels-tickets-49111123693?aff=ebapi"
-          target="_blank"
-        >
-          Go to event webpage.
-        </a>
+        <span>
+          <a
+            href="https://www.eventbrite.com/e/open-mat-jiu-jitsu-all-levels-tickets-49111123693?aff=ebapi"
+            target="_blank"
+          >
+            Go to event webpage.
+          </a>
+          <svg
+            className="icon-adjust delete-icon"
+            data-ebid="49111123693"
+            fill="currentColor"
+            height="1em"
+            onClick={[Function]}
+            preserveAspectRatio="xMidYMid meet"
+            style={
+              Object {
+                "color": undefined,
+                "verticalAlign": "middle",
+              }
+            }
+            viewBox="0 0 40 40"
+            width="1em"
+          >
+            <g>
+              <path
+                d="m20 33.4c7.3 0 13.4-6.1 13.4-13.4s-6.1-13.4-13.4-13.4-13.4 6.1-13.4 13.4 6.1 13.4 13.4 13.4z m0-30c9.2 0 16.6 7.4 16.6 16.6s-7.4 16.6-16.6 16.6-16.6-7.4-16.6-16.6 7.4-16.6 16.6-16.6z m4.3 10l2.3 2.3-4.3 4.3 4.3 4.3-2.3 2.3-4.3-4.3-4.3 4.3-2.3-2.3 4.3-4.3-4.3-4.3 2.3-2.3 4.3 4.3z"
+              />
+            </g>
+          </svg>
+           
+        </span>
       </div>
     </h4>
   </div>

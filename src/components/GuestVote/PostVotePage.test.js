@@ -13,10 +13,10 @@ function setup(){
 }
 
 describe('post vote page', () => {
-  it('should render a message if redirect is false', () => {
+  it.only('should render a message if redirect is false', () => {
     const {props, enzymeWrapper} = setup();
     if(props.redirect === false){
-      const message = enzymeWrapper.find('div');
+      const message = enzymeWrapper.find('.container');
       expect(message.text()).toEqual(' Thanks for your input!Your event coordinator will be in touch with the final plan!');
     }
   });
