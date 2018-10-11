@@ -5,6 +5,7 @@ import '../../styles/ActivitySelect.css';
 import CreateNav from '../CreateNav';
 import SelectActivity from './SelectActivity';
 import WriteActivity from './WriteActivity';
+import { MdHighlightOff } from "react-icons/lib/md";
 
 export default class ActivitySelect extends React.Component {
 
@@ -113,11 +114,13 @@ export default class ActivitySelect extends React.Component {
         if(!activity.link){
           linkDisplay = <p></p>;
         } else {
-          linkDisplay = <a href={activity.link} target='_blank'>Go to event webpage.</a>;
+          linkDisplay = <span><a href={activity.link} target='_blank'>Go to event webpage.</a><MdHighlightOff  data-ebid={activity.ebId}  onClick={(e)=> this.deleteWhenClicked(e)} className="icon-adjust delete-icon"/> </span>;
+         
         }
 
         return (  <div className="border-bottom" key={activity.ebId}>
-          <p data-ebid={activity.ebId} onClick={(e)=> this.deleteWhenClicked(e)}>{activity.title}</p>
+         
+          <p data-ebid={activity.ebId}>{activity.title}  </p>
           {descriptionDisplay}
           {linkDisplay}
         </div>
