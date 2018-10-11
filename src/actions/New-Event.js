@@ -78,6 +78,7 @@ export const deleteEventSuccess = () => ({
   type: DELETE_EVENT_SUCCESS
 });
 
+
 export const deleteEvent = (eventId) => dispatch => {
   dispatch(deleteEventRequest());
   const token = localStorage.getItem('authToken');

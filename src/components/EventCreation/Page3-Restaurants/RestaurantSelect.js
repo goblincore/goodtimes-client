@@ -67,18 +67,14 @@ export default class RestaurantSelect extends React.Component {
         }
         return (
           <div className="restaurant-result-box" key={restaurant.id}> 
-             {/* <label className="input-container">  */}
-           
-           
-               {/* <span class="checkmark"></span>
-              </label> */}
+   
               <div className="restaurant-info-box">
                
               <div className="restaurant-img-bg" 
                   style={
                     {background:`url(${restaurant.image_url === '' ? 'https://divineeventslv.com/wp-content/uploads/2018/04/yelp-logo-27.png': restaurant.image_url} )`
                   , backgroundSize:'cover'}}>
-                    {/* <img src={restaurant.image_url === '' ? 'https://divineeventslv.com/wp-content/uploads/2018/04/yelp-logo-27.png': restaurant.image_url} alt="thumbnail"></img> */}
+                
                </div>
 
                <div className="restaurant-text-info">
