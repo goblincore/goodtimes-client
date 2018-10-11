@@ -13,7 +13,7 @@ function setup(){
   const props = {
     pageNum: 1,
     dispatch: jest.fn(),
-    eventState: {
+    newEvent: {
       location:{
         latitude: 39.7392, longitude: -104.9903
       },
@@ -21,7 +21,7 @@ function setup(){
     },
     history: createHistory(),
   };
-  const enzymeWrapper = shallow(<CreateEventContainer  {...props} localStorage={localStorage}></CreateEventContainer>);
+  const enzymeWrapper = mount(<CreateEventContainer  {...props} localStorage={localStorage}></CreateEventContainer>);
   return {
     props,
     enzymeWrapper
@@ -34,15 +34,16 @@ describe('create event container', () => {
     const divs = enzymeWrapper.find('div');
     expect(divs.length).toBeGreaterThan(0);
   });
-  // it('should render create event on page 1', () => {
-  //   const {props, enzymeWrapper, } = setup();
-  //   if(props.pageNum === 1){
-  //     const component = enzymeWrapper.find(CreateEvent);
-  //     expect(component.length).toEqual(1);
-  //   }});
+  it('should render create event on page 1', () => {
+    const {props, enzymeWrapper } = setup();
+    if(props.pageNum === 1){
+      const component = enzymeWrapper.find(CreateEvent);  
+      expect(component.length).toEqual(1);
+    }});
   it('should render date select on page 2', () => {
     const {props, enzymeWrapper} = setup();
     if(props.pageNum === 2){
+      console.log(enzymeWrapper.debug());
       const component = enzymeWrapper.find(DateSelectPage);
       expect(component.length).toEqual(1);
     }});

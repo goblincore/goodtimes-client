@@ -14,7 +14,7 @@ export class CreateEvent extends React.Component {
     this.state = {
       locationOption: 1,
       locationFeedback: '',
-      initialLocation: this.props.eventState.location
+      initialLocation: props.eventState.location
     }
   }
 
