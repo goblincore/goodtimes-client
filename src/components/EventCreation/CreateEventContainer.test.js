@@ -7,6 +7,7 @@ import RestaurantSelect from './Page3-Restaurants/RestaurantSelect';
 import ActivityPage from './Page4-Activities/ActivityPage';
 import PreviewEvent from './Page5-Preview/PreviewEvent';
 import SuccessfullyCreatedEvent from './Page6-Share/SuccessfullyCreatedEvent';
+import createHistory from 'history/createBrowserHistory';
 
 function setup(){
   const props = {
@@ -16,7 +17,9 @@ function setup(){
       location:{
         latitude: 39.7392, longitude: -104.9903
       },
-    }
+      locationCity: {city: 'Denver', state: 'CO'},
+    },
+    history: createHistory(),
   };
   const enzymeWrapper = shallow(<CreateEventContainer  {...props} localStorage={localStorage}></CreateEventContainer>);
   return {
