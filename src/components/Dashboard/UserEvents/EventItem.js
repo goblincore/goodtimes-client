@@ -66,7 +66,7 @@ export default class EventItem extends React.Component{
           </div>
 
           <div className='date-options'>
-          {this.props.event.activityOptions.length===0?'':<h4>Event voting</h4>}
+          {this.props.event.activityOptions.length===0?'':<h4>Activity voting</h4>}
             {
               this.props.event.activityOptions.map((act,i) =>{
                 return(

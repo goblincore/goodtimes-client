@@ -139,7 +139,7 @@ export  class ActivityPage extends React.Component {
     
 
       <div className="card border-right"> 
-        <p>{this.props.eventState.errorMessage}</p>
+        <p className='form-error'>{this.props.eventState.errorMessage}</p>
         <button className="choose-from-list" onClick={() => this.setState({display: 'choose'})}>Choose From List</button>
         <button onClick={() => this.setState({display: 'write'})}>Create My Own Activity</button>
 

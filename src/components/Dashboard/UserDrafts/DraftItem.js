@@ -46,17 +46,18 @@ class DraftItem extends React.Component{
     if(event.activityOptions.length > 0){
       activtyOptionsDisplay = (
         <div className='date-options'>
-          <p>Event options 
+          <h4>Activity options 
             <FaEdit
              className="edit-icon"
               onClick={()=>this.addDraftToReduxState(this.props.event, 4)}
             />
-          </p>
+          </h4>
           {event.activityOptions.map((act,i) =>{
             return(
               <div key={i} className='date-vote'>
-                <a href={act.link} target="_blank">{act.title}</a>
-              
+                <span className="dates-text">
+                  <a href={act.link} target="_blank">{act.title}</a>
+                </span>
               </div>
             );
           })}
@@ -66,7 +67,7 @@ class DraftItem extends React.Component{
     else {
       activtyOptionsDisplay = (
         <div className='date-options'>
-          <h4>Add an Event
+          <h4>Add an Activity
             <FaEdit
                className="edit-icon"
               onClick={()=>this.addDraftToReduxState(event, 4)}
