@@ -18,6 +18,8 @@ Users can create an account where all their events are stored...
 //screenshot of login and of dashboard.
 
 Users click create event to start planning and are walked through a series of event options.
+<img src="https://github.com/thinkful-ei22/its_a_date_client/blob/development/screenshots/foodoption.jpg" width=100%>
+<img src="https://github.com/thinkful-ei22/its_a_date_client/blob/development/screenshots/activityoption.png" width=100%>
 
 //screenshots of create event button and pages
 
