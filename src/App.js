@@ -32,7 +32,6 @@ export class App extends Component{
   
     render() {
 
-
         return (
     
             <Route
@@ -64,27 +63,17 @@ export class App extends Component{
                           }
                         }
                       }
-                       
                       }
                     keys={location.pathname.split('/').filter(a => a)[0]}
                     from={item => {
-                     
-                       
                             return({ transform: 'translate(80%,0)', opacity: 0})
-                        
                     }}
-                    enter={item => {
-                   
-                 
+
+                    enter={item => {                 
                             return({ transform: 'translate(0,0)', opacity: 1  })
-                       
                     }}
 
                     leave={item => {
-
-                     
-                         
-                         
                           if(item === 'create-event'){
                           let el = document.querySelector(".createEventRoute");
                           if(el !== null) {
@@ -112,32 +101,25 @@ export class App extends Component{
                     {style => (
                         <Switch location={location}>
                      
-                        <Route exact path="/" render={props => HomePage({ ...props, style })}/>
-                        <Route exact path="/about" render={props => About_Page({ ...props, style })} />
-                        <Route exact path="/login" render={props => Login_Page({ ...props, style })} />
-                        <Route exact path="/register" render={props => RegisterPage({ ...props, style })} />
-                        <Route exact path="/dashboard" render={props => DashboardPage({ ...props, style })} />
-                        <Route exact path="/create-event" render={props => CreateEventPage({ ...props, style })} />
-                         <Route path="/guestevents/:eventId" render={props => GuestEventPage({ ...props, style })} />
-                         <Route exact path="/edit-draft" render={(props) => {
-                            //  console.log('APP JS props passes', location.state)
-                             return Edit_Draft_Page({...props,style,...location})
-                        }}/> 
-                     
-                        <Route
-                          render={() => {
-                            // console.log("location.pathname: " + location.pathname);
-                            // console.log(
-                            //   "window.location.pathname: " + window.location.pathname
-                            // );
-                            if (location.pathname === window.location.pathname) {
-                              return <Redirect to="/" />;
-                            }
-                            return null;
-                          }}
-                        />
-                    
-                      
+                            <Route exact path="/" render={props => HomePage({ ...props, style })}/>
+                            <Route exact path="/about" render={props => About_Page({ ...props, style })} />
+                            <Route exact path="/login" render={props => Login_Page({ ...props, style })} />
+                            <Route exact path="/register" render={props => RegisterPage({ ...props, style })} />
+                            <Route exact path="/dashboard" render={props => DashboardPage({ ...props, style })} />
+                            <Route exact path="/create-event" render={props => CreateEventPage({ ...props, style })} />
+                            <Route path="/guestevents/:eventId" render={props => GuestEventPage({ ...props, style })} />
+                            <Route exact path="/edit-draft" render={(props) => {
+                                return Edit_Draft_Page({...props,style,...location})
+                            }}/> 
+                        
+                            <Route
+                              render={() => {
+                                if (location.pathname === window.location.pathname) {
+                                  return <Redirect to="/" />;
+                                }
+                                return null;
+                              }}
+                            />
          
                         </Switch>
                     )}
@@ -160,12 +142,6 @@ const mapStateToProps = state => ({
 
   export default withRouter(connect(mapStateToProps)(App));
 
-
-// const NavLink = props => (
-//   <li className="navItem">
-//     <Link {...props} style={{ cursor: 'pointer', color: 'inherit' }} />
-//   </li>
-// )
 
 const HomePage = ({ style,...props }) => (
   
@@ -209,7 +185,6 @@ const CreateEventPage = ({ style }) => (
   
   <div className="mainRouteItem">
    <NewEventMain/>
-   {/* <EventContainer/> */}
    </div>
   </animated.div>
 

@@ -55,8 +55,9 @@ export class EmailForm extends React.Component {
     }
     else if(e.target.message.value === ''){
       warning = 'Add message to email body.';
-    }
-    else {
+    } else if (!e.target.to.value.includes('@')){
+      warning = 'Must enter valid email addresses.'
+    } else {
       warning = '';
     }
     this.setState({error: warning});
@@ -87,12 +88,13 @@ export class EmailForm extends React.Component {
     return (
       <div className="event-email-form">
         <form onSubmit={(e) => {
+          e.preventDefault();
           this.validateFields(e);
           this.sendEmail(e);
         }}>
           
           <label htmlFor='to'>Enter recipients' e-mails separated by a comma.</label>
-          <input placeholder="friend1@example.com, friend2@example.com, friend3@example.com" id="to"></input>
+          <input type='email' placeholder="friend1@example.com, friend2@example.com, friend3@example.com" id="to"></input>
           <label htmlFor='subject'>Enter the subject of the e-mail.</label>
           <input placeholder="Let's hang out!" id="subject"></input>
           <label htmlFor='message'>Write the body of the e-mail.</label>
