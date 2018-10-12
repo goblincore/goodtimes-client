@@ -9,6 +9,11 @@
 
 Goodtimes is designed to help friends select the time and place to hang out that works best for the group. By simply casting votes, everyone can avoid those never-ending group texts that decide nothing. Get ready to organize a get-together faster than ever before!
 
+
+## Deployed app:
+https://goodtimes-client.herokuapp.com/
+Server side repo: https://github.com/thinkful-ei22/its_a_date_server
+
 ## Features:
 
 Users can register to create an account where all their events are stored...
@@ -21,7 +26,7 @@ Users can register to create an account where all their events are stored...
 
 <img src="https://github.com/thinkful-ei22/its_a_date_client/blob/development/screenshots/dashboard.jpg" width=100%>
 
-Users click create event to start planning and are walked through a series of event options.
+Users click create event to start planning and are walked through a series of event options, including a location, time, food and activities.
 <img src="https://github.com/thinkful-ei22/its_a_date_client/blob/development/screenshots/step1.jpg" width=100%>
 <img src="https://github.com/thinkful-ei22/its_a_date_client/blob/development/screenshots/step2.jpg" width=100%>
 <img src="https://github.com/thinkful-ei22/its_a_date_client/blob/development/screenshots/step3.jpg" width=100%>
@@ -32,9 +37,7 @@ After selecting the options for the event, Goodtimes auto-generates a form that 
 You can email your friends directly from the Goodtimes website and send them a bitly link that will take them to the voting form.
 
 <img src="https://github.com/thinkful-ei22/its_a_date_client/blob/development/screenshots/guestemailvote.jpg" width=100%>
-//screenshot of form
-
-//Users' friends can vote on the times and places that work best for them...
+Users' friends can vote on the times and places that work best for them...
 
 
 ...and users can check the results of the votes on their dashboard.
@@ -43,8 +46,30 @@ You can email your friends directly from the Goodtimes website and send them a b
 
 When everyone has voted, users can let their group know which options came out on top!
 
-## Tech Stack:
+## Tech-Stack
 
-**FrontEnd:** React, Redux, input-moment, (other things?)
+Front-end                      | Back-end
+_______________________________|_________________________________
+ HTML                          |  Node/Express
+ CSS                           |  Sendgrid
+ React                         |  MongoDB/mongoose
+ Redux                         |  JSON Webtoken
+ React-Router                  |  Bcrypt.js
+ Redux-Form                    |  Passport.js
+ React-Icons                   |  Axios
+ Moment.js                     |  Request/Promise
+ Lodash                        |  Bit.ly API
+ Node-sass                     |  Yelp API
+ Bing Maps API                 |  Event Bright API
+ Enzyme/jest                   |  Continuous Integration (Travis)
+ Continuous Deployment (Heroku)|  Continuous Deployment (Heroku)
+                               |  Mocha/Chai
 
-**BackEnd:** MongoDB, Mongoose, Node.js, JWT authentication, (others?)
+
+## Team Members
+
+Jennifer Colna
+Morgan Huegel
+Chasen Arey
+William Holcombe
+Donny Cheng
