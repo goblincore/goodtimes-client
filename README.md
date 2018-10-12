@@ -52,22 +52,22 @@ When everyone has voted, users can let their group know which options came out o
 
 ## Tech-Stack
 
-Front-end                      | Back-end
-_______________________________|_________________________________
- HTML                          |  Node/Express
- CSS                           |  Sendgrid
- React                         |  MongoDB/mongoose
- Redux                         |  JSON Webtoken
- React-Router                  |  Bcrypt.js
- Redux-Form                    |  Passport.js
- React-Icons                   |  Axios
- Moment.js                     |  Request/Promise
- Lodash                        |  Bit.ly API
- Node-sass                     |  Yelp API
- Bing Maps API                 |  Event Bright API
- Enzyme/jest                   |  Continuous Integration (Travis)
- Continuous Deployment (Heroku)|  Continuous Deployment (Heroku)
-                               |  Mocha/Chai
+Front-end                       | Back-end
+--------------------------------|------------------------------------
+ HTML                           |  Node/Express
+ CSS                            |  Sendgrid
+ React                          |  MongoDB/mongoose
+ Redux                          |  JSON Webtoken
+ React-Router                   |  Bcrypt.js
+ Redux-Form                     |  Passport.js
+ React-Icons                    |  Axios
+ Moment.js                      |  Request/Promise
+ Node-sass                      |  Bit.ly API
+ Bing Maps API                  |  Yelp API
+ Enzyme/jest                    |  Event Bright API
+ Continuous Integration (Travis)|  Mocha/Chai
+ Continuous Deployment (Heroku) |  Continuous Integration (Travis)
+ .                              |  Continuous Deployment (Heroku)
 
 
 ## Team Members
