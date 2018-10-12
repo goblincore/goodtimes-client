@@ -1,8 +1,9 @@
 # Goodtimes [![Build Status](https://travis-ci.org/thinkful-ei22/its_a_date_client.svg?branch=development)](https://travis-ci.org/thinkful-ei22/its_a_date_client)
+
+<img src="https://github.com/thinkful-ei22/its_a_date_client/blob/development/screenshots/goodtimes.png" width=100%>
 <img src="https://github.com/thinkful-ei22/its_a_date_client/blob/development/screenshots/Homepage.gif" width=100%>
 
 ### *Let the Goodtimes roll!*
-
 
 ## Summary:
 
@@ -10,14 +11,14 @@ Goodtimes is designed to help friends select the time and place to hang out that
 
 ## Features:
 
-Users can create an account where all their events are stored...
+Users can register to create an account where all their events are stored...
 
 <img src="https://github.com/thinkful-ei22/its_a_date_client/blob/development/screenshots/register.jpg" width=100%>
 
 ...and login anytime.
 <img src="https://github.com/thinkful-ei22/its_a_date_client/blob/development/screenshots/login.jpg" width=100%>
 
-//screenshot of login and of dashboard.
+
 <img src="https://github.com/thinkful-ei22/its_a_date_client/blob/development/screenshots/dashboard.jpg" width=100%>
 
 Users click create event to start planning and are walked through a series of event options.
