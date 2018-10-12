@@ -1,10 +1,7 @@
 # Goodtimes [![Build Status](https://travis-ci.org/thinkful-ei22/its_a_date_client.svg?branch=development)](https://travis-ci.org/thinkful-ei22/its_a_date_client)
 <img src="https://github.com/thinkful-ei22/its_a_date_client/blob/development/screenshots/goodtimes.png" width=100%>
-
-### *Let the Goodtimes roll!*
-
 <img src="https://github.com/thinkful-ei22/its_a_date_client/blob/development/screenshots/Homepage.gif" width=100%>
-
+### *Let the Goodtimes roll!*
 ## Summary:
 
 Goodtimes is designed to help friends select the time and place to hang out that works best for the group. By simply casting votes, everyone can avoid those never-ending group texts that decide nothing. Get ready to organize a get-together faster than ever before!
