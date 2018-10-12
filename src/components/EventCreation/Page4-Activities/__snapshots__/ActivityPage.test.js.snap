@@ -83,7 +83,9 @@ exports[`ActivityPage renders as expected 1`] = `
   <div
     className="card border-right"
   >
-    <p />
+    <p
+      className="form-error"
+    />
     <button
       className="choose-from-list"
       onClick={[Function]}
@@ -245,19 +247,6 @@ exports[`ActivityPage renders as expected 1`] = `
         <p
           data-ebid="41090701394"
         >
-          Kids CrossFit - Ages 4 to 17!
-            
-        </p>
-        <p>
-          get swole!
-        </p>
-        <span>
-          <a
-            href="https://www.eventbrite.com/e/kids-crossfit-ages-4-to-17-tickets-41090701394?aff=ebapi"
-            target="_blank"
-          >
-            Go to event webpage.
-          </a>
           <svg
             className="icon-adjust delete-icon"
             data-ebid="41090701394"
@@ -280,7 +269,18 @@ exports[`ActivityPage renders as expected 1`] = `
               />
             </g>
           </svg>
-           
+          Kids CrossFit - Ages 4 to 17!
+        </p>
+        <p>
+          get swole!
+        </p>
+        <span>
+          <a
+            href="https://www.eventbrite.com/e/kids-crossfit-ages-4-to-17-tickets-41090701394?aff=ebapi"
+            target="_blank"
+          >
+            Go to event webpage.
+          </a>
         </span>
       </div>
       <div
@@ -289,19 +289,6 @@ exports[`ActivityPage renders as expected 1`] = `
         <p
           data-ebid="49111123693"
         >
-          Open Mat Jiu Jitsu - ALL Levels
-            
-        </p>
-        <p>
-          Hi - ya!
-        </p>
-        <span>
-          <a
-            href="https://www.eventbrite.com/e/open-mat-jiu-jitsu-all-levels-tickets-49111123693?aff=ebapi"
-            target="_blank"
-          >
-            Go to event webpage.
-          </a>
           <svg
             className="icon-adjust delete-icon"
             data-ebid="49111123693"
@@ -324,7 +311,18 @@ exports[`ActivityPage renders as expected 1`] = `
               />
             </g>
           </svg>
-           
+          Open Mat Jiu Jitsu - ALL Levels
+        </p>
+        <p>
+          Hi - ya!
+        </p>
+        <span>
+          <a
+            href="https://www.eventbrite.com/e/open-mat-jiu-jitsu-all-levels-tickets-49111123693?aff=ebapi"
+            target="_blank"
+          >
+            Go to event webpage.
+          </a>
         </span>
       </div>
     </h4>

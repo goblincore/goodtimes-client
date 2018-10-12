@@ -43,7 +43,6 @@ describe('create event container', () => {
   it('should render date select on page 2', () => {
     const {props, enzymeWrapper} = setup();
     if(props.pageNum === 2){
-      console.log(enzymeWrapper.debug());
       const component = enzymeWrapper.find(DateSelectPage);
       expect(component.length).toEqual(1);
     }});

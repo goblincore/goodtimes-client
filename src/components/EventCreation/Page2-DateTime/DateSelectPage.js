@@ -35,7 +35,7 @@ export default class DateSelectPage extends React.Component {
   }
 
 
-  handleSave = () => {
+  addDate = () => {
     let currentTime = moment();
     //Error Handling...
     if (this.state.inputMoment < currentTime) {
@@ -75,11 +75,8 @@ export default class DateSelectPage extends React.Component {
 
       <div className="container absoluteposition">
        
-       
-           <CreateNav saveAsDraft={this.handleSave} pageNum={this.props.pageNum} prevPage={this.props.prevPage} nextPage={this.props.nextPage} handleNextPage={this.handleNextPage} />
+           <CreateNav saveAsDraft={this.props.saveAsDraft} pageNum={this.props.pageNum} prevPage={this.props.prevPage} nextPage={this.props.nextPage} handleNextPage={this.handleNextPage} />
 
-
-         
             <div className="card-container">
                 <div className="card max-300">
                 <DatePicker
@@ -100,7 +97,7 @@ export default class DateSelectPage extends React.Component {
 
                  <div className="full-width-button" >
                <p className='error-message'>{this.props.eventState.errorMessage}</p>
-                <button  onClick={this.handleSave}>
+                <button  onClick={this.addDate}>
                   
                         Add this time and date  <MdAddCircleOutline />
                  </button>

@@ -29,7 +29,11 @@ export  class ActivityPage extends React.Component {
 
   deleteWhenClicked(e){
     const { activityOptions }  = this.props.eventState;
-    const idOfActivityToDelete = e.target.dataset.ebid;
+    let targetNode = e.target;
+    while (targetNode.tagName !== 'svg') {
+      targetNode = targetNode.parentNode;
+    }
+    const idOfActivityToDelete = targetNode.dataset.ebid;
     if (document.getElementById(idOfActivityToDelete)) {
       document.getElementById(idOfActivityToDelete).checked = false;
     }
@@ -116,13 +120,16 @@ export  class ActivityPage extends React.Component {
         if(!activity.link){
           linkDisplay = <p></p>;
         } else {
-          linkDisplay = <span><a href={activity.link} target='_blank'>Go to event webpage.</a><MdHighlightOff  data-ebid={activity.ebId}  onClick={(e)=> this.deleteWhenClicked(e)} className="icon-adjust delete-icon"/> </span>;
+          linkDisplay = <span><a href={activity.link} target='_blank'>Go to event webpage.</a></span>;
          
         }
 
         return (  <div className="border-bottom" key={activity.ebId}>
          
-          <p data-ebid={activity.ebId}>{activity.title}  </p>
+          <p data-ebid={activity.ebId}>
+            <MdHighlightOff  data-ebid={activity.ebId}  onClick={(e)=> this.deleteWhenClicked(e)} className="icon-adjust delete-icon"/>
+            {activity.title}  
+          </p>
           {descriptionDisplay}
           {linkDisplay}
         </div>
@@ -137,34 +144,26 @@ export  class ActivityPage extends React.Component {
 
           <CreateNav saveAsDraft={this.props.saveAsDraft} pageNum={this.props.pageNum} prevPage={this.props.prevPage} nextPage={this.props.nextPage} handleNextPage={this.props.nextPage} />
     
-
-      <div className="card border-right"> 
-        <p>{this.props.eventState.errorMessage}</p>
-        <button className="choose-from-list" onClick={() => this.setState({display: 'choose'})}>Choose From List</button>
-        <button onClick={() => this.setState({display: 'write'})}>Create My Own Activity</button>
-
-       
-      </div>
+          <div className="card border-right"> 
+            <p className='form-error'>{this.props.eventState.errorMessage}</p>
+            <button className="choose-from-list" onClick={() => this.setState({display: 'choose'})}>Choose From List</button>
+            <button onClick={() => this.setState({display: 'write'})}>Create My Own Activity</button>
+          </div>
     
 
-      <div className="card" >
-            <div className="activity-option">
-              {optionDisplay}
-            </div>
-      </div>
+          <div className="card" >
+                <div className="activity-option">
+                  {optionDisplay}
+                </div>
+          </div>
 
 
-       <div id="user-event-list" className="card small-text">
-        <h4>Event Choices{selectedActivitiesDisplay}</h4>
-         
-        </div>  
+          <div id="user-event-list" className="card small-text">
+            <h4>Event Choices{selectedActivitiesDisplay}</h4>
+          </div>  
 
-
-     
-   
       </div>
      
-   
     );
   }
 }
