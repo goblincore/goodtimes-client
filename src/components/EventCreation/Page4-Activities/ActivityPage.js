@@ -29,7 +29,11 @@ export  class ActivityPage extends React.Component {
 
   deleteWhenClicked(e){
     const { activityOptions }  = this.props.eventState;
-    const idOfActivityToDelete = e.target.dataset.ebid;
+    let targetNode = e.target;
+    while (targetNode.tagName !== 'svg') {
+      targetNode = targetNode.parentNode;
+    }
+    const idOfActivityToDelete = targetNode.dataset.ebid;
     if (document.getElementById(idOfActivityToDelete)) {
       document.getElementById(idOfActivityToDelete).checked = false;
     }
