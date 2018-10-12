@@ -1,5 +1,5 @@
 # Goodtimes [![Build Status](https://travis-ci.org/thinkful-ei22/its_a_date_client.svg?branch=development)](https://travis-ci.org/thinkful-ei22/its_a_date_client)
-
+<img src="https://github.com/thinkful-ei22/its_a_date_client/blob/development/screenshots/Homepage.gif" width=100%>
 ### *Let the Goodtimes roll!*
 
 ## Summary:
@@ -10,18 +10,23 @@ Goodtimes is designed to help friends select the time and place to hang out that
 
 Users can create an account where all their events are stored...
 
-//screenshot of registration page//
+<img src="https://github.com/thinkful-ei22/its_a_date_client/blob/development/screenshots/register.jpg" width=100%>
 
 ...and login anytime.
+<img src="https://github.com/thinkful-ei22/its_a_date_client/blob/development/screenshots/login.jpg" width=100%>
 
 //screenshot of login and of dashboard.
+<img src="https://github.com/thinkful-ei22/its_a_date_client/blob/development/screenshots/dashboard.jpg" width=100%>
+
 
 Users click create event to start planning and are walked through a series of event options.
-
-//screenshots of create event button and pages
-
+<img src="https://github.com/thinkful-ei22/its_a_date_client/blob/development/screenshots/step1.jpg" width=100%>
+<img src="https://github.com/thinkful-ei22/its_a_date_client/blob/development/screenshots/step2.jpg" width=100%>
+<img src="https://github.com/thinkful-ei22/its_a_date_client/blob/development/screenshots/step3.jpg" width=100%>
+<img src="https://github.com/thinkful-ei22/its_a_date_client/blob/development/screenshots/step5.jpg" width=100%>
+<img src="https://github.com/thinkful-ei22/its_a_date_client/blob/development/screenshots/step6.jpg" width=100%>
 After selecting the options for the event, Goodtimes auto-generates a form users can send to friends.
-
+<img src="https://github.com/thinkful-ei22/its_a_date_client/blob/development/screenshots/guestemailvote.jpg" width=100%>
 //screenshot of form
 
 //Users' friends can vote on the times and places that work best for them...
@@ -29,7 +34,7 @@ After selecting the options for the event, Goodtimes auto-generates a form users
 //screenshot of voting and the thanks page
 
 ...and users can check the results of the votes on their dashboard.
-
+<img src="https://github.com/thinkful-ei22/its_a_date_client/blob/development/screenshots/dashboardvotes.jpg" width=100%>
 //screenshot of votes details on event
 
 When everyone has voted, users can let their group know which options came out on top!
