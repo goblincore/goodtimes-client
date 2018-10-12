@@ -5,16 +5,18 @@
 
 ### *Let the Goodtimes roll!*
 
-## Summary:
+## Summary
 
 Goodtimes is designed to help friends select the time and place to hang out that works best for the group. By simply casting votes, everyone can avoid those never-ending group texts that decide nothing. Get ready to organize a get-together faster than ever before!
 
 
-## Deployed app:
+## Deployed app
+
 https://goodtimes-client.herokuapp.com/
+
 Server side repo: https://github.com/thinkful-ei22/its_a_date_server
 
-## Features:
+## Features
 
 Users can register to create an account where all their events are stored...
 
@@ -42,7 +44,7 @@ Users' friends can vote on the times and places that work best for them...
 
 ...and users can check the results of the votes on their dashboard.
 <img src="https://github.com/thinkful-ei22/its_a_date_client/blob/development/screenshots/dashboardvotes.jpg" width=100%>
-//screenshot of votes details on event
+
 
 When everyone has voted, users can let their group know which options came out on top!
 
