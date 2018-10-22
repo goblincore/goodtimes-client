@@ -19,8 +19,8 @@ https://goodtimes-client.herokuapp.com/
 Server side repo: https://github.com/thinkful-ei22/its_a_date_server
 
 ### Demo login info
-username: demouser
-password password12
+* username: demouser
+* password password12
 
 
 ## Features
